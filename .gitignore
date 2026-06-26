@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+count_pdf.cjs
+count_pdf.mjs
+read_pdf.cjs
