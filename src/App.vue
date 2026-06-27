@@ -186,14 +186,27 @@
                   <div v-for="item in trackerData[partKey].items" :key="item.id" class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-3.5 gap-3">
                     <span class="text-sm font-medium text-slate-400 hover:text-slate-300 transition">{{ item.name }}</span>
                     <div class="flex gap-3 w-full sm:w-auto justify-end">
-                      <label class="flex items-center gap-2 bg-slate-950/40 border border-slate-800 px-3 py-1.5 rounded-lg cursor-pointer text-xs select-none hover:border-slate-700 transition">
-                        <input type="checkbox" :checked="trackerState[`${item.id}_read`]" @change="toggleTracker(item.id, 'read')" class="w-4 h-4 accent-blue-500 rounded">
-                        <span class="font-medium" :class="trackerState[`${item.id}_read`] ? 'text-blue-400' : 'text-slate-400'">已閱讀</span>
-                      </label>
-                      <label class="flex items-center gap-2 bg-slate-950/40 border border-slate-800 px-3 py-1.5 rounded-lg cursor-pointer text-xs select-none hover:border-slate-700 transition">
-                        <input type="checkbox" :checked="trackerState[`${item.id}_quiz`]" @change="toggleTracker(item.id, 'quiz')" class="w-4 h-4 accent-emerald-500 rounded">
-                        <span class="font-medium" :class="trackerState[`${item.id}_quiz`] ? 'text-emerald-400' : 'text-slate-400'">做測驗</span>
-                      </label>
+                      <template v-if="item.examOnly">
+                        <div class="flex items-center gap-2 bg-slate-950/40 border px-3 py-1.5 rounded-lg text-xs"
+                          :class="examCounts[item.examKey] > 0 ? 'border-emerald-800/60' : 'border-slate-800'">
+                          <span class="font-medium" :class="examCounts[item.examKey] > 0 ? 'text-emerald-400' : 'text-slate-500'">
+                            已完成 {{ examCounts[item.examKey] }} 次測驗
+                          </span>
+                        </div>
+                      </template>
+                      <template v-else>
+                        <label class="flex items-center gap-2 bg-slate-950/40 border border-slate-800 px-3 py-1.5 rounded-lg cursor-pointer text-xs select-none hover:border-slate-700 transition">
+                          <input type="checkbox" :checked="trackerState[`${item.id}_read`]" @change="toggleTracker(item.id, 'read')" class="w-4 h-4 accent-blue-500 rounded">
+                          <span class="font-medium" :class="trackerState[`${item.id}_read`] ? 'text-blue-400' : 'text-slate-400'">已閱讀</span>
+                        </label>
+                        <label class="flex items-center gap-2 bg-slate-950/40 border border-slate-800 px-3 py-1.5 rounded-lg cursor-pointer text-xs select-none hover:border-slate-700 transition">
+                          <input type="checkbox" :checked="trackerState[`${item.id}_quiz`]" @change="toggleTracker(item.id, 'quiz')" class="w-4 h-4 accent-emerald-500 rounded">
+                          <span class="font-medium" :class="trackerState[`${item.id}_quiz`] ? 'text-emerald-400' : 'text-slate-400'">做測驗</span>
+                          <span v-if="(bookHistoryMaster[item.id]?.length || 0) > 0" class="ml-0.5 px-1.5 py-0.5 rounded-md bg-emerald-950 text-emerald-400 text-[10px] font-bold border border-emerald-900/50">
+                            {{ bookHistoryMaster[item.id].length }}次
+                          </span>
+                        </label>
+                      </template>
                     </div>
                   </div>
                 </div>
@@ -474,6 +487,7 @@ const bookStructure = [
 
 // =================【🔥 進度追蹤儀表板專用變數與大腦】=================
 const trackerState = ref({});
+const examCounts = ref({ sub1: 0, sub2: 0 });
 const countdownStr = ref('--天 --時');
 let countdownInterval = null;
 
@@ -485,7 +499,10 @@ const trackerData = {
   part5: { name: '第五篇：Low code / No code 基本概念與應用', items: [{ id: 'p5_c1', name: '第1章：Low code / No code 基本概念' }, { id: 'p5_c2', name: '第2章：Low code / No code 優勢與限制' }] },
   part6: { name: '第六篇：生成式 AI 應用領域與常見工具', items: [{ id: 'p6_c1', name: '第1章：生成式 AI 應用領域與常見工具' }, { id: 'p6_c2', name: '第2章：如何善用生成式 AI 工具' }] },
   part7: { name: '第七篇：生成式 AI 導入評估與風險管理', items: [{ id: 'p7_c1', name: '第1章：生成式 AI 導入評估' }, { id: 'p7_c2', name: '第2章：生成式 AI 導入規劃' }, { id: 'p7_c3', name: '第3章：生成式 AI 風險評估' }] },
-  exams: { name: '', items: [{ id: 'ex_114_4', name: '114年第四梯次 全真刷題' }, { id: 'ex_115_1', name: '115年第一次 全真刷題' }, { id: 'ex_115_2', name: '115年第二次 全真刷題' }] }
+  exams: { name: '', items: [
+    { id: 'ex_sub1', name: '📘 科目一：人工智慧基礎概論 全真模擬考', examOnly: true, examKey: 'sub1' },
+    { id: 'ex_sub2', name: '📙 科目二：生成式AI應用與規劃 全真模擬考', examOnly: true, examKey: 'sub2' }
+  ] }
 };
 
 const trackerSections = [
@@ -520,6 +537,7 @@ const trackerProgress = computed(() => {
   let checked = 0;
   for (const key in trackerData) {
     trackerData[key].items.forEach(item => {
+      if (item.examOnly) return; // 全真刷題不計入備考達成率
       total += 2;
       if (trackerState.value[`${item.id}_read`]) checked++;
       if (trackerState.value[`${item.id}_quiz`]) checked++;
@@ -597,6 +615,11 @@ onMounted(async () => {
       trackerState.value = JSON.parse(savedTracker);
     }
 
+    const savedExamCounts = localStorage.getItem('ipas_exam_counts_v1');
+    if (savedExamCounts) {
+      examCounts.value = JSON.parse(savedExamCounts);
+    }
+
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 60000);
 
@@ -643,73 +666,17 @@ const startExam = (subject = 1) => {
     return;
   }
 
-  const sub1Codes = {
-    "L11101": "CH1-1", "L11402": "CH1-2", "L11201": "CH2-1", "L11202": "CH2-2",
-    "L11401": "CH2-3", "L11203": "CH3-1", "L11102": "CH3-2", "L11301": "CH4-1", "L11302": "CH4-2"
-  };
-  const sub2Codes = {
-    "L12202": "CH5-1", "L12204": "CH5-2", "L12101": "CH6-1", "L12102": "CH6-2",
-    "L12303": "CH7-1", "L12201": "CH7-2", "L12301": "CH7-3", "L12302": "CH7-3"
-  };
-  const targetMap = subject === 1 ? sub1Codes : sub2Codes;
+  // 依考古題官方出題比率訂定固定配額（科目一共50題，科目二共50題）
+  const sub1Quotas = { "L11101": 4, "L11102": 6, "L11201": 3, "L11202": 7, "L11203": 3, "L11301": 10, "L11302": 7, "L11401": 6, "L11402": 4 };
+  const sub2Quotas = { "L12101": 6, "L12102": 6, "L12201": 8, "L12202": 10, "L12301": 7, "L12302": 5, "L12303": 8 };
+  const targetQuotas = subject === 1 ? sub1Quotas : sub2Quotas;
 
-  // ── 步驟1：建立各章節題庫（零題章節標記 hasPool=false，完全不參與除法）
-  const poolsByChapter = {};
-  let totalPoolSize = 0;
-  for (const key of Object.keys(targetMap)) {
-    const pool = allQuestions.value.filter(q => String(q.detail_code || '').trim() === key);
-    poolsByChapter[key] = pool;
-    if (pool.length > 0) totalPoolSize += pool.length;
-  }
+  // detail_code → CH 標籤（供 weaknessAnalysis 顯示用）
+  const sub1CHMap = { "L11101": "CH1-1", "L11402": "CH1-2", "L11201": "CH2-1", "L11202": "CH2-2", "L11401": "CH2-3", "L11203": "CH3-1", "L11102": "CH3-2", "L11301": "CH4-1", "L11302": "CH4-2" };
+  const sub2CHMap = { "L12101": "CH6-1", "L12102": "CH6-2", "L12201": "CH7-2", "L12202": "CH5-1", "L12301": "CH7-3", "L12302": "CH7-3", "L12303": "CH7-1" };
+  const chMap = subject === 1 ? sub1CHMap : sub2CHMap;
 
-  if (totalPoolSize === 0) {
-    alert(`科目${subject}題庫目前為空，無法組卷！`);
-    return;
-  }
-
-  // ── 步驟2：比例配額（🚨 NaN 防呆：零庫存章節強制歸零且不參與運算）
-  const quotas = {};
-  let allocated = 0;
-  for (const key of Object.keys(targetMap)) {
-    const count = poolsByChapter[key].length;
-    if (count === 0) {
-      quotas[key] = { exact: 0, remainder: 0, hasPool: false };
-      continue;
-    }
-    const proportion = (count / totalPoolSize) * 50;
-    const floor = Math.floor(proportion);
-    quotas[key] = { exact: floor, remainder: proportion - floor, hasPool: true };
-    allocated += floor;
-  }
-
-  // ── 步驟3：最大餘數法補滿50題（只對有庫存章節操作）
-  const remainderCandidates = Object.keys(quotas)
-    .filter(k => quotas[k].hasPool && quotas[k].remainder > 0)
-    .sort((a, b) => quotas[b].remainder - quotas[a].remainder);
-
-  let ri = 0;
-  while (allocated < 50 && ri < remainderCandidates.length) {
-    const key = remainderCandidates[ri++];
-    if (quotas[key].exact < poolsByChapter[key].length) {
-      quotas[key].exact++;
-      allocated++;
-    }
-  }
-
-  // 安全補充：若餘數分配後仍不足50（極端稀疏題庫），循環補足
-  if (allocated < 50) {
-    const poolKeys = Object.keys(quotas).filter(k => quotas[k].hasPool);
-    for (let ki = 0; allocated < 50; ki++) {
-      const key = poolKeys[ki % poolKeys.length];
-      if (quotas[key].exact < poolsByChapter[key].length) {
-        quotas[key].exact++;
-        allocated++;
-      }
-      if (ki > poolKeys.length * 100) break;
-    }
-  }
-
-  // ── 步驟4：Fisher-Yates 洗牌工具
+  // Fisher-Yates 洗牌
   const fisherYates = (arr) => {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -719,22 +686,48 @@ const startExam = (subject = 1) => {
     return a;
   };
 
-  // ── 步驟5：依配額從各章節抽題，並將 detail_code 覆蓋為 CH 標籤
-  let selected = [];
-  for (const key of Object.keys(targetMap)) {
-    const toTake = quotas[key].exact;
-    if (toTake === 0) continue;
-    const shuffled = fisherYates(poolsByChapter[key]);
-    shuffled.slice(0, toTake).forEach(item => {
-      selected.push({ ...item, detail_code: targetMap[key] });
-    });
+  // ── 步驟1：依配額從各章節抽題，超額題目進入備用池
+  const selected = [];
+  const surplusPool = [];
+
+  for (const [code, quota] of Object.entries(targetQuotas)) {
+    const pool = fisherYates(allQuestions.value.filter(q => String(q.detail_code || '').trim() === code));
+    const take = Math.min(pool.length, quota);
+    for (let i = 0; i < take; i++) {
+      selected.push({ ...pool[i], detail_code: chMap[code] || code });
+    }
+    // 超出配額的題目進備用池，備用池供題庫不足時補題
+    for (let i = quota; i < pool.length; i++) {
+      surplusPool.push({ ...pool[i], detail_code: chMap[code] || code });
+    }
   }
 
-  // ── 步驟6：整份試卷順序洗牌
-  selected = fisherYates(selected);
+  // ── 步驟2：若有章節題庫不足，從備用池（其他章節多餘題目）補足
+  if (selected.length < 50 && surplusPool.length > 0) {
+    const shuffledSurplus = fisherYates(surplusPool);
+    selected.push(...shuffledSurplus.slice(0, 50 - selected.length));
+  }
 
-  // ── 步驟7：選項洗牌 + 清除 (A)(B)(C)(D) 前綴 + 精確修正 correctIndex
-  selected = selected.map(q => {
+  // ── 步驟3：極端情況（備用池也不夠），循環重複已有題目補至50題
+  if (selected.length > 0 && selected.length < 50) {
+    const base = fisherYates([...selected]);
+    let fi = 0;
+    while (selected.length < 50) {
+      selected.push({ ...base[fi % base.length] });
+      fi++;
+    }
+  }
+
+  if (selected.length === 0) {
+    alert(`科目${subject}題庫目前為空，無法組卷！`);
+    return;
+  }
+
+  // ── 步驟4：整份試卷順序洗牌
+  let shuffledExam = fisherYates(selected);
+
+  // ── 步驟5：選項洗牌 + 清除 (A)(B)(C)(D) 前綴 + 修正 correctIndex
+  shuffledExam = shuffledExam.map(q => {
     if (!q.options?.length || q.correctIndex == null) return { ...q };
     const cleanOpts = q.options.map(o => String(o).replace(/^\([A-D]\)\s*/i, '').trim());
     const correctText = cleanOpts[q.correctIndex];
@@ -742,9 +735,9 @@ const startExam = (subject = 1) => {
     return { ...q, options: shuffledOpts, correctIndex: shuffledOpts.indexOf(correctText) };
   });
 
-  // ── 步驟8：寫入狀態、重置計時器、跳轉考試頁
+  // ── 步驟6：寫入狀態、重置計時器、跳轉考試頁
   examSubject.value = subject;
-  examQuestions.value = selected;
+  examQuestions.value = shuffledExam;
   userAnswers.value = Array(50).fill(null);
   currentQuestionIdx.value = 0;
   examSubmitted.value = false;
@@ -764,6 +757,9 @@ const forceSubmitExam = () => {
   });
   examScore.value = correctCount * 2;
   examSubmitted.value = true;
+  const key = examSubject.value === 1 ? 'sub1' : 'sub2';
+  examCounts.value[key]++;
+  localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -784,6 +780,9 @@ const submitExam = () => {
   });
   examScore.value = correctCount * 2;
   examSubmitted.value = true;
+  const key = examSubject.value === 1 ? 'sub1' : 'sub2';
+  examCounts.value[key]++;
+  localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
