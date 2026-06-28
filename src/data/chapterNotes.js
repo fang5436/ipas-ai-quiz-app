@@ -4,11 +4,13 @@ export const chapterNotes = {
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">弱 AI (Narrow AI) vs 強 AI (AGI)</strong>：弱 AI 專精於特定任務（如語音辨識）；強 AI 具備等同人類的全面認知能力（目前尚未實現）。</li>
       <li><strong class="text-slate-100">通用智慧</strong>：指學習和獲取知識並廣泛應用於多種領域的能力，非侷限於單一領域的預設規則。</li>
+      <li><strong class="text-slate-100">圖靈測試 (Turing Test)</strong>：評估機器是否能表現出與人類無法區分的智慧行為的方法。</li>
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、核心技術架構</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">機器學習 (ML)</strong>：不依賴明確指令，讓模型從資料中找出規律。</li>
-      <li><strong class="text-slate-100">深度學習 (DL)</strong>：ML 的子領域，使用多層神經網路，適合圖像、語音等非結構化資料。</li>
+      <li><strong class="text-slate-100">深度學習 (DL)</strong>：ML 的子領域，使用多層神經網路，透過多層自動萃取特徵，適合圖像、語音等非結構化資料。</li>
+      <li><strong class="text-slate-100">CNN vs RNN</strong>：CNN（卷積神經網路）擅長處理影像空間特徵；RNN（循環神經網路）擅長處理語音、文本等序列資料。</li>
     </ul>`,
 
   p1_c2: `
@@ -19,7 +21,7 @@ export const chapterNotes = {
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、國際法規框架</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
-      <li><strong class="text-slate-100">NIST</strong>：提供風險管理和資訊安全指導標準，管理 AI 生命週期。</li>
+      <li><strong class="text-slate-100">NIST AI RMF</strong>：提供風險管理和資訊安全指導標準，管理 AI 生命週期；四大核心功能為：治理 (Govern)、映射 (Map)、測量 (Measure)、管理 (Manage)。</li>
       <li><strong class="text-slate-100">GDPR</strong>：全球最嚴隱私法，強調個人資料處理的透明度與明確同意。</li>
       <li><strong class="text-slate-100">CCPA</strong>：強調消費者對個人資料的控制權與透明化。</li>
       <li><strong class="text-slate-100">歐盟 AI 法案</strong>：世界首次 AI 立法，確保技術開發符合社會利益。</li>
@@ -32,7 +34,13 @@ export const chapterNotes = {
       <li><strong class="text-slate-100">非結構化資料</strong>：無固定格式（音訊、圖像、影片），需 ML/DL 處理。</li>
       <li><strong class="text-slate-100">半結構化資料</strong>：JSON、XML，有組織元素但不完全遵循表格格式。</li>
     </ul>
-    <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、資料集劃分</h3>
+    <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、數值資料類型</h3>
+    <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
+      <li><strong class="text-slate-100">連續資料</strong>：可取任意實數值（如價格、溫度），數值間有無限可能。</li>
+      <li><strong class="text-slate-100">離散資料</strong>：僅限整數或特定值（如人數、次數），數值間有明確間隔。</li>
+      <li><strong class="text-slate-100">時間序列資料</strong>：帶有時間戳記且具時間依賴性，前後觀測值相互關聯（如股價、感測器數值）。</li>
+    </ul>
+    <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">三、資料集劃分</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">訓練集 (70%)</strong>：讓模型學習特徵與輸入輸出的關係。</li>
       <li><strong class="text-slate-100">驗證集 (15%)</strong>：調整超參數，評估模型防過擬合。</li>
@@ -76,7 +84,7 @@ export const chapterNotes = {
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">一、機器學習四大範式</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">監督式學習</strong>：依賴標記資料建立輸入輸出映射（如郵件垃圾分類）。</li>
-      <li><strong class="text-slate-100">無監督式學習</strong>：未標記資料，探索隱藏模式（如 K-均值聚類）。</li>
+      <li><strong class="text-slate-100">非監督式學習</strong>：未標記資料，探索隱藏模式（如 K-均值聚類）。</li>
       <li><strong class="text-slate-100">半監督式學習</strong>：少量標記 + 大量未標記，降低標記成本。</li>
       <li><strong class="text-slate-100">強化學習 (RL)</strong>：智慧體與環境互動，透過獎勵/懲罰優化動態決策。</li>
     </ul>
@@ -133,13 +141,15 @@ export const chapterNotes = {
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、模型優化技術</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
-      <li><strong class="text-slate-100">RAG 檢索增強生成</strong>：從外部知識庫檢索相關資訊再生成答案，降低「幻覺」並保護隱私。</li>
-      <li><strong class="text-slate-100">微調 (Fine-Tuning)</strong>：用特定領域資料對預訓練模型進行二次訓練。</li>
+      <li><strong class="text-slate-100">遷移學習 (Transfer Learning)</strong>：重複使用預訓練模型的權重應用於新任務，可凍結部分層以節省計算資源。</li>
+      <li><strong class="text-slate-100">微調 (Fine-Tuning)</strong>：在遷移學習基礎上，用特定領域資料對預訓練模型進行二次訓練，使其更貼合特定任務。</li>
+      <li><strong class="text-slate-100">RAG 檢索增強生成</strong>：從外部知識庫檢索相關資訊再生成答案，降低「幻覺」並保護隱私，無需重新訓練即可取得最新資料。</li>
     </ul>`,
 
   p5_c1: `
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">一、LCNC 核心概念</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
+      <li><strong class="text-slate-100">Low-code vs No-code 差異</strong>：Low-code 允許客製化程式碼，適合複雜應用；No-code 採純視覺化拖放，無需程式碼，適合非技術人員（公民開發者）快速建構。</li>
       <li><strong class="text-slate-100">民主化編程</strong>：視覺化拖放介面，讓非技術的「公民開發者」快速構建應用。</li>
       <li><strong class="text-slate-100">加速迭代</strong>：快速建立原型，收集反饋並快速迭代。</li>
       <li><strong class="text-slate-100">降低技術門檻</strong>：釋放 IT 團隊資源，專注複雜核心難題。</li>
@@ -148,7 +158,7 @@ export const chapterNotes = {
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">客製化限制</strong>：依賴預先配置的模版，面對複雜業務邏輯靈活性受限。</li>
       <li><strong class="text-slate-100">供應商鎖定 (Vendor Lock-in)</strong>：遷移到其他平台技術成本極高。</li>
-      <li><strong class="text-slate-100">影子 IT 與資安盲區</strong>：非 IT 人員開發繞過正規審核，易產生資料洩漏漏洞。</li>
+      <li><strong class="text-slate-100">影子 IT 與資安盲區</strong>：非 IT 人員開發繞過正規審核，易產生資料洩漏漏洞，程式碼審查困難。</li>
     </ul>`,
 
   p5_c2: `
@@ -193,6 +203,7 @@ export const chapterNotes = {
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、高階思維技巧</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">思維鏈提示 (CoT)</strong>：引導模型逐步推理，提高數學與邏輯問題準確率。</li>
+      <li><strong class="text-slate-100">少樣本提示 (Few-Shot)</strong>：在提示中給予幾個範例，引導模型適應新情境或特定格式。</li>
       <li><strong class="text-slate-100">思維樹提示 (ToT)</strong>：樹狀結構探索多重解決路徑，適合複雜決策。</li>
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">三、優化技術</h3>
@@ -205,8 +216,10 @@ export const chapterNotes = {
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">一、導入策略與可行性</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
       <li><strong class="text-slate-100">商業目標優先</strong>：實施前先明確商業目標，確保技術選擇能創造實質價值。</li>
-      <li><strong class="text-slate-100">技術可行性評估</strong>：評估現有基礎設施能否承載所選模型。</li>
-      <li><strong class="text-slate-100">用例優先級矩陣</strong>：按技術複雜性、資源需求、預期回報評分，優先執行最具價值的 PoC。</li>
+      <li><strong class="text-slate-100">技術可行性評估</strong>：評估現有基礎設施能否承載所選模型，同時進行資料品質評估。</li>
+      <li><strong class="text-slate-100">概念驗證 (PoC)</strong>：建議從小而可控的 PoC 開始，驗證系統整合點（確保資料流暢）與性能指標，再逐步擴大規模。</li>
+      <li><strong class="text-slate-100">用例優先級矩陣</strong>：按商業影響、技術複雜度、資源需求評分，優先執行最具價值的用例。</li>
+      <li><strong class="text-slate-100">預訓練模型 vs 自建模型</strong>：決策點包含資料量、成本、可控性與特定領域需求等因素。</li>
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">二、四大風險領域</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
@@ -247,7 +260,8 @@ export const chapterNotes = {
     </ul>
     <h3 class="text-base font-bold text-blue-400 mb-2 mt-3">三、偏見緩解</h3>
     <ul class="list-disc pl-5 space-y-1.5 text-slate-300 mb-3 text-sm">
-      <li><strong class="text-slate-100">主動去偏見</strong>：定期測試模型公平性，不可只依賴自動化工具。</li>
+      <li><strong class="text-slate-100">可解釋性技術</strong>：LIME（局部代理模型解釋）、SHAP（特徵貢獻值分析）、Saliency Map（顯著性圖，用於影像模型）能增強透明性，是問責制的基礎。</li>
+      <li><strong class="text-slate-100">主動去偏見</strong>：AI 偏見在招聘、金融等場景危害最大，須定期測試模型公平性，不可只依賴自動化工具。</li>
       <li><strong class="text-slate-100">第三方供應鏈審查</strong>：不能完全信任供應商，必須主動審查第三方軟體元件。</li>
     </ul>`
 }
