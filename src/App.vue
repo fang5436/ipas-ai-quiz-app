@@ -243,6 +243,9 @@
                   <button @click="activeNotesId = ch.id" class="px-3 py-2 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800/60 text-purple-400 hover:text-purple-300 text-xs font-bold rounded-xl transition-all shadow-sm">
                     📖 重點筆記
                   </button>
+                  <button @click="activeAnalysisId = ch.id" class="px-3 py-2 bg-amber-950/40 hover:bg-amber-900/60 border border-amber-800/60 text-amber-400 hover:text-amber-300 text-xs font-bold rounded-xl transition-all shadow-sm">
+                    🔍 試題解析
+                  </button>
                   <button @click="launchBookQuiz(ch.id, ch.name)" class="px-3 py-2 bg-sky-950/40 hover:bg-sky-900/60 border border-sky-800/60 text-sky-400 hover:text-sky-300 text-xs font-bold rounded-xl transition-all shadow-sm">
                     👉 開始 {{ getQuestionCount(ch.id) }} 題練習
                   </button>
@@ -435,6 +438,28 @@
       </div>
     </Transition>
 
+    <!-- 試題解析 Modal -->
+    <Transition name="notes-modal">
+      <div v-if="activeAnalysisId" class="fixed inset-0 z-[200] flex flex-col justify-end" @click.self="activeAnalysisId = null">
+        <div class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm" @click="activeAnalysisId = null"></div>
+        <div class="notes-sheet relative max-h-[88dvh] bg-slate-900 border-t border-slate-700 rounded-t-3xl flex flex-col overflow-hidden shadow-2xl">
+          <div class="flex items-center justify-between px-5 pt-4 pb-3 border-b border-slate-800/80">
+            <div>
+              <div class="text-[10px] text-amber-400 font-bold tracking-wider mb-0.5">🔍 試題解析</div>
+              <div class="text-sm font-bold text-slate-200">{{ getChapterName(activeAnalysisId) }}</div>
+            </div>
+            <button @click="activeAnalysisId = null" class="text-slate-400 hover:text-white w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-800 transition-all text-xl font-light">✕</button>
+          </div>
+          <div class="overflow-y-auto px-5 py-3 flex-1 analysis-content" v-html="chapterAnalysis[activeAnalysisId] || '<p class=\'text-slate-500 text-sm\'>暫無解析</p>'"></div>
+          <div class="px-5 pt-3 pb-[calc(env(safe-area-inset-bottom)+16px)] border-t border-slate-800/80 bg-slate-900">
+            <button @click="activeAnalysisId = null" class="w-full py-3 bg-amber-900/30 hover:bg-amber-800/50 border border-amber-700/50 text-amber-300 hover:text-amber-200 font-bold rounded-xl text-sm transition-all">
+              ✅ 已閱讀，關閉解析
+            </button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
     <!-- 指南練習專屬盲點置底切換鍵 -->
     <div v-if="currentTab === 'book' && bookQuizActive" class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent pt-12 pb-[calc(env(safe-area-inset-bottom)+16px)] px-4 z-50 pointer-events-none">
       <div class="max-w-2xl mx-auto flex items-center justify-between gap-3 pointer-events-auto">
@@ -449,6 +474,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
+import { chapterAnalysis } from './data/chapterAnalysis.js';
 
 const loading = ref(true);
 const currentTab = ref('home');
@@ -582,6 +608,7 @@ const chapterMapping = {
 
 // =================【🔥 指南單元練習專用變數與大腦】=================
 const activeNotesId = ref(null);
+const activeAnalysisId = ref(null);
 const getChapterName = (chId) => bookStructure.flatMap(p => p.chapters).find(c => c.id === chId)?.name || chId;
 const bookQuizActive = ref(false);
 const activeBookChId = ref(null);
@@ -1069,6 +1096,17 @@ body {
 }
 .notes-content li {
   @apply leading-relaxed;
+}
+
+/* 試題解析內容排版 */
+.analysis-content .analysis-item {
+  @apply flex gap-3.5 py-4 border-b border-slate-800/60 last:border-0;
+}
+.analysis-content .analysis-num {
+  @apply flex-shrink-0 w-9 h-9 rounded-full bg-amber-950 border border-amber-800/60 text-amber-400 text-sm font-bold flex items-center justify-center mt-0.5;
+}
+.analysis-content p {
+  @apply text-base text-slate-200 leading-loose;
 }
 
 .btn-primary {
