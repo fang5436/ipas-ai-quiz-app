@@ -14,11 +14,11 @@ npm run preview  # 預覽建置結果
 
 ## 部署
 
-部署至 GitHub Pages，`vite.config.js` 設定 `base: '/ipas-ai-quiz-app/'`，所有資源路徑均以此為前綴。
+推送至 `main` 分支會觸發 `.github/workflows/deploy.yml` 自動建置並部署到 GitHub Pages。`vite.config.js` 設定 `base: '/ipas-ai-quiz-app/'`，所有資源路徑均以此為前綴，本機 `npm run dev` 測試時注意路徑差異。
 
 ## 架構
 
-**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1000 行），分為五個 tab：`home`、`exam`、`book`、`tracker`、`analysis`，以 `v-if/v-else-if` 切換渲染。
+**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換五個 tab：`home`、`exam`、`book`、`tracker`、`analysis`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
 
 ### 題庫資料流
 
@@ -39,14 +39,15 @@ npm run preview  # 預覽建置結果
 |-----|------|
 | `ipas_book_history_v2` | 各章節歷次練習紀錄（分數、耗時、日期） |
 | `ipas_tracker_v1` | 進度追蹤勾選狀態（`{id}_read`、`{id}_quiz`） |
+| `ipas_exam_counts_v1` | 各章節模擬考累計測驗次數 |
 
 ### `src/utils/` 注意事項
 
 `src/utils/` 下有三個工具模組（`examConfig.js`、`shuffle.js`、`wrongBook.js`），但**目前 `App.vue` 並未 import 這些模組**，其邏輯以內聯方式重新實作於 `App.vue` 內。這些 utils 是預留的重構出口，修改時須注意兩者可能存在差異（例如 `examConfig.js` 使用固定官方配額，而 `App.vue` 使用比例分配演算法）。
 
-### `src/data/chapterNotes.js`
+### `src/data/chapterNotes.js` 與 `src/data/chapterAnalysis.js`
 
-匯出 `chapterNotes` 物件，key 為章節 ID（`p1_c1` 等），值為 HTML 字串，直接以 `v-html` 渲染於重點筆記 Modal。
+兩者皆匯出以章節 ID（`p1_c1` 等）為 key 的物件，值為 HTML 字串，直接以 `v-html` 渲染：`chapterNotes` 用於重點筆記 Modal，`chapterAnalysis` 用於「指南單元」的試題解析 Modal（`activeAnalysisId` 控制目前顯示的章節）。修改內容時兩者皆需維持相同的 HTML class 結構（如 `analysis-item`/`analysis-num`）才能吃到既有樣式。
 
 ## PWA
 
