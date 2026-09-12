@@ -111,6 +111,7 @@
             <div class="flex flex-wrap gap-2 mb-3">
               <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-medium border border-slate-700">{{ currentQuestion.category }}</span>
               <span class="px-2 py-0.5 rounded bg-violet-950 text-violet-400 text-[10px] font-medium border border-violet-900/40">{{ currentQuestion.detail_code }}</span>
+              <span v-if="currentQuestion.source" class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 text-[10px] font-medium border border-emerald-900/40">{{ formatSourceBadge(currentQuestion.source) }}</span>
             </div>
             <div class="min-h-[90px] flex items-center mb-4">
               <h2 class="text-base font-semibold text-slate-100 leading-relaxed w-full">{{ currentQuestion.question }}</h2>
@@ -878,6 +879,14 @@ const startTimer = () => {
 
 const stopTimer = () => { if (timerInterval) { clearInterval(timerInterval); timerInterval = null; } };
 const cleanOptionText = (text) => text ? text.replace(/^\([A-D]\)\s*/, '') : '';
+
+// 將 questions.json 的 source 欄位（如「114年第四次官方公告試題」）簡化為梯次標籤（如「114-4」）
+const CN_NUM_MAP = { '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9, '十': 10 };
+const formatSourceBadge = (source) => {
+  const m = String(source || '').match(/^(\d+)年第([一二三四五六七八九十]+)次/);
+  if (!m) return source || '';
+  return `${m[1]}-${CN_NUM_MAP[m[2]] ?? m[2]}`;
+};
 const selectOption = (idx) => { if (!examSubmitted.value) userAnswers.value[currentQuestionIdx.value] = idx; };
 const prevQuestion = () => { if (currentQuestionIdx.value > 0) currentQuestionIdx.value--; };
 const nextQuestion = () => { if (currentQuestionIdx.value < examQuestions.value.length - 1) currentQuestionIdx.value++; };
