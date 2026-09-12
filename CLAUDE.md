@@ -22,12 +22,14 @@ npm run preview  # 預覽建置結果
 
 ### 題庫資料流
 
-- `src/data/questions.json`（~293KB）在 `onMounted` 以 `import.meta.glob` 動態載入，支援未來拆分多個 JSON 檔案。
-- 每筆題目必要欄位：`question`、`options`（字串陣列）、`correctIndex`（0-based 整數）、`detail_code`（如 `L11101`）、`category`。
+- `src/data/questions.json`（400 題，~412KB）在 `onMounted` 以 `import.meta.glob` 動態載入，支援未來拆分多個 JSON 檔案。
+- 每筆題目必要欄位：`id`（全域唯一整數）、`question`、`options`（字串陣列）、`correctIndex`（0-based 整數）、`detail_code`（如 `L11101`）、`category`。
 
 ### 模擬考抽題邏輯（`App.vue` 內 `startExam()`）
 
-`detail_code` 對應兩科的 CH 標籤映射（`sub1Codes` / `sub2Codes`），採**比例配額 + 最大餘數法**從各章節抽足 50 題，再對整卷與各題選項分別執行 Fisher-Yates 洗牌，並自動修正 `correctIndex`。
+`detail_code` 對應兩科的 CH 標籤映射（`sub1CHMap` / `sub2CHMap`），依 `sub1Quotas` / `sub2Quotas` 這兩個**靜態寫死的固定配額字典**從各章節抽足 50 題（`EXAM_TOTAL_QUESTIONS`），再對整卷與各題選項分別執行 Fisher-Yates 洗牌，並自動修正 `correctIndex`。配額數字並非執行期動態計算，而是依「115年第一~三次」+「114年第四次」共 4 梯次官方公告試題（每梯次固定50題/科）平均後以最大餘數法（Hamilton apportionment）取整而來；未來題庫再擴充新梯次時，應重新手動執行這個計算並更新配額數字，而不是自動重算。
+
+**未出現題目優先機制**：`UNSEEN_PRIORITY_GRACE_ATTEMPTS`（目前為 `1`）控制從第幾次模擬考開始啟用——該科目測驗次數達門檻後，每章節抽題時會把 `seenQuestionIds`（曾在已交卷模擬考出現過的題目 id 集合）裡尚未出現過的題目排到前面優先抽取，抽完才輪到已出現過的題目；當某章節所有題目都已出現過一輪時，該章節的追蹤會自動重置、重新開始新一輪。僅在交卷（`forceSubmitExam`/`submitExam` 內的 `markExamQuestionsSeen()`）時才會寫入紀錄，中途放棄（`abortExam`）不計。
 
 ### 指南單元練習（`bookQuizData`）
 
@@ -39,11 +41,12 @@ npm run preview  # 預覽建置結果
 |-----|------|
 | `ipas_book_history_v2` | 各章節歷次練習紀錄（分數、耗時、日期） |
 | `ipas_tracker_v1` | 進度追蹤勾選狀態（`{id}_read`、`{id}_quiz`） |
-| `ipas_exam_counts_v1` | 各章節模擬考累計測驗次數 |
+| `ipas_exam_counts_v1` | 各科目（`sub1`/`sub2`）模擬考累計交卷次數 |
+| `ipas_seen_question_ids_v1` | 曾在已交卷模擬考出現過的題目 `id` 陣列（未出現題目優先機制用） |
 
 ### `src/utils/` 注意事項
 
-`src/utils/` 下有三個工具模組（`examConfig.js`、`shuffle.js`、`wrongBook.js`），但**目前 `App.vue` 並未 import 這些模組**，其邏輯以內聯方式重新實作於 `App.vue` 內。這些 utils 是預留的重構出口，修改時須注意兩者可能存在差異（例如 `examConfig.js` 使用固定官方配額，而 `App.vue` 使用比例分配演算法）。
+`src/utils/` 下有三個工具模組（`examConfig.js`、`shuffle.js`、`wrongBook.js`），但**目前 `App.vue` 並未 import 這些模組**，其邏輯以內聯方式重新實作於 `App.vue` 內。這些 utils 是預留的重構出口；`examConfig.js` 跟 `App.vue` 其實都是用固定配額字典（並非比例分配演算法），只是 `examConfig.js` 裡的配額數字是舊版、並未隨題庫更新同步調整（因為它本來就是死碼，未被 import），修改時不要誤以為兩邊配額一致。
 
 ### `src/data/chapterNotes.js` 與 `src/data/chapterAnalysis.js`
 

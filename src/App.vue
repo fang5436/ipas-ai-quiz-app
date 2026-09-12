@@ -144,9 +144,12 @@
                 <h1 class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">iPAS 初級 AI 應用規劃師</h1>
                 <p class="text-slate-400 mt-1 text-sm">獨立備考進度追蹤儀表板 (2026 衝刺版)</p>
             </div>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-center gap-4 w-full md:w-auto shadow-xl shadow-blue-950/20">
-                <div class="text-blue-400 font-mono text-2xl md:text-3xl font-bold tracking-wider">{{ countdownStr }}</div>
-                <div class="text-xs text-slate-400 border-l border-slate-800 pl-4">距離 8/15<br>考試倒數</div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-1 w-full md:w-auto shadow-xl shadow-blue-950/20">
+                <div class="flex items-center justify-center gap-4">
+                    <div class="text-blue-400 font-mono text-2xl md:text-3xl font-bold tracking-wider">{{ countdownStr }}</div>
+                    <div class="text-xs text-slate-400 border-l border-slate-800 pl-4">距離 11/7<br>考試倒數</div>
+                </div>
+                <div class="text-[10px] text-slate-500 border-t border-slate-800 pt-1 w-full text-center">考試活動編號：115-04-Z01</div>
             </div>
         </header>
 
@@ -514,6 +517,9 @@ const bookStructure = [
 // =================【🔥 進度追蹤儀表板專用變數與大腦】=================
 const trackerState = ref({});
 const examCounts = ref({ sub1: 0, sub2: 0 });
+const seenQuestionIds = ref(new Set());
+const examBagResetCodes = ref([]);
+const EXAM_TOTAL_QUESTIONS = 50;
 const countdownStr = ref('--天 --時');
 let countdownInterval = null;
 
@@ -538,7 +544,7 @@ const trackerSections = [
 ];
 
 const updateCountdown = () => {
-  const diff = new Date('2026-08-15T00:00:00').getTime() - new Date().getTime();
+  const diff = new Date('2026-11-07T00:00:00').getTime() - new Date().getTime();
   if (diff <= 0) { countdownStr.value = '考試結束'; return; }
   const d = Math.floor(diff / (1000 * 60 * 60 * 24));
   const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -647,6 +653,11 @@ onMounted(async () => {
       examCounts.value = JSON.parse(savedExamCounts);
     }
 
+    const savedSeenIds = localStorage.getItem('ipas_seen_question_ids_v1');
+    if (savedSeenIds) {
+      seenQuestionIds.value = new Set(JSON.parse(savedSeenIds));
+    }
+
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 60000);
 
@@ -687,15 +698,21 @@ const switchTab = (tabId) => {
 };
 
 // =================【🔄 模擬考核心引擎區】=================
+// 模擬考「未曾出現題目優先」機制：第 1 次測驗維持純隨機（貼近現行體驗），第 2 次起啟用未見優先＋章節出題循環重置
+const UNSEEN_PRIORITY_GRACE_ATTEMPTS = 1;
+
 const startExam = (subject = 1) => {
   if (allQuestions.value.length === 0) {
     alert("題庫資料尚未載入完成，請稍候再試！");
     return;
   }
 
-  // 依考古題官方出題比率訂定固定配額（科目一共50題，科目二共50題）
-  const sub1Quotas = { "L11101": 4, "L11102": 6, "L11201": 3, "L11202": 7, "L11203": 3, "L11301": 10, "L11302": 7, "L11401": 6, "L11402": 4 };
-  const sub2Quotas = { "L12101": 6, "L12102": 6, "L12201": 8, "L12202": 10, "L12301": 7, "L12302": 5, "L12303": 8 };
+  // 出題配額計算方式：依「115年第一~三次」+「114年第四次」共 4 梯次官方公告試題，
+  // 分別計算各梯次每一細項(detail_code)的實際出題數（每梯次固定50題/科），
+  // 四梯次平均後以最大餘數法四捨五入取整，使各科總數為50。
+  // 若未來新增梯次考古題，應重新執行此計算並更新下列配額數字。
+  const sub1Quotas = { "L11101": 2, "L11102": 8, "L11201": 2, "L11202": 8, "L11203": 2, "L11301": 12, "L11302": 6, "L11401": 7, "L11402": 3 };
+  const sub2Quotas = { "L12101": 4, "L12102": 3, "L12201": 12, "L12202": 15, "L12301": 4, "L12302": 3, "L12303": 9 };
   const targetQuotas = subject === 1 ? sub1Quotas : sub2Quotas;
 
   // detail_code → CH 標籤（供 weaknessAnalysis 顯示用）
@@ -713,12 +730,28 @@ const startExam = (subject = 1) => {
     return a;
   };
 
+  const attemptsSoFar = examCounts.value[subject === 1 ? 'sub1' : 'sub2'];
+  const bagResetCodes = []; // 記錄本次抽題觸發「章節重置」的代碼，供交卷時清空舊紀錄用
+
   // ── 步驟1：依配額從各章節抽題，超額題目進入備用池
   const selected = [];
   const surplusPool = [];
 
   for (const [code, quota] of Object.entries(targetQuotas)) {
-    const pool = fisherYates(allQuestions.value.filter(q => String(q.detail_code || '').trim() === code));
+    let pool = fisherYates(allQuestions.value.filter(q => String(q.detail_code || '').trim() === code));
+
+    if (attemptsSoFar >= UNSEEN_PRIORITY_GRACE_ATTEMPTS) {
+      let unseenInCode = pool.filter(q => !seenQuestionIds.value.has(q.id));
+      let seenInCode = pool.filter(q => seenQuestionIds.value.has(q.id));
+      if (unseenInCode.length === 0 && pool.length > 0) {
+        // 這個章節已經抽完一輪，重新視為全新一輪
+        unseenInCode = pool;
+        seenInCode = [];
+        bagResetCodes.push(code);
+      }
+      pool = [...unseenInCode, ...seenInCode];
+    }
+
     const take = Math.min(pool.length, quota);
     for (let i = 0; i < take; i++) {
       selected.push({ ...pool[i], detail_code: chMap[code] || code });
@@ -729,17 +762,20 @@ const startExam = (subject = 1) => {
     }
   }
 
-  // ── 步驟2：若有章節題庫不足，從備用池（其他章節多餘題目）補足
-  if (selected.length < 50 && surplusPool.length > 0) {
-    const shuffledSurplus = fisherYates(surplusPool);
-    selected.push(...shuffledSurplus.slice(0, 50 - selected.length));
+  examBagResetCodes.value = bagResetCodes;
+
+  // ── 步驟2：若有章節題庫不足，從備用池（其他章節多餘題目）補足，優先使用未出現過的題目
+  if (selected.length < EXAM_TOTAL_QUESTIONS && surplusPool.length > 0) {
+    const unseenSurplus = fisherYates(surplusPool.filter(q => !seenQuestionIds.value.has(q.id)));
+    const seenSurplus = fisherYates(surplusPool.filter(q => seenQuestionIds.value.has(q.id)));
+    selected.push(...[...unseenSurplus, ...seenSurplus].slice(0, EXAM_TOTAL_QUESTIONS - selected.length));
   }
 
   // ── 步驟3：極端情況（備用池也不夠），循環重複已有題目補至50題
-  if (selected.length > 0 && selected.length < 50) {
+  if (selected.length > 0 && selected.length < EXAM_TOTAL_QUESTIONS) {
     const base = fisherYates([...selected]);
     let fi = 0;
-    while (selected.length < 50) {
+    while (selected.length < EXAM_TOTAL_QUESTIONS) {
       selected.push({ ...base[fi % base.length] });
       fi++;
     }
@@ -765,7 +801,7 @@ const startExam = (subject = 1) => {
   // ── 步驟6：寫入狀態、重置計時器、跳轉考試頁
   examSubject.value = subject;
   examQuestions.value = shuffledExam;
-  userAnswers.value = Array(50).fill(null);
+  userAnswers.value = Array(EXAM_TOTAL_QUESTIONS).fill(null);
   currentQuestionIdx.value = 0;
   examSubmitted.value = false;
   examScore.value = 0;
@@ -776,17 +812,28 @@ const startExam = (subject = 1) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+const markExamQuestionsSeen = () => {
+  const next = new Set(seenQuestionIds.value);
+  examBagResetCodes.value.forEach(code => {
+    allQuestions.value.filter(q => q.detail_code === code).forEach(q => next.delete(q.id));
+  });
+  examQuestions.value.forEach(q => next.add(q.id));
+  seenQuestionIds.value = next;
+  localStorage.setItem('ipas_seen_question_ids_v1', JSON.stringify([...next]));
+};
+
 const forceSubmitExam = () => {
   stopTimer();
   let correctCount = 0;
   userAnswers.value.forEach((ans, idx) => {
     if (ans === examQuestions.value[idx]?.correctIndex) correctCount++;
   });
-  examScore.value = correctCount * 2;
+  examScore.value = correctCount * (100 / EXAM_TOTAL_QUESTIONS);
   examSubmitted.value = true;
   const key = examSubject.value === 1 ? 'sub1' : 'sub2';
   examCounts.value[key]++;
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
+  markExamQuestionsSeen();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -805,11 +852,12 @@ const submitExam = () => {
   userAnswers.value.forEach((ans, idx) => {
     if (ans === examQuestions.value[idx].correctIndex) correctCount++;
   });
-  examScore.value = correctCount * 2;
+  examScore.value = correctCount * (100 / EXAM_TOTAL_QUESTIONS);
   examSubmitted.value = true;
   const key = examSubject.value === 1 ? 'sub1' : 'sub2';
   examCounts.value[key]++;
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
+  markExamQuestionsSeen();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
