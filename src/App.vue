@@ -84,6 +84,20 @@
             <button @click="startExam(1)" class="btn-primary">📘 科目一</button>
             <button @click="startExam(2)" class="btn-primary !bg-indigo-600 hover:!bg-indigo-500">📙 科目二</button>
           </div>
+
+          <!-- 🆕 歷屆考古題單獨測驗：依年度梯次挑選，原始題序、不隨機抽題 -->
+          <div class="w-full max-w-md flex flex-col gap-3 mt-4 pt-6 border-t border-slate-800">
+            <p class="text-slate-500 text-xs">或依年度梯次單獨測驗（依官方原始題序出題，不隨機抽題）：</p>
+            <div class="flex flex-col gap-2">
+              <div v-for="session in pastExamSessions" :key="session.source" class="flex flex-wrap items-center justify-between gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5">
+                <span class="text-sm font-bold text-slate-300">{{ session.label }}</span>
+                <div class="flex gap-2">
+                  <button @click="startPastExam(session.source, 1)" class="px-3 py-1.5 rounded-lg bg-violet-950/60 hover:bg-violet-900/70 border border-violet-800/50 text-violet-300 text-xs font-bold transition">科目一</button>
+                  <button @click="startPastExam(session.source, 2)" class="px-3 py-1.5 rounded-lg bg-indigo-950/60 hover:bg-indigo-900/70 border border-indigo-800/50 text-indigo-300 text-xs font-bold transition">科目二</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div v-else class="flex flex-col gap-4">
@@ -91,6 +105,7 @@
             <div class="flex flex-col gap-0.5">
               <div class="flex items-center gap-1.5 mb-0.5">
                 <span class="text-[10px] font-bold px-1.5 py-0.5 rounded" :class="examSubject === 1 ? 'bg-violet-950 text-violet-400' : 'bg-indigo-950 text-indigo-400'">{{ examSubject === 1 ? '科目一' : '科目二' }}</span>
+                <span v-if="isPastExamMode" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400">🗂️ 歷屆考古題</span>
               </div>
               <div class="flex items-baseline gap-1.5">
                 <span class="text-2xl font-bold text-violet-400">{{ currentQuestionIdx + 1 }}</span>
@@ -102,8 +117,8 @@
             </div>
             <div v-if="examSubmitted" class="px-3 py-1 bg-violet-950/60 border border-violet-800 text-violet-400 rounded-lg font-bold text-xs">得分：{{ examScore }}</div>
             <div class="flex gap-2">
-              <button v-if="!examSubmitted" @click="abortExam" class="btn-secondary py-1.5 px-2.5 text-xs border-red-900/50 text-red-400 hover:bg-red-950/20">中止</button>
-              <button v-if="!examSubmitted" @click="submitExam" class="btn-primary py-1.5 px-3 text-xs" :disabled="!allAnswered">交卷</button>
+              <button v-if="!examSubmitted" @click="handleExamAbort" class="btn-secondary py-1.5 px-2.5 text-xs border-red-900/50 text-red-400 hover:bg-red-950/20">中止</button>
+              <button v-if="!examSubmitted" @click="handleExamSubmit" class="btn-primary py-1.5 px-3 text-xs" :disabled="!allAnswered">交卷</button>
             </div>
           </div>
 
@@ -887,6 +902,106 @@ const formatSourceBadge = (source) => {
   if (!m) return source || '';
   return `${m[1]}-${CN_NUM_MAP[m[2]] ?? m[2]}`;
 };
+// =================【🆕 歷屆考古題單獨測驗：依年度梯次挑選，原始題序、不隨機抽題】=================
+// 是否為「歷屆考古題」模式：直接由目前試卷第一題判斷，不需另外維護狀態，切換考卷時自動同步、不會有殘留問題
+const isPastExamMode = computed(() => examQuestions.value.length > 0 && examQuestions.value[0]?._isPastExam === true);
+
+// 由題庫中所有出現過的 source 值，解析成可選的「年度梯次」清單（依年度、梯次新到舊排序）
+const pastExamSessions = computed(() => {
+  const map = new Map();
+  allQuestions.value.forEach(q => {
+    if (!q.source || map.has(q.source)) return;
+    const m = String(q.source).match(/^(\d+)年第([一二三四五六七八九十]+)次/);
+    map.set(q.source, {
+      source: q.source,
+      label: formatSourceBadge(q.source),
+      year: m ? parseInt(m[1], 10) : 0,
+      sessionNum: m ? (CN_NUM_MAP[m[2]] ?? 0) : 0,
+    });
+  });
+  return [...map.values()].sort((a, b) => b.year - a.year || b.sessionNum - a.sessionNum);
+});
+
+// 依指定梯次（source）＋科目，原封不動抽出該梯次該科全部題目，依題號原始順序排列（不洗牌、不重組配額）
+const startPastExam = (source, subject = 1) => {
+  if (allQuestions.value.length === 0) {
+    alert("題庫資料尚未載入完成，請稍候再試！");
+    return;
+  }
+  // detail_code → CH 標籤（供 weaknessAnalysis 顯示用，與 startExam 內的對照表一致）
+  const sub1CHMap = { "L11101": "CH1-1", "L11402": "CH1-2", "L11201": "CH2-1", "L11202": "CH2-2", "L11401": "CH2-3", "L11203": "CH3-1", "L11102": "CH3-2", "L11301": "CH4-1", "L11302": "CH4-2" };
+  const sub2CHMap = { "L12101": "CH6-1", "L12102": "CH6-2", "L12201": "CH7-2", "L12202": "CH5-1", "L12301": "CH7-3", "L12302": "CH7-3", "L12303": "CH7-1" };
+  const chMap = subject === 1 ? sub1CHMap : sub2CHMap;
+  const subjectPrefix = subject === 1 ? 'L11' : 'L12';
+
+  const pool = allQuestions.value
+    .filter(q => q.source === source && String(q.detail_code || '').trim().startsWith(subjectPrefix))
+    .slice()
+    .sort((a, b) => a.id - b.id)
+    .map(q => ({
+      ...q,
+      detail_code: chMap[q.detail_code] || q.detail_code,
+      options: q.options.map(o => String(o).replace(/^\([A-D]\)\s*/i, '').trim()),
+      _isPastExam: true,
+    }));
+
+  if (pool.length === 0) {
+    alert('找不到該梯次、該科目的考古題！');
+    return;
+  }
+
+  examSubject.value = subject;
+  examQuestions.value = pool;
+  userAnswers.value = Array(pool.length).fill(null);
+  currentQuestionIdx.value = 0;
+  examSubmitted.value = false;
+  examScore.value = 0;
+  expandedAccordion.value = null;
+  timer.value = 75 * 60;
+  startPastExamTimer();
+  currentTab.value = 'exam';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// 與 startTimer 共用同一個 timerInterval 變數／stopTimer()，確保切換分頁時的中途離開保護（switchTab 內的 stopTimer()）
+// 對歷屆考古題模式一樣有效；差別只在倒數歸零時要呼叫 forceSubmitPastExam 而非原本的 forceSubmitExam
+const startPastExamTimer = () => {
+  stopTimer();
+  timerInterval = setInterval(() => {
+    if (timer.value > 0) timer.value--;
+    else { stopTimer(); forceSubmitPastExam(); }
+  }, 1000);
+};
+
+// 歷屆考古題的交卷/中止：獨立於 examCounts、未出現題目優先機制之外，不影響隨機抽題模擬考的既有計次與追蹤邏輯
+const forceSubmitPastExam = () => {
+  stopTimer();
+  let correctCount = 0;
+  userAnswers.value.forEach((ans, idx) => {
+    if (ans === examQuestions.value[idx]?.correctIndex) correctCount++;
+  });
+  examScore.value = correctCount * (100 / examQuestions.value.length);
+  examSubmitted.value = true;
+  currentTab.value = 'analysis';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const submitPastExam = () => {
+  if (!confirm('確定要提交卷進行評分嗎？')) return;
+  forceSubmitPastExam();
+};
+
+const abortPastExam = () => {
+  if (!confirm('🛑 確定要中止本次歷屆考古題測驗嗎？')) return;
+  stopTimer();
+  examQuestions.value = [];
+  currentTab.value = 'home';
+};
+
+// 交卷/中止按鈕的統一入口：依目前試卷是否為歷屆考古題模式分派，隨機抽題模擬考的原有行為完全不變
+const handleExamAbort = () => { isPastExamMode.value ? abortPastExam() : abortExam(); };
+const handleExamSubmit = () => { isPastExamMode.value ? submitPastExam() : submitExam(); };
+
 const selectOption = (idx) => { if (!examSubmitted.value) userAnswers.value[currentQuestionIdx.value] = idx; };
 const prevQuestion = () => { if (currentQuestionIdx.value > 0) currentQuestionIdx.value--; };
 const nextQuestion = () => { if (currentQuestionIdx.value < examQuestions.value.length - 1) currentQuestionIdx.value++; };
