@@ -18,7 +18,9 @@ npm run preview  # 預覽建置結果
 
 ## 架構
 
-**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換五個 tab：`home`、`exam`、`book`、`tracker`、`analysis`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
+**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換六個 tab：`home`、`exam`、`book`、`tracker`、`analysis`、`browse`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
+
+`browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。
 
 ### 題庫資料流
 

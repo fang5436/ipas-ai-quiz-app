@@ -23,6 +23,7 @@
           
           <button @click="switchTab('tracker')" :class="getTabClass('tracker')">進度追蹤</button>
           <button @click="switchTab('book')" :class="getTabClass('book')">指南單元</button>
+          <button @click="switchTab('browse')" :class="getTabClass('browse')">題庫瀏覽</button>
         </nav>
       </div>
     </header>
@@ -59,6 +60,11 @@
               <button @click="currentTab = 'book'" class="btn-secondary w-full py-3.5 !bg-slate-900 hover:!bg-slate-800 border-slate-700 flex flex-col items-center justify-center gap-0.5 shadow-lg">
                 <span class="font-bold text-base text-sky-400">📘 進入 指南單元強效練習板</span>
                 <span class="text-[10px] font-normal text-slate-400">對照指南紙本 16 單元固定試題，具獨立正向計時與縱向進退步分析</span>
+              </button>
+
+              <button @click="switchTab('browse')" class="btn-secondary w-full py-3.5 !bg-slate-900 hover:!bg-slate-800 border-slate-700 flex flex-col items-center justify-center gap-0.5 shadow-lg">
+                <span class="font-bold text-base text-amber-400">📚 題庫瀏覽</span>
+                <span class="text-[10px] font-normal text-slate-400">{{ allQuestions.length }} 題依梯次分類，直接查看正確答案與解說</span>
               </button>
             </div>
           </div>
@@ -422,6 +428,58 @@
         </div>
       </div>
 
+      <!-- =================【🆕 TAB 6: 題庫瀏覽（依梯次＋科目列出全部題目，直接查看答案與解說）】================= -->
+      <div v-else-if="currentTab === 'browse'" class="animate-fade-in flex flex-col gap-4 pt-2">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+          <div class="flex flex-col gap-1">
+            <h2 class="text-base font-bold text-amber-400">📚 題庫瀏覽</h2>
+            <p class="text-slate-400 text-xs">依官方出題梯次與科目分類，點選題目即可查看正確答案與解說。</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button v-for="session in pastExamSessions" :key="session.source" @click="selectBrowseSource(session.source)" class="px-3 py-1.5 rounded-lg border text-xs font-bold transition" :class="activeBrowseSource === session.source ? 'bg-amber-600 border-amber-500 text-white' : 'bg-slate-950 border-slate-700 text-slate-400 hover:text-slate-200'">{{ session.label }}</button>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex gap-2">
+              <button @click="selectBrowseSubject(1)" class="px-3 py-1.5 rounded-lg border text-xs font-bold transition" :class="browseSubject === 1 ? 'bg-violet-600 border-violet-500 text-white' : 'bg-violet-950/60 border-violet-800/50 text-violet-300 hover:bg-violet-900/70'">科目一</button>
+              <button @click="selectBrowseSubject(2)" class="px-3 py-1.5 rounded-lg border text-xs font-bold transition" :class="browseSubject === 2 ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-indigo-950/60 border-indigo-800/50 text-indigo-300 hover:bg-indigo-900/70'">科目二</button>
+            </div>
+            <div class="flex gap-2">
+              <button @click="expandAllBrowse" class="btn-secondary py-1.5 px-2.5 text-xs">全部展開</button>
+              <button @click="collapseAllBrowse" class="btn-secondary py-1.5 px-2.5 text-xs">全部收合</button>
+            </div>
+          </div>
+          <p class="text-slate-500 text-[11px]">共 {{ browseQuestions.length }} 題</p>
+        </div>
+
+        <div class="flex flex-col gap-2.5">
+          <div v-for="(q, qIdx) in browseQuestions" :key="q.id" class="bg-slate-900 border rounded-xl overflow-hidden transition-colors scroll-mt-20" :class="browseExpanded.has(q.id) ? 'border-amber-800/60' : 'border-slate-800'">
+            <button @click="toggleBrowseItem(q.id, $event)" class="w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-slate-800/40 transition-colors">
+              <span class="shrink-0 w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center text-xs font-bold">{{ qIdx + 1 }}</span>
+              <div class="flex-1 min-w-0 flex flex-col gap-1.5">
+                <span class="text-sm text-slate-200 leading-relaxed" :class="{ 'line-clamp-2': !browseExpanded.has(q.id) }">{{ q.question }}</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-medium border border-slate-700">{{ q.category }}</span>
+                  <span class="px-2 py-0.5 rounded bg-violet-950 text-violet-400 text-[10px] font-medium border border-violet-900/40">{{ q.detail_code }}</span>
+                </div>
+              </div>
+              <span class="shrink-0 text-slate-500 text-xs mt-1 transition-transform duration-200" :class="{ 'rotate-90 text-amber-400': browseExpanded.has(q.id) }">▶</span>
+            </button>
+
+            <div v-if="browseExpanded.has(q.id)" class="px-4 pb-4 pt-1 flex flex-col gap-2 animate-fade-in">
+              <div v-for="(option, idx) in q.options" :key="idx" class="flex items-start gap-3 p-3 rounded-xl border text-sm" :class="idx === q.correctIndex ? 'bg-green-950/30 border-green-800/60 text-green-300' : 'bg-slate-950/40 border-slate-800 text-slate-400'">
+                <div class="w-7 h-7 text-xs rounded-lg flex items-center justify-center font-bold shrink-0" :class="idx === q.correctIndex ? 'bg-green-600 text-white' : 'bg-slate-800 text-slate-400'">{{ String.fromCharCode(65 + idx) }}</div>
+                <div class="flex-1 leading-relaxed">{{ cleanOptionText(option) }}</div>
+                <span v-if="idx === q.correctIndex" class="shrink-0 text-[10px] font-bold text-green-400 mt-1">✓ 正確答案</span>
+              </div>
+              <div class="mt-1 p-3.5 rounded-xl border bg-amber-950/20 border-amber-900/40 text-amber-100/90 text-xs leading-relaxed whitespace-pre-wrap">
+                <span class="font-bold block mb-1 text-amber-400">💡 解說</span>
+                {{ q.explanation || '此題無解析。' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
 
     <!-- 模擬考專屬盲點置底切換鍵 -->
@@ -491,7 +549,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
 
@@ -696,6 +754,7 @@ const getTabClass = (id) => {
   if (!isActive) return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-all duration-200';
   if (id === 'book') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-sky-600 text-white shadow-lg shadow-sky-900/40 transition-all duration-200';
   if (id === 'tracker') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white shadow-lg shadow-emerald-900/40 transition-all duration-200';
+  if (id === 'browse') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-600 text-white shadow-lg shadow-amber-900/40 transition-all duration-200';
   return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-violet-600 text-white shadow-lg shadow-violet-900/40 transition-all duration-200';
 };
 
@@ -997,6 +1056,43 @@ const abortPastExam = () => {
   examQuestions.value = [];
   currentTab.value = 'home';
 };
+
+// =================【🆕 題庫瀏覽：依年度梯次＋科目列出全部題目，直接查看正確答案與解說】=================
+// 純閱讀用途：不寫入 seenQuestionIds / examCounts，不影響模擬考抽題與計次
+const browseSource = ref(null);
+const browseSubject = ref(1);
+const browseExpanded = ref(new Set());
+
+// 未手動選擇梯次時，預設為最新梯次
+const activeBrowseSource = computed(() => browseSource.value || pastExamSessions.value[0]?.source || null);
+
+// 依梯次＋科目篩選，依題號原始順序排列（與 startPastExam 相同）
+const browseQuestions = computed(() => {
+  const subjectPrefix = browseSubject.value === 1 ? 'L11' : 'L12';
+  return allQuestions.value
+    .filter(q => q.source === activeBrowseSource.value && String(q.detail_code || '').trim().startsWith(subjectPrefix))
+    .slice()
+    .sort((a, b) => a.id - b.id);
+});
+
+const selectBrowseSource = (source) => { browseSource.value = source; browseExpanded.value = new Set(); };
+const selectBrowseSubject = (subject) => { browseSubject.value = subject; browseExpanded.value = new Set(); };
+
+// 一次只展開一題：點開新題目時自動收合其他題；再點同一題則收合
+const toggleBrowseItem = (id, event) => {
+  if (browseExpanded.value.has(id)) {
+    browseExpanded.value = new Set();
+    return;
+  }
+  browseExpanded.value = new Set([id]);
+  // 上方題目收合後版面會上移，點開的題目可能被推出畫面外，需捲回可視範圍
+  const card = event?.currentTarget?.parentElement;
+  nextTick(() => {
+    if (card && card.getBoundingClientRect().top < 64) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+};
+const expandAllBrowse = () => { browseExpanded.value = new Set(browseQuestions.value.map(q => q.id)); };
+const collapseAllBrowse = () => { browseExpanded.value = new Set(); };
 
 // 交卷/中止按鈕的統一入口：依目前試卷是否為歷屆考古題模式分派，隨機抽題模擬考的原有行為完全不變
 const handleExamAbort = () => { isPastExamMode.value ? abortPastExam() : abortExam(); };
