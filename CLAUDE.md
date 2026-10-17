@@ -20,7 +20,14 @@ npm run preview  # 預覽建置結果
 
 **單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換六個 tab：`home`、`exam`、`book`、`tracker`、`analysis`、`browse`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
 
-`browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。
+`browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。解說框下方的「📖 相關名詞」區塊讀取 `src/data/terms/`（見下方），`activeBrowseTerms` 記錄每題目前展開的名詞（每題最多一張），題目收合、切換梯次／科目、全部展開／收合時一律清空。全真模擬考作答畫面刻意不顯示名詞，以免提示答案。
+
+### `src/data/terms/`（相關名詞卡片）
+
+- `terms.json`：名詞卡片陣列，欄位為 `id`、`name`、`units`（評鑑內容代碼）、`oneLiner`、`analogy`、`useCases`、`distinguish`、`trap`、`sources`、`status`（`已查證`／`待確認`）。
+- `question-terms.json`：題目 `id` → 名詞 `id` 陣列（依「題幹 → 正確答案 → 錯誤選項 → 解說」排序）。
+- 兩檔放在子資料夾，是為了避開題庫載入用的 `import.meta.glob('./data/*.json')`（非遞迴）；若放在 `src/data/` 根目錄會被誤當成題目載入。
+- 撰寫依據的官方文件放在 `docs/official/`（不會被打包進網站）；名詞清單與查證計畫見根目錄 `terms-list.md`。
 
 ### 題庫資料流
 

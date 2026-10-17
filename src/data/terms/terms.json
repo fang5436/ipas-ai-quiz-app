@@ -1,0 +1,4391 @@
+[
+  {
+    "id": "weak-ai",
+    "name": "弱 AI（Weak AI／Narrow AI）",
+    "units": [
+      "L11101"
+    ],
+    "oneLiner": "只針對特定任務設計與最佳化的 AI，換到其他任務就不能直接用；目前所有實際上線的 AI 都屬於弱 AI。",
+    "analogy": "像只會下圍棋的棋王：棋下得比人好，但請他幫你排班表就完全不會。",
+    "useCases": "人臉辨識門禁、瑕疵檢測、客戶流失預測、自動生成貼文等單一任務的產品。",
+    "distinguish": "強 AI／AGI 具備人類般跨領域的通用智慧，目前尚未實現；ASI 是超越人類的假想智慧。",
+    "trap": "「效能超越人類」或「能生成內容」都不代表是強 AI；只要是針對特定任務設計、無法跨領域遷移，就是弱 AI。",
+    "sources": [
+      "Russell & Norvig, Artificial Intelligence: A Modern Approach（4th ed.）, Ch.1、Ch.28"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "strong-ai-agi",
+    "name": "強 AI／通用人工智慧 AGI",
+    "units": [
+      "L11101"
+    ],
+    "oneLiner": "能像人一樣跨領域學習、理解與解決各種問題的 AI，目前仍是假想的目標，尚未實現。",
+    "analogy": "像一位什麼都能學會的全才新人，今天學會記帳、明天就能學設計，不必重新打造。",
+    "useCases": "主要出現在 AI 分類與長期發展的討論，不是現有產品的分類。",
+    "distinguish": "弱 AI 只做特定任務；ASI 則是能力全面超越人類的假想階段。",
+    "trap": "題目描述的產品若只做單一任務（如 PCB 檢測、門禁辨識），即使表現很好也不是 AGI。",
+    "sources": [
+      "Russell & Norvig, Artificial Intelligence: A Modern Approach（4th ed.）, Ch.1、Ch.28"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "asi",
+    "name": "超級人工智慧 ASI",
+    "units": [
+      "L11101"
+    ],
+    "oneLiner": "能力在幾乎所有領域都遠超過人類的假想 AI。",
+    "analogy": "不只是全才新人，而是比所有專家加起來都更厲害的存在。",
+    "useCases": "多用於 AI 長期風險與倫理討論。",
+    "distinguish": "弱 AI（特定任務）→ AGI（人類等級的通用智慧）→ ASI（超越人類），後兩者目前都未實現。",
+    "trap": "現有的任何商用 AI 都不是 ASI，看到具體產品描述時通常可直接排除這個選項。",
+    "sources": [
+      "Bostrom, Superintelligence: Paths, Dangers, Strategies（2014）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "turing-test",
+    "name": "圖靈測試（Turing Test）",
+    "units": [
+      "L11101"
+    ],
+    "oneLiner": "1950 年圖靈提出的測試：人類透過文字對話，若無法分辨對方是人還是機器，就算機器通過測試。",
+    "analogy": "像隔著牆聊天，聊完猜不出對方是真人還是機器人，機器就「騙過」你了。",
+    "useCases": "討論 AI 是否展現類人對話能力的經典判準。",
+    "distinguish": "它檢驗的是「像不像人」，不是答案正確性、專業判斷力或可解釋性。",
+    "trap": "「通過圖靈測試」不代表 AI 的專業判斷可信、答案一致或可解釋；只能說明對話表現近似人類。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy, The Turing Test: https://plato.stanford.edu/entries/turing-test/",
+      "Turing (1950), Computing Machinery and Intelligence, Mind 59(236): https://doi.org/10.1093/mind/LIX.236.433"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "computer-vision",
+    "name": "電腦視覺（Computer Vision）",
+    "units": [
+      "L11101",
+      "L11402",
+      "L12202"
+    ],
+    "oneLiner": "讓電腦「看懂」影像或影片的 AI 領域，包含影像分類、物件偵測、影像分割等任務。",
+    "analogy": "像替電腦裝上眼睛和大腦，看到照片就能說出裡面有什麼、在哪裡。",
+    "useCases": "瑕疵檢測、蘋果成熟度判斷、害蟲辨識、監視器車流統計、醫療影像判讀。",
+    "distinguish": "自然語言處理（NLP）處理文字語意；語音辨識處理聲音。輸入是影像就優先想到電腦視覺。",
+    "trap": "題目只要以「影像、照片、外觀特徵」為輸入，核心技術通常是電腦視覺，選 NLP 或推薦系統都是陷阱。",
+    "sources": [
+      "Szeliski, Computer Vision: Algorithms and Applications（2nd ed.）: https://szeliski.org/Book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "image-classification",
+    "name": "影像分類（Image Classification）",
+    "units": [
+      "L11101",
+      "L11301"
+    ],
+    "oneLiner": "判斷一整張影像屬於哪個類別，例如「有沒有煙霧」「是貓還是狗」。",
+    "analogy": "像看一張照片只回答一句話：「這是蘋果」，不管蘋果在哪裡。",
+    "useCases": "瑕疵／正常判定、病害種類分類、影像是否含有特定物體。",
+    "distinguish": "物件偵測要找出位置並畫框；影像分割要標出每個像素屬於哪一類。",
+    "trap": "題目要求「標示位置」就不是影像分類；要求「精確到像素、算面積」更要選影像分割。",
+    "sources": [
+      "Stanford CS231n, Image Classification: https://cs231n.github.io/classification/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "object-detection",
+    "name": "物件偵測（Object Detection）",
+    "units": [
+      "L11101",
+      "L11203"
+    ],
+    "oneLiner": "在影像中找出物體是什麼、在哪裡，通常用方框（Bounding Box）標出位置。",
+    "analogy": "像在照片上把每台車用框框圈起來，並寫上「汽車」「機車」。",
+    "useCases": "車流統計、安全帽與反光背心穿戴偵測、貨架缺貨位置標示。",
+    "distinguish": "影像分類只判斷整張圖的類別；影像分割精確到像素；人臉辨識是確認「是誰」。",
+    "trap": "只需統計「有沒有戴安全帽」而不需知道是誰時，物件偵測可兼顧隱私，人臉辨識反而侵犯隱私；要精確描出不規則形狀（如煙霧範圍）則要用影像分割。",
+    "sources": [
+      "Szeliski, Computer Vision: Algorithms and Applications（2nd ed.）, Ch.6 Recognition: https://szeliski.org/Book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "image-segmentation",
+    "name": "影像分割（Image Segmentation）",
+    "units": [
+      "L11101",
+      "L11102"
+    ],
+    "oneLiner": "把影像中每一個像素標上所屬類別，能精確描出物體輪廓與範圍。",
+    "analogy": "像用不同顏色的筆，把照片裡的道路、人行道、草地一格一格塗滿。",
+    "useCases": "煙霧範圍標示、道路設施受損面積統計、醫療影像病灶描繪。",
+    "distinguish": "物件偵測只畫方框；影像分類只判斷整張圖；顯著性圖顯示「模型看哪裡」，不是病灶的真實邊界。",
+    "trap": "關鍵字是「每個像素」「精確範圍」「計算面積」「形狀不固定」；只要求畫框標位置則是物件偵測。",
+    "sources": [
+      "Szeliski, Computer Vision: Algorithms and Applications（2nd ed.）, Ch.7: https://szeliski.org/Book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "face-recognition",
+    "name": "人臉辨識（Face Recognition）",
+    "units": [
+      "L11101",
+      "L11203"
+    ],
+    "oneLiner": "從臉部影像比對出「這個人是誰」或驗證「是否為本人」。",
+    "analogy": "像門口警衛看到你的臉，就認出你是哪位員工。",
+    "useCases": "門禁身分驗證、手機解鎖。",
+    "distinguish": "物件偵測只找出「有人臉／有安全帽」而不識別身分；人臉辨識會識別特定個人。",
+    "trap": "題目要求「不得識別特定個人」或只做群體統計、輿情分析時，選人臉辨識就是陷阱，因為它涉及個人身分與隱私。",
+    "sources": [
+      "NIST Face Recognition Technology Evaluation（FRTE）: https://pages.nist.gov/frvt/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "nlp",
+    "name": "自然語言處理 NLP",
+    "units": [
+      "L11101",
+      "L11102",
+      "L11202",
+      "L11402"
+    ],
+    "oneLiner": "讓電腦理解與產生人類語言（文字）的 AI 領域，例如情感分析、摘要、翻譯、文字分類。",
+    "analogy": "像教電腦讀懂文章、聽懂話裡的意思，而不只是認得字。",
+    "useCases": "評論情緒分析、合約條款審查、客服對話分析、文件摘要。",
+    "distinguish": "電腦視覺處理影像；語音辨識把聲音轉成文字，之後的語意理解才是 NLP。",
+    "trap": "題目的輸入是影像（如電路板外觀），NLP 就是「最不相關」的選項；NLP 前處理（移除停用詞、統一大小寫）屬於資料清理。",
+    "sources": [
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ocr",
+    "name": "光學字元辨識 OCR",
+    "units": [
+      "L11101",
+      "L11201"
+    ],
+    "oneLiner": "把影像或掃描檔中的文字辨識出來，轉成可編輯、可搜尋的文字。",
+    "analogy": "像把紙本發票拍照後，電腦幫你把上面的字一個個打出來。",
+    "useCases": "紙本單據建檔、掃描文件數位化、手寫表單轉文字。",
+    "distinguish": "OCR 只負責「認字」，理解文字意思要再接 NLP；路線規劃、資料分析不是 OCR 的功能。",
+    "trap": "OCR 只能擷取文字，不能做路線優化或決策；掃描的手寫 PDF 在 OCR 之前屬於非結構化資料。",
+    "sources": [
+      "Google Cloud Vision, Detect text in images（OCR）: https://cloud.google.com/vision/docs/ocr"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "recommender-system",
+    "name": "推薦系統（Recommender System）",
+    "units": [
+      "L11101",
+      "L11302",
+      "L12303"
+    ],
+    "oneLiner": "根據使用者的行為與偏好，推薦可能感興趣的商品或內容。",
+    "analogy": "像熟客常去的店員，記得你喜歡什麼，主動推薦你可能會買的東西。",
+    "useCases": "電商商品推薦、影音平台推薦影片、新聞推播。",
+    "distinguish": "推薦系統預測「你可能喜歡什麼」；電腦視覺看影像；異常偵測找異常。",
+    "trap": "推薦系統上線後若點擊率逐漸下降，常見原因是使用者行為改變（資料漂移）；不同族群收到差異推薦時，先檢查訓練資料的代表性。",
+    "sources": [
+      "Google for Developers, Recommendation Systems course: https://developers.google.com/machine-learning/recommendation"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "predictive-maintenance",
+    "name": "預測性維護（Predictive Maintenance）",
+    "units": [
+      "L11101",
+      "L11302"
+    ],
+    "oneLiner": "用感測資料與 AI 預測設備何時可能故障，在壞掉之前安排維修。",
+    "analogy": "像車子還沒拋錨，儀表板就先提醒你「煞車皮快磨完了」。",
+    "useCases": "工廠設備故障預測、智慧製造、工業物聯網。",
+    "distinguish": "異常偵測是即時發現「現在不正常」；預測性維護是推估「未來可能故障」。",
+    "trap": "預測性維護是智慧製造最經典的 AI 應用；故障樣本通常極少，常用只學正常資料的自編碼器做異常偵測，而不是複製異常樣本。",
+    "sources": [
+      "Jardine, Lin & Banjevic (2006), A review on machinery diagnostics and prognostics implementing condition-based maintenance: https://doi.org/10.1016/j.ymssp.2005.09.012"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "analytics-types",
+    "name": "描述性／診斷性／預測性分析",
+    "units": [
+      "L11101",
+      "L11202"
+    ],
+    "oneLiner": "資料分析的層次：描述性看「發生了什麼」、診斷性找「為什麼發生」、預測性推估「未來會怎樣」。",
+    "analogy": "像看病：量體溫是描述，找出發燒原因是診斷，推估明天會不會更嚴重是預測。",
+    "useCases": "描述性：銷售走勢圖；診斷性：找出促銷失敗的原因；預測性：推算下一季銷量。",
+    "distinguish": "另有規範性（處方性）分析，回答「該怎麼做」；預測性分析的核心是用歷史資料建模推估未來。",
+    "trap": "「視覺化過去走勢」是描述性、「找出失敗原因」是診斷性；只有「推估未來」才是預測性分析。",
+    "sources": [
+      "Gartner Glossary, Predictive Analytics: https://www.gartner.com/en/information-technology/glossary/predictive-analytics"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "expert-system",
+    "name": "專家系統與規則引擎",
+    "units": [
+      "L11101",
+      "L11201",
+      "L12101",
+      "L12202"
+    ],
+    "oneLiner": "把專家知識寫成「如果…就…」的規則，讓電腦依規則推論出結論的早期 AI 方法。",
+    "analogy": "像一本超詳細的診療流程手冊，照著一條條規則走就能得出結論。",
+    "useCases": "規則明確、變動少的判斷流程。",
+    "distinguish": "機器學習從資料中自己學規律；專家系統的規則需要人工撰寫與維護。",
+    "trap": "需求是「從資料自動學習」「資料頻繁更新」「需要引用來源」時，規則式專家系統通常不是最佳解。",
+    "sources": [
+      "Russell & Norvig, Artificial Intelligence: A Modern Approach（4th ed.）, Ch.1"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "anomaly-detection",
+    "name": "異常偵測（Anomaly Detection）",
+    "units": [
+      "L11101",
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "找出明顯偏離正常模式的資料或訊號，例如設備異常振動、異常交易、機器人灌水評論。",
+    "analogy": "像熟悉家裡冰箱聲音的人，一聽到怪聲就知道「不對勁」，即使說不出是哪裡壞。",
+    "useCases": "設備即時預警、詐欺交易、網路異常連線、異常評論偵測。",
+    "distinguish": "異常偵測找出「不正常」；故障預測推估「未來多久會壞」；異常分類判斷「是哪一種故障」；分群是把資料分組。",
+    "trap": "異常樣本稀少或難以標記時，常只用大量正常資料訓練（如自編碼器、One-Class SVM），偏離正常分布即判為異常，題目常把這種作法歸為半監督式；但這只能指出「異常」，無法直接判斷異常屬於哪一類。",
+    "sources": [
+      "scikit-learn User Guide, Novelty and Outlier Detection: https://scikit-learn.org/stable/modules/outlier_detection.html",
+      "Chandola, Banerjee & Kumar (2009), Anomaly Detection: A Survey, ACM Computing Surveys: https://doi.org/10.1145/1541880.1541882"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "asr",
+    "name": "語音辨識 ASR（語音轉文字）",
+    "units": [
+      "L11101",
+      "L12202",
+      "L12302"
+    ],
+    "oneLiner": "把人說的話轉成文字的技術，是語音助理、會議記錄等系統的第一道關卡。",
+    "analogy": "像速記員，把聽到的話一字一字打出來。",
+    "useCases": "語音客服、車載語音助理、會議逐字稿、語音訂餐。",
+    "distinguish": "ASR 只負責「聽寫」；理解意思、判斷意圖是後面語言模型的工作。標註「誰在說話」叫語者分離（Speaker Diarization）。",
+    "trap": "語音系統改善順序依資料流程：先修好最前端的 ASR 辨識錯誤，再強化 LLM 與知識補充、調整生成參數，最後才處理效能；若已排除 ASR 錯誤，查詢誤判多半出在 LLM 的提示詞指示不清。",
+    "sources": [
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）, Automatic Speech Recognition: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "proxy-variable",
+    "name": "代理變數（Proxy Variable）",
+    "units": [
+      "L11102",
+      "L12303"
+    ],
+    "oneLiner": "表面中性、卻和敏感屬性（如性別、族群、職業）高度相關的欄位，模型可透過它間接推得敏感資訊。",
+    "analogy": "履歷就算遮住性別，若從社團名稱或居住地就猜得出來，等於還是看到了性別。",
+    "useCases": "檢查信用評分、核保、招募等高風險模型是否有間接歧視時，要找出可能的代理變數。",
+    "distinguish": "XAI 裡的「代理模型（Surrogate Model）」是用來近似黑箱的簡單模型，與代理變數無關。題目也會用「代理特徵」描述拿敏感屬性（如性別）代替真正的風險因素來預測，同樣違反公平性。",
+    "trap": "「刪掉敏感欄位就不會歧視」是錯的：居住地區、消費類別等相關欄位仍可能造成間接歧視。正解通常是導入公平性評估／檢測並調整模型，而不是只刪欄位或靠事後人工逐案複核。",
+    "sources": [
+      "Barocas, Hardt & Narayanan, Fairness and Machine Learning, Ch.3「No fairness through unawareness」: https://fairmlbook.org/classification.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "bank-ai-operating-rules",
+    "name": "金融機構運用人工智慧技術作業規範（銀行公會）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "銀行公會訂定、經金管會備查的自律規範，規定金融機構運用 AI 時的治理、資料保護、風險控管與對消費者的揭露義務。",
+    "analogy": "像銀行業自己訂的「AI 使用守則」：要有人負責管、員工要受訓、用 AI 服務客人前要講清楚，但不必公開自家祕方（程式碼）。",
+    "useCases": "判斷金融機構用 AI 服務客戶時「必須做什麼、必須告知什麼」，例如智能客服、AI 信用評分或核保。",
+    "distinguish": "金管會《金融業運用人工智慧（AI）指引》（113 年 6 月）是主管機關發布的指引，提出六大核心原則；本規範是銀行公會的自律規範，兩者名稱相近但發布單位不同。",
+    "trap": "治理面要指定高階主管或委員會監督、指派專責單位或人員、辦理人才培育，且相關人員要了解生成式 AI 運作方式（第 9 條）；與消費者互動時要告知是 AI 自動完成、揭露適用對象／場合／用途，並提醒有無替代方案（第 11 條）。「每日公布運作狀況」或「公開原始程式碼、模型架構、訓練資料」都不是規範要求。",
+    "sources": [
+      "docs/official/金融機構運用人工智慧技術作業規範_銀行公會_1141002.pdf",
+      "銀行公會會員重要規範: https://www.ba.org.tw/memberStandard/details?id=68",
+      "金管會新聞稿：發布「金融業運用人工智慧(AI)指引」: https://www.fsc.gov.tw/ch/home.jsp?id=96&parentpath=0%2C2&mcustomize=news_view.jsp&dataserno=202406200001&dtable=News"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-cleaning",
+    "name": "資料清理與前處理",
+    "units": [
+      "L11102",
+      "L11202"
+    ],
+    "oneLiner": "把原始雜亂的資料整理乾淨：去除雜訊與重複、統一格式、處理遺漏值與錯誤，讓模型能有效學習。",
+    "analogy": "像煮飯前先挑掉米裡的小石子、洗乾淨，飯才會好吃。",
+    "useCases": "文字資料移除 HTML 標籤、網址、停用詞並統一大小寫；統一金額單位與欄位命名。",
+    "distinguish": "特徵萃取是把資料轉成數值特徵；模型評估、超參數調校都是清理之後的步驟。",
+    "trap": "移除停用詞、HTML 標籤、統一大小寫屬於「資料清理與前處理」，不是特徵萃取或超參數調校；Garbage in, garbage out，訓練資料的清洗是降低有害輸出的根本防線。",
+    "sources": [
+      "Han, Kamber & Pei, Data Mining: Concepts and Techniques（3rd ed.）, Ch.3 Data Preprocessing"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "human-in-the-loop",
+    "name": "人在迴圈內（Human-in-the-loop, HITL）",
+    "units": [
+      "L11102",
+      "L12303"
+    ],
+    "oneLiner": "AI 做出決定前，必須由人類審核、確認或做最終決定，人直接參與每一個關鍵決策。",
+    "analogy": "像實習醫師開好處方，一定要主治醫師簽名後才能給病人。",
+    "useCases": "影響民眾權益的重大決策、超出 AI 授權額度的採購、招募評估等高風險應用。",
+    "distinguish": "人在迴圈上（HOTL）：AI 自主運作，人類在旁持續監督、必要時介入；HITL 則是人直接參與決策本身。",
+    "trap": "AI 決策可能重大影響權益、或超出 AI 核決權限時，正解通常是轉交有權限的人做最終審核；拆單規避、事後抽查或交給另一個 AI 複核都不對。",
+    "sources": [
+      "European Commission HLEG, Ethics Guidelines for Trustworthy AI（2019）: https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai",
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf（4.2 倫理議題：保持人為參與）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "human-over-the-loop",
+    "name": "人在迴圈上（Human-over-the-loop, HOTL）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "AI 可以自主運作，但人類持續監督，並保有隨時介入、修正或停止的權力。",
+    "analogy": "像自動駕駛巡航時，駕駛手不握方向盤，但眼睛一直盯著路況，隨時可以接手。",
+    "useCases": "大量、即時、不可能逐筆人工審核，但仍需人類監督的系統。",
+    "distinguish": "HITL：每個決策都要人審核批准；HOTL：人監督運作、必要時介入。歐盟文件稱為 Human-on-the-loop，題目寫作 Human-over-the-loop。",
+    "trap": "HOTL 不是「平時完全不管、出事才接手」，而是「日常持續監督、必要時立即介入」；「每項決策執行前都要人逐一批准」則是 HITL。",
+    "sources": [
+      "European Commission HLEG, Ethics Guidelines for Trustworthy AI（2019）: https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ai-basic-act",
+    "name": "人工智慧基本法",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "我國 AI 發展與治理的基本法，115 年 1 月 14 日公布，主管機關為國科會，訂有七大基本原則。",
+    "analogy": "像 AI 領域的「憲法大綱」，先定下方向和原則，細節再由各機關訂規範。",
+    "useCases": "判斷政府推動 AI 的原則，以及高風險 AI、資料、個資、勞工保障等政策方向。",
+    "distinguish": "七大原則：永續發展與福祉、人類自主、隱私保護與資料治理、資安與安全、透明與可解釋、公平與不歧視、問責。題目中的「草案」是同一部法的立法階段（行政院 114 年通過草案、立法院 114 年 12 月 23 日三讀）。",
+    "trap": "系統準確率高、沒收到大量申訴，都不代表沒有偏誤問題；依本法精神，應主動做偏誤影響評估，並建立可解釋與申訴機制。法中的「創新實驗環境」即監理沙盒概念。",
+    "sources": [
+      "全國法規資料庫，人工智慧基本法: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0160093",
+      "數位發展部新聞稿，立法院三讀通過《人工智慧基本法》: https://moda.gov.tw/press/press-releases/18316"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "regulatory-sandbox",
+    "name": "監理沙盒（Regulatory Sandbox）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "在主管機關監督下的受控實驗環境，讓創新產品或服務在限定範圍與期間內測試，並可暫時排除部分法規適用。",
+    "analogy": "像讓新手在封閉的駕訓場練車，有教練盯著、場地受限，不必一開始就上大馬路。",
+    "useCases": "金融科技創新實驗、AI 創新產品或服務的上市前測試。",
+    "distinguish": "我國最早的例子是《金融科技發展與創新實驗條例》（107 年）；歐盟《AI 法》第 57 條要求各會員國設立 AI 監理沙盒；《人工智慧基本法》稱為「創新實驗環境」。",
+    "trap": "「創新實驗環境」對應的國際制度是監理沙盒（Regulatory Sandbox），不是資料保護影響評估（DPIA）或倫理審查委員會；沙盒也不是完全不受監管。",
+    "sources": [
+      "全國法規資料庫，金融科技發展與創新實驗條例: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380254",
+      "EU AI Act（Regulation (EU) 2024/1689）, Article 57: https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "全國法規資料庫，人工智慧基本法第 11 條: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0160093"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "fsc-ai-guidance",
+    "name": "金融業運用人工智慧（AI）指引（金管會）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "金管會 113 年 6 月發布的指引，依六大核心原則與 AI 系統生命週期 4 階段，以風險為基礎說明金融機構導入 AI 的作法。",
+    "analogy": "像主管機關給金融業的「AI 導入參考手冊」，告訴大家每個階段要注意什麼。",
+    "useCases": "了解金融機構運用 AI 時的治理、公平、隱私、穩健、透明、永續要求。",
+    "distinguish": "六大原則：治理及問責、公平性及以人為本、保護隱私及客戶權益、系統穩健與安全、透明性與可解釋性、促進永續發展。銀行公會的《金融機構運用人工智慧技術作業規範》是業者自律規範，兩者名稱相近但發布單位不同。",
+    "trap": "官方評鑑範圍點名的是金管會這份「指引」；題目引用的「作業規範」是銀行公會訂定的，看到題目寫哪一份就依那一份的內容作答。",
+    "sources": [
+      "docs/official/金融業運用人工智慧AI指引_金管會_1130620.pdf",
+      "金管會新聞稿：發布「金融業運用人工智慧(AI)指引」: https://www.fsc.gov.tw/ch/home.jsp?id=96&parentpath=0%2C2&mcustomize=news_view.jsp&dataserno=202406200001&dtable=News"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ai-evaluation-center",
+    "name": "AI 產品與系統評測中心（數位發展部）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "數位發展部 112 年 12 月啟動的評測中心，針對 AI 產品與大型語言模型訂定 10 個評測項目。",
+    "analogy": "像 AI 產品的「健康檢查中心」，從安全、公平到隱私逐項檢查。",
+    "useCases": "判斷 AI 產品是否值得信任、申請評測驗證。",
+    "distinguish": "10 項：安全性、可解釋性、彈性、公平性、準確性、透明性、當責性、可靠性、隱私、資安；重點是可信任與風險，不是運算效能。",
+    "trap": "「互動性」「效率性」「資料複雜性」都不是評測項目；LLM 安全性評估著重事實正確、偏見歧視、惡意濫用等輸出風險。",
+    "sources": [
+      "數位發展部數位產業署新聞稿，AI 產品與系統評測中心啟動: https://moda.gov.tw/ADI/news/latest-news/9295"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "public-sector-ai-handbook",
+    "name": "公部門人工智慧應用參考手冊（數位發展部）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "數位發展部提供各機關導入 AI 的參考手冊，涵蓋 AI 概念、服務評估、導入、營運管理與治理。",
+    "analogy": "像政府機關導入 AI 的「新手教戰手冊」，從挑題目到上線後怎麼管都有寫。",
+    "useCases": "公部門評估哪些業務適合導入 AI、如何管理風險與倫理議題。",
+    "distinguish": "手冊以《人工智慧基本法》七大原則為應用原則，並強調保持人為參與、權責機制與透明可解釋。",
+    "trap": "AI 自動決策可能重大影響民眾權益時，最優先的是「人在迴圈內」的最終審核機制，而不是只做第三方檢測、資安掃描或把所有決策軌跡公開上網。",
+    "sources": [
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf",
+      "數位發展部，公部門人工智慧應用參考手冊: https://www-api.moda.gov.tw/File/Get/moda/zh-tw/WwHCroVhwWy52dw"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ai-ethics-principles",
+    "name": "AI 倫理原則（透明、公平、隱私、當責…）",
+    "units": [
+      "L11102",
+      "L11203",
+      "L12303"
+    ],
+    "oneLiner": "AI 開發與使用應遵守的倫理準則，常見核心包括透明可解釋、公平不歧視、隱私保護、安全、當責。",
+    "analogy": "像醫師的職業倫理守則：要說明理由、一視同仁、保守病人祕密、對結果負責。",
+    "useCases": "判斷 AI 事件違反了哪一項原則。",
+    "distinguish": "各機構清單數量不同：《人工智慧基本法》7 項、金管會 6 項、歐盟可信任 AI 7 項；題目的「五大原則」是常見核心的歸納。",
+    "trap": "對應口訣：看不懂判斷依據 → 透明性；特定族群誤判率高 → 公平性；未經同意使用個資 → 隱私；出事找不到負責人 → 當責性。",
+    "sources": [
+      "全國法規資料庫，人工智慧基本法第 4 條: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0160093",
+      "European Commission HLEG, Ethics Guidelines for Trustworthy AI（2019）: https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "accountability",
+    "name": "當責性／責任歸屬（Accountability）",
+    "units": [
+      "L11102",
+      "L12303"
+    ],
+    "oneLiner": "AI 出錯時，要能清楚找出由誰負責、如何追查與救濟，並建立內部治理責任。",
+    "analogy": "像工地出事，要能查出是設計、施工還是監工的責任，而不是大家互推。",
+    "useCases": "醫療誤診、自駕車事故、AI 評測項目中的「當責性」。",
+    "distinguish": "透明性是「能不能看懂決策過程」；當責性是「出事時誰負責」，兩者相關：黑箱不透明會讓責任難以釐清。",
+    "trap": "題目描述「發生錯誤時，院方與廠商都說不出判斷依據」，核心挑戰是責任歸屬（當責性），不是資料更新、影像品質或個資外洩。",
+    "sources": [
+      "全國法規資料庫，人工智慧基本法第 4 條（問責）、第 17 條: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0160093"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "xai",
+    "name": "可解釋 AI（XAI）",
+    "units": [
+      "L11102",
+      "L12303"
+    ],
+    "oneLiner": "讓人能理解 AI 為什麼做出某個判斷的方法與技術，用來打開「黑箱」。",
+    "analogy": "像老師改考卷，不只給分數，還寫出扣分的理由。",
+    "useCases": "醫療診斷、貸款審核、自駕車等高風險決策，需要向使用者或主管機關說明理由。",
+    "distinguish": "局部解釋看單一筆預測（LIME、SHAP、顯著性圖）；全域解釋看整體規律（PDP、排列特徵重要性）。",
+    "trap": "XAI 的核心價值是建立信任與可審查性，不是提升準確率或降低成本；要提升報告可解釋性，應附上支持結論的具體依據（數值、規範），而不是加免責聲明或換更大的模型。",
+    "sources": [
+      "NIST IR 8312, Four Principles of Explainable Artificial Intelligence: https://doi.org/10.6028/NIST.IR.8312",
+      "Molnar, Interpretable Machine Learning: https://christophm.github.io/interpretable-ml-book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "lime",
+    "name": "LIME（局部可解釋模型無關解釋）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "針對單一筆預測，在它附近產生擾動樣本、觀察黑箱的反應，再用簡單模型（如線性模型）近似，說明各特徵對這一筆的影響。",
+    "analogy": "像想知道某道菜為什麼好吃，就一次少放一種調味料試試看，觀察味道怎麼變。",
+    "useCases": "客戶貸款被拒時，說明是哪些因素影響了「這一筆」決定。",
+    "distinguish": "LIME 屬於事後（post-hoc）、模型無關、局部解釋；PDP 是全域解釋；顯著性圖主要用於影像。",
+    "trap": "LIME 是解釋「單一筆」預測，不是提升準確率、也不是建立全域解釋；它的代理模型只在局部近似黑箱，不會完全取代原模型。",
+    "sources": [
+      "Ribeiro, Singh & Guestrin (2016), \"Why Should I Trust You?\": https://arxiv.org/abs/1602.04938"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "shap",
+    "name": "SHAP 值（Shapley 值）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "源自賽局理論的 Shapley 值，計算每個特徵把「這一筆」預測往上或往下推了多少，公平分配貢獻。",
+    "analogy": "像團隊專案結束後，依每個人實際貢獻，公平分配獎金。",
+    "useCases": "信用評分中說明某位申請人被評為高風險，各項特徵各貢獻了多少分。",
+    "distinguish": "SHAP 可做單筆解釋，也可彙總成整體特徵重要性；LIME 是用局部代理模型近似。",
+    "trap": "SHAP 提供的是「單一預測中，各特徵對結果的正負貢獻」，不是訓練收斂速度、使用頻率或自動刪除特徵。",
+    "sources": [
+      "Lundberg & Lee (2017), A Unified Approach to Interpreting Model Predictions: https://arxiv.org/abs/1705.07874"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "saliency-map",
+    "name": "顯著性圖（Saliency Map）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "用熱力圖標示輸入資料中，哪些區域（影像像素或文字片段）對這次預測影響最大。",
+    "analogy": "像在 X 光片上用螢光筆標出「AI 主要是看這裡做判斷的」。",
+    "useCases": "醫療影像判讀的複核、合約審查中標示關鍵字詞。",
+    "distinguish": "顯著性圖顯示「模型看哪裡」；影像分割是精確標出物體或病灶的真實邊界。Grad-CAM 是常見的顯著性圖方法。",
+    "trap": "熱點不等於病灶的實際範圍，不能拿來量測大小，也不會提升模型可靠性；它的用途是協助人理解與複核模型判斷。",
+    "sources": [
+      "Simonyan, Vedaldi & Zisserman (2013), Saliency Maps: https://arxiv.org/abs/1312.6034",
+      "Selvaraju et al. (2017), Grad-CAM: https://arxiv.org/abs/1610.02391"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "pdp",
+    "name": "部分依賴圖 PDP",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "呈現某個特徵改變時，模型「平均」預測結果如何變化，屬於全域解釋方法。",
+    "analogy": "像統計「溫度每升高 1 度，全廠平均良率怎麼變」，看的是整體趨勢。",
+    "useCases": "了解單一特徵對整體預測的平均影響趨勢。",
+    "distinguish": "PDP 看整體平均（全域）；LIME、SHAP 可解釋單一筆（局部）。",
+    "trap": "PDP 只呈現整體趨勢，無法判斷某一筆個案（如某批瑕疵品）的原因；它也能看兩個特徵的交互效果，不只限單一特徵。",
+    "sources": [
+      "Molnar, Interpretable Machine Learning, Partial Dependence Plot: https://christophm.github.io/interpretable-ml-book/pdp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "permutation-importance",
+    "name": "排列特徵重要性（Permutation Feature Importance）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "把某個特徵的數值隨機打亂後重新測試，模型誤差增加越多，代表模型越依賴這個特徵。",
+    "analogy": "像把考卷上某一題的答案打亂，如果總分掉很多，就知道那題很關鍵。",
+    "useCases": "向主管機關說明各項資料對評分結果的影響力。",
+    "distinguish": "它是全域解釋方法；不需要重新訓練模型，也不是計算線性相關係數。",
+    "trap": "打亂後誤差「增加越多」越重要，誤差不變代表不重要；過程不需要用新資料重新訓練模型。",
+    "sources": [
+      "scikit-learn User Guide, Permutation feature importance: https://scikit-learn.org/stable/modules/permutation_importance.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "counterfactual-explanation",
+    "name": "反事實解釋（Counterfactual Explanation）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "說明「如果某些條件不同，結果就會改變」，例如「年收入再多 5 萬就會核准」。",
+    "analogy": "像教練告訴你：「再快 0.5 秒就能進決賽」，直接指出要改什麼。",
+    "useCases": "貸款被拒時，告訴客戶可以怎麼調整條件才能通過。",
+    "distinguish": "LIME、SHAP 說明「各因素影響多少」；反事實解釋說明「要改什麼才會翻盤」。",
+    "trap": "反事實建議必須在現實中可行（例如不能建議「年齡變小」），並符合因果邏輯與公平放貸法規；它是在模型不變下，分析資料變動對結果的影響。",
+    "sources": [
+      "Wachter, Mittelstadt & Russell (2017), Counterfactual Explanations without Opening the Black Box: https://arxiv.org/abs/1711.00399",
+      "Molnar, Interpretable Machine Learning, Counterfactual Explanations: https://christophm.github.io/interpretable-ml-book/counterfactual.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "global-local-explanation",
+    "name": "全域解釋 vs 局部解釋",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "全域解釋說明模型「整體」依賴哪些特徵、行為模式為何；局部解釋說明「某一筆」預測為什麼這樣判斷。",
+    "analogy": "全域像分析整個班級考試的共通弱點；局部像分析某位同學這次為什麼考差。",
+    "useCases": "全域：了解模型在大量影像中的整體判斷規律；局部：說明某位客戶被拒貸的原因。",
+    "distinguish": "全域：PDP、排列特徵重要性；局部：LIME、反事實解釋、單筆 SHAP、顯著性圖。",
+    "trap": "題目說「大量資料中的整體規律、模型整體傾向」→ 全域；「這一筆、單一客戶」→ 局部。",
+    "sources": [
+      "Molnar, Interpretable Machine Learning, Global Model-Agnostic Methods: https://christophm.github.io/interpretable-ml-book/global.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "post-hoc-explanation",
+    "name": "事後解釋（Post-hoc）vs 內建可解釋",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "事後解釋是在模型訓練完成後，從外部提供解釋；內建可解釋是模型本身結構就透明（如決策樹、線性模型）。",
+    "analogy": "事後解釋像考完試後請同學說明解題思路；內建可解釋像作答時就把每一步寫在考卷上。",
+    "useCases": "黑箱模型多用事後解釋；需要高度透明時可直接選內建可解釋的模型。",
+    "distinguish": "LIME、SHAP、顯著性圖都屬於事後解釋，不改變原模型。",
+    "trap": "LIME 屬於事後（post-hoc）解釋；選項說「訓練另一個簡單模型來完全取代原黑盒模型」是錯的，LIME 的代理模型只用來局部解釋。",
+    "sources": [
+      "Molnar, Interpretable Machine Learning: https://christophm.github.io/interpretable-ml-book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "surrogate-model",
+    "name": "代理模型（Surrogate Model）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "用一個簡單、看得懂的模型去模仿黑箱模型的預測行為，藉此解釋黑箱。",
+    "analogy": "像請一位會講白話的翻譯，模仿專家的判斷方式，讓一般人聽得懂。",
+    "useCases": "LIME 在單一資料點附近訓練局部代理模型；也可訓練全域代理模型近似整體行為。",
+    "distinguish": "「代理變數（Proxy Variable）」是能間接推得敏感屬性的欄位，與代理模型無關。",
+    "trap": "LIME 的代理模型是「擬合原黑箱在目標實例附近的行為」，不是全域模型、不是產生擾動資料的機制，也不會取代原模型做推論。",
+    "sources": [
+      "Molnar, Interpretable Machine Learning, Global Surrogate & LIME: https://christophm.github.io/interpretable-ml-book/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "algorithmic-bias",
+    "name": "演算法偏見與公平性（Fairness）",
+    "units": [
+      "L11102",
+      "L12303"
+    ],
+    "oneLiner": "AI 因訓練資料或設計問題，對特定族群產生系統性的不公平結果；公平性是要偵測並降低這種差異。",
+    "analogy": "像只用某地區學生的考卷出題，換到別區考試就對他們特別不利。",
+    "useCases": "貸款審核、補助資格、招募、推薦系統的族群差異檢查。",
+    "distinguish": "偏見檢測是「量測有沒有問題」；偏見緩解是「實際去修正」。統計學的「偏差（Bias）」與這裡的社會偏見不同。",
+    "trap": "準確率高不代表公平；最優先的作法通常是檢視訓練資料代表性、做公平性評估或偏誤影響評估，而不是只追求整體準確率、刪除敏感欄位或要廠商出具聲明。",
+    "sources": [
+      "NIST SP 1270, Towards a Standard for Identifying and Managing Bias in AI: https://doi.org/10.6028/NIST.SP.1270",
+      "Barocas, Hardt & Narayanan, Fairness and Machine Learning: https://fairmlbook.org/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-debiasing",
+    "name": "資料去偏（Data Debiasing）",
+    "units": [
+      "L11102"
+    ],
+    "oneLiner": "從訓練資料源頭減少偏見，例如調整或擴充資料，讓不同群體的比例更平衡。",
+    "analogy": "像調整問卷樣本，讓男女老少都有足夠的人數，結論才不會偏向某一群。",
+    "useCases": "NLP 訓練語料去偏、生成式 AI 訓練資料的偏見過濾。",
+    "distinguish": "去偏是處理「資料」；正則化或加雜訊是處理「模型訓練」，不是去偏的標準做法。",
+    "trap": "增加模型參數、隨機替換輸出、加正則化都不是資料去偏；正解是重新取樣、擴充資料，讓各群體比例平衡。",
+    "sources": [
+      "NIST SP 1270, Towards a Standard for Identifying and Managing Bias in AI: https://doi.org/10.6028/NIST.SP.1270"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "feature-selection",
+    "name": "特徵選擇（Feature Selection）",
+    "units": [
+      "L11102",
+      "L11202"
+    ],
+    "oneLiner": "從原有特徵中挑出對預測最有用的子集，去掉無關或重複的特徵。",
+    "analogy": "像整理行李，只帶真正用得到的東西，箱子輕、出門也快。",
+    "useCases": "特徵很多時提升模型效能、降低過擬合與運算成本。",
+    "distinguish": "監督式特徵選擇會參考目標變數（例如特徵與目標的相關性）；非監督式只看特徵本身的變異或分布；PCA 是產生新特徵（降維），不是挑原特徵。",
+    "trap": "監督式特徵選擇的關鍵是「利用目標變數（標籤）」評估特徵價值；特徵選擇也要考慮公平性，敏感屬性不能只看預測力就納入。",
+    "sources": [
+      "scikit-learn User Guide, Feature selection: https://scikit-learn.org/stable/modules/feature_selection.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "sensor-network",
+    "name": "感測器網路（Sensor Network）與物聯網 IoT",
+    "units": [
+      "L11201"
+    ],
+    "oneLiner": "由大量感測器組成的網路，持續蒐集溫度、空氣品質、設備狀態等物理資料，再傳給系統分析。",
+    "analogy": "像在城市各處裝上會回報的小眼睛和小鼻子，隨時把看到、聞到的狀況傳回總部。",
+    "useCases": "空氣品質監測、垃圾桶滿溢偵測、工業設備監控。",
+    "distinguish": "專家系統、決策支援系統負責判斷與決策；感測器網路負責「蒐集資料」。題目有時譯作「感知器網路」。",
+    "trap": "題目強調「持續蒐集環境數據與設備狀態」，最直接的技術是感測器網路，不是做決策的專家系統。",
+    "sources": [
+      "NIST SP 800-183, Networks of 'Things': https://doi.org/10.6028/NIST.SP.800-183"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-structure-types",
+    "name": "結構化／半結構化／非結構化資料",
+    "units": [
+      "L11201",
+      "L12202"
+    ],
+    "oneLiner": "結構化資料有固定欄位（如資料庫表格）；半結構化有標籤但欄位不固定（如 JSON、XML）；非結構化沒有固定格式（如文字、影像、聲音）。",
+    "analogy": "結構化像填好的 Excel 表；半結構化像每張都貼了標籤但欄位不一的便條；非結構化像一疊手寫信。",
+    "useCases": "判斷資料要用什麼方式儲存、清理與分析。",
+    "distinguish": "「能不能轉成數字」不是判斷依據；看的是資料本身有沒有固定的欄位結構。",
+    "trap": "MySQL 表格、ERP 訂單、感測器數值是結構化；JSON／XML 是半結構化；手寫掃描 PDF、客服對話文字是非結構化。",
+    "sources": [
+      "docs/official/評鑑內容範圍參考_11502.pdf（L11201 資料型態與結構）",
+      "NIST SP 1500-1, Big Data Interoperability Framework Vol.1 Definitions: https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.1500-1.pdf"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "big-data-v",
+    "name": "大數據 V 特性（Volume、Velocity、Variety…）",
+    "units": [
+      "L11201"
+    ],
+    "oneLiner": "描述大數據特性的幾個 V：Volume（資料量大）、Velocity（產生速度快）、Variety（型態多樣），常再加上 Veracity（真實性）與 Value（價值）。",
+    "analogy": "像一條大河：水量大（Volume）、流得快（Velocity）、裡面什麼都有（Variety）。",
+    "useCases": "分析大數據專案主要面臨哪種挑戰。",
+    "distinguish": "V 的數量各家說法不同：常見 3V、4V、5V；NIST 定義的第四個 V 是 Variability（變異性），考題則常用 Veracity 與 Value。",
+    "trap": "「格式與型態差異大、整合困難」是 Variety；「每秒大量產生、需即時處理」是 Volume 加 Velocity。",
+    "sources": [
+      "NIST SP 1500-1, Big Data Interoperability Framework Vol.1 Definitions: https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.1500-1.pdf"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "k-fold",
+    "name": "k-fold 交叉驗證（Cross-Validation）",
+    "units": [
+      "L11202",
+      "L11203",
+      "L11301"
+    ],
+    "oneLiner": "把資料平均分成 k 份，輪流拿 1 份當測試、其餘當訓練，重複 k 次後取平均，更客觀地評估模型。",
+    "analogy": "像把題庫分成 5 回，每次留 1 回當模擬考、用另外 4 回練習，5 輪考完取平均，比只考一次更能看出真實實力。",
+    "useCases": "資料量有限、想穩定評估模型效能，或公平比較不同模型時。",
+    "distinguish": "保留法（Hold-out）只切一次訓練／測試；自助抽樣（Bootstrapping）是可重複地抽取樣本；時間序列資料要改用依時間先後切分的方法（如 Time Series Split）。",
+    "trap": "標準 k-fold 不考慮時間先後，用在時間序列時訓練資料可能比測試資料更晚，等於「用未來預測過去」而造成資料洩漏。它只是評估方法：不會改變資料的類別比例，也不能保護隱私；切分若有打亂，要可重現就得固定隨機數種子。",
+    "sources": [
+      "scikit-learn User Guide, Cross-validation（含 TimeSeriesSplit）: https://scikit-learn.org/stable/modules/cross_validation.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "etl",
+    "name": "ETL（萃取、轉換、載入）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "資料整合的標準流程：先從來源萃取（Extract），再轉換（Transform：清理、格式轉換、排序），最後載入（Load）到目標資料庫。",
+    "analogy": "像煮菜：先去市場買菜（萃取）、回家洗切調味（轉換）、最後裝盤上桌（載入）。",
+    "useCases": "把多個系統的資料整理後匯入資料倉儲。",
+    "distinguish": "另有先載入再轉換的 ELT，是不同的架構；ETL 本身的步驟順序是固定的。",
+    "trap": "T（轉換）包含資料清理與排序；E 是「萃取」不是「儲存」，L 也與「解密」無關。",
+    "sources": [
+      "AWS, What is ETL?: https://aws.amazon.com/what-is/etl/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-integration",
+    "name": "資料整合（Data Integration）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把多個來源的資料統一格式與欄位定義、處理重複後合併，讓資料完整一致、方便分析。",
+    "analogy": "像把各分店格式不同的帳本，整理成總公司統一格式的一本帳。",
+    "useCases": "整合 ERP、感測器、客服紀錄等多來源資料，建立資料平台。",
+    "distinguish": "資料保存期限、留存政策屬於「資料生命週期管理」，不是資料整合的目的。",
+    "trap": "「延長原始資料留存期限」不是資料整合的目的；統一格式、處理重複、提升完整性才是。",
+    "sources": [
+      "Han, Kamber & Pei, Data Mining: Concepts and Techniques（3rd ed.）, Ch.3 Data Preprocessing"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "eda",
+    "name": "探索性資料分析 EDA",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "建模之前，先用圖表與基本統計觀察資料的分布、關係與異常，了解資料長什麼樣子。",
+    "analogy": "像搬家前先在新房子裡走一圈，看看格局、量量尺寸，再決定家具怎麼擺。",
+    "useCases": "繪製變數關聯圖、看分布與離群值、找出潛在關係與假設。",
+    "distinguish": "建立預測模型、分群後直接制定策略、做正式的假設檢定，都不屬於「探索」階段。",
+    "trap": "EDA 的關鍵是「視覺化觀察、尋找潛在關係」；訓練隨機森林或做 t 檢定都已超出 EDA。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook of Statistical Methods, Ch.1 Exploratory Data Analysis: https://www.itl.nist.gov/div898/handbook/eda/eda.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "scatter-plot",
+    "name": "散佈圖（Scatter Plot）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "用 X、Y 座標上的點，呈現兩個數值變數之間的關係。",
+    "analogy": "把每個人的身高和體重畫成一個點，點的排列方向就能看出兩者有沒有關係。",
+    "useCases": "觀察身高與體重、價格與銷量是否相關。",
+    "distinguish": "直方圖看「單一」變數的分布；折線圖看隨時間的變化；長條圖比較類別之間的數量。",
+    "trap": "關鍵字「兩個數值變數的關係／相關性」→ 散佈圖。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook, Scatter Plot: https://www.itl.nist.gov/div898/handbook/eda/section3/scatterp.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "histogram",
+    "name": "直方圖（Histogram）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把連續數值切成多個區間，統計每個區間的筆數，用來看單一變數的分布形狀。",
+    "analogy": "像把全班成績分成 0–10、10–20…各一格，數每格有幾個人，就看出成績集中在哪。",
+    "useCases": "觀察年齡分布是否集中、偏態或多峰。",
+    "distinguish": "長條圖的橫軸是「類別」且長條分開；直方圖的橫軸是「連續數值區間」。散佈圖看兩個變數的關係。",
+    "trap": "看「單一連續變數的分布、集中、偏態」→ 直方圖；比較各類別銷售額是長條圖，看時間趨勢是折線圖，看兩變數關係是散佈圖。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook, Histogram: https://www.itl.nist.gov/div898/handbook/eda/section3/histogra.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "central-tendency",
+    "name": "集中趨勢與離散指標（平均數、中位數、標準差…）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "描述資料「中心在哪裡」（平均數、中位數、眾數）與「分散程度」（標準差、百分位數）的統計指標。",
+    "analogy": "中位數像排隊站中間的那個人，不管隊尾站了一個巨人，中間的人都不太會變。",
+    "useCases": "摘要資料、選擇遺漏值填補方式、判斷偏態。",
+    "distinguish": "平均數容易被極端值拉動；中位數不受極端值影響；標準差越大代表越分散；百分位數表示相對位置。",
+    "trap": "資料偏態或有離群值時，中位數比平均數更能代表一般情況；「標準差越大越集中」「中位數能反映極端值」都是錯的。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook, Measures of Location: https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "skewness",
+    "name": "偏態（左偏／右偏）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "資料分布不對稱的程度：右偏（正偏）是長尾在右、少數極大值；左偏（負偏）是長尾在左、少數極小值。",
+    "analogy": "右偏像收入分布：多數人中等，少數富豪把平均拉高。",
+    "useCases": "判斷該用平均數還是中位數、要不要做對數轉換。",
+    "distinguish": "平均數大於中位數 → 通常右偏；平均數小於中位數 → 通常左偏。",
+    "trap": "「平均數明顯小於中位數」是左偏（負偏），代表多數值偏高、少數極低值拉低平均；高度右偏的金額資料常用對數轉換或中位數處理。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook, Measures of Skewness and Kurtosis: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "outlier",
+    "name": "離群值（Outlier）與 IQR",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "明顯偏離其他資料的極端值；常用 Z 分數（例如超過 ±3 個標準差）或四分位距 IQR 來偵測。",
+    "analogy": "像全班身高都在 150–180 公分，突然出現一筆 250 公分，就要查是輸入錯誤還是真的有巨人。",
+    "useCases": "理賠金額、血壓等資料的極端值偵測與處理。",
+    "distinguish": "偵測出離群值後，可刪除、截尾（Trimming）、調整或保留；異常偵測則是把找出異常當成任務本身。",
+    "trap": "不能盲目刪除，要依領域知識判斷是雜訊還是重要個案；把數值型離群值做 One-hot 編碼是錯誤做法。",
+    "sources": [
+      "NIST/SEMATECH e-Handbook, Detection of Outliers: https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "standardization-normalization",
+    "name": "標準化（Z-score）與正規化",
+    "units": [
+      "L11202",
+      "L11302"
+    ],
+    "oneLiner": "把數值特徵縮放到相近範圍：標準化轉成平均 0、標準差 1（Z 分數）；正規化常指縮放到 0～1。",
+    "analogy": "像把公分、公斤、分數換成同一把尺，比較時才不會被單位大的欄位壓過去。",
+    "useCases": "梯度下降類模型（邏輯迴歸、神經網路）、以距離計算的模型（KNN、SVM）。",
+    "distinguish": "「正規化（Normalization）」是縮放資料，「正則化（Regularization）」是限制模型複雜度，兩者不同；決策樹對特徵尺度不敏感，可以不做。",
+    "trap": "Z 分數不會限制在 0～1，也不會把分布變成常態；為避免資料洩漏，要先切分資料、只用訓練集的平均與標準差，再套用到測試集。",
+    "sources": [
+      "scikit-learn User Guide, Preprocessing data: https://scikit-learn.org/stable/modules/preprocessing.html",
+      "Google ML Crash Course, Normalization: https://developers.google.com/machine-learning/crash-course/numerical-data/normalization"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "log-transform",
+    "name": "對數轉換（Log Transformation）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "對數值取對數，把高度右偏、長尾的資料壓縮得較接近常態，降低極端值的影響。",
+    "analogy": "像把 10 元、100 元、10,000 元換成「幾位數」來比，差距一下子就不會那麼誇張。",
+    "useCases": "年消費金額、收入、交易金額等高度右偏的特徵。",
+    "distinguish": "標準化只改變尺度、不改變分布形狀；區間化（Binning）是把數值切成區段。",
+    "trap": "「金額呈高度右偏、少數值特別大」→ 對數轉換；資料已近似常態時，用對數轉換處理極端值就不恰當。",
+    "sources": [
+      "Google ML Crash Course, Normalization（Log scaling）: https://developers.google.com/machine-learning/crash-course/numerical-data/normalization"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "binning",
+    "name": "區間化（Binning）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把連續數值切成幾個區段（例如年齡 20–29、30–39），變成類別型特徵。",
+    "analogy": "像把精確的年齡改成「20 幾歲、30 幾歲」，細節變少但比較好分群。",
+    "useCases": "數值與目標呈非線性關係、想把連續值分組時。",
+    "distinguish": "對數轉換是壓縮數值差距、保留連續性；區間化會失去區段內的細節。",
+    "trap": "題目要「降低高度偏態金額的極端值影響」時，標準答案是對數轉換，不是區間化。",
+    "sources": [
+      "Google ML Crash Course, Binning: https://developers.google.com/machine-learning/crash-course/numerical-data/binning"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "one-hot",
+    "name": "One-hot 編碼",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把沒有大小順序的類別（如交通方式、地區）轉成多個 0／1 欄位，每筆只有一個欄位是 1。",
+    "analogy": "像點名單：火車、飛機、自駕、公車各一欄，搭哪個就在那欄打勾，其他欄空白。",
+    "useCases": "名目變數（Nominal）：地區、資費方案、交通方式、職業類別。",
+    "distinguish": "Label Encoding 把類別轉成 1、2、3，會讓模型誤以為有大小關係；序數編碼適合本來就有順序的類別（如會員等級）。",
+    "trap": "One-hot 只適合類別變數；把連續數值或數值型離群值做 One-hot 是錯的。合併兩個欄位捕捉交互作用則是特徵交叉。",
+    "sources": [
+      "Google ML Crash Course, One-hot encoding: https://developers.google.com/machine-learning/crash-course/categorical-data/one-hot-encoding"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "label-encoding",
+    "name": "Label Encoding（標籤編碼）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把每個類別直接換成一個整數（例如工程師=1、教師=2、業務=3）。",
+    "analogy": "像替每種職業隨便編號，但號碼大小其實不代表任何高低。",
+    "useCases": "決策樹等不會把數字大小當距離的模型，或目標標籤的編碼。",
+    "distinguish": "One-hot 不會產生假的大小關係；序數編碼的數字大小有實際順序意義。",
+    "trap": "把無順序的類別（職業、地區）用 Label Encoding 後丟進線性模型，模型會誤以為類別有大小與距離，是最容易出錯的做法。",
+    "sources": [
+      "scikit-learn User Guide, Encoding categorical features: https://scikit-learn.org/stable/modules/preprocessing.html#encoding-categorical-features"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ordinal-encoding",
+    "name": "序數編碼（Ordinal Encoding）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "依照類別本身的順序給數字，例如普通=1、進階=2、白金=3。",
+    "analogy": "像衣服尺寸 S、M、L 換成 1、2、3，數字越大真的代表越大。",
+    "useCases": "本身有等級或順序的類別：會員等級、滿意度、教育程度。",
+    "distinguish": "沒有順序的名目變數（交通方式、地區）應該用 One-hot。",
+    "trap": "判斷關鍵是「類別之間有沒有大小順序」：交通方式沒有順序要用 One-hot，用序數編碼就錯了。",
+    "sources": [
+      "scikit-learn User Guide, Encoding categorical features: https://scikit-learn.org/stable/modules/preprocessing.html#encoding-categorical-features"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "feature-engineering",
+    "name": "特徵工程（Feature Engineering）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把原始資料轉換、組合或篩選成更能幫助模型預測的特徵，例如編碼、縮放、交叉、轉換。",
+    "analogy": "像廚師備料：同樣的食材，切法和調味不同，做出來的菜就差很多。",
+    "useCases": "類別編碼、數值標準化、對數轉換、特徵交叉、特徵選擇。",
+    "distinguish": "深度學習能自動學特徵，傳統機器學習較依賴人工特徵工程；AutoML 會自動做部分特徵工程。",
+    "trap": "選用的特徵必須是「預測當下就拿得到」的資料；把未來才知道的資訊（如下個月是否消費）放進特徵會造成資料洩漏。",
+    "sources": [
+      "Google ML Crash Course, Working with numerical data: https://developers.google.com/machine-learning/crash-course/numerical-data"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "feature-cross",
+    "name": "特徵交叉（Feature Cross）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把兩個以上的特徵組合成新特徵，讓模型學到它們之間的交互作用。",
+    "analogy": "「星期一」和「早上 8 點」分開看都普通，合在一起才知道是通勤尖峰。",
+    "useCases": "星期幾 × 時段預測通勤時間、地區 × 商品類別。",
+    "distinguish": "One-hot 是把單一類別轉成數值；寬深模型（Wide & Deep）是一種模型架構，其中 Wide 部分常用到特徵交叉。",
+    "trap": "題目要「結合兩個欄位」捕捉交互影響 → 特徵交叉；只是把類別轉成數值 → One-hot。",
+    "sources": [
+      "Google ML Crash Course, Feature crosses: https://developers.google.com/machine-learning/crash-course/categorical-data/feature-crosses"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "feature-extraction",
+    "name": "特徵萃取（Feature Extraction）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "把原始資料（文字、影像）轉換成模型可使用的數值特徵，例如把文字轉成向量。",
+    "analogy": "像把一篇文章濃縮成一張「關鍵字出現次數表」，電腦才算得了。",
+    "useCases": "文字轉向量、影像萃取邊緣與紋理特徵。",
+    "distinguish": "資料清理是「去除雜訊」；特徵萃取是「轉成數值表示」；CNN 能自動萃取影像特徵。",
+    "trap": "移除 HTML、停用詞、統一大小寫屬於資料清理，不是特徵萃取。",
+    "sources": [
+      "scikit-learn User Guide, Feature extraction: https://scikit-learn.org/stable/modules/feature_extraction.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "pca",
+    "name": "主成分分析 PCA（降維）",
+    "units": [
+      "L11202",
+      "L11301"
+    ],
+    "oneLiner": "把許多彼此相關的特徵，轉換成少數幾個互不相關的「主成分」，達到降低維度、減少重複資訊。",
+    "analogy": "像把「總坪數、客廳坪數、房間坪數」濃縮成一個「房子大小」指標。",
+    "useCases": "特徵高度相關、維度太高時；資料視覺化。",
+    "distinguish": "PCA 是非監督式方法，不看目標變數；監督式特徵選擇會依據特徵與目標的關係挑選原有特徵。",
+    "trap": "關鍵字「高度相關的特徵、降低維度」→ PCA；PCA 產生的是新特徵，不是從原特徵中挑選。",
+    "sources": [
+      "scikit-learn User Guide, Decomposition（PCA）: https://scikit-learn.org/stable/modules/decomposition.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "smote",
+    "name": "SMOTE 過採樣",
+    "units": [
+      "L11202",
+      "L11302"
+    ],
+    "oneLiner": "針對類別不平衡，在少數類別樣本與其鄰近樣本之間插值，「合成」新的少數類別樣本。",
+    "analogy": "像詐欺案例太少，就在兩個相似的真實案例之間，畫出一個「介於兩者之間」的新案例。",
+    "useCases": "詐欺偵測、瑕疵檢測等少數類別樣本極少的資料。",
+    "distinguish": "隨機刪除多數類別是欠採樣；調高少數類別的損失權重是成本敏感學習；交叉驗證只是評估方法，不會改變類別比例。",
+    "trap": "SMOTE 是「合成新樣本」，不是單純複製、刪除資料或改損失函數。",
+    "sources": [
+      "Chawla et al. (2002), SMOTE: Synthetic Minority Over-sampling Technique, JAIR 16: https://doi.org/10.1613/jair.953"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-leakage",
+    "name": "資料洩漏（Data Leakage）",
+    "units": [
+      "L11202",
+      "L11301"
+    ],
+    "oneLiner": "訓練時不小心用到「預測當下不該知道」的資訊（如測試資料或未來資料），導致評估結果虛高、上線後表現變差。",
+    "analogy": "像考前偷看到考卷答案，模擬考分數很高，正式考試卻考不好。",
+    "useCases": "檢查特徵選擇、資料切分、標準化流程是否有偷用未來或測試資料。",
+    "distinguish": "這裡的「洩漏」指訓練流程偷看答案，和個資外洩（資安問題）是不同概念；把資料改成每小時彙總也不會造成資料洩漏。",
+    "trap": "常見情況：用全部資料算標準化統計量、把未來才知道的結果當特徵、時間序列用隨機打散的 k-fold。",
+    "sources": [
+      "scikit-learn, Common pitfalls: Data leakage: https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "missing-value",
+    "name": "遺漏值處理（Missing Value）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "資料有缺漏時的處理方式：刪除、填補（平均數、中位數、眾數）或依前後資料插補。",
+    "analogy": "像點名簿有幾格空白，可以照常理補上，但補錯方式反而會讓統計失真。",
+    "useCases": "感測器短暫斷線、問卷漏填、欄位缺值。",
+    "distinguish": "時間序列適合用前後時間點線性插補；高度偏態資料適合用中位數；類別資料常用眾數。",
+    "trap": "右偏資料填平均數會被極端值拉高，應填中位數；時序資料填 0 或整體平均會製造假的異常跳動。",
+    "sources": [
+      "scikit-learn User Guide, Imputation of missing values: https://scikit-learn.org/stable/modules/impute.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "time-series-split",
+    "name": "時間序列資料的切分與抽樣",
+    "units": [
+      "L11202",
+      "L11301"
+    ],
+    "oneLiner": "有時間先後的資料，切分與抽樣都要保留時間順序：用過去訓練、用未來測試。",
+    "analogy": "像用去年的天氣練習預測今年，而不是拿明天的天氣來「預測」昨天。",
+    "useCases": "用電量預測、交易詐欺比例推估、銷售預測。",
+    "distinguish": "標準 k-fold 不考慮時間順序；Time Series Split 讓每一折的測試資料都在訓練資料之後。",
+    "trap": "時間序列不能完全隨機打散，否則會破壞時間結構並造成「用未來預測過去」；應依時間區間切分或分層抽樣。",
+    "sources": [
+      "scikit-learn User Guide, Cross-validation of time series data: https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "binary-search",
+    "name": "二分搜尋（Binary Search）",
+    "units": [
+      "L11202"
+    ],
+    "oneLiner": "在「已排序」的資料中，每次和中間值比較並排除一半，快速找到目標。",
+    "analogy": "像猜 1～100 的數字，每次猜中間，再依「太大／太小」砍掉一半範圍。",
+    "useCases": "已排序清單的快速查找。",
+    "distinguish": "循序搜尋從頭一個個找；二分搜尋前提是資料必須先排序。",
+    "trap": "計算比較次數時，照題目規則每次取中間值、排除該值與一半範圍，逐步數下去即可。",
+    "sources": [
+      "Cormen et al., Introduction to Algorithms（4th ed.）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "gradient-descent",
+    "name": "梯度下降與反向傳播",
+    "units": [
+      "L11202",
+      "L11301"
+    ],
+    "oneLiner": "計算損失函數對每個參數的梯度（反向傳播），再沿梯度的反方向一點一點更新參數，讓誤差越來越小（梯度下降）。",
+    "analogy": "像在濃霧中下山，每一步都摸摸腳下哪邊最陡往下，就往那邊走一小步。",
+    "useCases": "訓練神經網路、邏輯迴歸等模型。",
+    "distinguish": "損失函數負責「算出誤差」；優化器（如 SGD、Adam）負責「決定怎麼更新」；啟動函數不決定更新方向。",
+    "trap": "參數更新方向依據的是「損失函數的梯度」，不是準確率變化或啟動函數輸出；特徵尺度差異大時，梯度下降會收斂慢，需要先標準化。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.4 & Ch.6.5: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "wide-and-deep",
+    "name": "寬深模型（Wide & Deep）",
+    "units": [
+      "L11202",
+      "L11302"
+    ],
+    "oneLiner": "Google 提出的推薦模型架構，結合線性模型（Wide，負責記憶）與深度神經網路（Deep，負責泛化）。",
+    "analogy": "像一位店員同時有好記性（記得熟客常買什麼）與好眼光（能猜新客人會喜歡什麼）。",
+    "useCases": "推薦系統、點擊率預測，特別是有大量稀疏類別特徵時。",
+    "distinguish": "特徵交叉是特徵工程技巧；寬深模型是模型架構；One-hot 是類別編碼方法。",
+    "trap": "關鍵字「既要記住已出現的特徵組合，又要對沒出現過的組合做合理預測」→ 寬深模型。",
+    "sources": [
+      "Cheng et al. (2016), Wide & Deep Learning for Recommender Systems: https://arxiv.org/abs/1606.07792"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "synthetic-data",
+    "name": "合成資料（Synthetic Data）擴增訓練集",
+    "units": [
+      "L11202",
+      "L11402",
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "用演算法或生成式 AI 產生模擬資料（例如少數類別樣本、瑕疵影像、攻擊流量），補充真實資料的不足。",
+    "analogy": "像飛行員用模擬器練習各種罕見緊急狀況，真實世界很少遇到也能先練。",
+    "useCases": "稀有詐欺樣本、模擬瑕疵或車損照片、模擬新型攻擊流量來訓練防禦模型。",
+    "distinguish": "SMOTE 是經典的少數類別合成方法；生成式 AI（如影像生成工具）可產生更逼真的模擬樣本。",
+    "trap": "合成資料是「補充」真實資料、提升模型對罕見或未知情況的辨識力，不能完全取代真實資料，也不會讓防禦模型變成生成式模型。",
+    "sources": [
+      "Chawla et al. (2002), SMOTE, JAIR 16: https://doi.org/10.1613/jair.953",
+      "Goodfellow et al. (2014), Generative Adversarial Networks: https://arxiv.org/abs/1406.2661"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "class-imbalance",
+    "name": "類別不平衡（Class Imbalance）",
+    "units": [
+      "L11202",
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "各類別的樣本數差很多（例如詐欺只占 0.1%），模型容易只學會預測多數類別。",
+    "analogy": "像 1000 張考卷只有 1 張不及格，老師就算全部批「及格」，正確率也有 99.9%。",
+    "useCases": "詐欺偵測、瑕疵檢測、罕見疾病篩檢、高價商品推薦。",
+    "distinguish": "處理方法：過採樣（如 SMOTE）、欠採樣、調整類別權重；評估時改看 F1、召回率，而不是準確率。",
+    "trap": "不平衡資料下高準確率是假象；模型決策邊界會被多數類別主導，使少數類別的召回率大幅下降。",
+    "sources": [
+      "Google ML Crash Course, Imbalanced datasets: https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "logistic-regression",
+    "name": "邏輯迴歸（Logistic Regression）",
+    "units": [
+      "L11202",
+      "L11302"
+    ],
+    "oneLiner": "把線性組合透過 Sigmoid 函數轉成 0～1 的機率，再依門檻判斷類別，是常用的二元分類模型。",
+    "analogy": "像醫師綜合年齡、血壓等因素給出「罹病機率 70%」，超過 50% 就提出警示。",
+    "useCases": "疾病風險預測、客戶流失預測、信用違約判斷。",
+    "distinguish": "名稱有「迴歸」，但用途是分類；線性迴歸才是預測連續數值。",
+    "trap": "需要「輸出 0～1 機率並依門檻警示」→ 邏輯迴歸；用梯度下降訓練時，特徵尺度差異大要先標準化。",
+    "sources": [
+      "scikit-learn User Guide, Logistic regression: https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "random-forest",
+    "name": "隨機森林（Random Forest）",
+    "units": [
+      "L11202",
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "同時訓練很多棵各自隨機抽樣的決策樹，再用投票或平均決定結果，屬於集成學習。",
+    "analogy": "像請一群專家各自獨立判斷再投票，比只聽一個人更穩。",
+    "useCases": "特徵很多的違約風險預測、表格資料分類與迴歸。",
+    "distinguish": "隨機森林是「並行」訓練多棵樹；梯度提升（XGBoost）是「依序」修正錯誤。",
+    "trap": "特徵多、希望提升穩定性與泛化能力 → 隨機森林，它能降低單棵決策樹容易過擬合的問題。",
+    "sources": [
+      "Breiman (2001), Random Forests, Machine Learning 45: https://doi.org/10.1023/A:1010933404324",
+      "scikit-learn User Guide, Ensemble methods: https://scikit-learn.org/stable/modules/ensemble.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "federated-learning",
+    "name": "聯邦學習（Federated Learning）",
+    "units": [
+      "L11203",
+      "L12303"
+    ],
+    "oneLiner": "各單位在自己的本地端訓練模型，只把模型參數更新傳回中央彙整，原始資料不必離開本地。",
+    "analogy": "像各分校老師各自批改自己學生的考卷，只把「教學心得」交回總部彙整，考卷不外流。",
+    "useCases": "跨醫院、跨國、跨供應商在資料不能集中的情況下共同訓練模型。",
+    "distinguish": "同態加密：資料可集中，但在加密狀態下運算；差分隱私：在結果加雜訊；去識別化：移除可識別資訊。",
+    "trap": "關鍵字「資料分散、不能集中、不能外流，但仍要共同訓練」→ 聯邦學習；若資料「可以集中，但要在加密狀態下計算」則是同態加密。",
+    "sources": [
+      "McMahan et al. (2016), Communication-Efficient Learning of Deep Networks from Decentralized Data: https://arxiv.org/abs/1602.05629"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "differential-privacy",
+    "name": "差分隱私（Differential Privacy）",
+    "units": [
+      "L11203",
+      "L12303"
+    ],
+    "oneLiner": "在統計查詢結果中加入經過設計的隨機雜訊，讓任一個人的資料是否存在，都不會明顯改變結果。",
+    "analogy": "像公布全班平均身高時故意加減一點點誤差，整體趨勢不變，但沒人能反推出某個同學的身高。",
+    "useCases": "開放統計資料查詢、防止多次查詢比對推論特定個人。",
+    "distinguish": "k-匿名化是處理「資料集本身」讓每筆無法區分；差分隱私是處理「查詢輸出」加雜訊。",
+    "trap": "關鍵字「加入隨機雜訊」「防止多次查詢推論個人」「新增或刪除一筆不影響結果」→ 差分隱私。",
+    "sources": [
+      "Dwork & Roth, The Algorithmic Foundations of Differential Privacy: https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf",
+      "NIST SP 800-226, Guidelines for Evaluating Differential Privacy Guarantees: https://doi.org/10.6028/NIST.SP.800-226"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "de-identification",
+    "name": "去識別化與匿名化",
+    "units": [
+      "L11203",
+      "L12303"
+    ],
+    "oneLiner": "移除或轉換資料中可識別個人的資訊（如姓名、身分證號），使資料無法或難以連結到特定個人。",
+    "analogy": "像把病歷上的姓名、電話塗掉，並把住址只保留到縣市。",
+    "useCases": "釋出研究資料、把資料交給 AI 系統前先處理。",
+    "distinguish": "假名化以代號取代識別資料，若保留對照表仍可還原；匿名化要達到無法再識別。個資法對「無從識別特定當事人」的資料有較寬鬆的利用規定。",
+    "trap": "只做加密、只靠合約約定或保留可還原的對照表，都不算去識別化；正確做法是移除直接識別資訊，並轉換具識別風險的間接欄位。",
+    "sources": [
+      "全國法規資料庫，個人資料保護法: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0050021",
+      "NIST IR 8053, De-Identification of Personal Information: https://doi.org/10.6028/NIST.IR.8053"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "k-anonymity",
+    "name": "k-匿名化（k-Anonymity）",
+    "units": [
+      "L11203"
+    ],
+    "oneLiner": "把郵遞區號、性別、年齡等準識別資訊泛化或隱藏，讓每一筆資料至少和另外 k−1 筆無法區分。",
+    "analogy": "像把「台北市大安區 32 歲女性」改成「北部 30–39 歲」，同條件的人至少有 k 個，就認不出是誰。",
+    "useCases": "公開去識別化的消費、健康資料集前的處理。",
+    "distinguish": "差分隱私是對查詢結果加雜訊；雜湊只是把欄位轉碼，無法防止用其他欄位交叉比對。",
+    "trap": "關鍵字「防止用郵遞區號、性別等間接資訊交叉比對重新識別」「同時保留分析價值」→ k-匿名化。",
+    "sources": [
+      "Sweeney (2002), k-Anonymity: A Model for Protecting Privacy: https://doi.org/10.1142/S0218488502001648",
+      "NIST IR 8053, De-Identification of Personal Information: https://doi.org/10.6028/NIST.IR.8053"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "pseudonymization",
+    "name": "假名化（Pseudonymization）",
+    "units": [
+      "L11203"
+    ],
+    "oneLiner": "用代號或隨機編號取代可直接識別個人的資料，同一個人仍對應同一個代號，可追蹤行為但看不出是誰。",
+    "analogy": "像考試時用准考證號碼代替姓名，改考卷的老師不知道是誰，但同一號碼的成績還是能對起來。",
+    "useCases": "需要跨時間追蹤同一人行為、又要保護身分的研究資料。",
+    "distinguish": "若保留代號與真實身分的對照表，資料仍可還原，不算真正去識別；差分隱私是對統計結果加雜訊。",
+    "trap": "要「保留追蹤同一人的能力」又符合去識別化，作法是換成隨機編號且不保留任何對應關係；雜湊後保留對照表可直接還原，不符合要求。",
+    "sources": [
+      "NIST IR 8053, De-Identification of Personal Information: https://doi.org/10.6028/NIST.IR.8053"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-masking",
+    "name": "資料遮罩（Data Masking）",
+    "units": [
+      "L11203",
+      "L12302",
+      "L12303"
+    ],
+    "oneLiner": "把敏感資料的部分內容遮蔽或替換，例如身分證號只顯示 A12****789。",
+    "analogy": "像收據上的信用卡號只印最後四碼。",
+    "useCases": "測試環境用資料、畫面顯示、輸出時隱藏敏感欄位。",
+    "distinguish": "遮罩多用於顯示或輸出端；資料最小化是從源頭就不提供不必要的資料；差分隱私是對統計結果加雜訊。",
+    "trap": "題目強調「從資料層面、專案初期」降低暴露風險時，優先答案是資料最小化與去識別化，而不是只在輸出端做遮罩。",
+    "sources": [
+      "NIST IR 8053, De-Identification of Personal Information: https://doi.org/10.6028/NIST.IR.8053"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "hashing",
+    "name": "雜湊（Hashing）",
+    "units": [
+      "L11203"
+    ],
+    "oneLiner": "用雜湊函數把資料轉成固定長度的代碼，同樣輸入一定得到同樣代碼，但很難從代碼反推原文。",
+    "analogy": "像把一份文件壓成「指紋」，同一份文件指紋一定一樣，但看指紋還原不了文件。",
+    "useCases": "密碼儲存、資料完整性驗證、把識別欄位轉碼。",
+    "distinguish": "雜湊不是加密（加密可用金鑰解回原文）；MD5 已被證實不安全，不建議用於安全用途。",
+    "trap": "雜湊後若「保留對照表」，就能直接查回身分，不算去識別化；雜湊也無法防止用其他間接欄位交叉比對。",
+    "sources": [
+      "NIST IR 8053, De-Identification of Personal Information: https://doi.org/10.6028/NIST.IR.8053",
+      "RFC 6151, Updated Security Considerations for MD5: https://www.rfc-editor.org/rfc/rfc6151"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mitm",
+    "name": "中間人攻擊與傳輸加密",
+    "units": [
+      "L11203"
+    ],
+    "oneLiner": "攻擊者躲在通訊雙方之間偷看或竄改資料；防範方式是傳輸加密（如 TLS）並驗證雙方身分。",
+    "analogy": "像寄信途中被人偷拆開改內容再封回去；用上鎖的保險箱寄送，並確認收件人身分就能防範。",
+    "useCases": "跨國傳輸敏感資料、網站與 API 通訊。",
+    "distinguish": "接收端的存取控管保護的是「存放後」的資料；傳輸加密保護的是「傳送途中」的資料。",
+    "trap": "防中間人攻擊的標準解是「傳輸過程加密並確認雙方身分」；拆分資料分批傳送或改用離線交換都不是有效又可行的做法。",
+    "sources": [
+      "NIST CSRC Glossary, Man-in-the-middle attack: https://csrc.nist.gov/glossary/term/man_in_the_middle_attack",
+      "RFC 8446, TLS 1.3: https://www.rfc-editor.org/rfc/rfc8446"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "personal-data-act",
+    "name": "個人資料保護法（目的外利用）",
+    "units": [
+      "L11203",
+      "L12303"
+    ],
+    "oneLiner": "我國規範個人資料蒐集、處理、利用的法律；利用個資不得逾越特定目的之必要範圍，目的外利用須符合法定例外（如當事人同意）。",
+    "analogy": "像你把電話給快遞是為了收包裹，快遞不能拿去賣給推銷公司。",
+    "useCases": "判斷蒐集網路公開照片訓練商業模型、提供刷卡資料給研究機構是否合法。",
+    "distinguish": "「當事人自行公開」的資料雖可能符合蒐集要件，但後續利用仍要符合特定目的；資料若已無從識別特定當事人，利用限制較寬。",
+    "trap": "公開照片不等於同意被拿去訓練商業 AI；事後刪除照片或只公開揭露訓練目的，都無法免除先前的法律責任。",
+    "sources": [
+      "全國法規資料庫，個人資料保護法（第 2、5、19、20 條）: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0050021"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "sentiment-analysis",
+    "name": "情感分析（Sentiment Analysis）",
+    "units": [
+      "L11203",
+      "L12101",
+      "L12302"
+    ],
+    "oneLiner": "用 NLP 判斷文字所表達的情緒或立場，例如正面、負面、中性。",
+    "analogy": "像讀一則留言就能感覺出對方是開心、普通還是生氣。",
+    "useCases": "輿情分析、商品評論分析、客服偵測客戶不滿並轉接真人。",
+    "distinguish": "情感分析分析的是「文字內容」，不需要辨識發文者身分；人臉辨識、社群圖譜追蹤個人則涉及隱私。",
+    "trap": "做群體輿情分析時，情感分析結合關鍵詞提取即可，不必識別個人；客服情緒分數超過門檻時自動轉真人，比全面改人工或只靠關鍵字更合適。",
+    "sources": [
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）, Ch.4: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "random-seed",
+    "name": "隨機數種子（Random Seed）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "亂數產生器的起始值；種子固定，每次產生的亂數序列就相同，結果可以重現。",
+    "analogy": "像洗牌前先約好一套固定洗法，每次照同一套洗，發到的牌順序都一模一樣。",
+    "useCases": "需要可重現性的情境，例如模型稽核、隨機切分資料（k-fold、訓練／測試切分），或比較模型時確保條件一致。",
+    "distinguish": "調高 k 值或重複多次取平均，是讓評估「更穩定」，不是讓切分「完全一致」；只有固定種子才能讓每次切分相同。",
+    "trap": "看到「可重現性」「每次執行結果一致」「符合稽核要求」，答案通常是固定隨機數種子，而不是增加特徵、提高 k 值或多跑幾次取平均。",
+    "sources": [
+      "scikit-learn Glossary, random_state: https://scikit-learn.org/stable/glossary.html#term-random_state",
+      "scikit-learn, Common pitfalls: Controlling randomness: https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-drift",
+    "name": "資料漂移（Data Drift）",
+    "units": [
+      "L11301",
+      "L12303"
+    ],
+    "oneLiner": "模型上線後，實際輸入資料的統計分布和訓練時不同了，導致模型表現逐漸變差。",
+    "analogy": "像用夏天的客人資料訓練的推薦模型，到了冬天客人買的東西都變了。",
+    "useCases": "推薦系統、商品分類、需求預測的上線後監控。",
+    "distinguish": "概念漂移是「輸入和答案的對應關係」改變（同樣的行為不再代表同樣的結果）；資料漂移是「輸入資料本身的分布」改變。",
+    "trap": "「分類標準沒變，但輸入特徵分布改變」→ 資料漂移；「特徵分布差不多，但代表的意義變了」→ 概念漂移；兩者都不是過擬合。",
+    "sources": [
+      "Gama et al. (2014), A Survey on Concept Drift Adaptation, ACM Computing Surveys: https://doi.org/10.1145/2523813",
+      "Google Cloud, MLOps: Continuous delivery and automation pipelines in ML: https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "supervised-learning",
+    "name": "監督式學習（Supervised Learning）",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "用「有標準答案（標籤）」的資料訓練模型，學會輸入與答案之間的對應關係；典型任務是分類與迴歸。",
+    "analogy": "像拿附詳解的題庫練習，做錯就對照答案修正。",
+    "useCases": "已標註「洗錢／正常」的交易分類、已標註故障的設備預測、房價預測。",
+    "distinguish": "非監督式沒有標籤；半監督式是少量標籤加大量無標籤；強化式學習靠獎懲回饋而不是標準答案。",
+    "trap": "只要資料「已有標註」且要預測該標籤，就是監督式；監督式也能做異常偵測（有標註時），也不一定需要大量標註（可搭配遷移學習）。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.5 Machine Learning Basics: https://www.deeplearningbook.org/contents/ml.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "unsupervised-learning",
+    "name": "非監督式學習（Unsupervised Learning）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "資料沒有標籤，讓模型自己找出內在結構，例如分群、降維、關聯規則。",
+    "analogy": "像把一堆沒貼標籤的積木，依顏色和形狀自己分成幾堆。",
+    "useCases": "顧客分群、股價走勢型態分組、探索資料潛在結構。",
+    "distinguish": "監督式學「輸入→已知答案」；非監督式只看輸入本身的相似性；半監督式混用少量標籤。",
+    "trap": "非監督式不需要預先定義正確類別；它能找出偏離分布的離群點，但無法自動替這些點貼上「特定異常類別」的標籤。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.5: https://www.deeplearningbook.org/contents/ml.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "semi-supervised-learning",
+    "name": "半監督式學習（Semi-supervised Learning）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "同時利用少量已標註資料與大量未標註資料訓練模型，降低人工標註成本。",
+    "analogy": "像老師只批改了 3 成作業當範例，學生再參考範例自己檢查其餘 7 成。",
+    "useCases": "只有 30% 影像有標註的病害辨識、只有部分銷售紀錄有標記的損耗預測。",
+    "distinguish": "監督式只用有標籤的資料；非監督式完全不用標籤；自監督式是從資料本身自動產生訓練目標。",
+    "trap": "關鍵字「少量已標註＋大量未標註」→ 半監督式；把未標註資料直接分群當成標籤、或丟掉未標註資料，都不是最佳做法。",
+    "sources": [
+      "Chapelle, Schölkopf & Zien (2006), Semi-Supervised Learning, MIT Press",
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.7.6: https://www.deeplearningbook.org/contents/regularization.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "self-supervised-learning",
+    "name": "自監督式學習（Self-supervised Learning）",
+    "units": [
+      "L11301",
+      "L11401"
+    ],
+    "oneLiner": "從資料本身自動產生訓練目標（例如遮住一部分讓模型猜），不需要人工逐筆標註。",
+    "analogy": "像自己做克漏字練習：把文章挖空再自己填，答案就藏在原文裡。",
+    "useCases": "大型語言模型預訓練、CLIP、DINO 等視覺模型的表徵學習。",
+    "distinguish": "監督式需要人工標註；自監督式的「標籤」來自資料本身。CLIP 用圖文配對資料，DINO 用未標註影像。",
+    "trap": "自監督式「不需要人工逐筆標註」，說它和監督式一樣要人工標記是錯的。",
+    "sources": [
+      "Balestriero et al. (2023), A Cookbook of Self-Supervised Learning: https://arxiv.org/abs/2304.12210"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "reinforcement-learning",
+    "name": "強化式學習（Reinforcement Learning）",
+    "units": [
+      "L11301",
+      "L12202"
+    ],
+    "oneLiner": "讓 AI 代理與環境互動、採取行動，依獲得的獎勵或懲罰調整策略，以最大化長期累積報酬。",
+    "analogy": "像訓練小狗：做對給零食、做錯不給，牠慢慢學會怎麼做最划算。",
+    "useCases": "自動交易策略、車隊調度、路線規劃、推薦策略、LLM 的偏好對齊。",
+    "distinguish": "監督式靠標準答案；強化式靠行動後的回饋訊號；它調整的是「策略函數（Policy）」，也就是在各狀態選擇行動的方式。",
+    "trap": "關鍵字「依行動結果的獎勵／懲罰持續調整策略」「不依賴事先標記的資料」→ 強化式學習；回饋訊號也可以是專家或使用者的評分。",
+    "sources": [
+      "Sutton & Barto, Reinforcement Learning: An Introduction（2nd ed.）: http://incompleteideas.net/book/the-book-2nd.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "exploration-exploitation",
+    "name": "探索與利用的權衡（Exploration vs. Exploitation）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "強化學習的核心難題：要嘗試新行動以發現更好的選擇（探索），還是用已知最好的行動確保收益（利用）。",
+    "analogy": "像選餐廳：一直去熟悉的店很安全，但可能錯過更好吃的新店。",
+    "useCases": "推薦系統要不要推新商品、廣告投放策略。",
+    "distinguish": "偏差與變異的權衡講模型複雜度；探索與利用講強化學習的行動選擇。",
+    "trap": "題目描述「總推過去表現好的商品會錯失新機會，但常嘗試新商品又影響短期成效」→ 探索與利用的權衡。",
+    "sources": [
+      "Sutton & Barto, Reinforcement Learning: An Introduction（2nd ed.）, Ch.2: http://incompleteideas.net/book/the-book-2nd.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "transfer-learning",
+    "name": "遷移學習（Transfer Learning）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "把在某個任務上訓練好的模型（預訓練模型）拿到相關的新任務上微調，只需少量新資料就能有好表現。",
+    "analogy": "像會騎腳踏車的人學騎機車，很多平衡技巧可以直接沿用。",
+    "useCases": "新產品瑕疵檢測樣本很少、標註成本高，但公司已有類似產品的成熟模型。",
+    "distinguish": "資料增強是增加現有資料的變化；遷移學習是沿用已學到的知識。微調（Fine-tuning）是遷移學習常見的作法。",
+    "trap": "關鍵字「已有同領域成熟模型」「新任務標註極少」→ 遷移學習；即使標註資料不多，監督式任務仍可藉遷移學習訓練。",
+    "sources": [
+      "Pan & Yang (2010), A Survey on Transfer Learning, IEEE TKDE: https://doi.org/10.1109/TKDE.2009.191"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "clustering",
+    "name": "叢集分析（Clustering）與 K-means",
+    "units": [
+      "L11301",
+      "L11302",
+      "L12202"
+    ],
+    "oneLiner": "非監督式方法，依資料特徵的相似度，自動把資料分成幾個群組；K-means 是最常見的演算法。",
+    "analogy": "像把一群人依穿著風格自動分成幾桌，事前沒人告訴你有哪幾種風格。",
+    "useCases": "顧客分群做差異化行銷、使用者行為分群、會議內容依語意分群。",
+    "distinguish": "分類需要事先有類別標籤；分群沒有標籤，群組是自動形成的。",
+    "trap": "叢集不需要標註資料；「沒有預設客戶類型、依相似度自動分群」→ 叢集分析。分群結果不能直接當成病害或異常類別標籤，K-means 也不能搭配準確率做連續值預測。",
+    "sources": [
+      "scikit-learn User Guide, Clustering: https://scikit-learn.org/stable/modules/clustering.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "association-rules",
+    "name": "關聯規則（Association Rules）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "非監督式方法，找出資料中經常一起出現的項目組合，例如「買啤酒的人常買尿布」。",
+    "analogy": "像超市店長發現某些商品總是被一起買，就把它們擺在一起。",
+    "useCases": "購物籃分析、商品擺放、交叉銷售。",
+    "distinguish": "關聯規則找「共同出現」；分群找「相似群組」；分類預測「標籤」。",
+    "trap": "有「洗錢／正常」標記並要判斷新交易時是監督式分類，不是關聯規則；偵測偏離正常的評論也不是找常見字詞組合。",
+    "sources": [
+      "Han, Kamber & Pei, Data Mining: Concepts and Techniques（3rd ed.）, Ch.6"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "regression-vs-classification",
+    "name": "迴歸 vs 分類任務",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "迴歸預測「連續數值」（如房價、用電量）；分類預測「類別」（如是否詐欺、病害種類）。",
+    "analogy": "迴歸像猜「明天幾度」；分類像猜「明天會不會下雨」。",
+    "useCases": "迴歸：銷量、產量、房價；分類：流失與否、垃圾郵件、瑕疵與否。",
+    "distinguish": "迴歸用 MSE、MAE、MAPE 評估；分類用準確率、精確率、召回率、F1。",
+    "trap": "「邏輯迴歸」名字有迴歸，其實是分類模型（輸出 0～1 機率再以門檻判斷）；預測連續值時選分類指標或分群演算法都是陷阱。",
+    "sources": [
+      "Google ML Crash Course, Linear regression: Loss: https://developers.google.com/machine-learning/crash-course/linear-regression/loss"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "loss-function",
+    "name": "損失函數（Loss Function）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "衡量模型「預測值」和「實際值」差多少的量化指標，是模型調整參數的依據。",
+    "analogy": "像射箭時量出箭離靶心多遠，距離越大分數越差，下一箭就照著修正。",
+    "useCases": "迴歸常用均方誤差（MSE），分類常用交叉熵。",
+    "distinguish": "損失函數負責「算出差距」；優化器負責「根據差距更新參數」；評估指標是用來報告模型好壞給人看。",
+    "trap": "題目描述「依預測與實際的落差產生量化數值，提供給後續訓練做參數調整依據」→ 損失函數，而不是優化器或評估指標。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.6.2: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "regression-metrics",
+    "name": "迴歸評估指標（MSE、MAE、RMSE、MAPE、R²）",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "衡量連續數值預測誤差的指標：MSE 是誤差平方的平均、MAE 是絕對誤差的平均、RMSE 是 MSE 開根號、MAPE 是平均百分比誤差、R² 是解釋程度。",
+    "analogy": "像量體重計準不準：每次差幾公斤（MAE）、差距平方後平均（MSE，對大誤差更敏感）。",
+    "useCases": "房價、銷量、用電量、住院日數預測的模型評估。",
+    "distinguish": "MSE、MAE、RMSE、MAPE 越小越好；R² 越接近 1 越好。精確率、召回率、F1 是分類指標。",
+    "trap": "相同測試資料下，MSE 較低代表整體誤差較小；MSE 大於 0 不代表過擬合。只看單一整體指標會掩蓋少數重要子群（如重症病患）的誤差。",
+    "sources": [
+      "scikit-learn User Guide, Regression metrics: https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "cross-entropy",
+    "name": "交叉熵損失（Cross-Entropy Loss）",
+    "units": [
+      "L11301",
+      "L12201"
+    ],
+    "oneLiner": "分類問題最常用的損失函數，衡量模型預測的機率分布和真實答案差多少。",
+    "analogy": "像天氣預報說「下雨機率 90%」結果沒下雨，交叉熵就會給很重的懲罰。",
+    "useCases": "二元分類、多類別分類（常和 Softmax 搭配）。",
+    "distinguish": "迴歸任務常用 MSE；交叉熵用於分類；CLIP 比對圖文相似度時看的是餘弦相似度。",
+    "trap": "預測房價等連續值時要選 MSE，不是交叉熵。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.6.2: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "confusion-matrix",
+    "name": "混淆矩陣（TP、FP、FN、TN）",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "把分類結果分成四格：真陽性 TP、假陽性 FP（誤報）、假陰性 FN（漏報）、真陰性 TN，用來計算各種分類指標。",
+    "analogy": "像警報器：有小偷且響了（TP）、沒小偷卻響了（FP）、有小偷卻沒響（FN）、沒小偷也沒響（TN）。",
+    "useCases": "計算精確率、召回率、F1，判斷誤報與漏報哪個代價較高。",
+    "distinguish": "精確率 = TP ÷（TP＋FP）；召回率 = TP ÷（TP＋FN）。",
+    "trap": "「漏檢、漏診」就是假陰性 FN，代價高時要重視召回率；混淆矩陣是分類工具，不能用來評估連續值預測。",
+    "sources": [
+      "Google ML Crash Course, Accuracy, recall, precision: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "precision",
+    "name": "精確率（Precision）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "模型判定為「陽性」的案例中，真的是陽性的比例；重點在「不要誤報」。",
+    "analogy": "像警察抓 10 個嫌犯，其中 9 個真的是犯人，精確率就是 90%。",
+    "useCases": "誤報代價高的情境，例如垃圾郵件過濾（不想把正常信丟掉）。",
+    "distinguish": "召回率重點在「不要漏掉」；兩者常互相拉扯，F1 是兩者的調和平均。",
+    "trap": "題目強調「不能漏掉患者、寧可多複檢」時要看召回率，不是精確率；調低門檻會提高召回率、精確率可能下降。",
+    "sources": [
+      "Google ML Crash Course, Accuracy, recall, precision: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "recall",
+    "name": "召回率（Recall）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "所有真正的陽性案例中，模型成功抓出來的比例；重點在「不要漏掉」。",
+    "analogy": "像全班 10 位發燒的同學，體溫檢測抓出了 8 位，召回率就是 80%。",
+    "useCases": "癌症篩檢、害蟲偵測、詐欺偵測等漏掉代價很高的情境。",
+    "distinguish": "精確率看「判為陽性的有多準」；召回率看「真的陽性抓到多少」。",
+    "trap": "關鍵字「降低漏診／漏檢」「寧可誤判也不能漏掉」→ 召回率；類別不平衡時，少數類別的召回率常會大幅下降。",
+    "sources": [
+      "Google ML Crash Course, Accuracy, recall, precision: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "f1-score",
+    "name": "F1 分數（F1-score）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "精確率與召回率的調和平均，兩者都要好，F1 才會高。",
+    "analogy": "像評估一位守門員，既要擋下射門（召回），又不能亂撲（精確），兩項綜合打分。",
+    "useCases": "類別不平衡時評估模型對少數類別的辨識能力。",
+    "distinguish": "準確率在不平衡資料下會失真；F1 綜合考慮誤報與漏報。若題目明確強調「不可漏掉」，則優先看召回率。",
+    "trap": "瑕疵品比例極低、模型全猜正常也有高準確率時，應改看 F1；但題目若特別強調漏檢代價最高，答案會是召回率而不是 F1。",
+    "sources": [
+      "scikit-learn User Guide, Classification metrics: https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "accuracy",
+    "name": "準確率（Accuracy）",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "所有預測中，預測正確的比例。",
+    "analogy": "像考試答對幾題除以總題數。",
+    "useCases": "各類別數量差不多時的分類模型評估。",
+    "distinguish": "準確率適合類別平衡的資料；不平衡時改看 F1、召回率；迴歸任務不能用準確率。",
+    "trap": "資料極度不平衡時，全猜多數類別也能有很高的準確率，這是假象；參數更新方向也不是依準確率決定，而是依損失函數的梯度。",
+    "sources": [
+      "Google ML Crash Course, Accuracy, recall, precision: https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "roc-auc",
+    "name": "ROC 曲線與 AUC",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "ROC 曲線畫出不同門檻下「真陽性率」與「假陽性率」的變化；AUC 是曲線下面積，越接近 1 表示模型整體區分能力越好。",
+    "analogy": "像把警報器靈敏度從低調到高，看每個設定下抓到多少小偷、誤響幾次，畫成一條線。",
+    "useCases": "比較不同模型的整體分類能力，不受單一門檻影響。",
+    "distinguish": "ROC-AUC 衡量整體區分能力；召回率直接衡量「抓出多少真正的陽性」。",
+    "trap": "題目問「最能反映找出癌症患者（降低漏診）的能力」時，答案是召回率，而不是 ROC-AUC 或假陽性率。",
+    "sources": [
+      "Google ML Crash Course, ROC and AUC: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "decision-threshold",
+    "name": "判定門檻（Decision Threshold）",
+    "units": [
+      "L11301",
+      "L11302",
+      "L12303"
+    ],
+    "oneLiner": "分類模型輸出機率後，超過多少就判為陽性的那條線，例如 0.5。",
+    "analogy": "像體溫幾度算發燒：門檻定 37.5 度會抓到更多人，定 38.5 度就比較少。",
+    "useCases": "癌症篩檢、風險警示等需要在漏報與誤報之間取捨的情境。",
+    "distinguish": "調整門檻不需要重新訓練模型；調低門檻 → 召回率上升、精確率可能下降，調高則相反。",
+    "trap": "希望多抓出真正患者、可接受多一些複檢時，應「調低」門檻；精確率與召回率通常無法只靠調門檻同時提升。",
+    "sources": [
+      "Google ML Crash Course, Thresholds and the confusion matrix: https://developers.google.com/machine-learning/crash-course/classification/thresholding"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "overfitting",
+    "name": "過擬合與欠擬合（Overfitting／Underfitting）",
+    "units": [
+      "L11301",
+      "L12202",
+      "L12303"
+    ],
+    "oneLiner": "過擬合是模型把訓練資料背得太熟，遇到新資料就表現差；欠擬合是模型太簡單，連訓練資料都學不好。",
+    "analogy": "過擬合像死背考古題，題目換個說法就不會；欠擬合像根本沒讀書。",
+    "useCases": "訓練準確率 98%、測試只有 72% 時，就是過擬合的典型訊號。",
+    "distinguish": "改善過擬合：資料增強、正則化、增加資料、簡化模型；上線後效能下降多半是資料漂移，不是過擬合。",
+    "trap": "過擬合時「增加模型深度與參數量」只會更糟；少量樣本做微調要特別注意過擬合；模式崩潰、資料漂移都不是過擬合。",
+    "sources": [
+      "Google ML Crash Course, Overfitting: https://developers.google.com/machine-learning/crash-course/overfitting/overfitting",
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.5.2: https://www.deeplearningbook.org/contents/ml.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "bias-variance",
+    "name": "偏差與變異的權衡（Bias-Variance Tradeoff）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "模型太簡單會偏差高（欠擬合），太複雜會變異高（過擬合）；要找到兩者平衡的複雜度。",
+    "analogy": "像射飛鏢：偏差高是每支都偏離靶心同一側；變異高是每支散得到處都是。",
+    "useCases": "選擇模型複雜度、決定是否加正則化。",
+    "distinguish": "偏差與變異的權衡講模型複雜度；探索與利用的權衡講強化學習的行動選擇；類別不平衡是資料分布問題。",
+    "trap": "偏差與變異權衡要解決的是「避免過擬合或欠擬合」，不是資料不足、資料重複或類別不平衡。",
+    "sources": [
+      "Hastie, Tibshirani & Friedman, The Elements of Statistical Learning（2nd ed.）, Ch.7: https://hastie.su.domains/ElemStatLearn/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "regularization",
+    "name": "正則化 L1／L2（Lasso／Ridge）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "在損失函數中加入權重的懲罰項，限制模型複雜度以避免過擬合；L1 用權重絕對值，L2 用權重平方。",
+    "analogy": "像規定行李限重：東西帶太多（權重太大）就要罰錢，逼你只帶真正需要的。",
+    "useCases": "特徵很多、容易過擬合的模型；L1 也可用來自動篩選特徵。",
+    "distinguish": "L1 稱 Lasso，會讓不重要的權重剛好變成 0（稀疏解）；L2 稱 Ridge，讓權重變小但通常不為 0。「正則化」和資料縮放的「正規化」是不同概念。",
+    "trap": "L2 是 Ridge 不是 Lasso；會讓權重趨近或等於零、產生稀疏解的是 L1；L1 不會忽略目標變數，也不會讓損失函數變成非凸。",
+    "sources": [
+      "Hastie, Tibshirani & Friedman, The Elements of Statistical Learning（2nd ed.）, Ch.3.4: https://hastie.su.domains/ElemStatLearn/",
+      "scikit-learn User Guide, Linear Models（Lasso、Ridge）: https://scikit-learn.org/stable/modules/linear_model.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-augmentation",
+    "name": "資料增強（Data Augmentation）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "對現有訓練資料做旋轉、翻轉、裁切等隨機變化，產生更多樣的訓練樣本，提升泛化能力。",
+    "analogy": "像練認人臉時，把同一張照片轉一轉、調亮調暗，練到換角度也認得出來。",
+    "useCases": "影像分類過擬合、訓練資料多樣性不足。",
+    "distinguish": "資料增強擴充現有資料的變化；遷移學習沿用其他任務學到的知識；SMOTE 是合成少數類別樣本。",
+    "trap": "訓練高、測試低（過擬合）且要增加資料多樣性 → 資料增強；但若已有同領域成熟模型、新任務標註極少，遷移學習更能發揮既有優勢。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.7.4 Dataset Augmentation: https://www.deeplearningbook.org/contents/regularization.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "vanishing-gradient",
+    "name": "梯度消失／梯度爆炸",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "深層網路或長序列在反向傳播時，梯度越傳越小（消失）或越傳越大（爆炸），導致前面的層學不到東西或訓練不穩。",
+    "analogy": "像傳話遊戲，一路傳到最後一個人時，話已經小聲到聽不見了。",
+    "useCases": "診斷深層網路訓練停滯、RNN 記不住長序列的原因。",
+    "distinguish": "改善方法：改用 ReLU 類啟動函數、LSTM 取代傳統 RNN、批次正規化。",
+    "trap": "訓練誤差長期不降、參數幾乎不更新 → 懷疑梯度消失，應調整啟動函數，而不是單純延長訓練或增加資料；傳統 RNN 的長序列問題也是梯度消失。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.8.2 & Ch.10.7: https://www.deeplearningbook.org/contents/optimization.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "activation-function",
+    "name": "啟動函數（ReLU、Sigmoid、Tanh）",
+    "units": [
+      "L11301",
+      "L11302"
+    ],
+    "oneLiner": "神經網路每一層的非線性轉換函數，讓網路能學習複雜關係；常見有 ReLU、Sigmoid、Tanh。",
+    "analogy": "像水龍頭的開關規則：水壓（輸入）夠大才放水，決定訊號要不要往下傳、傳多少。",
+    "useCases": "隱藏層多用 ReLU；二元分類輸出可用 Sigmoid；多類別輸出用 Softmax。",
+    "distinguish": "Sigmoid、Tanh 在兩端飽和時梯度趨近 0，深層網路易梯度消失；ReLU 在正數區梯度固定為 1，較能改善這個問題。",
+    "trap": "要改善梯度消失、提升收斂穩定性，最常用的是改用 ReLU 或其變體；啟動函數的輸出不決定參數更新方向（那是損失函數的梯度）。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.6.3 Hidden Units: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "optimizer",
+    "name": "優化器（Optimizer）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "根據損失函數算出的梯度，決定如何更新模型參數的演算法，例如 SGD、Adam。",
+    "analogy": "像導航系統：知道離目的地多遠（損失）後，決定下一步往哪走、走多大步。",
+    "useCases": "所有神經網路的訓練過程。",
+    "distinguish": "損失函數「量出差距」；優化器「實際更新參數」；啟動函數決定神經元的輸出。",
+    "trap": "題目描述「持續比對預測與實際的差距，並透過一套機制逐步調整內部參數」→ 優化器；只描述「量化落差、作為調整依據」→ 損失函數。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.8 Optimization: https://www.deeplearningbook.org/contents/optimization.html",
+      "Kingma & Ba (2014), Adam: https://arxiv.org/abs/1412.6980"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "batch-normalization",
+    "name": "批次正規化（Batch Normalization）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "在訓練時把每一層、每一批次的輸出重新標準化，降低內部特徵分布的變動，讓訓練更穩定、更快收斂。",
+    "analogy": "像每一關考試前都把分數重新換算成同一個標準，下一關的老師就不會被忽高忽低的分數搞混。",
+    "useCases": "深度神經網路訓練時損失震盪大、收斂不穩。",
+    "distinguish": "它作用在「隱藏層輸出」，不是輸入影像的前處理；也不是權重初始化或增加非線性。",
+    "trap": "批次正規化的主要作用是降低不同批次造成的內部特徵分布變動，讓梯度更新更穩定。",
+    "sources": [
+      "Ioffe & Szegedy (2015), Batch Normalization: https://arxiv.org/abs/1502.03167"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "structured-prediction",
+    "name": "結構化預測（Structured Prediction）",
+    "units": [
+      "L11301"
+    ],
+    "oneLiner": "輸出不是單一標籤或數值，而是有內部結構的結果，例如一整串詞性標註、句法樹。",
+    "analogy": "一般分類像替一張照片貼一個標籤；結構化預測像替一整句話的每個字都貼上互相有關的標籤。",
+    "useCases": "逐詞標註、命名實體辨識、序列標註。",
+    "distinguish": "判斷垃圾郵件、流失與否是單一標籤分類；預測需求量是迴歸。",
+    "trap": "「替語音轉文字後的內容逐詞標註」→ 結構化預測；其他單一輸出的分類或迴歸都不是。",
+    "sources": [
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）, Sequence Labeling: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "concept-drift",
+    "name": "概念漂移（Concept Drift）",
+    "units": [
+      "L11301",
+      "L12303"
+    ],
+    "oneLiner": "輸入特徵和預測目標之間的關係改變了，同樣的輸入不再代表同樣的結果。",
+    "analogy": "以前「在商品頁停留很久」代表想買，現在大家只是習慣慢慢比價，意思變了。",
+    "useCases": "消費趨勢轉變、詐欺手法改變後的模型監控。",
+    "distinguish": "資料漂移是輸入分布改變（例如新用戶年齡層不同）；概念漂移是輸入和答案的對應關係改變。",
+    "trap": "「輸入分布跟以前差不多，但模型準確率仍下降，因為行為代表的意義變了」→ 概念漂移；分類標準沒變、只是輸入分布不同 → 資料漂移。",
+    "sources": [
+      "Gama et al. (2014), A Survey on Concept Drift Adaptation, ACM Computing Surveys: https://doi.org/10.1145/2523813"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ner",
+    "name": "命名實體辨識 NER",
+    "units": [
+      "L11301",
+      "L11302",
+      "L11401"
+    ],
+    "oneLiner": "從文字中找出人名、地名、機構名、日期等特定類型的詞語，是典型的序列標註任務。",
+    "analogy": "像用不同顏色的螢光筆，把文章裡的人名、地名、公司名分別畫起來。",
+    "useCases": "從合約、新聞中自動抽取人名、公司、日期。",
+    "distinguish": "NER 是序列標註（結構化預測）；文本分類是替整段文字貼一個標籤。",
+    "trap": "NER 常用條件隨機場（CRF），CRF 屬於鑑別式模型。",
+    "sources": [
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）, Sequence Labeling for Parts of Speech and Named Entities: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rnn",
+    "name": "RNN 循環神經網路",
+    "units": [
+      "L11302",
+      "L12201"
+    ],
+    "oneLiner": "專門處理有先後順序資料（文字、語音、時間序列）的神經網路，會把前一步的資訊傳給下一步。",
+    "analogy": "像邊聽故事邊記重點：每聽一句就帶著剛才的印象往下聽；但故事太長時，開頭的細節會越來越模糊。",
+    "useCases": "短中期的時間序列預測（如前 15 分鐘的壅塞延續影響下一階段）、依序出現的語音或文字資料。",
+    "distinguish": "CNN 擅長影像的空間特徵；LSTM 是 RNN 的改良版，能記得更久；Transformer 用自注意力直接關聯遠處內容，不必一步步傳遞。題目有時譯作「遞迴神經網路」。",
+    "trap": "RNN 的經典弱點是長序列訓練時的「梯度消失」，難以記住早期資訊；但它能處理不同長度的序列，也能做時間序列預測。題目強調「前一階段延續影響下一階段」選 RNN，強調「記不住很早以前的資訊」則選 LSTM。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.10 Sequence Modeling: https://www.deeplearningbook.org/contents/rnn.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "lstm",
+    "name": "LSTM 長短期記憶網路",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "RNN 的改良版，用「閘門」決定哪些資訊要記住、哪些要忘掉，能保留較長期的序列資訊。",
+    "analogy": "像帶著筆記本聽故事：重要的事寫進筆記（記憶單元），不重要的劃掉（遺忘門），故事再長也不會忘記開頭。",
+    "useCases": "需要參考較長歷史的序列資料，例如依過去 24 個月消費預測下個月、長句語音辨識、公車到站時間預測。",
+    "distinguish": "RNN 結構簡單但長序列容易梯度消失；Transformer 用自注意力一次看全文、不必依序傳遞，處理長文本更有效率。單張影像比對屬於 CNN 的工作，不是 LSTM。",
+    "trap": "題目出現「長序列」「難以保留前段資訊」「長期依賴」時選 LSTM；若強調「直接關聯相距很遠的內容、無須依序傳遞前文」則選 Transformer。",
+    "sources": [
+      "Hochreiter & Schmidhuber (1997), Long Short-Term Memory, Neural Computation 9(8): https://doi.org/10.1162/neco.1997.9.8.1735",
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.10.10: https://www.deeplearningbook.org/contents/rnn.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "gradient-boosting",
+    "name": "梯度提升（XGBoost）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "一棵接一棵地訓練決策樹，每棵新樹專門修正前面的錯誤，組合成強大的模型；XGBoost 是常用實作。",
+    "analogy": "像一群老師接力改作業，後面的老師專門挑前面漏改的地方補改。",
+    "useCases": "表格資料的分類與迴歸，例如用電量預測、信用評分。",
+    "distinguish": "隨機森林是多棵樹「同時、獨立」訓練後投票；梯度提升是「依序」修正錯誤。",
+    "trap": "XGBoost 可做迴歸（XGBoost Regressor），預測連續值時要搭配 MAE、MAPE 等迴歸指標，而不是準確率或 F1。",
+    "sources": [
+      "Chen & Guestrin (2016), XGBoost: A Scalable Tree Boosting System: https://arxiv.org/abs/1603.02754"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "q-learning",
+    "name": "Q-Learning／Deep Q-Learning",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "Q-Learning 用一張 Q 表記錄「每個狀態下做每個行動的價值」；Deep Q-Learning 改用深度神經網路來估計 Q 值。",
+    "analogy": "Q 表像一本「在哪種情況該做什麼」的對照手冊；情況太多寫不完時，就改請一位會舉一反三的顧問（神經網路）估算。",
+    "useCases": "遊戲 AI、機器人控制、高維度狀態的決策問題。",
+    "distinguish": "兩者差異在「用表格還是神經網路估 Q 值」，不是有沒有標記資料；Deep Q-Learning 常搭配經驗回放（Experience Replay）穩定訓練。",
+    "trap": "Q 表在高維、連續狀態下難以擴展，Deep Q-Learning 用神經網路解決這個問題；說它「無法搭配經驗回放」是錯的。",
+    "sources": [
+      "Mnih et al. (2015), Human-level control through deep reinforcement learning, Nature: https://doi.org/10.1038/nature14236",
+      "Sutton & Barto, Reinforcement Learning: An Introduction（2nd ed.）: http://incompleteideas.net/book/the-book-2nd.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "softmax",
+    "name": "Softmax 函數",
+    "units": [
+      "L11302",
+      "L11401"
+    ],
+    "oneLiner": "把神經網路輸出的多個分數，轉換成總和為 1 的機率分布，用於多類別分類的輸出層。",
+    "analogy": "像把各候選人的得票數換算成得票率，全部加起來剛好 100%。",
+    "useCases": "預測影片類型、圖片類別等多類別分類。",
+    "distinguish": "Sigmoid 常用於二元分類（輸出單一機率）；ReLU 用於隱藏層。",
+    "trap": "輸出層需要「各類別的機率分布」→ Softmax；Transformer 長序列的瓶頸是自注意力，不是 Softmax。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.6.2.2.3 Softmax Units: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "deep-learning",
+    "name": "深度學習（Deep Learning）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "機器學習的一支，用多層神經網路從大量資料中自動學習抽象特徵。",
+    "analogy": "像一層層的濾網：第一層看出線條，下一層組成形狀，再下一層認出「這是貓」。",
+    "useCases": "影像辨識、語音辨識、自然語言處理、生成式 AI。",
+    "distinguish": "傳統機器學習較依賴人工特徵工程；深度學習能自動學特徵，但通常需要大量資料。",
+    "trap": "深度學習的特點是「自動學特徵、需要大量資料」；說它「通常需要人工設計特徵」或「資料少也能表現好」是錯的。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.1: https://www.deeplearningbook.org/contents/intro.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "naive-bayes",
+    "name": "貝氏分類器（Naive Bayes）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "根據貝氏定理，計算各類別下特徵出現的機率，再推斷新資料最可能屬於哪一類；假設特徵彼此獨立。",
+    "analogy": "像收到信時想：「垃圾信裡常有『免費』『中獎』，這封都有，那它很可能是垃圾信。」",
+    "useCases": "垃圾郵件過濾、文字分類。",
+    "distinguish": "貝氏分類器學的是資料的機率分布，屬於生成式模型；邏輯迴歸、SVM 直接學分類邊界，屬於鑑別式模型。",
+    "trap": "貝氏分類器是「建構資料分布、利用條件機率推斷」的生成式模型，不是直接學邊界的模型。",
+    "sources": [
+      "scikit-learn User Guide, Naive Bayes: https://scikit-learn.org/stable/modules/naive_bayes.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "knn",
+    "name": "K 近鄰演算法 KNN",
+    "units": [
+      "L11302",
+      "L11401"
+    ],
+    "oneLiner": "找出和新資料最接近的 K 筆資料，用它們的多數決（或平均）決定預測結果。",
+    "analogy": "像搬到新社區，想知道這區治安如何，就問問最近的 3 位鄰居，多數人怎麼說就怎麼判斷。",
+    "useCases": "簡單分類、推薦相似項目。",
+    "distinguish": "KNN 依「距離」判斷，對特徵尺度很敏感；決策樹不受尺度影響。KNN 不是生成式模型。",
+    "trap": "K=3、鄰居為 A、B、A 時，多數決預測為 A；使用 KNN 前通常要先標準化特徵。",
+    "sources": [
+      "scikit-learn User Guide, Nearest Neighbors: https://scikit-learn.org/stable/modules/neighbors.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "linear-regression",
+    "name": "線性迴歸（Linear Regression）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "用一條直線（或平面）描述特徵與連續數值目標之間的關係，用來預測數值。",
+    "analogy": "像根據坪數畫一條房價趨勢線，給一個新坪數就能估出價格。",
+    "useCases": "產量、銷量、價格等連續數值預測。",
+    "distinguish": "邏輯迴歸雖然叫迴歸，其實是分類；線性迴歸對特徵尺度敏感，決策樹則不受影響。",
+    "trap": "預測連續數值（如稻米產量）→ 監督式學習＋線性迴歸＋MAE 這類迴歸指標；搭配 K-means、混淆矩陣都不對。",
+    "sources": [
+      "scikit-learn User Guide, Linear Models: https://scikit-learn.org/stable/modules/linear_model.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "svm",
+    "name": "支援向量機 SVM",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "找出能把不同類別分得最開、邊界最寬的分隔線（超平面）；可用核函數處理非線性問題。",
+    "analogy": "像在兩群人中間畫一條走道，盡量讓走道越寬越好，兩邊都不會擠到線上。",
+    "useCases": "高維度、樣本數不多的分類，例如文字分類。",
+    "distinguish": "SVM 不是集成學習（那是隨機森林）；也不擅長自動萃取影像特徵（那是 CNN）。",
+    "trap": "SVM 在高維、樣本數有限時表現好，但資料量很大時運算成本會顯著上升；它對特徵尺度敏感，需要標準化。",
+    "sources": [
+      "scikit-learn User Guide, Support Vector Machines: https://scikit-learn.org/stable/modules/svm.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "decision-tree",
+    "name": "決策樹（Decision Tree）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "用一連串「如果…就…」的分岔問題做判斷，結構像一棵樹，容易理解。",
+    "analogy": "像猜謎遊戲：「是動物嗎？」「會飛嗎？」一路問下去就得到答案。",
+    "useCases": "需要可解釋性的分類或迴歸；隨機森林、梯度提升的基本元件。",
+    "distinguish": "決策樹依切分點判斷，對特徵尺度不敏感；隨機森林是很多棵樹投票，比單棵樹更不容易過擬合。",
+    "trap": "「最不需要標準化就能直接使用」→ 決策樹；它是從資料中學出規則，不是人工設定影像像素規則，影像瑕疵辨識仍以 CNN 為主。",
+    "sources": [
+      "scikit-learn User Guide, Decision Trees: https://scikit-learn.org/stable/modules/tree.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "isolation-forest",
+    "name": "孤立森林（Isolation Forest）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "一種異常偵測演算法：隨機切分資料，越容易被單獨切出來的點，越可能是異常值。",
+    "analogy": "像在人群中隨便畫線分隔，總是站在角落的怪人，很快就會被單獨隔開。",
+    "useCases": "交易異常、設備異常、網路入侵偵測。",
+    "distinguish": "孤立森林用於異常偵測；隨機森林用於分類與迴歸，兩者名字像但用途不同。",
+    "trap": "預測明日用電量這類連續值，應選迴歸模型（如 XGBoost Regressor）；孤立森林搭配召回率是異常偵測的組合，不是迴歸。",
+    "sources": [
+      "scikit-learn User Guide, Isolation Forest: https://scikit-learn.org/stable/modules/outlier_detection.html#isolation-forest"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mlp",
+    "name": "多層感知機 MLP（前饋神經網路）",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "最基本的神經網路：資料從輸入層經過一或多層全連接的隱藏層，單向傳到輸出層。",
+    "analogy": "像一條生產線，原料一站站往前加工，不會回頭。",
+    "useCases": "表格資料的分類與迴歸、作為其他網路的組成元件。",
+    "distinguish": "CNN 擅長影像的局部空間特徵；RNN 會把前一步的資訊傳給下一步，擅長序列；MLP 不考慮空間或時間結構。",
+    "trap": "影像物件辨識要選 CNN、時間序列延續影響要選 RNN／LSTM；單純加深全連接網路解決不了 RNN 的長期記憶問題。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.6 Deep Feedforward Networks: https://www.deeplearningbook.org/contents/mlp.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "cnn",
+    "name": "CNN 卷積神經網路",
+    "units": [
+      "L11302"
+    ],
+    "oneLiner": "用卷積層擷取影像的局部特徵（邊緣、紋理、形狀），是電腦視覺的主流架構。",
+    "analogy": "像拿放大鏡在照片上一小塊一小塊掃過去，找出線條和花紋，再拼出整張圖的意思。",
+    "useCases": "瑕疵刮痕檢測、車輛辨識、貨架缺貨偵測、醫療影像。",
+    "distinguish": "RNN／LSTM 處理序列資料；Transformer 處理長文本；GAN、擴散模型用於生成。",
+    "trap": "輸入是「影像」且要辨識或定位物體 → CNN；時間序列、對話先後順序、GPS 連續軌跡則不是 CNN 的主場。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.9 Convolutional Networks: https://www.deeplearningbook.org/contents/convnets.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "autoencoder",
+    "name": "自編碼器（Autoencoder）",
+    "units": [
+      "L11302",
+      "L11401"
+    ],
+    "oneLiner": "先把輸入壓縮成精簡的表示（編碼器），再盡量還原回原樣（解碼器）的神經網路；還原誤差可用來偵測異常。",
+    "analogy": "像把一幅畫縮成小草圖再照草圖畫回來，畫得越像代表越「正常」；畫不回來的就是怪東西。",
+    "useCases": "只用正常資料訓練的異常偵測、資料壓縮、降維。",
+    "distinguish": "一般自編碼器主要做壓縮與重建；變分自編碼器（VAE）學習機率分布，能生成新樣本；GAN 用對抗方式生成全新內容。",
+    "trap": "感測器異常偵測、異常樣本極少時，用「只學正常資料、看重建誤差」的自編碼器；要創作從未出現過的新旋律則選 GAN，不是一般自編碼器。",
+    "sources": [
+      "Goodfellow, Bengio & Courville (2016), Deep Learning, Ch.14 Autoencoders: https://www.deeplearningbook.org/contents/autoencoders.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "seq2seq",
+    "name": "序列到序列（Seq2Seq）",
+    "units": [
+      "L11302",
+      "L12201"
+    ],
+    "oneLiner": "輸入一段序列、輸出另一段序列的模型架構，通常由編碼器與解碼器組成，例如機器翻譯、摘要。",
+    "analogy": "像口譯員：先完整聽完一句中文（編碼），再說出對應的英文（解碼）。",
+    "useCases": "翻譯、摘要、問答；也可做序列重建（如序列自編碼器的異常偵測）。",
+    "distinguish": "生成式語言建模（自迴歸）是根據前文一直往下續寫；遮罩語言建模是補空格。",
+    "trap": "「輸入文章開頭、系統自動續寫」最適合的是生成式語言建模，不是序列到序列。",
+    "sources": [
+      "Sutskever, Vinyals & Le (2014), Sequence to Sequence Learning with Neural Networks: https://arxiv.org/abs/1409.3215"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "transformer",
+    "name": "Transformer",
+    "units": [
+      "L11302",
+      "L11401",
+      "L12201"
+    ],
+    "oneLiner": "以自注意力機制為核心的神經網路架構，能一次看整段輸入、直接關聯相距很遠的內容，是現今大型語言模型的基礎。",
+    "analogy": "像開會時每個人都能直接看到所有人的發言，不必等話一個一個傳過來。",
+    "useCases": "大型語言模型、翻譯、摘要、長文件語意分析，也用於影像（如 Vision Transformer）。",
+    "distinguish": "RNN、LSTM 要依序傳遞前文資訊；Transformer 用自注意力直接建立長距離關聯，且可平行運算。",
+    "trap": "題目強調「直接關聯相距很遠的文字、不必依序傳遞前文」→ Transformer；但它的上下文長度有上限，且自注意力運算量隨長度平方成長。",
+    "sources": [
+      "Vaswani et al. (2017), Attention Is All You Need: https://arxiv.org/abs/1706.03762"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "vae",
+    "name": "VAE 變分自編碼器",
+    "units": [
+      "L11302",
+      "L11401"
+    ],
+    "oneLiner": "一種生成模型：編碼器把資料轉成潛在空間中的機率分布，解碼器從中取樣並重建或生成新資料。",
+    "analogy": "像把各種貓的照片濃縮成一張「貓的特徵地圖」，在地圖上隨便選一點，就能畫出一隻新的貓。",
+    "useCases": "生成風格一致又有變化的新樣本、只學正常資料的異常偵測。",
+    "distinguish": "一般自編碼器主要做壓縮與重建；VAE 學的是機率分布，所以能生成新樣本。題目也譯作「隱變量自編碼器」。",
+    "trap": "VAE 的解碼器是「重建資料」，不是做分類；缺乏異常標註時，可用 VAE 只學正常資料，重建誤差大就判為異常。",
+    "sources": [
+      "Kingma & Welling (2013), Auto-Encoding Variational Bayes: https://arxiv.org/abs/1312.6114"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "discriminative-vs-generative",
+    "name": "鑑別式 AI vs 生成式 AI",
+    "units": [
+      "L11302",
+      "L11401",
+      "L11402",
+      "L12201"
+    ],
+    "oneLiner": "鑑別式 AI 對既有資料做判斷或分類（如是不是詐欺）；生成式 AI 產生新的內容（如撰寫報告、生成圖片）。",
+    "analogy": "鑑別式像評審，看作品打分數；生成式像創作者，自己做出新作品。",
+    "useCases": "鑑別式：風險判斷、條款標示、漲跌預測；生成式：撰寫通知信、劇本、文案。",
+    "distinguish": "模型層面另有一種說法：學「資料本身分布」的叫生成式模型（如貝氏分類器），直接學「分類邊界」的叫鑑別式模型（如邏輯迴歸、CRF）。",
+    "trap": "判斷依據是「輸出是判斷結果還是新內容」，不是有沒有用深度學習；輸出風險機率仍是鑑別式。生成式 AI 模擬的攻擊資料可增強鑑別式模型，但模型不會因此變成生成式。",
+    "sources": [
+      "Google for Developers, Background: What is a Generative Model?: https://developers.google.com/machine-learning/gan/generative"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "multimodal",
+    "name": "多模態（Multimodal）",
+    "units": [
+      "L11302",
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "能同時處理或結合多種資料型態（文字、影像、聲音、影片）的 AI。",
+    "analogy": "像人同時用眼睛看、耳朵聽、嘴巴說，把資訊整合起來理解。",
+    "useCases": "看圖說話（圖像描述生成）、語音對話、圖文搜尋。",
+    "distinguish": "跨模態對齊（如 CLIP）是讓不同模態在同一向量空間可比較；單一模態模型只處理一種資料。",
+    "trap": "圖像描述要精準，關鍵是結合影像特徵與語言建模；但多模態模型不等於能取得最新知識，需要引用知識庫時仍要搭配 RAG。",
+    "sources": [
+      "Yang et al. (2023), The Dawn of LMMs: Preliminary Explorations with GPT-4V(ision): https://arxiv.org/abs/2309.17421"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "self-attention",
+    "name": "自注意力機制（Self-Attention）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "讓序列中的每個 Token 都去計算和其他所有 Token 的關聯程度，決定要「注意」哪些內容。",
+    "analogy": "像讀一句話時，看到「它」就回頭找「它」指的是前面哪個名詞。",
+    "useCases": "Transformer 架構的核心運算。",
+    "distinguish": "Flash Attention 是讓自注意力算得更快、更省記憶體的實作方式，結果相同。",
+    "trap": "每個 Token 都要和所有 Token 計算關聯，運算量與記憶體隨輸入長度呈「平方」成長，這才是長文本的主要瓶頸，不是 Softmax、詞嵌入或詞彙表。",
+    "sources": [
+      "Vaswani et al. (2017), Attention Is All You Need: https://arxiv.org/abs/1706.03762"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "gan",
+    "name": "GAN 生成對抗網路",
+    "units": [
+      "L11401",
+      "L12201"
+    ],
+    "oneLiner": "由生成器和鑑別器互相對抗訓練：生成器努力造出以假亂真的樣本，鑑別器努力分辨真假，最後生成器能創造全新內容。",
+    "analogy": "像偽鈔製造者和驗鈔員互相較勁，偽鈔越做越逼真，驗鈔員也越來越厲害。",
+    "useCases": "生成全新旋律、影像、合成訓練資料。",
+    "distinguish": "擴散模型靠逐步去噪生成，品質與穩定性通常較好但較慢；一般自編碼器只做重建。",
+    "trap": "GAN 能創作從未出現過的新樣本；但訓練不穩定、容易模式崩潰，題目強調「穩定性與多樣性控制」時常選擴散模型。",
+    "sources": [
+      "Goodfellow et al. (2014), Generative Adversarial Networks: https://arxiv.org/abs/1406.2661",
+      "Goodfellow (2016), NIPS Tutorial: Generative Adversarial Networks: https://arxiv.org/abs/1701.00160"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "crf",
+    "name": "條件隨機場 CRF",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "用於序列標註的統計模型，考慮前後標籤之間的關係，找出整句最合理的標籤組合。",
+    "analogy": "像填詞性時，會參考前一個字是什麼詞性，而不是每個字單獨亂猜。",
+    "useCases": "命名實體辨識、詞性標註。",
+    "distinguish": "CRF 直接建模「給定輸入下標籤的條件機率」，屬於鑑別式模型；貝氏分類器、HMM 屬於生成式模型。",
+    "trap": "CRF 是鑑別式模型，不是生成式、非監督式或自迴歸模型。",
+    "sources": [
+      "Lafferty, McCallum & Pereira (2001), Conditional Random Fields, ICML",
+      "Jurafsky & Martin, Speech and Language Processing（3rd ed. draft）: https://web.stanford.edu/~jurafsky/slp3/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mode-collapse",
+    "name": "模式崩潰（Mode Collapse）",
+    "units": [
+      "L11401",
+      "L12202"
+    ],
+    "oneLiner": "生成模型只會反覆產生少數幾種相似的結果，失去多樣性。",
+    "analogy": "像餐廳主廚發現某道菜最不會被嫌，就天天只做那一道。",
+    "useCases": "GAN 只生成同一隻橘貓、LLM 回應總是同幾種模板。",
+    "distinguish": "過擬合是對新資料泛化差；模式崩潰是輸出缺乏多樣性；梯度消失是訓練停滯。",
+    "trap": "「生成器反覆產生同一種樣本騙過鑑別器」「回應長期集中在少數幾種形式」→ 模式崩潰，不是過擬合或梯度問題。",
+    "sources": [
+      "Goodfellow (2016), NIPS Tutorial: Generative Adversarial Networks: https://arxiv.org/abs/1701.00160"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "conditional-lm",
+    "name": "條件語言模型（Conditional Language Model）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "根據給定的條件（前文、指令、風格標籤等）來生成文字的語言模型，讓輸出和語境一致。",
+    "analogy": "像接龍時要依照前面的故事和指定的主題往下寫，不能自己亂開新話題。",
+    "useCases": "對話回應、摘要、指定風格的文案生成。",
+    "distinguish": "控制標記（Control Tokens）就是給條件語言模型的一種條件；決策樹、Q-learning、基因演算法都不是用來生成文字的。",
+    "trap": "要提升生成回應的「語境一致性」→ 條件語言模型。",
+    "sources": [
+      "Keskar et al. (2019), CTRL: A Conditional Transformer Language Model for Controllable Generation: https://arxiv.org/abs/1909.05858"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "scaling-law",
+    "name": "擴展定律（Scaling Law）",
+    "units": [
+      "L11401",
+      "L12301"
+    ],
+    "oneLiner": "語言模型的表現大致會隨參數量、訓練資料量與運算量增加而提升，但三者要相互搭配。",
+    "analogy": "像蓋大樓：地基（資料）、建材（參數）、工時（算力）要一起增加，只加其中一樣蓋不高。",
+    "useCases": "評估擴大模型規模是否值得、比較 7B、13B、175B 模型。",
+    "distinguish": "參數變多通常提升能力，但推論速度變慢、記憶體需求變高，不是越大越快。",
+    "trap": "參數增加「不會線性提升效能」，也需要足夠的高品質資料與資源；大模型推論不會比較快，記憶體用量也會增加。",
+    "sources": [
+      "Kaplan et al. (2020), Scaling Laws for Neural Language Models: https://arxiv.org/abs/2001.08361"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "catastrophic-forgetting",
+    "name": "災難性遺忘（Catastrophic Forgetting）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "模型在微調新任務時，原有權重被大幅覆寫，忘掉了預訓練時學到的廣泛知識。",
+    "analogy": "像為了準備專業考試狂背一科，結果其他原本會的科目都忘光了。",
+    "useCases": "評估微調風險、選擇 LoRA 等只更新少量參數的方法。",
+    "distinguish": "災難性遺忘是「舊知識流失」；過擬合是「對新資料泛化差」；訓練未收斂是「沒學好」。",
+    "trap": "微調後模型過度適應新資料分布、在原有任務或廣泛領域表現變差 → 災難性遺忘，而不是計算資源不足或無法回應長文。",
+    "sources": [
+      "Kirkpatrick et al. (2017), Overcoming catastrophic forgetting in neural networks: https://arxiv.org/abs/1612.00796"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "pruning",
+    "name": "剪枝（Pruning）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "移除模型中影響很小或冗餘的權重或神經元，縮小模型並加快推論。",
+    "analogy": "像修剪盆栽，剪掉多餘的枝葉，樹形更精簡也不影響生長。",
+    "useCases": "在手機、邊緣裝置部署模型，降低運算成本。",
+    "distinguish": "剪枝是「刪掉」不重要的權重；量化是「降低」權重的數值精度；凍結權重是訓練技巧；知識蒸餾是讓小模型學大模型。",
+    "trap": "把所有權重按比例縮小、凍結部分權重、動態跳過 Token，都不是剪枝。",
+    "sources": [
+      "Han, Mao & Dally (2015), Deep Compression: https://arxiv.org/abs/1510.00149"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "quantization",
+    "name": "模型量化（Quantization）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "用較低精度（如 8 位元、4 位元）表示模型權重，大幅縮小檔案與記憶體用量，加快推論。",
+    "analogy": "像把高解析照片轉成較小的檔案，看起來差不多，但細節可能少一點。",
+    "useCases": "手機或邊緣裝置離線執行小型語言模型。",
+    "distinguish": "量化是降精度；剪枝是刪權重；知識蒸餾是訓練一個小模型。",
+    "trap": "量化可能讓輸出品質「輕微下降」，不是完全無損；量化後模型可在本機獨立運作，也不會自動增加參數。",
+    "sources": [
+      "Jacob et al. (2017), Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference: https://arxiv.org/abs/1712.05877",
+      "Frantar et al. (2022), GPTQ: https://arxiv.org/abs/2210.17323"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "batch-vs-realtime-inference",
+    "name": "批次推論 vs 即時推論",
+    "units": [
+      "L11401",
+      "L12302"
+    ],
+    "oneLiner": "批次推論是把大量請求集中、離峰處理，重視吞吐量；即時推論是請求一進來就立刻回應，重視低延遲。",
+    "analogy": "批次像洗衣店一次收一大袋晚上統一洗；即時像現點現做的飲料店。",
+    "useCases": "批次：每日報表、隔天推薦清單；即時：客服對話、即時翻譯。",
+    "distinguish": "Batching（請求打包）能提高 GPU 使用率與整體吞吐量，但單筆請求可能要等批次湊齊，延遲略增；併發量低時效益有限。",
+    "trap": "訓練語料品質屬於「訓練」階段的問題，不是批次推論的難題；批次推論的挑戰在資源調度、吞吐量與延遲。",
+    "sources": [
+      "Google Cloud, Vertex AI: Overview of getting inferences（online vs batch）: https://cloud.google.com/vertex-ai/docs/predictions/overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "latency-throughput",
+    "name": "延遲（Latency）與吞吐量（Throughput）",
+    "units": [
+      "L11401",
+      "L12102",
+      "L12202",
+      "L12301"
+    ],
+    "oneLiner": "延遲是單次請求從送出到得到回應要多久；吞吐量是單位時間內能處理多少請求。",
+    "analogy": "延遲像一台車從起點開到終點的時間；吞吐量像一條高速公路每小時能通過幾台車。",
+    "useCases": "即時客服的效能測試、高頻交易系統、推理模型的成本評估。",
+    "distinguish": "首字回應時間（TTFT）是衡量對話「卡不卡」的常用延遲指標；系統整體很穩、處理量大，不代表延遲低。",
+    "trap": "使用者覺得「卡頓」要看延遲（單次回應速度），不是總處理量；提高思考預算會增加延遲與成本；Low-Code 難以做毫秒級延遲與超高吞吐量的底層優化。",
+    "sources": [
+      "NVIDIA Technical Blog, LLM Inference Benchmarking: Fundamental Concepts: https://developer.nvidia.com/blog/llm-benchmarking-fundamental-concepts/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rlhf",
+    "name": "RLHF 人類回饋強化學習",
+    "units": [
+      "L11401",
+      "L12202",
+      "L12303"
+    ],
+    "oneLiner": "先蒐集人類對不同回覆的偏好評比、訓練出「獎勵模型」，再用強化學習讓語言模型的回答更符合人類偏好。",
+    "analogy": "像餐廳請顧客替兩道菜比較打分，再依評分不斷調整食譜。",
+    "useCases": "讓聊天機器人回覆更有禮貌、更符合組織規範與人類偏好。",
+    "distinguish": "預訓練是用大量未標註語料學語言；監督式微調（SFT）是用標準問答範例教模型；RLHF 是用偏好回饋對齊行為。",
+    "trap": "RLHF 的核心是「人類偏好評比＋獎勵模型」；用大量未標註語料做長期訓練是預訓練，不屬於 RLHF。回饋者若集中在少數部門，會產生選擇性偏差。",
+    "sources": [
+      "Ouyang et al. (2022), Training language models to follow instructions with human feedback: https://arxiv.org/abs/2203.02155"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "grpo",
+    "name": "GRPO（群組相對策略優化）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "一種強化學習方法：同一題讓模型產生一組答案，依彼此的相對獎勵高低來更新模型，不需要額外的評價模型（Critic）。",
+    "analogy": "像同一題讓學生寫好幾種解法，互相比較誰答得比較好，好的解法就多加強。",
+    "useCases": "強化大型語言模型在數學與邏輯推理上的表現（如 DeepSeek-R1）。",
+    "distinguish": "RLHF 常見作法要訓練獎勵模型與評價模型；GRPO 用群組內相對比較取代評價模型，節省資源。",
+    "trap": "GRPO 最適合強化「逐步推導出正確解答」的推理任務（數學、邏輯），而不是情緒分類、語音轉文字或影像辨識。",
+    "sources": [
+      "Shao et al. (2024), DeepSeekMath（提出 GRPO）: https://arxiv.org/abs/2402.03300",
+      "DeepSeek-AI (2025), DeepSeek-R1: https://arxiv.org/abs/2501.12948"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "flash-attention",
+    "name": "Flash Attention",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "一種考慮硬體記憶體存取的「精確」注意力演算法，用分塊計算避免反覆讀寫巨大的注意力矩陣，加快速度並節省記憶體。",
+    "analogy": "像整理大批文件時，不把全部攤在地上，而是一疊一疊在桌上處理完就收好，省空間也省走動時間。",
+    "useCases": "訓練與推論長上下文的大型語言模型。",
+    "distinguish": "Flash Attention 計算結果和原本的注意力完全相同；「忽略影響小的注意力權重」是稀疏注意力，屬於近似方法。",
+    "trap": "Flash Attention 的效益來自調整計算與資料處理方式、減少中間結果的儲存與搬移，不是捨棄部分注意力，也不是增加注意力頭數。",
+    "sources": [
+      "Dao et al. (2022), FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness: https://arxiv.org/abs/2205.14135"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "moe",
+    "name": "專家混合模型 MoE",
+    "units": [
+      "L11401",
+      "L11402"
+    ],
+    "oneLiner": "模型內有多個「專家」子網路，每次由路由機制只啟用少數幾個專家來運算，讓模型總參數很大、單次運算量卻不高。",
+    "analogy": "像大醫院有很多科的醫師，每位病人只會被分到相關的一兩科看診，不需要全院醫師都出動。",
+    "useCases": "超大型語言模型、多語言模型、影像生成模型兼顧品質與效率。",
+    "distinguish": "稠密（Dense）模型每次都用上全部參數；稀疏 MoE 每次只用部分參數。",
+    "trap": "題目描述「模型規模大但仍兼顧運算效率、每次只用部分模型」→ 稀疏專家混合（MoE）。",
+    "sources": [
+      "Shazeer et al. (2017), Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer: https://arxiv.org/abs/1701.06538"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "clip",
+    "name": "CLIP（對比式語言-影像預訓練）",
+    "units": [
+      "L11401",
+      "L12201"
+    ],
+    "oneLiner": "OpenAI 用大量「圖片＋文字描述」配對資料，以對比學習把圖片和文字映射到同一個向量空間。",
+    "analogy": "像讓模型看了上億張附說明的照片，學會「這段文字」和「這張圖」講的是不是同一件事。",
+    "useCases": "用文字搜尋商品圖片、零樣本影像分類。",
+    "distinguish": "CLIP 用圖文配對資料；DINO 只用未標註影像。兩者都屬於自監督學習。",
+    "trap": "CLIP 衡量文字與圖片相符程度用的是向量的餘弦相似度，不是 BLEU、交叉熵或 F1。",
+    "sources": [
+      "Radford et al. (2021), Learning Transferable Visual Models From Natural Language Supervision（CLIP）: https://arxiv.org/abs/2103.00020"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "dino",
+    "name": "DINO（自監督影像模型）",
+    "units": [
+      "L11401"
+    ],
+    "oneLiner": "Meta 提出的自監督視覺模型，只用未標註的影像，透過自我蒸餾（學生模型模仿教師模型）學習影像特徵。",
+    "analogy": "像沒有老師批改，學生自己比對同一張圖不同角度的看法，慢慢學會看懂圖片。",
+    "useCases": "影像特徵學習、分割、檢索。",
+    "distinguish": "CLIP 需要圖文配對；DINO 只需要影像本身。",
+    "trap": "「CLIP 用圖文配對、DINO 用未標註影像」，題目常把兩者對調當陷阱。",
+    "sources": [
+      "Caron et al. (2021), Emerging Properties in Self-Supervised Vision Transformers（DINO）: https://arxiv.org/abs/2104.14294"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "long-context-degradation",
+    "name": "長上下文資訊遺失（Lost in the Middle）",
+    "units": [
+      "L11401",
+      "L12202"
+    ],
+    "oneLiner": "即使沒有超過上下文長度上限，上下文越長，模型擷取與利用關鍵資訊的能力可能下降，尤其容易忽略位在中間的內容。",
+    "analogy": "像一次聽完一場三小時的會議，最記得開頭和結尾，中間講的重點反而忘了。",
+    "useCases": "長時間客服對話、長文件問答的設計與測試。",
+    "distinguish": "上下文窗口是「能放多少」的硬上限；長上下文資訊遺失是「放得下但用不好」。",
+    "trap": "「沒有超過上下文上限就不會遺漏資訊」是錯的；模型在推論時也不會改變自身參數，或自動建立索引。",
+    "sources": [
+      "Liu et al. (2023), Lost in the Middle: How Language Models Use Long Contexts: https://arxiv.org/abs/2307.03172"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "gpt-oss",
+    "name": "GPT-OSS（OpenAI 開放權重模型）",
+    "units": [
+      "L11401",
+      "L12302"
+    ],
+    "oneLiner": "OpenAI 於 2025 年 8 月釋出的開放權重推理模型，有 gpt-oss-120b 與 gpt-oss-20b 兩種，採 Apache 2.0 授權，可自行下載部署。",
+    "analogy": "像餐廳公開了招牌菜的完整食譜，你可以在自家廚房照做，不必每次都去店裡點。",
+    "useCases": "企業在本地伺服器自行部署，避免敏感資料傳給第三方。",
+    "distinguish": "兩者都是專家混合（MoE）架構：120b 約 1,170 億總參數，20b 約 210 億總參數。",
+    "trap": "本地部署的主要好處是資料不必傳給第三方、可自主控制，不是「零運算成本」或「準確度比雲端高」。",
+    "sources": [
+      "OpenAI, gpt-oss-120b & gpt-oss-20b Model Card（2025-08-05）: https://cdn.openai.com/pdf/419b6906-9da6-406c-a19d-1bb078ac7637/oai_gpt-oss_model_card.pdf"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "edge-computing",
+    "name": "邊緣運算（Edge Computing）",
+    "units": [
+      "L11401",
+      "L12102"
+    ],
+    "oneLiner": "把運算放在靠近資料來源的裝置端（工廠設備、手機、閘道器）處理，而不是全部傳回雲端。",
+    "analogy": "像在每個路口設交通警察就地指揮，不用每次都打電話回總部請示。",
+    "useCases": "產線即時監控、手機離線語音翻譯、需要低延遲或網路不穩的場域。",
+    "distinguish": "雲端資源充足但需要網路；邊緣端延遲低、資料不外傳，但運算與記憶體資源有限。",
+    "trap": "系統在雲端順暢、部署到邊緣裝置變慢，最合理的解釋是邊緣裝置運算能力與資源有限；要在邊緣跑模型常需先量化或壓縮。",
+    "sources": [
+      "NIST SP 500-325, Fog Computing Conceptual Model: https://doi.org/10.6028/NIST.SP.500-325"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "diffusion-model",
+    "name": "擴散模型（Diffusion Model）",
+    "units": [
+      "L11401",
+      "L12201"
+    ],
+    "oneLiner": "訓練時把清晰影像一步步加雜訊直到變成純雜訊，再學會反向逐步去除雜訊；生成時從隨機雜訊開始一步步「洗」出清晰內容。",
+    "analogy": "像看著一張照片慢慢被雪花蓋滿，再學會把雪花一層層擦掉，最後連沒見過的照片也能「擦」出來。",
+    "useCases": "文生圖、文生影片、舊照片修復、服裝設計草圖（如 Stable Diffusion）。",
+    "distinguish": "GAN 一次生成、容易不穩定或模式崩潰；擴散模型生成較慢，但品質與穩定性通常較好；VAE 從潛在空間取樣重建。",
+    "trap": "關鍵字「先逐步加雜訊、再學習逐步去雜訊」「從隨機雜訊開始多步驟生成」→ 擴散模型；重視生成的穩定性與多樣性控制時也常選它。",
+    "sources": [
+      "Ho, Jain & Abbeel (2020), Denoising Diffusion Probabilistic Models: https://arxiv.org/abs/2006.11239"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "autoregressive",
+    "name": "自迴歸模型（Autoregressive Model）",
+    "units": [
+      "L11401",
+      "L12201"
+    ],
+    "oneLiner": "根據前面已產生的內容，一次預測下一個 Token，再把它接上去繼續預測，逐字生成文字。",
+    "analogy": "像文字接龍：每次只想「下一個字接什麼」，一路接到整句話完成。",
+    "useCases": "GPT 等對話模型、文章續寫、程式碼補全。",
+    "distinguish": "遮罩語言建模（如 BERT）是補中間的空格；自迴歸是從左到右往下寫。",
+    "trap": "AI 程式碼工具本質是「預測下一個符號」，所以不保證程式碼正確，仍需人工審查與測試。",
+    "sources": [
+      "Brown et al. (2020), Language Models are Few-Shot Learners（GPT-3）: https://arxiv.org/abs/2005.14165"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "llm",
+    "name": "大型語言模型 LLM",
+    "units": [
+      "L11401",
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "以 Transformer 為基礎、用海量文字訓練、參數規模龐大的語言模型，能理解與生成自然語言；ChatGPT、Gemini、Claude 都屬於此類。",
+    "analogy": "像讀過整座圖書館的超級文字接龍高手，能依你說的話接出合理的回答。",
+    "useCases": "對話客服、摘要、翻譯、程式碼生成、知識問答。",
+    "distinguish": "LLM 本質是依機率預測下一個 Token；要取得即時資訊或操作外部系統，需要搭配工具呼叫、RAG 或 MCP。",
+    "trap": "LLM 不保證輸出正確、無法自行查即時資料；超大型模型推論延遲高、成本高，部署時要在效能與營運成本之間權衡。",
+    "sources": [
+      "Zhao et al. (2023), A Survey of Large Language Models: https://arxiv.org/abs/2303.18223"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "pretraining",
+    "name": "預訓練（Pre-training）",
+    "units": [
+      "L11401",
+      "L12101",
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "用大量未標註資料（文字、程式碼等）讓模型先學會通用的語言與知識能力，之後再針對特定任務微調。",
+    "analogy": "像先讀完國民教育打好基礎，之後再去讀專科。",
+    "useCases": "大型語言模型的第一階段訓練；預訓練模型可透過 API 直接使用或再微調。",
+    "distinguish": "預訓練學「通用能力」；微調學「特定任務或風格」；RLHF 是對齊人類偏好。",
+    "trap": "用大量未標註語料做長期表示學習屬於預訓練，不是 RLHF；模型能輸出 Mermaid 等圖表語法，是因為預訓練時讀過大量程式碼與結構化標記語言。",
+    "sources": [
+      "Zhao et al. (2023), A Survey of Large Language Models: https://arxiv.org/abs/2303.18223"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "fine-tuning",
+    "name": "微調（Fine-tuning）",
+    "units": [
+      "L11401",
+      "L11402",
+      "L12202"
+    ],
+    "oneLiner": "在預訓練模型的基礎上，用特定資料再訓練一次，讓模型學會特定任務、語氣或格式。",
+    "analogy": "像通才員工進公司後再接受職前訓練，學會公司的說話方式和作業格式。",
+    "useCases": "有大量經審核的優質範例、要求語氣與格式高度一致、希望降低單次成本與延遲時。",
+    "distinguish": "微調改變模型權重，適合固化「風格與行為」；RAG 不改權重，適合處理「經常更新的知識」並可附上來源。",
+    "trap": "內容每天、每月更新時不該靠微調（重訓慢、成本高），應用 RAG；常見最佳組合是「微調或提示詞控制語氣＋RAG 更新知識」。微調可能造成災難性遺忘，樣本太少時也容易過擬合。",
+    "sources": [
+      "OpenAI Docs, Fine-tuning: https://platform.openai.com/docs/guides/fine-tuning",
+      "Ovadia et al. (2023), Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs: https://arxiv.org/abs/2312.05934"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "sft",
+    "name": "監督式微調 SFT",
+    "units": [
+      "L11401",
+      "L12202"
+    ],
+    "oneLiner": "用「問題＋標準答案」的配對範例微調語言模型，教它照著示範的方式回答。",
+    "analogy": "像給新人一本標準問答手冊，照著範例學怎麼回覆。",
+    "useCases": "教模型遵循指令、學習企業標準問答格式。",
+    "distinguish": "SFT 需要大量高品質的標準答案；RFT 和 RLHF 是用獎勵或偏好回饋來調整行為。",
+    "trap": "SFT 依賴大量完整標註；標註很少時，RFT 透過獎懲回饋較不依賴大量標準答案。RLHF 的核心是偏好評比與獎勵模型，直接用問答範例微調則是 SFT。",
+    "sources": [
+      "Ouyang et al. (2022), Training language models to follow instructions with human feedback: https://arxiv.org/abs/2203.02155"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "context-window",
+    "name": "上下文窗口（Context Window）",
+    "units": [
+      "L11401",
+      "L12202"
+    ],
+    "oneLiner": "模型一次能讀進與產生的最大 Token 數量上限，包含輸入與輸出。",
+    "analogy": "像一張固定大小的白板，寫滿了就放不下新內容，舊的會被擦掉。",
+    "useCases": "判斷長文件能否一次輸入、設計 RAG 與摘要策略。",
+    "distinguish": "上下文窗口是「放得下多少」；長上下文資訊遺失是「放得下但用不好」；溫度、最大 Token 數是另外的生成設定。",
+    "trap": "超過上下文長度的內容無法同時處理，資料量大時要用 RAG 檢索相關片段；工具呼叫不會增加模型的上下文上限。",
+    "sources": [
+      "Vaswani et al. (2017), Attention Is All You Need: https://arxiv.org/abs/1706.03762",
+      "Zhao et al. (2023), A Survey of Large Language Models: https://arxiv.org/abs/2303.18223"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "incremental-indexing",
+    "name": "增量索引更新（Incremental Indexing）",
+    "units": [
+      "L11402"
+    ],
+    "oneLiner": "RAG 知識庫有文件新增或修改時，只更新有變動的部分索引，不必整個重建。",
+    "analogy": "像圖書館進了幾本新書，只把新書加進目錄，而不是把整個目錄重印。",
+    "useCases": "法規、內規、商品資訊頻繁更新的 RAG 系統。",
+    "distinguish": "增量更新是針對「檢索索引」；增量微調是改模型權重，兩者不同。",
+    "trap": "RAG 每次更新都要全部重建索引、導致服務中斷或引用舊資料時，正解是增量或分段更新索引，而不是調整生成參數或加推論資源。",
+    "sources": [
+      "LangChain Docs, How to use the indexing API: https://python.langchain.com/docs/how_to/indexing/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "autoskill",
+    "name": "AutoSkill 框架",
+    "units": [
+      "L11402"
+    ],
+    "oneLiner": "一種讓 LLM 代理從使用者互動與經驗中，自動萃取、維護並重複使用「技能」的終身學習框架，不需要重新訓練模型。",
+    "analogy": "像資深員工把每次處理客訴的經驗整理成 SOP，下次遇到同類問題就直接套用。",
+    "useCases": "讓 AI 代理在重複任務上越用越熟練、越個人化。",
+    "distinguish": "AutoSkill 不更新模型參數，也不是 RAG 那種檢索外部知識；它是把經驗轉成可重用的技能模組。",
+    "trap": "AutoSkill 的目標是「把重複的互動經驗轉化為可重複使用的明確技能模組」。",
+    "sources": [
+      "AutoSkill: Experience-Driven Lifelong Learning via Skill Self-Evolution（2026）: https://arxiv.org/abs/2603.01145"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "automl",
+    "name": "自動化機器學習 AutoML",
+    "units": [
+      "L11402",
+      "L12101"
+    ],
+    "oneLiner": "自動完成特徵處理、演算法挑選與比較、超參數調校等建模步驟，讓非專業人員也能用自有資料建立模型。",
+    "analogy": "像全自動咖啡機：放豆子和水進去，它自己磨豆、調溫、萃取，你不必是咖啡師。",
+    "useCases": "缺乏資料科學人才、要用自家資料快速建立詐欺或洗錢偵測、情緒分類模型。",
+    "distinguish": "No-Code 平台擅長拖拉建立介面與流程；AutoML 擅長自動建立預測模型；預訓練 AI 服務是直接用別人訓練好的模型。",
+    "trap": "「缺乏 ML 人才、要用自有資料快速建模、自動特徵轉換與調參」→ AutoML；它不需要使用者熟悉 Python，產出的模型也能直接應用。",
+    "sources": [
+      "He, Zhao & Chu (2019), AutoML: A Survey of the State-of-the-Art: https://arxiv.org/abs/1908.00709",
+      "Google Cloud, AutoML: https://cloud.google.com/automl"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "hallucination",
+    "name": "幻覺（Hallucination）",
+    "units": [
+      "L11402",
+      "L12201",
+      "L12202",
+      "L12301",
+      "L12303"
+    ],
+    "oneLiner": "模型生成看似合理、但實際上錯誤或不存在的內容，例如捏造法規條號或文獻。",
+    "analogy": "像考試時不會又不想留白，就自信滿滿地寫出一個編出來的答案。",
+    "useCases": "評估法規問答、醫療摘要、工業維修建議等高風險應用的可靠性。",
+    "distinguish": "RAG 讓模型依真實文件作答，能降低幻覺；提高溫度反而會增加不實內容；附上引用來源只提高可追溯性，不保證內容正確。",
+    "trap": "上下文有矛盾資訊時，模型可能隨機採信或產生幻覺，不會自動判斷哪個正確；解決方案圖等分階段驗證可降低幻覺風險，但無法完全避免。",
+    "sources": [
+      "Ji et al. (2023), Survey of Hallucination in Natural Language Generation: https://arxiv.org/abs/2202.03629",
+      "NIST AI 600-1, Generative AI Profile（Confabulation）: https://doi.org/10.6028/NIST.AI.600-1"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rag",
+    "name": "檢索增強生成 RAG",
+    "units": [
+      "L11402",
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "先從外部知識庫（通常是向量資料庫）檢索與問題相關的內容，再交給語言模型依據這些內容生成回答。",
+    "analogy": "像開書考試：先翻到相關章節，再根據書上內容作答，而不是憑記憶亂寫。",
+    "useCases": "內部規章問答、法規查詢、需要即時更新與可追溯來源的知識助理。",
+    "distinguish": "RAG 補充「知識」；MCP 與工具呼叫讓模型「操作外部系統」；微調改變模型權重。RAG 仍屬於生成式 AI 應用。",
+    "trap": "資料頻繁更新、要引用來源、不想重新訓練 → RAG；它能降低幻覺與 Token 成本，但檢索到的內容若過時或錯誤，再好的提示詞也救不了，要先提升檢索品質。",
+    "sources": [
+      "Lewis et al. (2020), Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks: https://arxiv.org/abs/2005.11401",
+      "Gao et al. (2023), Retrieval-Augmented Generation for LLMs: A Survey: https://arxiv.org/abs/2312.10997"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "low-code",
+    "name": "Low-Code 低程式碼",
+    "units": [
+      "L12101",
+      "L12102"
+    ],
+    "oneLiner": "以視覺化拖拉與可重複使用的元件為主、再搭配少量程式碼來開發應用，降低門檻並加快開發。",
+    "analogy": "像用半成品組合家具，大部分照說明拼裝，少數地方自己鎖幾顆螺絲客製化。",
+    "useCases": "表單、簽核流程、儀表板、串接 AI API 的內部系統；團隊有基礎程式概念的人員時。",
+    "distinguish": "No-Code 完全不寫程式；Low-Code 可用少量程式碼客製；Vibe Coding 是用自然語言讓 AI 生成程式碼。",
+    "trap": "Low-Code 的限制：毫秒級延遲與超高吞吐量難以底層優化、企業專屬複雜演算法仍需自行寫程式；它也不會讓應用自動符合所有資安要求，仍需審查。",
+    "sources": [
+      "Microsoft Learn, What is Power Apps?（low-code）: https://learn.microsoft.com/en-us/power-apps/powerapps-overview",
+      "docs/official/評鑑內容範圍參考_11502.pdf（L12101、L12102）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "no-code",
+    "name": "No-Code 無程式碼",
+    "units": [
+      "L12101",
+      "L12102"
+    ],
+    "oneLiner": "完全不寫程式，只靠視覺化介面與拖拉元件就能建立應用或自動化流程。",
+    "analogy": "像用積木拼出想要的東西，不需要任何工具或技術。",
+    "useCases": "資訊人力少、不具開發能力的團隊快速串接通知、報表等流程；主管自行調整儀表板。",
+    "distinguish": "No-Code 門檻最低但彈性最小；Low-Code 可寫少量程式擴充。",
+    "trap": "No-Code 受限於平台供應商提供的功能範圍，難以高度客製或串接自訂 AI 模型；封閉平台還可能造成供應商鎖定。",
+    "sources": [
+      "Microsoft Learn, What is Power Apps?: https://learn.microsoft.com/en-us/power-apps/powerapps-overview",
+      "docs/official/評鑑內容範圍參考_11502.pdf（L12101、L12102）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "workflow-automation",
+    "name": "工作流程自動化工具（n8n、Zapier、Make）",
+    "units": [
+      "L12101"
+    ],
+    "oneLiner": "用視覺化方式把多個系統（AI API、檔案、通訊軟體、資料庫）串成自動執行的工作流程。",
+    "analogy": "像設定好的骨牌，推倒第一張（事件發生），後面的動作就自動一個接一個完成。",
+    "useCases": "AI 偵測到瑕疵後自動存檔、通知人員、更新庫存、產生報表。",
+    "distinguish": "n8n 可自架且能寫程式擴充，適合有一定開發人力的團隊；Zapier、Make 偏 No-Code，適合不寫程式的使用者。",
+    "trap": "要快速串接異質系統、又保留調整彈性 → 工作流程自動化工具；委外客製、套裝軟體、Excel 巨集都不夠敏捷或彈性。",
+    "sources": [
+      "n8n Docs: https://docs.n8n.io/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "router-node",
+    "name": "條件分支節點（Router／Branching）",
+    "units": [
+      "L12101"
+    ],
+    "oneLiner": "自動化流程中依條件把資料分到不同路徑，例如「意圖＝退費且金額＞1 萬」走緊急通知路線。",
+    "analogy": "像高速公路交流道，依目的地把車子分流到不同出口。",
+    "useCases": "依 AI 判定結果與金額等多重條件決定後續動作。",
+    "distinguish": "Router 負責「分流」；Aggregator 負責「合併」多來源結果；Iterator 逐筆處理；Filter 只讓符合條件的資料通過。",
+    "trap": "依多重條件決定流程走向 → 條件分支；要「等多個來源都回來再合併」則是聚合器。",
+    "sources": [
+      "n8n Docs, Switch node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch/",
+      "n8n Docs, If node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.if/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "aggregator-node",
+    "name": "聚合器節點（Aggregator）",
+    "units": [
+      "L12101"
+    ],
+    "oneLiner": "把多筆資料或多個來源的結果合併成單一輸出，再交給後續步驟。",
+    "analogy": "像會議記錄員等每個部門都報告完，再整理成一份完整報告。",
+    "useCases": "分別查詢倉儲與物流商後，合併成一則完整回覆給客戶。",
+    "distinguish": "Router 只分流，不負責合併；Iterator 是把一批資料拆成逐筆處理，方向剛好相反。",
+    "trap": "需求是「等多個來源都取得資料後，合併成一個輸出」→ 聚合器。",
+    "sources": [
+      "n8n Docs, Aggregate node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.aggregate/",
+      "n8n Docs, Merge node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.merge/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "iterator-node",
+    "name": "迭代器節點（Iterator）",
+    "units": [
+      "L12101"
+    ],
+    "oneLiner": "把一批資料（陣列）拆開，逐筆依序執行後續流程。",
+    "analogy": "像發成績單，一疊拿在手上，一張一張發給每位同學。",
+    "useCases": "對每一筆訂單、每一封信件分別執行相同處理。",
+    "distinguish": "Iterator 是「拆開逐筆處理」；Aggregator 是「合併成一筆」；Router 是「依條件分流」。",
+    "trap": "題目要「依條件決定流程」或「合併多來源結果」時，迭代器都是干擾選項。",
+    "sources": [
+      "n8n Docs, Loop Over Items（Split in Batches）node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.splitinbatches/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "filter-formatter-node",
+    "name": "篩選器（Filter）與格式化（Formatter）節點",
+    "units": [
+      "L12101"
+    ],
+    "oneLiner": "篩選器只讓符合條件的資料繼續往下，其餘停止；格式化節點負責整理與轉換資料格式。",
+    "analogy": "篩選器像門口警衛只放有邀請函的人進場；格式化像把各種寫法的日期統一成同一格式。",
+    "useCases": "只處理特定狀態的訂單、統一日期與金額格式。",
+    "distinguish": "篩選器只有「通過或停止」一條路；條件分支（Router）可以分成多條不同路徑。",
+    "trap": "需要依條件「走向不同處理路徑」是條件分支，不是篩選器或格式化。",
+    "sources": [
+      "n8n Docs, Filter node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.filter/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "webhook",
+    "name": "Webhook",
+    "units": [
+      "L12101",
+      "L12102"
+    ],
+    "oneLiner": "事件發生時，系統主動把資料推送到預先指定的網址，讓其他系統立即收到通知。",
+    "analogy": "像在餐廳留下電話，有空位時店家主動打給你，而不是你每 10 分鐘打去問。",
+    "useCases": "付款完成通知、表單送出後觸發流程、平台與 ERP 系統串接。",
+    "distinguish": "Webhook 是事件驅動的「推播」；定時重複查詢是「輪詢（Polling）」；公開看板、定期電子報都不是 Webhook。",
+    "trap": "「系統每隔 10 分鐘自動幫你查」是輪詢，不是 Webhook；平台整合能力的關鍵是豐富的 API 與 Webhook 機制、開放式架構。",
+    "sources": [
+      "GitHub Docs, About webhooks: https://docs.github.com/en/webhooks/about-webhooks",
+      "n8n Docs, Webhook node: https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rule-based-automation",
+    "name": "規則式自動化（Rule-based）與 RPA",
+    "units": [
+      "L12101",
+      "L12201",
+      "L12302"
+    ],
+    "oneLiner": "依照事先寫好的固定規則與流程自動執行任務；RPA（機器人流程自動化）是模擬人在電腦上的固定操作。",
+    "analogy": "像自動販賣機：投幣、按鈕、掉出飲料，流程永遠一樣，不會自己變通。",
+    "useCases": "格式固定、步驟明確、很少變動的重複作業。",
+    "distinguish": "AI Agent 能依目標自主規劃、動態選工具與調整；規則式系統只能照預設流程走；規則式分流依固定條件派送，模型路由則讓模型判斷問題特性。",
+    "trap": "題目問 AI Agent 與傳統自動化的差異，關鍵是「能依目標動態決策並調整策略」；需要理解非結構化內容時，規則式也不是最佳解。",
+    "sources": [
+      "Microsoft Learn, Introduction to desktop flows（RPA）: https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "vibe-coding",
+    "name": "Vibe Coding",
+    "units": [
+      "L12101",
+      "L12202",
+      "L12303"
+    ],
+    "oneLiner": "用自然語言描述需求，讓 AI 生成並修改程式碼，再透過多輪對話逐步調整功能；由 Andrej Karpathy 於 2025 年 2 月提出。",
+    "analogy": "像跟一位工程師口述「我想要一個報名網站」，看成果再說「這裡改一下」，反覆修正到滿意。",
+    "useCases": "快速做出原型（Prototype）、MVP、非技術人員建立簡單工具。",
+    "distinguish": "Prompt Engineering 著重設計與優化提示詞；Low-Code 用平台元件加少量程式碼；Agentic Coding 是 AI 代理直接在開發環境執行多步驟任務。",
+    "trap": "Vibe Coding 彈性高，但品質高度依賴需求描述是否精準；成果要靠反覆互動與驗證，上線前仍需程式碼審查、重構與安全測試。",
+    "sources": [
+      "Collins Dictionary, Word of the Year 2025: vibe coding: https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "agentic-coding",
+    "name": "Agentic Coding（如 Claude Code）",
+    "units": [
+      "L12101",
+      "L12201"
+    ],
+    "oneLiner": "AI 代理直接在開發環境中讀寫專案檔案、執行終端機指令（測試、建置），並協助完成修改、測試到版本提交的多步驟開發流程。",
+    "analogy": "不只是在旁邊提建議的顧問，而是能自己動手改檔案、跑測試的助理工程師。",
+    "useCases": "跨檔案修改、修正錯誤、撰寫並執行測試。",
+    "distinguish": "一般程式設計助手主要提供補全與建議；Agentic Coding 能自主執行多步驟操作，因此更需要規劃人工審核機制。",
+    "trap": "Agentic Coding 工具的核心能力是能直接讀寫檔案、執行指令並完成多步驟流程，而不是只提供建議、等人手動套用。",
+    "sources": [
+      "Anthropic Docs, Claude Code overview: https://docs.anthropic.com/en/docs/claude-code/overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "prompt-engineering",
+    "name": "提示工程（Prompt Engineering）",
+    "units": [
+      "L12101",
+      "L12202"
+    ],
+    "oneLiner": "設計與優化給模型的提示詞，包括明確的任務、格式、角色、範例與限制，讓輸出更穩定、更符合需求。",
+    "analogy": "像給新同事交代工作：講清楚要做什麼、要什麼格式、注意什麼，成果就不容易出錯。",
+    "useCases": "控制回覆風格、指定文件格式、引導推理步驟。",
+    "distinguish": "提示工程不改模型權重；微調會改權重；Vibe Coding 是用自然語言讓 AI 寫程式。",
+    "trap": "單一提示詞塞入太多不同層級、互相競爭的指令，模型會漏掉部分要求，應拆解任務或分層設計；要 AI 寫好文件，應提供要點並指定格式與術語，而不是什麼都不給。",
+    "sources": [
+      "OpenAI Docs, Prompt engineering: https://platform.openai.com/docs/guides/prompt-engineering",
+      "Anthropic Docs, Prompt engineering overview: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mlops",
+    "name": "MLOps",
+    "units": [
+      "L12102",
+      "L12303"
+    ],
+    "oneLiner": "把 DevOps 的概念用在機器學習：自動化模型的訓練、部署、監控與更新，讓模型能穩定運作。",
+    "analogy": "像工廠的生產線管理，不只做出產品，還要持續品管、維修和改版。",
+    "useCases": "模型上線後監控資料漂移、自動重新訓練、版本管理。",
+    "distinguish": "No Code 平台主要解決「降低技術門檻、促進跨部門協作」，不負責大量資料標註或基礎設施擴展。",
+    "trap": "模型上線後效能逐漸下降，是 MLOps 要持續監控的資料漂移問題；No Code 在 MLOps 中最能解決的是用可視化介面降低門檻。",
+    "sources": [
+      "Google Cloud, MLOps: Continuous delivery and automation pipelines in ML: https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "citizen-developer",
+    "name": "公民開發者與 AI 民主化",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "讓不具程式背景的業務人員，也能透過 No-Code／Low-Code 工具自行開發應用或 AI 功能。",
+    "analogy": "像傻瓜相機讓一般人也能拍出好照片，不必是專業攝影師。",
+    "useCases": "各部門自行建立表單、流程與分析應用。",
+    "distinguish": "AI 民主化是「讓更多人能用 AI」；但開放後仍需要治理，否則會出現影子 IT。",
+    "trap": "各部門自行開發造成重複與混亂時，正解是建立治理規範與共用標準，而不是全面禁止或停用工具。",
+    "sources": [
+      "Microsoft Learn, What is Power Apps?: https://learn.microsoft.com/en-us/power-apps/powerapps-overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "automated-testing",
+    "name": "自動化測試與服務虛擬化（Mock）",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "用可重複執行的測試腳本自動驗證系統；服務虛擬化（Mock）則用模擬的外部服務取代真實第三方系統，方便隔離測試。",
+    "analogy": "像飛行模擬器：不必真的起飛，也能反覆練習各種狀況。",
+    "useCases": "Low-Code 系統整合財務、庫存、第三方物流等外部服務時的可靠性與可測試性。",
+    "distinguish": "平台即時預覽只能檢查表面流程；上線後再靠使用者回饋修正風險太高。",
+    "trap": "跨部門、跨外部服務的系統，正解是建立可重複執行的自動化測試，並用 API 或服務虛擬化做模組化驗證。",
+    "sources": [
+      "Martin Fowler, Test Double: https://martinfowler.com/bliki/TestDouble.html"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rbac",
+    "name": "角色權限控管（RBAC）與稽核日誌",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "依使用者的角色給予對應的存取權限，並記錄誰在何時做了什麼操作，方便稽核與合規。",
+    "analogy": "像公司門禁卡，不同職位只能刷開不同樓層，進出紀錄都會留存。",
+    "useCases": "企業 No-Code／Low-Code 平台的資料權限管理與合規稽核。",
+    "distinguish": "RBAC 管「誰能做什麼」；資料最小化管「給多少資料」；去識別化管「資料能否識別個人」。",
+    "trap": "企業級 No-Code／Low-Code 平台通常內建角色權限與存取控管，反而有助於落實治理，而不是讓治理變得更難。",
+    "sources": [
+      "NIST CSRC, Role Based Access Control: https://csrc.nist.gov/projects/role-based-access-control"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "shadow-it",
+    "name": "影子 IT（Shadow IT）",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "各部門未經資訊部門審核，自行建置或使用的系統與工具，容易造成重複開發、資料不一致與資安風險。",
+    "analogy": "像每個部門各自私藏一份 Excel 帳本，數字對不起來，也沒人知道誰改過。",
+    "useCases": "No-Code／Low-Code 開放後，各部門應用數量暴增時的治理問題。",
+    "distinguish": "問題根源是「缺乏統一的開發與上線管理機制」，不是平台自主性太高。",
+    "trap": "出現大量重複系統、欄位定義不一致、未經審核即上線時，根本解是建立治理規範、上線審核與共用標準，而不是全面禁止部門開發。",
+    "sources": [
+      "Microsoft Learn, Discover and manage shadow IT: https://learn.microsoft.com/en-us/defender-cloud-apps/tutorial-shadow-it"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "vendor-lock-in",
+    "name": "供應商鎖定（Vendor Lock-in）",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "過度依賴某一家平台或供應商，資料與功能難以轉移，未來想換系統時代價極高。",
+    "analogy": "像手機只能用原廠專用的充電線，想換別牌手機，所有配件都得重買。",
+    "useCases": "評估封閉式 No-Code 平台、雲端服務的長期風險。",
+    "distinguish": "專有格式、匯出功能有限、沒有標準 API 是鎖定的警訊；多雲架構是降低單一供應商依賴的一種作法。",
+    "trap": "封閉平台長期最可能的風險是「更換系統時資料與功能難以轉移」，而不是效能逐漸下降或員工得學寫程式。",
+    "sources": [
+      "NIST SP 800-146, Cloud Computing Synopsis and Recommendations: https://doi.org/10.6028/NIST.SP.800-146"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "multi-cloud",
+    "name": "多雲架構（Multi-Cloud）",
+    "units": [
+      "L12102"
+    ],
+    "oneLiner": "同時使用多家雲端服務供應商，部署不同服務與資料，以滿足資料落地法規或降低對單一供應商的依賴。",
+    "analogy": "像把存款分散在幾家銀行，不會因為一家出問題就全部卡住。",
+    "useCases": "歐盟客戶要求資料存放在歐洲資料中心、避免單一雲端供應商依賴。",
+    "distinguish": "多雲會影響平台的部署位置、資料落地與整合方式，不只是基礎設施的事。",
+    "trap": "導入 No-Code／Low-Code 平台前，要確認是否支援企業的多雲部署需求並符合資安與法規，而不是只比較開發效率，也不必因此全面改回傳統開發。",
+    "sources": [
+      "Google Cloud, What is multicloud?: https://cloud.google.com/learn/what-is-multicloud"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "cosine-similarity",
+    "name": "餘弦相似度（Cosine Similarity）",
+    "units": [
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "計算兩個向量方向有多接近的指標，常用來比較文字、圖片轉成向量後的語意相似程度。",
+    "analogy": "像比較兩支箭指的方向，指向越一致就越相似，和箭的長短無關。",
+    "useCases": "CLIP 圖文比對、RAG 語意檢索、推薦相似內容。",
+    "distinguish": "BLEU 衡量文字詞彙重疊；交叉熵是訓練用的損失函數；F1 是分類評估指標。",
+    "trap": "CLIP 衡量文字描述與圖片相符程度，用的是向量空間中的餘弦相似度。",
+    "sources": [
+      "Radford et al. (2021), CLIP: https://arxiv.org/abs/2103.00020",
+      "Google ML Crash Course, Embeddings: https://developers.google.com/machine-learning/crash-course/embeddings"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "encoder-decoder",
+    "name": "Encoder–Decoder vs Decoder-only",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "Encoder–Decoder 先用編碼器理解輸入、再由解碼器逐字生成輸出；Decoder-only 只用單一解碼器，把輸入當前文直接接著生成。",
+    "analogy": "Encoder–Decoder 像口譯員先聽完整句再翻譯；Decoder-only 像接龍，看著前文直接往下說。",
+    "useCases": "Encoder–Decoder：翻譯、摘要（如 T5）；Decoder-only：對話、續寫（如 GPT）。",
+    "distinguish": "兩種架構都能做對話或翻譯，不是只限某種任務；Decoder-only 也不需要依賴外部知識檢索。",
+    "trap": "解碼器是根據編碼器的語意表示，加上先前已生成的內容「逐詞」產生回覆，不是一次輸出整句，也不是先產生再交給編碼器修正。",
+    "sources": [
+      "Vaswani et al. (2017), Attention Is All You Need: https://arxiv.org/abs/1706.03762",
+      "Raffel et al. (2019), T5: https://arxiv.org/abs/1910.10683"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "masked-lm",
+    "name": "遮罩語言建模（Masked Language Modeling）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "訓練時把句子中部分詞遮住，讓模型根據前後文猜出被遮的詞（如 BERT），擅長理解語意。",
+    "analogy": "像做克漏字測驗，看前後文猜空格裡該填什麼。",
+    "useCases": "文字分類、語意理解、命名實體辨識的預訓練。",
+    "distinguish": "遮罩語言建模是「補空格」；生成式（自迴歸）語言建模是「往下續寫」。",
+    "trap": "要做「輸入開頭、自動續寫後文」的功能，選生成式語言建模，不是遮罩語言建模。",
+    "sources": [
+      "Devlin et al. (2018), BERT: https://arxiv.org/abs/1810.04805"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ai-coding-assistant",
+    "name": "AI 程式設計助手（GitHub Copilot 等）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "在開發者撰寫程式時，依程式碼上下文與註解即時建議整行或整個函式的 AI 工具；GitHub Copilot 最初由 OpenAI Codex 模型提供技術支援。",
+    "analogy": "像打字時的智慧輸入法，只是它建議的是一整段程式碼。",
+    "useCases": "程式碼補全、重構、撰寫測試與註解。",
+    "distinguish": "它基於大型語言模型「預測下一個 Token」，不是搜尋程式碼資料庫，也不是靜態分析；現在的 Copilot 可選用多家廠商的模型。",
+    "trap": "AI 生成的程式碼不保證正確，工具不會先執行驗證，仍需開發者審查與測試；遇到 API 版本過時，可用 MCP 讓模型即時讀取最新官方文件。",
+    "sources": [
+      "GitHub Blog, Introducing GitHub Copilot（2021）: https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/",
+      "GitHub Docs, Supported AI models in GitHub Copilot: https://docs.github.com/en/copilot/reference/ai-models/supported-models"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "ai-agent",
+    "name": "AI Agent（AI 代理）／Agentic AI",
+    "units": [
+      "L12201",
+      "L12301"
+    ],
+    "oneLiner": "能依任務目標自主規劃步驟、呼叫外部工具、觀察結果並調整策略，完成多步驟任務的 AI 系統。",
+    "analogy": "像一位能自己安排行程的助理：你只說「下週出差台北」，他會查班機、訂飯店、排行程，遇到客滿就改訂別家。",
+    "useCases": "處理訂單異常、跨部門簽核、自動排程、客服退款處理。",
+    "distinguish": "傳統自動化只照固定規則；一般生成式 AI 只產生內容；AI Agent 會「感知、規劃、行動並調整」。",
+    "trap": "「依提示生成多樣化文本」只是 LLM 的基本能力，不是 Agent 特有特性；Agent 也不能完全取代人工審核，高風險或超出權限時仍需人在迴圈內。",
+    "sources": [
+      "Anthropic Engineering, Building effective agents: https://www.anthropic.com/engineering/building-effective-agents",
+      "Wang et al. (2023), A Survey on LLM-based Autonomous Agents: https://arxiv.org/abs/2308.11432"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mcp",
+    "name": "MCP 模型上下文協定（Model Context Protocol）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "Anthropic 於 2024 年 11 月提出的開放標準，讓 AI 應用以統一方式連接外部工具與資料來源；架構為 Host（AI 應用）→ Client → Server。",
+    "analogy": "像 AI 的「萬用插座」，各種工具只要做成標準插頭（MCP Server），AI 就能直接插上使用。",
+    "useCases": "讓 AI 查詢 GitHub、讀取最新 API 文件、存取訂單與保單資料庫。",
+    "distinguish": "RAG 著重「補充知識」（檢索文件）；MCP 著重「與外部工具及系統互動」的標準化介面。MCP Server 提供工具（Tools）、資源（Resources）與提示範本（Prompts），本身不是語言模型。題目也譯作「模型內容協定」。",
+    "trap": "運作順序是 AI Host → MCP Client → MCP Server → 查詢資料 → 結果回傳 Host；MCP 不需要依賴向量資料庫，也不會取代資料庫。",
+    "sources": [
+      "Model Context Protocol, Architecture overview: https://modelcontextprotocol.io/docs/learn/architecture",
+      "Anthropic, Introducing the Model Context Protocol: https://www.anthropic.com/news/model-context-protocol"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "a2a",
+    "name": "A2A（Agent-to-Agent）協定",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "Google 於 2025 年提出的開放協定，讓不同的 AI 代理之間能溝通與分工；由 Client Agent 發起任務，Remote Agent 執行並回傳結果。",
+    "analogy": "像總機接到客戶需求後，轉交給最適合的專業部門處理，部門做完再回報。",
+    "useCases": "跨廠商、跨系統的多代理協作。",
+    "distinguish": "MCP 是「代理與工具／資料」之間的協定；A2A 是「代理與代理」之間的協定。代理可透過「Agent Card」公開自己的能力。",
+    "trap": "A2A 中是 Client Agent 發起任務、Remote Agent 執行回傳，不是 Remote 主動派工；OpenAI 的 AgentKit 是開發工具包，不是 A2A 通訊協定。",
+    "sources": [
+      "Google Developers Blog, Announcing the Agent2Agent Protocol（A2A）: https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/",
+      "A2A Protocol Specification: https://a2a-protocol.org/latest/specification/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "solution-graph",
+    "name": "解決方案圖（Solution Graph）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "把一次任務拆解成子任務節點與依賴關係的圖狀結構（通常為有向無環圖 DAG），作為 AI 代理規劃與逐步執行的參考框架。",
+    "analogy": "像出發前畫好的行程路線圖，標出每一站和先後順序，但途中仍可依狀況調整。",
+    "useCases": "跨部門簽核、退款處理等需要分階段規劃與驗證的複雜任務。",
+    "distinguish": "解決方案圖只描述「本次任務」的步驟安排，任務結束即完成使命；知識圖譜長期保存可跨任務共用的知識。LLM 可以協助建構解決方案圖。",
+    "trap": "它是輔助推理的框架，不會取代 LLM 推理，也不會自動保證答案正確；分階段規劃與驗證能降低幻覺風險。尋找路徑時可用廣度優先、深度優先或最佳優先等搜尋。",
+    "sources": [
+      "Graphs Meet AI Agents: Taxonomy, Progress, and Future Opportunities（2025，任務依賴圖相關研究）: https://arxiv.org/abs/2506.18019",
+      "src/data/questions.json（官方公告試題 114042049、115022040、115032010 的描述）"
+    ],
+    "status": "待確認"
+  },
+  {
+    "id": "knowledge-graph",
+    "name": "知識圖譜（Knowledge Graph）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "用「實體」與「關係」組成的圖狀資料結構，長期保存結構化知識，例如「台北 —位於→ 台灣」。",
+    "analogy": "像一張人物關係圖，誰認識誰、誰屬於哪個公司，一目了然。",
+    "useCases": "搜尋引擎、問答系統、推薦系統、供多個任務查詢的企業知識。",
+    "distinguish": "知識圖譜保存可跨任務共用的知識；解決方案圖只描述單次任務的步驟安排，兩者都是圖但不能互相取代。",
+    "trap": "「長期保存、供不同任務共用的結構化知識」→ 知識圖譜；「依每次任務動態建立的步驟依賴」→ 解決方案圖。",
+    "sources": [
+      "Hogan et al. (2021), Knowledge Graphs, ACM Computing Surveys: https://arxiv.org/abs/2003.02320"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "graph-search",
+    "name": "圖搜尋演算法（BFS、DFS、最佳優先）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "在圖狀結構中找路徑的方法：廣度優先（BFS）一層層往外找；深度優先（DFS）一條路走到底；最佳優先依評估分數先走最有希望的路。",
+    "analogy": "BFS 像在迷宮每個岔路口都先探一小步；DFS 像先沿一條路走到盡頭再回頭；最佳優先像每次都往看起來最靠近出口的方向走。",
+    "useCases": "AI 代理在解決方案圖上尋找最佳解題路徑、路線規劃。",
+    "distinguish": "隨機嘗試、只走一條預設路徑、或完全靠 LLM 一次推斷完整路徑，都不是有系統的搜尋策略。",
+    "trap": "Agentic AI 在解決方案圖上找最佳路徑，通常使用廣度優先、深度優先或最佳優先等搜尋演算法。",
+    "sources": [
+      "Russell & Norvig, Artificial Intelligence: A Modern Approach（4th ed.）, Ch.3 Solving Problems by Searching"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "task-planner",
+    "name": "任務規劃器（Task Planner）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "AI Agent 架構中負責把高層目標拆解成具體子任務、決定執行順序的核心元件。",
+    "analogy": "像專案經理接到「下週上線」的目標，先拆成設計、開發、測試等工作再排進度。",
+    "useCases": "跨縣市配送排程、跨部門任務協調。",
+    "distinguish": "任務規劃器負責「拆解與決策」；工具執行器負責「實際呼叫工具」；API 閘道器負責流量管理。",
+    "trap": "Agent 回答 FAQ 常出錯、又無法修改訂單，缺的是向量檢索（知識）與 API 呼叫（行動能力），不是任務規劃器。",
+    "sources": [
+      "Wang et al. (2023), A Survey on LLM-based Autonomous Agents（Planning module）: https://arxiv.org/abs/2308.11432"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "function-calling",
+    "name": "函數呼叫／工具呼叫（Function Calling／Tool Calling）",
+    "units": [
+      "L12201",
+      "L12202",
+      "L12301"
+    ],
+    "oneLiner": "讓 LLM 把自然語言需求轉成結構化的參數（如 JSON），去呼叫外部 API 或工具，取得即時資料或執行動作。",
+    "analogy": "像客服聽懂你要「訂兩杯珍奶送公司」，把它填成訂單表格送進系統。",
+    "useCases": "語音訂餐下單、查詢即時股價與天氣、修改訂單、精確計算。",
+    "distinguish": "RAG 是檢索文件補充知識；函數呼叫是讓模型「採取行動」或取得即時資料；MCP 是把工具連接標準化的協定。",
+    "trap": "工具呼叫是為了彌補 LLM 無法取得即時資訊、無法精確運算、無法操作外部系統的限制；它不會增加上下文長度，也不會更新模型權重。",
+    "sources": [
+      "OpenAI Docs, Function calling: https://platform.openai.com/docs/guides/function-calling",
+      "Schick et al. (2023), Toolformer: https://arxiv.org/abs/2302.04761"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "multi-agent",
+    "name": "多代理系統（Multi-Agent）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "由多個各有分工的 AI 代理協同完成任務，例如一個負責分析、一個負責評估、一個負責執行。",
+    "analogy": "像一個專案團隊，有人做研究、有人做審核、有人負責執行，彼此要隨時同步。",
+    "useCases": "市場分析＋風險評估＋交易執行、跨部門專案協作。",
+    "distinguish": "多代理系統需要清楚的角色分工、啟動條件與共享狀態，通常由協調者（Orchestrator）統一調度。",
+    "trap": "角色與啟動條件沒定義清楚 → 多個代理重複做同樣的事；代理之間資訊不同步 → 決策不一致，根本原因是缺乏上下文同步或共享記憶，不是上下文視窗大小不同。",
+    "sources": [
+      "Guo et al. (2024), Large Language Model based Multi-Agents: A Survey of Progress and Challenges: https://arxiv.org/abs/2402.01680"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "shared-memory",
+    "name": "共享記憶與上下文同步",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "多個 AI 代理共用的資訊狀態，讓每個代理都能知道其他代理已完成的任務與最新判斷。",
+    "analogy": "像團隊共用的白板，誰更新了進度大家都看得到，不會各做各的。",
+    "useCases": "多代理系統的狀態管理與協作。",
+    "distinguish": "共享記憶解決「代理之間資訊不一致」；上下文視窗是單一模型一次能讀多少內容。",
+    "trap": "代理重複詢問、互相矛盾、依舊資訊做決策 → 缺乏共享記憶或上下文同步機制；伺服器記憶體、提示詞模板或模型廠商不同都不是根本原因。",
+    "sources": [
+      "Guo et al. (2024), Large Language Model based Multi-Agents: A Survey of Progress and Challenges: https://arxiv.org/abs/2402.01680"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "context-aware-agent",
+    "name": "情境感知代理（Context-aware Agent）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "能利用對話歷史、任務狀態與環境資訊，動態調整行為與決策的 AI 代理。",
+    "analogy": "像老練的店員記得你上次買過什麼、今天心情如何，推薦方式會跟著調整。",
+    "useCases": "長期互動的客服、個人助理。",
+    "distinguish": "情境感知看的是「記憶與狀態」；多模態指能處理多種資料型態，兩者不同。",
+    "trap": "情境感知代理的核心是利用對話歷史與任務狀態調整決策，不是即時重新訓練模型、也不是只看當前指令。",
+    "sources": [
+      "Russell & Norvig, Artificial Intelligence: A Modern Approach（4th ed.）, Ch.2 Intelligent Agents"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "titans-mac",
+    "name": "Titans 架構 Memory as Context（MAC）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "Google 研究團隊提出的 Titans 架構中的一種記憶設計：把長期記憶整理後，和目前的輸入一起當作上下文提供給模型參考。",
+    "analogy": "像開會前先把過去的會議重點整理成一頁摘要，和今天的議程一起發給大家。",
+    "useCases": "需要長期記住使用者偏好與歷史需求的 AI 助理。",
+    "distinguish": "Titans 另有把記憶當作閘控（MAG）或作為一層（MAL）的設計；MAC 是把記憶「當作上下文」一起輸入。",
+    "trap": "MAC 的做法是「把記憶整理成重點，與目前輸入一起提供給模型」，不是把記憶整合進每一層，也不是單純增加文字長度。",
+    "sources": [
+      "Behrouz, Zhong & Mirrokni (2024), Titans: Learning to Memorize at Test Time: https://arxiv.org/abs/2501.00663"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "gpt-realtime",
+    "name": "GPT-Realtime（即時語音模型）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "OpenAI 於 2025 年 8 月推出的語音對語音（speech-to-speech）模型，透過 Realtime API 以單一模型直接處理與產生語音，延遲低、語氣自然。",
+    "analogy": "像直接用電話跟人對談，而不是先把話打成字、再請人念回答給你聽。",
+    "useCases": "即時語音客服、互動式語音 AI 代理。",
+    "distinguish": "傳統語音系統串接語音轉文字、LLM、文字轉語音三段，延遲較高；GPT-Realtime 由單一模型完成。",
+    "trap": "GPT-Realtime 最適合即時語音互動；長時間批次報表、重視高一致性的法規摘要都不是它的主場。",
+    "sources": [
+      "OpenAI Developers, Developer notes on the Realtime API: https://developers.openai.com/blog/realtime-api"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "agentkit",
+    "name": "AgentKit（OpenAI）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "OpenAI 於 2025 年 10 月推出的工具包，協助開發者建構、部署與優化 AI 代理，包含視覺化的 Agent Builder、ChatKit、評估工具與連接器管理。",
+    "analogy": "像一套組裝 AI 助理的工具箱，零件和說明書都備齊了。",
+    "useCases": "建構代理、整合工具、設計任務流程。",
+    "distinguish": "AgentKit 是開發工具包；A2A 是代理間通訊協定；它也不是強化學習的模擬環境或預訓練機制。",
+    "trap": "AgentKit 的主要用途是支援代理的建構、工具整合與任務流程開發。",
+    "sources": [
+      "TechCrunch（2025-10-06）, OpenAI launches AgentKit to help developers build and ship AI agents: https://techcrunch.com/2025/10/06/openai-launches-agentkit-to-help-developers-build-and-ship-ai-agents"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "agent-skill",
+    "name": "Skill（AI 能力模組）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "把需要 AI 語意理解與專業判斷的工作，封裝成可重複呼叫的能力模組（例如包含指示、腳本與參考資料的資料夾）。",
+    "analogy": "像替助理準備好的「工作錦囊」，遇到核對理賠文件這類任務就打開對應的錦囊照做。",
+    "useCases": "理賠文件核對、報告撰寫等重複出現、需要專業判斷的任務。",
+    "distinguish": "MCP 負責「統一存取外部工具與資料」；Skill 負責「封裝可重複使用的 AI 能力」，兩者分工不同、不能互相取代。",
+    "trap": "Skill 可以封裝需要推理與語意理解的工作，不是只能放固定規則；使用 MCP 或 Skill 都不需要重新訓練模型。",
+    "sources": [
+      "Anthropic Engineering, Equipping agents for the real world with Agent Skills: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "image-gen-tools",
+    "name": "文生圖工具（Midjourney、DALL·E、Stable Diffusion）",
+    "units": [
+      "L12201"
+    ],
+    "oneLiner": "依文字描述生成或編輯影像的生成式 AI 工具，可移除物件並修補背景、調整光影風格、替換元素。",
+    "analogy": "像一位聽得懂口語指令的修圖師兼插畫家。",
+    "useCases": "商品圖片處理、模擬瑕疵影像擴充訓練資料、設計草圖。",
+    "distinguish": "Midjourney、Stable Diffusion 專門生成影像；ChatGPT、Claude 等語言模型擅長撰寫文件；Perplexity 是 AI 搜尋工具。",
+    "trap": "影像生成工具不負責分析銷售數據或產生報表；要同時生成影像與撰寫文件，應搭配影像工具與語言模型，而不是全用同一種工具。",
+    "sources": [
+      "Stability AI: https://stability.ai/",
+      "Ho, Jain & Abbeel (2020), Denoising Diffusion Probabilistic Models: https://arxiv.org/abs/2006.11239"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "knowledge-distillation",
+    "name": "知識蒸餾（Knowledge Distillation）",
+    "units": [
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "讓小型的「學生模型」學習大型「教師模型」的輸出行為，以較低成本保留接近的效果。",
+    "analogy": "像資深師傅把多年經驗濃縮成重點，教給學徒，學徒不用花一樣久就能做得不錯。",
+    "useCases": "RAG 系統推論成本太高時，用小模型降低延遲與成本；在邊緣裝置部署。",
+    "distinguish": "知識蒸餾是「訓練一個小模型」；LoRA 是「用少量參數微調大模型」；剪枝、量化是直接壓縮原模型。",
+    "trap": "知識蒸餾的效益是用小模型學大模型行為、降低推論成本並維持品質；它可用於文字任務，也不限特定 API 廠商。",
+    "sources": [
+      "Hinton, Vinyals & Dean (2015), Distilling the Knowledge in a Neural Network: https://arxiv.org/abs/1503.02531"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "vector-database",
+    "name": "向量資料庫與嵌入（Embedding）",
+    "units": [
+      "L12201",
+      "L12202"
+    ],
+    "oneLiner": "嵌入是把文字等資料轉成代表語意的數字向量；向量資料庫儲存這些向量，能找出語意最相近的內容。",
+    "analogy": "像把每篇文章放到一張「意思地圖」上，意思相近的文章會靠在一起，查「請假」也能找到「休假申請規定」。",
+    "useCases": "RAG 檢索、語意搜尋、推薦相似內容。",
+    "distinguish": "關鍵字搜尋或全文檢索只比對字面；向量檢索比對語意。",
+    "trap": "能找出「字面不同但語意相近」的文件，靠的是向量資料庫的語意相似度搜尋；Agent 回答 FAQ 常出錯，通常是缺少向量檢索。",
+    "sources": [
+      "Google ML Crash Course, Embeddings: https://developers.google.com/machine-learning/crash-course/embeddings",
+      "Gao et al. (2023), Retrieval-Augmented Generation for LLMs: A Survey: https://arxiv.org/abs/2312.10997"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "system-prompt",
+    "name": "系統提示詞（System Prompt）",
+    "units": [
+      "L12202",
+      "L12303"
+    ],
+    "oneLiner": "在對話開始前給模型的背景指示，設定它的角色、語氣、回答範圍與規則。",
+    "analogy": "像上工前主管交代：「你是客服，只回答訂單問題，語氣要客氣。」",
+    "useCases": "設定客服人設與品牌語氣、限定回答範圍。",
+    "distinguish": "系統提示詞由開發者設定；使用者輸入的內容若試圖覆蓋它，就是提示詞注入或越獄。",
+    "trap": "系統提示詞適合控制風格與範圍，但單靠它防不住攻擊；安全防護要搭配輸入驗證、輸出監控與最小權限等多層機制。",
+    "sources": [
+      "Anthropic Docs, Giving Claude a role with a system prompt: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts",
+      "OWASP Top 10 for LLM Applications, LLM01 Prompt Injection: https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "guardrails",
+    "name": "護欄（Guardrails）",
+    "units": [
+      "L12202",
+      "L12303"
+    ],
+    "oneLiner": "在模型的輸入端與輸出端加上檢查與攔截機制，過濾有害輸入、阻擋不當或不合規的輸出。",
+    "analogy": "像山路邊的護欄，不管駕駛怎麼開，至少不會衝出懸崖。",
+    "useCases": "開源模型商用、提示鏈中間步驟驗證、工業維修指引的安全檢查。",
+    "distinguish": "護欄檢查的是輸入與輸出；它不會重建或追蹤模型內部的完整推理過程。",
+    "trap": "多步驟流程中，誤差會一路累積放大，根本解是在每個中間步驟加驗證與護欄，而不只是調低溫度；完全信任模型或每筆都人工審核都不切實際。",
+    "sources": [
+      "NIST AI 600-1, AI RMF: Generative AI Profile: https://doi.org/10.6028/NIST.AI.600-1"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "lora-peft",
+    "name": "LoRA 低秩適配與 PEFT",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "PEFT（參數高效微調）是只更新少量參數的微調方法；LoRA 是代表技術，凍結原模型，只在旁邊加上小型的低秩矩陣來訓練。",
+    "analogy": "像不重新裝潢整間房子，只換幾件家具和窗簾，就讓房間換了風格。",
+    "useCases": "GPU 運算與記憶體受限時，微調大型語言模型學習企業專屬知識或風格。",
+    "distinguish": "LoRA 是微調方法；知識蒸餾是訓練另一個小模型；提示工程不改變任何權重。",
+    "trap": "GPU 與記憶體嚴重受限、又要維持效能並大幅減少需更新的參數 → 低秩適配（LoRA）。",
+    "sources": [
+      "Hu et al. (2021), LoRA: Low-Rank Adaptation of Large Language Models: https://arxiv.org/abs/2106.09685"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "rft",
+    "name": "強化微調 RFT",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "用評分器或獎勵訊號評估模型輸出的好壞，以強化學習方式調整模型的回應策略與行為偏好。",
+    "analogy": "像教練不直接示範標準動作，而是每次看你表現打分數，你慢慢摸索出得高分的做法。",
+    "useCases": "讓模型遵守服務優先順序與品牌語氣、在標註資料有限的專業任務上提升表現。",
+    "distinguish": "SFT 教模型「照範例做」；RFT 用 reward 讓模型學「怎樣做比較好」。",
+    "trap": "RFT 的目的是用 reward 訊號調整回應策略與行為偏好，不是擴充知識或加快推論；它對大量標註資料的依賴較低，但不會自動產生正確標註，也不能完全取代 SFT。",
+    "sources": [
+      "OpenAI Docs, Reinforcement fine-tuning: https://platform.openai.com/docs/guides/reinforcement-fine-tuning"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "token",
+    "name": "Token 與斷詞（Tokenization）",
+    "units": [
+      "L12202",
+      "L12301"
+    ],
+    "oneLiner": "Token 是模型處理文字的基本單位（字、子詞或符號）；斷詞是把文字切成 Token 的過程。Token 數量決定輸入輸出長度與 API 費用。",
+    "analogy": "像把一句話切成一塊塊積木，模型一次讀一塊、也按塊數計費。",
+    "useCases": "估算 API 成本、判斷是否超過上下文上限。",
+    "distinguish": "Token 不是整段文字的語意向量（那是嵌入）；現代模型多用子詞斷詞（如 BPE）。",
+    "trap": "Token 數量同時影響計費與能處理的長度；遇到沒看過的罕見專有名詞，模型會拆成較小的已知片段處理，不會忽略或中斷。",
+    "sources": [
+      "Sennrich, Haddow & Birch (2015), Neural Machine Translation of Rare Words with Subword Units（BPE）: https://arxiv.org/abs/1508.07909"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "temperature",
+    "name": "溫度參數（Temperature）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "控制生成隨機程度的設定：溫度低，回答穩定一致；溫度高，回答多樣有創意。",
+    "analogy": "像調整廚師的即興程度：調低就照食譜做，調高就自由發揮。",
+    "useCases": "要風格一致的商品描述就調低；要多版本廣告文案就調高。",
+    "distinguish": "溫度控制隨機性；最大 Token 數只影響輸出長度；上下文窗口是能讀進多少內容。",
+    "trap": "溫度只能調隨機性，解決不了資料錯誤或流程問題：檢索到過時文件、提示鏈中間步驟出錯，根本解都不是調溫度；提高溫度也會增加幻覺風險。",
+    "sources": [
+      "Hugging Face Blog, How to generate text（sampling & temperature）: https://huggingface.co/blog/how-to-generate"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "zero-shot",
+    "name": "零樣本提示（Zero-shot Prompting）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "不提供任何範例，直接請模型完成任務。",
+    "analogy": "像直接說「幫我翻成英文」，不先示範怎麼翻。",
+    "useCases": "翻譯、情感判斷、摘要等常識性任務。",
+    "distinguish": "少樣本提示會附上幾個範例；思維鏈會要求逐步推理。",
+    "trap": "零樣本對常識任務表現不錯，但「從表格精確擷取資料」「嚴格格式輸出」這類任務缺少示範容易出錯；Zero-shot 也不是從思維鏈衍生出的技術。",
+    "sources": [
+      "Brown et al. (2020), Language Models are Few-Shot Learners: https://arxiv.org/abs/2005.14165"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "few-shot",
+    "name": "少樣本提示（Few-shot Prompting）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "在提示詞中附上少量（通常 1～5 組）輸入與輸出的範例，讓模型照著格式、風格或邏輯完成新任務，不需要重新訓練。",
+    "analogy": "像先給你看兩份寫好的範文，再請你照同樣的格式寫一篇。",
+    "useCases": "依教師範例批改作文、依過去報告格式產出新報告、統一客服回覆風格。",
+    "distinguish": "少樣本微調（Few-shot Fine-tuning）會改權重、要注意過擬合；少樣本提示只在提示中給範例，不改權重。",
+    "trap": "「在提示中附上幾組範例」→ Few-shot；範例太少或沒涵蓋新情境（領域偏移）時，效果會不穩定。",
+    "sources": [
+      "Brown et al. (2020), Language Models are Few-Shot Learners: https://arxiv.org/abs/2005.14165"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "chain-of-thought",
+    "name": "思維鏈 CoT（Chain-of-Thought）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "要求模型在給答案前，先一步一步寫出推理過程，提升邏輯正確性與透明度。",
+    "analogy": "像數學考試要求「寫出計算過程」，不只寫答案。",
+    "useCases": "設備故障分析、退款流程這類線性步驟的推理。",
+    "distinguish": "CoT 是單一路線的線性推理；ToT 會探索多條路徑並比較；Graph Prompting 處理多條件交織的網狀關係；ReAct、ToT、Self-consistency 都是從 CoT 發展出來的。",
+    "trap": "「請逐步說明判斷依據與推理過程，最後再給結論」→ CoT；只要求把任務拆成步驟或提供範例，不一定是 CoT。",
+    "sources": [
+      "Wei et al. (2022), Chain-of-Thought Prompting Elicits Reasoning in Large Language Models: https://arxiv.org/abs/2201.11903"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "tree-of-thoughts",
+    "name": "思維樹 ToT（Tree of Thoughts）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "讓模型同時探索多條推理路徑，評估各方案、必要時回頭改走別條路，適合需要比較與權衡的問題。",
+    "analogy": "像下棋時把幾種走法都往下想幾步，比較後再選最好的一步。",
+    "useCases": "多部門活動規劃、需同時考量預算、場地、時程的方案比較。",
+    "distinguish": "CoT 是一條直線推理；ToT 是分支探索；Graph Prompting 用圖結構呈現條件之間的關聯。",
+    "trap": "單純查詢 SOP 流程用 CoT 就夠；需要比較多種方案可行性時才用 ToT；但多條件「彼此交織影響」時，題目常選 Graph Prompting。",
+    "sources": [
+      "Yao et al. (2023), Tree of Thoughts: Deliberate Problem Solving with Large Language Models: https://arxiv.org/abs/2305.10601"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "self-consistency",
+    "name": "自我一致性（Self-consistency）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "讓模型用思維鏈產生多組不同的推理過程，再取最多次出現的答案，提高正確率。",
+    "analogy": "像請好幾位同學各自解同一題，最後採用多數人算出的答案。",
+    "useCases": "數學、邏輯推理等有標準答案的問題。",
+    "distinguish": "Self-consistency、ReAct、ToT 都源自思維鏈；Zero-shot 則不是。",
+    "trap": "題目問「哪一個不是從思維鏈發展而來」時，Self-consistency 是從 CoT 發展的，答案是 Zero-shot。",
+    "sources": [
+      "Wang et al. (2022), Self-Consistency Improves Chain of Thought Reasoning in Language Models: https://arxiv.org/abs/2203.11171"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "react",
+    "name": "ReAct（推理與行動）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "讓 AI 代理交替進行「推理（想下一步該做什麼）」和「行動（呼叫工具查資料）」，依每次結果再決定下一步。",
+    "analogy": "像偵探辦案：先推理該去哪查，查到線索後再想下一步，一路邊想邊做。",
+    "useCases": "資訊是否足夠不確定、需要反覆查詢並調整方向的探索型任務。",
+    "distinguish": "提示鏈是預先設計好的固定步驟；ReAct 每一步都依結果動態決定；RAG 只是先檢索再生成。",
+    "trap": "流程明確、步驟固定的任務（批次翻譯、依規則判斷）不需要 ReAct；「每次取得結果後再判斷是否繼續查詢」才是 ReAct。",
+    "sources": [
+      "Yao et al. (2022), ReAct: Synergizing Reasoning and Acting in Language Models: https://arxiv.org/abs/2210.03629"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "graph-prompting",
+    "name": "圖提示（Graph Prompting）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "把實體與條件之間的關係用圖結構（節點與連線）整理後提供給模型，幫助處理多條件互相影響的網狀問題。",
+    "analogy": "像把庫存、促銷、物流之間的影響關係畫成一張關係圖，再請 AI 依圖分析。",
+    "useCases": "多項彼此相關的條件需要綜合考量的決策，例如門市補貨規劃、社群關係分析。",
+    "distinguish": "CoT 是線性一步步推理；Graph Prompting 能表達非線性、網狀的關聯。",
+    "trap": "把圖結構轉成文字提示時，可能遺失部分關聯資訊；學術上的 GraphPrompt 另指圖神經網路的提示方法，與題目的用法不同。",
+    "sources": [
+      "src/data/questions.json（官方公告試題 114042040、115012036 的描述）",
+      "Liu et al. (2023), GraphPrompt（圖神經網路領域的同名方法，用法不同）: https://arxiv.org/abs/2302.08043"
+    ],
+    "status": "待確認"
+  },
+  {
+    "id": "ape",
+    "name": "自動提示工程 APE",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "讓 LLM 自動產生多個候選提示詞，再依評估結果挑選或迭代出效果最好的提示。",
+    "analogy": "像請 AI 幫你寫好幾種提問方式，試完後留下回答品質最好的那一種。",
+    "useCases": "大量任務需要優化提示詞、不想全靠人工反覆嘗試。",
+    "distinguish": "一般提示工程由人設計；APE 由模型自動產生與篩選提示。",
+    "trap": "APE 用在超長上下文時，評估回饋往往只針對局部片段，難以衡量整體輸出品質；搭配圖提示時，圖結構轉文字可能遺失關聯資訊。",
+    "sources": [
+      "Zhou et al. (2022), Large Language Models Are Human-Level Prompt Engineers（APE）: https://arxiv.org/abs/2211.01910"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "context-engineering",
+    "name": "上下文工程（Context Engineering）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "精心挑選、整理與組織放進模型上下文的所有資訊（提示、文件、對話歷史、工具結果），讓模型在有限的上下文中表現最好。",
+    "analogy": "像替主管準備開會資料：不是把所有文件都塞給他，而是整理出最相關、最好讀的內容。",
+    "useCases": "把 Excel 表格轉成 JSON 或 Markdown 表格、整理 AI 代理的記憶與工具結果。",
+    "distinguish": "提示工程著重「怎麼寫提示詞」；上下文工程範圍更廣，管理整個上下文的內容與結構；它不是縮短訓練時間或增加參數。",
+    "trap": "上下文工程的核心是優化提示與上下文；處理法律合約時應優先保留原文逐字精確，不能為了省 Token 過度壓縮。",
+    "sources": [
+      "Anthropic Engineering, Effective context engineering for AI agents: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "control-tokens",
+    "name": "控制標記（Control Tokens）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "在輸入中加入特殊標記或風格標籤（如 [風格：專業]），讓同一個模型依標記切換輸出的風格或屬性。",
+    "analogy": "像在點餐單上勾選「少糖、去冰」，同一家店就做出不同口味。",
+    "useCases": "依不同客戶群調整客服回覆風格。",
+    "distinguish": "為每個客群各訓練一個模型成本太高；控制標記讓單一模型就能切換。",
+    "trap": "要兼顧即時性與效果地調整回覆風格 → 控制標記或風格標籤，而不是為每個客群分別微調模型或用 GAN 生成再人工挑選。",
+    "sources": [
+      "Keskar et al. (2019), CTRL: A Conditional Transformer Language Model for Controllable Generation: https://arxiv.org/abs/1909.05858"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "role-prompting",
+    "name": "角色／情境設定提示（Role Prompting／Context Prompting）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "在提示詞開頭先替模型設定角色、語氣與用詞限制（如「請扮演資深理賠客服」），再提出問題。",
+    "analogy": "像請演員先進入角色，再開始演戲。",
+    "useCases": "讓客服回覆更專業、有同理心，或符合特定身分的口吻。",
+    "distinguish": "題目（115032031）把這種作法稱為「情境設定提示（Context Prompting）」，一般文件多稱為角色提示（Role Prompting）；作答時依題目用詞選擇。",
+    "trap": "只設定角色與語氣、沒給範例 → 不是少樣本提示；沒要求逐步推理 → 不是思維鏈；附上三份報告要求照格式產出才是少樣本提示。",
+    "sources": [
+      "Anthropic Docs, Giving Claude a role with a system prompt: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/system-prompts",
+      "src/data/questions.json（115032031 官方答案用語）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "prompt-chaining",
+    "name": "提示鏈（Prompt Chaining）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "把複雜任務拆成多個依序執行的提示步驟，前一步的輸出作為下一步的輸入。",
+    "analogy": "像工廠生產線，每一站只做一件事，再把半成品交給下一站。",
+    "useCases": "訂單解析 → 異常分類 → 補償方案生成這類多步驟流程。",
+    "distinguish": "提示鏈的步驟是事先設計好的；ReAct 會依每次結果動態決定下一步。",
+    "trap": "中間步驟的小偏差若未經驗證就往下傳，誤差會累積放大；根本解是在各步驟加驗證與護欄，而不是調低溫度或重建索引。",
+    "sources": [
+      "Anthropic Docs, Chain complex prompts: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-prompts"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "chunking",
+    "name": "文本切分（Chunking）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "把長篇文件切成適當大小的語意段落，再轉成向量存入知識庫，讓檢索更精準。",
+    "analogy": "像把一本厚書拆成一張張重點卡片，要找答案時直接抽出相關的那幾張。",
+    "useCases": "RAG 系統處理長篇法規、手冊與內部文件。",
+    "distinguish": "文本切分器（Text Splitter）負責切段；重排序器負責調整檢索結果的順序。",
+    "trap": "切分的主要目的是提高檢索的語意相關性、降低長文件的雜訊干擾，而不是加快推理、省記憶體或增加創意。",
+    "sources": [
+      "LangChain Docs, Text splitters: https://python.langchain.com/docs/concepts/text_splitters/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "multi-vector-retriever",
+    "name": "多向量檢索器（Multi-vector Retriever）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "同一份文件同時建立多種向量表示（例如原文、摘要、可能被問到的問題），讓使用者的提問能從不同角度命中目標。",
+    "analogy": "像替一本書同時做目錄、摘要和常見問題索引，不管從哪個角度找都找得到。",
+    "useCases": "企業知識檢索系統、文字與表格等不同型態內容的檢索。",
+    "distinguish": "多向量檢索是「增加表示方式」提升命中率；文本切分是「切小段」；溫度與檢索無關。",
+    "trap": "多向量檢索器提升完整性與精準度的方式，是支援同時處理多種資訊表示，而不是壓縮向量或調整生成溫度。",
+    "sources": [
+      "LangChain Docs, How to retrieve using multiple vectors per document: https://python.langchain.com/docs/how_to/multi_vector/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "reranker",
+    "name": "重排序器（Reranker）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "在初步檢索出一批候選文件後，再用更精細的模型重新評估相關性並排序，把最相關的排到前面交給 LLM。",
+    "analogy": "像初選先挑出 10 位候選人，再由評審面試一次，把最適合的 3 位排在前面。",
+    "useCases": "RAG 檢索到了正確文件但排序太後面、沒被提供給模型時。",
+    "distinguish": "查詢擴展是讓「更多相關文件被檢索到」；語意快取是重複利用過去的回答；文本切分是建索引前的處理。",
+    "trap": "文件「已被檢索到但排名太後面」→ 重排序器；不需要重新訓練模型或重建向量資料庫。",
+    "sources": [
+      "Cohere Docs, Rerank overview: https://docs.cohere.com/docs/rerank-overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "domain-shift",
+    "name": "領域偏移（Domain Shift）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "模型應用到的新資料，和原本訓練或範例所涵蓋的資料特性差異很大，導致表現下降。",
+    "analogy": "像在台北學開車，第一次到鄉間山路就手忙腳亂。",
+    "useCases": "把 AI 應用擴展到新市場、新產品線或新客群時。",
+    "distinguish": "領域偏移是「新舊資料差很大」；資料漂移是「同一應用的資料隨時間慢慢改變」。",
+    "trap": "少樣本提示只有 1～2 個範例時，無法涵蓋新領域的多樣性，導致泛化不足；問題在範例代表性不夠，不是模型推理能力不足。",
+    "sources": [
+      "Quiñonero-Candela et al. (2009), Dataset Shift in Machine Learning, MIT Press"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "llm-stateless",
+    "name": "LLM 無狀態與對話歷史（Chat History）",
+    "units": [
+      "L12202"
+    ],
+    "oneLiner": "透過 API 呼叫 LLM 時，模型本身不會記得上一次的對話；要有「記憶」，必須在每次請求時把先前的對話紀錄一起送進去。",
+    "analogy": "像每次打客服都換一位新專員，你得把前面講過的話重說一次，他才知道狀況。",
+    "useCases": "用 Dify 等平台或 API 建立聊天機器人時，設計多輪對話記憶。",
+    "distinguish": "增加伺服器記憶體、換更大的模型、調溫度，都無法讓模型記住上一輪對話。",
+    "trap": "機器人「完全記不住五分鐘前說過的話」，根本解是每次 API 請求都把歷史對話一併送入模型。",
+    "sources": [
+      "OpenAI Docs, Conversation state: https://platform.openai.com/docs/guides/conversation-state"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "reasoning-budget",
+    "name": "推理模型的思考預算（Thinking Budget）",
+    "units": [
+      "L12202",
+      "L12301"
+    ],
+    "oneLiner": "推理型模型在回答前會先進行內部思考；思考預算是設定它最多能花多少 Token 思考，用來平衡推理深度與成本。",
+    "analogy": "像給員工規定思考時間：簡單問題 1 分鐘回覆，複雜案子允許花一小時研究。",
+    "useCases": "依案件複雜度動態調整推理深度，例如理賠合規審查、法律合約分析。",
+    "distinguish": "思考預算控制「想多深」；溫度控制「隨機性」；換更大的模型是改變模型本身。",
+    "trap": "提高思考預算能提升複雜任務的品質，但會增加回應延遲與運算成本；不會縮減上下文窗口，也不是增加幻覺。",
+    "sources": [
+      "Anthropic Docs, Building with extended thinking: https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "benchmark",
+    "name": "基準測試（Benchmark）",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "用標準化的資料集與評分方式測試模型能力，方便比較不同模型的表現。",
+    "analogy": "像全國統一考試，大家寫同一份考卷，分數才能互相比較。",
+    "useCases": "比較不同規模或廠商的語言模型在知識、推理、數學等方面的能力。",
+    "distinguish": "基準測試評估「模型能力」；員工實際使用 AI 的互動紀錄與工具呼叫紀錄，才能看出實際工作流程。",
+    "trap": "模型越大，基準測試成績可能提升，但幅度取決於訓練資料品質與資源配置，不是規模無關，也不是小模型一定比較好；要找出常用工作流程應分析使用紀錄，而不是看基準測試報告。",
+    "sources": [
+      "Stanford CRFM, HELM（Holistic Evaluation of Language Models）: https://crfm.stanford.edu/helm/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mmlu",
+    "name": "MMLU（大規模多任務語言理解）",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "涵蓋 57 個學科（STEM、人文、社會科學等）的選擇題基準測試，用來評估語言模型的多領域知識與理解能力。",
+    "analogy": "像一份橫跨數學、歷史、法律、醫學的超級綜合學測。",
+    "useCases": "評估 LLM 的通用知識與跨領域推理能力。",
+    "distinguish": "GSM8K 測小學數學應用題；MATH 測競賽等級數學；C-Eval 測中文多學科知識；MMLU 測多領域、多任務的英文語言理解。",
+    "trap": "題目描述「涵蓋人文、科學、社會科學等多領域、多任務的語言理解」→ MMLU，而不是專測數學或中文的資料集。",
+    "sources": [
+      "Hendrycks et al. (2020), Measuring Massive Multitask Language Understanding: https://arxiv.org/abs/2009.03300",
+      "Cobbe et al. (2021), GSM8K: https://arxiv.org/abs/2110.14168",
+      "Huang et al. (2023), C-Eval: https://arxiv.org/abs/2305.08322"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "tco",
+    "name": "總體擁有成本 TCO",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "一項系統從導入、運作到維護的所有直接與間接成本總和，不只看採購或帳單金額。",
+    "analogy": "像買車不只算車價，還要算油錢、保險、保養與停車費。",
+    "useCases": "評估生成式 AI 專案的真實成本：API 費用、人力、基礎設施、訓練、系統整合、資安合規。",
+    "distinguish": "TCO 計算的是「花出去的成本」；導入後省下的燃油、人力費用屬於效益，要放在 ROI 計算，不能算進成本。",
+    "trap": "最完整的 TCO 除了 API、人力、基礎設施等直接成本，還要納入訓練、系統整合與資安合規等支出；「省下的錢」不是 TCO 的直接成本。",
+    "sources": [
+      "IBM Think, What is total cost of ownership（TCO）?: https://www.ibm.com/think/topics/total-cost-of-ownership"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "roi",
+    "name": "投資報酬率 ROI",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "衡量投資划不划算的指標，比較投資帶來的效益與投入的成本；也常用「多久回收成本」來評估。",
+    "analogy": "像花 20 萬買一台機器，每月幫你省 3 萬，大約 7 個月就回本。",
+    "useCases": "評估 AI 導入能節省多少成本、多久能回收整合費用。",
+    "distinguish": "ROI 看「效益與成本的比較」；TCO 只看「總成本」。",
+    "trap": "計算時先算每月節省（原成本－新成本），再用一次性投入除以每月節省得到回收期；完整評估還要納入品牌商譽等無形效益與後續維護、合規等隱性成本，不能只看帳面數字。",
+    "sources": [
+      "IBM Think, What is return on investment（ROI）?: https://www.ibm.com/think/topics/roi"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "token-economics",
+    "name": "Token 經濟（Token Economics）",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "依模型推論時使用的輸入與輸出 Token 數量來估算 API 成本與效益。",
+    "analogy": "像計程車按里程計費，Token 就是 AI 的「里程數」。",
+    "useCases": "估算每月 API 費用、比較人工與 AI 的成本。",
+    "distinguish": "Token Economics 看的是「推論階段」的 Token 用量與費用；模型訓練階段的 GPU 與記憶體屬於基礎設施成本，不在此範圍。",
+    "trap": "計算步驟：份數 × 字數 × 每字 Token 數 ＝ 總 Token，再 ÷ 1,000 × 每千 Token 單價；只算輸出時別把輸入 Token 加進去。",
+    "sources": [
+      "Sennrich, Haddow & Birch (2015), Subword Units（Token 的切分方式）: https://arxiv.org/abs/1508.07909",
+      "OpenAI Docs, Conversation state（Token 與上下文計費概念）: https://platform.openai.com/docs/guides/conversation-state"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "poc",
+    "name": "概念驗證 PoC",
+    "units": [
+      "L12301"
+    ],
+    "oneLiner": "正式全面導入前，先用小規模、短時間的試做，驗證技術是否可行、是否符合業務需求。",
+    "analogy": "像餐廳推新菜前先做幾份給員工試吃，確認好吃又做得出來再放進菜單。",
+    "useCases": "驗證 AI 回覆品質、與業務需求的匹配度、系統整合可行性與技術限制。",
+    "distinguish": "PoC 驗證「做不做得到、有沒有價值」；MVP 是最小可用的產品，要給真實使用者用；長期治理框架則在擴大導入時才制定。",
+    "trap": "制定跨部門使用規範與長期治理框架，不是 PoC 階段的主要工作。",
+    "sources": [
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf（建議優先進行小規模概念驗證）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "mvp",
+    "name": "最小可行產品 MVP",
+    "units": [
+      "L12302",
+      "L12303"
+    ],
+    "oneLiner": "只做出最核心功能、能讓真實使用者使用的第一版產品，用來快速驗證市場與需求。",
+    "analogy": "像先開一台餐車賣招牌便當，確定有人買，再考慮開店面。",
+    "useCases": "新創快速推出原型、蒐集使用者回饋。",
+    "distinguish": "MVP 重視「快速驗證」，但不代表可以省略品質與安全檢查。",
+    "trap": "用 Vibe Coding 快速做出 MVP 後，正式上線前仍要做程式碼審查、重構與安全測試；高度重視隱私與合規時，不能以「先用 MVP 驗證成效」取代資料安全設計。",
+    "sources": [
+      "Ries (2011), The Lean Startup",
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "kpi",
+    "name": "關鍵績效指標 KPI",
+    "units": [
+      "L12302"
+    ],
+    "oneLiner": "用來衡量專案或業務是否達成目標的量化指標，例如回覆正確率、處理時間、客戶滿意度。",
+    "analogy": "像減肥設定「三個月瘦 5 公斤」，有明確數字才知道有沒有做到。",
+    "useCases": "AI 導入專案的目標設定與成效評估。",
+    "distinguish": "KPI 是業務目標的衡量標準；模型評估指標（如召回率、MSE）是技術面的衡量。",
+    "trap": "AI 導入的第一步是明確定義目標並設定 KPI，接著整備資料、評選技術，最後才設計細部對話邏輯與應答範本。",
+    "sources": [
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf（2.2 場景問題定義、3.6 驗收標準）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "on-premises",
+    "name": "地端／私有化部署（On-Premises）",
+    "units": [
+      "L12302"
+    ],
+    "oneLiner": "把模型與系統部署在企業自己管理的伺服器或受控環境中，敏感資料不必傳給外部雲端服務。",
+    "analogy": "像把重要文件鎖在公司自己的保險箱，而不是寄放在外面的倉庫。",
+    "useCases": "金融、醫療、政府機密公文等高度敏感資料的生成式 AI 應用。",
+    "distinguish": "地端部署主要解決「資料外流與自主控制」；它不會自動提升準確率、消除幻覺或讓運算成本變零。",
+    "trap": "合規與資安絕對優先時，答案傾向「自行訓練並私有化部署，同時建立存取控管與稽核」；機密文件可用同一模型但在隔離環境處理，不能「先驗證效益再補強合規」。",
+    "sources": [
+      "NIST SP 800-145, The NIST Definition of Cloud Computing（Private cloud）: https://doi.org/10.6028/NIST.SP.800-145",
+      "docs/official/公部門人工智慧應用參考手冊_數位發展部_V1.0_1150128.pdf（地端環境）"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "load-balancing",
+    "name": "負載平衡與高可用性",
+    "units": [
+      "L12302"
+    ],
+    "oneLiner": "建立多個服務實例，用負載平衡器把請求分散到不同實例，避免單點故障、因應流量高峰。",
+    "analogy": "像大賣場開很多個結帳櫃台，有人引導顧客到人少的櫃台，一台壞了也不影響營業。",
+    "useCases": "高併發的 LLM API 服務、需要服務不中斷的系統。",
+    "distinguish": "負載平衡依「伺服器負載」分配請求；模型路由依「問題特性」選擇模型；規則式分流依固定條件派送。",
+    "trap": "要高可用與可擴展，正解是多實例加負載分散；單一高效能主機有單點故障風險；要依問題難度選模型則是模型路由。",
+    "sources": [
+      "Google Cloud, Cloud Load Balancing overview: https://cloud.google.com/load-balancing/docs/load-balancing-overview"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "model-routing",
+    "name": "模型路由（Model Routing）",
+    "units": [
+      "L12302"
+    ],
+    "oneLiner": "先判斷每個請求的特性或難度，再自動分派給最適合的模型：簡單問題給便宜快速的模型，複雜問題給推理能力強的模型。",
+    "analogy": "像醫院的檢傷分類，小感冒看一般門診，重症才轉給專科醫師。",
+    "useCases": "同時使用多種成本與能力不同的 LLM，兼顧品質與營運成本。",
+    "distinguish": "負載平衡只看伺服器負載；規則式分流用固定關鍵字或類別；模型路由讓模型判斷問題特性。",
+    "trap": "「讓系統自動判斷每次請求該由哪個模型處理」→ 模型路由，而不是要使用者自己選類型或依固定關鍵字分流。",
+    "sources": [
+      "Ong et al. (2024), RouteLLM: Learning to Route LLMs with Preference Data: https://arxiv.org/abs/2406.18665"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "bias-detection-mitigation",
+    "name": "偏見檢測 vs 偏見緩解",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "偏見檢測是量測模型是否對不同群體不公平；偏見緩解是採取行動降低不公平。",
+    "analogy": "檢測像量體溫確認有沒有發燒；緩解像吃退燒藥。",
+    "useCases": "AI 決策模型上線前後的公平性稽核。",
+    "distinguish": "檢測：比較不同群體的預測分布與錯誤率；緩解：重新加權樣本、加入輸出過濾、調整決策門檻。",
+    "trap": "「比較各群體的錯誤率」是檢測；「重新加權、過濾、調門檻」都是緩解。",
+    "sources": [
+      "NIST SP 1270, Towards a Standard for Identifying and Managing Bias in AI: https://doi.org/10.6028/NIST.SP.1270"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "homomorphic-encryption",
+    "name": "同態加密（Homomorphic Encryption）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "可以直接對加密後的資料做運算，解密後的結果和對原始資料運算的結果相同。",
+    "analogy": "像把東西放進上鎖的手套箱，工人隔著手套在箱子裡組裝，卻看不到也拿不出裡面的零件。",
+    "useCases": "資料可集中在安全環境，但要求處理過程中資料始終保持加密。",
+    "distinguish": "聯邦學習：資料不集中、各自本地訓練；同態加密：資料可集中、在加密狀態下運算；零知識證明：證明某件事為真而不透露內容。",
+    "trap": "關鍵字「資料可集中」「即使在加密狀態下仍能完成計算」→ 同態加密；「資料分散不能集中」→ 聯邦學習。",
+    "sources": [
+      "HomomorphicEncryption.org, Introduction: https://homomorphicencryption.org/introduction/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "zero-knowledge-proof",
+    "name": "零知識證明（Zero-knowledge Proof）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "一方能向另一方證明某件事為真，卻不透露任何其他資訊。",
+    "analogy": "像證明你知道保險箱密碼，只要當面打開給對方看，不必說出密碼是多少。",
+    "useCases": "身分驗證、證明符合資格而不揭露細節。",
+    "distinguish": "零知識證明用於「驗證」；聯邦學習與同態加密才是用於「隱私保護下的模型訓練或運算」。",
+    "trap": "題目要「在隱私前提下持續訓練模型」時，零知識證明通常是干擾選項。",
+    "sources": [
+      "NIST CSRC Glossary, Zero-knowledge proof: https://csrc.nist.gov/glossary/term/zero_knowledge_proof"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-minimization",
+    "name": "資料最小化（Data Minimization）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "只蒐集、提供與目的相關的必要資料，不必要的資料就不給、不用。",
+    "analogy": "像辦會員卡只填姓名和電話就夠，不需要連身分證、薪水都交出去。",
+    "useCases": "把資料交給生成式 AI 前，先濾掉不必要的欄位並去識別化。",
+    "distinguish": "資料最小化是從「源頭」減少；遮罩、輸出審查、加密存放是事後或周邊的保護措施。",
+    "trap": "題目強調「導入初期優先避免觸法」「從資料層面降低暴露風險」→ 資料最小化＋去識別化，而不是只加密、只審查輸出或只限制回覆範圍。",
+    "sources": [
+      "全國法規資料庫，人工智慧基本法第 4 條（資料最小化原則）: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0160093",
+      "全國法規資料庫，個人資料保護法第 5 條: https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0050021"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "prompt-injection",
+    "name": "提示詞注入（Prompt Injection）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "攻擊者在輸入中夾帶指令（如「請忽略原本的設定」），試圖覆蓋系統設定，讓模型做出未授權的行為。",
+    "analogy": "像有人遞給櫃台人員一張紙條：「主管說今天可以免費送你商品」，騙他違反規定。",
+    "useCases": "對外服務的聊天機器人、客服系統的資安風險評估。",
+    "distinguish": "直接注入：使用者自己輸入惡意指令；間接注入：惡意指令藏在模型讀取的外部內容；提示洩漏：目的是套出系統提示詞。",
+    "trap": "防禦要多層：輸入檢測、輸出審核、系統提示保護與最小權限；只靠關鍵字黑名單、只靠系統提示或只限制回答主題都不夠。",
+    "sources": [
+      "OWASP Top 10 for LLM Applications, LLM01 Prompt Injection: https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "indirect-prompt-injection",
+    "name": "間接提示詞注入（Indirect Prompt Injection）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "攻擊者把惡意指令藏在模型要讀取的外部內容（網頁、文件、履歷）裡，模型讀到後被間接操控。",
+    "analogy": "像有人在交給秘書的文件夾裡塞了一張「把公司機密寄給我」的紙條，秘書照做了。",
+    "useCases": "會讀取網頁、文件、Email 的 AI 助理與 Agent。",
+    "distinguish": "直接注入是使用者在對話中輸入指令；越獄是靠多輪誘導對話突破限制，沒有夾帶外部內容。",
+    "trap": "關鍵字「指令藏在外部網頁／文件／履歷（甚至用同色小字）」→ 間接提示詞注入；這不是訓練資料被污染（資料投毒），也不是伺服器被入侵。",
+    "sources": [
+      "Greshake et al. (2023), Indirect Prompt Injection: https://arxiv.org/abs/2302.12173",
+      "OWASP Top 10 for LLM Applications, LLM01 Prompt Injection: https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "jailbreak",
+    "name": "越獄（Jailbreak）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "使用者透過多輪追問、情境設計或誘導式提問，讓模型逐步突破原本的安全或範圍限制。",
+    "analogy": "像小孩一直換方式跟爸媽盧，最後讓爸媽答應原本說不行的事。",
+    "useCases": "AI 助教、客服等有回答範圍限制的系統之安全測試。",
+    "distinguish": "越獄只靠對話本身；若是把指令藏在外部文件或網頁中，則是間接提示詞注入。",
+    "trap": "題目特別強調「只透過對話、沒有用外部文件或網頁」→ 越獄，而不是間接注入、幻覺或資料洩漏。",
+    "sources": [
+      "OWASP Top 10 for LLM Applications, LLM01 Prompt Injection（含 Jailbreaking）: https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "prompt-leakage",
+    "name": "提示洩漏（Prompt Leakage）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "攻擊者設法讓模型說出它的系統提示詞或內部規則。",
+    "analogy": "像套話讓客服念出公司內部的作業手冊。",
+    "useCases": "評估系統提示中是否藏有不該外洩的機密。",
+    "distinguish": "提示洩漏的目的是「取得」系統提示內容；提示詞注入的目的是「覆蓋」設定、讓模型做未授權的事。",
+    "trap": "使用者要求模型「忽略原本設定、改做別的事」是提示詞注入，不是提示洩漏；系統提示中本來就不應放密碼或機密。",
+    "sources": [
+      "OWASP Top 10 for LLM Applications, LLM07 System Prompt Leakage: https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "data-poisoning",
+    "name": "資料投毒（Data Poisoning）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "有問題或惡意的資料混進訓練資料，讓模型學到錯誤或危險的模式。",
+    "analogy": "像有人在食譜書裡偷偷改了幾道菜的鹽量，照著學的廚師都會做壞。",
+    "useCases": "持續收集使用者回饋再訓練的系統，要防範回饋資料被污染。",
+    "distinguish": "資料投毒發生在「訓練」階段；提示詞注入發生在「使用（推論）」階段。",
+    "trap": "使用者回饋的資料未經驗證就拿去優化模型，導致模型開始產生有漏洞的內容，根本原因是缺少訓練資料驗證機制。",
+    "sources": [
+      "OWASP Top 10 for LLM Applications, LLM04 Data and Model Poisoning: https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "c2pa",
+    "name": "C2PA 內容憑證（Content Credentials）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "一套內容來源的開放標準，在檔案中嵌入可驗證的元資料，記錄內容由誰、用什麼工具（含 AI）產生或編輯。",
+    "analogy": "像商品背後的產銷履歷，掃一下就知道是哪裡生產、經過哪些加工。",
+    "useCases": "標示 AI 生成影像或影片的來源，降低深偽與誤導風險。",
+    "distinguish": "C2PA 是附在檔案上的元資料；SynthID 是嵌入內容本身的不可見浮水印；可見浮水印是肉眼看得到的標記。",
+    "trap": "OpenAI 為 Sora 提供的出處工具包括 C2PA 元資料、可見的動態浮水印與內部反向影像／音訊搜尋工具；並沒有對外開放的即時來源驗證介面。",
+    "sources": [
+      "C2PA（Coalition for Content Provenance and Authenticity）: https://c2pa.org/",
+      "OpenAI, Sora 2 System Card（2025-09-30）: https://cdn.openai.com/pdf/50d5973c-c4ff-4c2d-986f-c72b5d0ff069/sora_2_system_card.pdf"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "synthid",
+    "name": "SynthID 數位浮水印",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "Google DeepMind 開發的不可見數位浮水印技術，直接嵌入 AI 生成的影像、影片、音訊或文字中，經壓縮或裁切仍可偵測。",
+    "analogy": "像鈔票裡的防偽線，肉眼看不出來，但用專門的機器一照就知道是不是真的。",
+    "useCases": "Gemini 應用程式中 Veo 生成的影片、Imagen 生成的影像。",
+    "distinguish": "SynthID 是不可見浮水印；C2PA 是附加的元資料；可見浮水印是畫面上看得到的標誌。",
+    "trap": "Veo 生成的影片採用 SynthID 在影格中嵌入不可見浮水印，而不是限制生成次數或強制加入免責聲明片段。",
+    "sources": [
+      "Google DeepMind, SynthID: https://deepmind.google/science/synthid/",
+      "Gemini Apps Help, Manage watermark settings: https://support.google.com/gemini/answer/17405358"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "selection-bias",
+    "name": "選擇性偏差（Selection Bias）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "資料只來自某些特定群體，不能代表全體，導致分析或模型結果偏向那一群。",
+    "analogy": "像只在健身房做問卷調查「大家多常運動」，結果一定高估全國平均。",
+    "useCases": "RLHF 回饋、問卷、使用者評分等資料的代表性檢查。",
+    "distinguish": "選擇性偏差是「誰被納入資料」的問題；演算法偏見可能來自它，也可能來自其他設計因素。",
+    "trap": "只有少數部門提供回饋時，模型會逐漸偏向那些部門的需求與用語；正解是擴大不同部門的回饋樣本，而不是相信獎勵模型會自動泛化。",
+    "sources": [
+      "NIST SP 1270, Towards a Standard for Identifying and Managing Bias in AI: https://doi.org/10.6028/NIST.SP.1270"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "least-privilege",
+    "name": "最小權限原則（Least Privilege）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "每個使用者、程式或 AI 代理只給完成任務所需的最小權限，避免被濫用時造成更大損害。",
+    "analogy": "像給清潔人員的鑰匙只能開走廊和廁所，開不了金庫。",
+    "useCases": "限制 AI 代理能呼叫的 API 與能存取的資料，降低提示詞注入的損害。",
+    "distinguish": "最小權限是限制「能做什麼」；輸入驗證與輸出監控是限制「說什麼、收到什麼」。",
+    "trap": "提示詞注入防禦的最佳答案是多層防禦，其中包含最小權限；單一黑名單或只靠系統提示都不夠。",
+    "sources": [
+      "NIST CSRC Glossary, Least privilege: https://csrc.nist.gov/glossary/term/least_privilege"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "adversarial-attack",
+    "name": "對抗性攻擊與對抗性測試",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "對抗性攻擊是刻意對輸入做細微偽裝或修改，讓 AI 判斷出錯；對抗性測試則是主動模擬這種攻擊，檢驗系統是否扛得住。",
+    "analogy": "像防詐騙演練：故意用變化過的詐騙話術打給員工，看他們能不能識破。",
+    "useCases": "反詐騙系統、影像辨識、資安防禦模型的上線前後測試。",
+    "distinguish": "對抗性測試看「被刻意偽裝時能否判斷正確」；漂移監控看資料分布變化；公平性檢測看族群差異。",
+    "trap": "「模擬攻擊者手法、把可疑特徵稍作偽裝再送入系統」→ 對抗性測試；使用者要求模型忽略設定則是提示詞注入。",
+    "sources": [
+      "Goodfellow, Shlens & Szegedy (2014), Explaining and Harnessing Adversarial Examples: https://arxiv.org/abs/1412.6572",
+      "NIST AI 100-2 E2025, Adversarial Machine Learning: https://doi.org/10.6028/NIST.AI.100-2e2025"
+    ],
+    "status": "已查證"
+  },
+  {
+    "id": "memorization",
+    "name": "訓練資料記憶（Memorization）",
+    "units": [
+      "L12303"
+    ],
+    "oneLiner": "模型在訓練時把部分訓練資料原封不動記住，之後在特定情境下把它們（包括個資或機密）重新輸出。",
+    "analogy": "像學生把同學的日記背下來，聊天時不小心整段說出來。",
+    "useCases": "評估用含個資的資料訓練或微調模型的外洩風險。",
+    "distinguish": "記憶外洩來自「訓練資料」；提示詞注入、資料庫權限錯誤、對話上下文混用是其他原因。",
+    "trap": "已排除外部入侵、資料庫異常與輸入觸發，模型卻說出當次沒提供的客戶資料 → 訓練階段過度記憶了未脫敏的真實資料。",
+    "sources": [
+      "Carlini et al. (2020), Extracting Training Data from Large Language Models: https://arxiv.org/abs/2012.07805",
+      "OWASP Top 10 for LLM Applications, LLM02 Sensitive Information Disclosure: https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/"
+    ],
+    "status": "已查證"
+  }
+]
