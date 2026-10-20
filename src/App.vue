@@ -520,7 +520,7 @@
       <PracticeTab v-else-if="currentTab === 'practice'" :questions="allQuestions" />
 
       <!-- =================【🆕 TAB 8: 名詞卡（搜尋＋依評鑑範圍分組＋不熟清單，程式在 components/TermsTab.vue）】================= -->
-      <TermsTab v-else-if="currentTab === 'terms'" />
+      <TermsTab v-else-if="currentTab === 'terms'" :questions="allQuestions" />
 
     </main>
 

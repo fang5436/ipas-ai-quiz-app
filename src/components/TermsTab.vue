@@ -1,6 +1,8 @@
 <template>
   <div class="animate-fade-in flex flex-col gap-4 pt-2">
 
+    <LessonsPanel :questions="questions" />
+
     <div class="bg-gradient-to-br from-teal-900/30 to-slate-900 border border-teal-800/40 rounded-2xl p-5 flex flex-col gap-1.5">
       <h2 class="text-lg font-bold text-white">📖 名詞卡</h2>
       <p class="text-slate-400 text-xs leading-relaxed">{{ terms.length }} 張名詞卡，涵蓋 {{ questionCount }} 題考古題中出現的專有名詞，依官方評鑑範圍分組。看到不熟的名詞點 ⭐，就會收進「不熟」清單。</p>
@@ -70,6 +72,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { CODE_NAMES } from '../data/codeNames.js';
+import LessonsPanel from './LessonsPanel.vue';
+
+defineProps({ questions: { type: Array, default: () => [] } });
 
 const STAR_KEY = 'ipas_term_stars_v1';
 const FILTERS = [
