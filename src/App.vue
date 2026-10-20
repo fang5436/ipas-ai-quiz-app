@@ -24,6 +24,7 @@
           <button @click="switchTab('tracker')" :class="getTabClass('tracker')">進度追蹤</button>
           <button @click="switchTab('book')" :class="getTabClass('book')">指南單元</button>
           <button @click="switchTab('browse')" :class="getTabClass('browse')">題庫瀏覽</button>
+          <button @click="switchTab('practice')" :class="getTabClass('practice')">練習題</button>
         </nav>
       </div>
     </header>
@@ -514,6 +515,9 @@
         </div>
       </div>
 
+      <!-- =================【🆕 TAB 7: 練習題（方小瑋出題＋錯題複習＋累積弱點，程式在 components/PracticeTab.vue）】================= -->
+      <PracticeTab v-else-if="currentTab === 'practice'" :questions="allQuestions" />
+
     </main>
 
     <!-- 模擬考專屬盲點置底切換鍵 -->
@@ -586,6 +590,9 @@
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
+import PracticeTab from './components/PracticeTab.vue';
+import { recordWrongAnswer } from './utils/wrongBook.js';
+import { recordCodeAnswers } from './utils/answerStats.js';
 
 const loading = ref(true);
 const currentTab = ref('home');
@@ -797,6 +804,7 @@ const getTabClass = (id) => {
   if (id === 'book') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-sky-600 text-white shadow-lg shadow-sky-900/40 transition-all duration-200';
   if (id === 'tracker') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white shadow-lg shadow-emerald-900/40 transition-all duration-200';
   if (id === 'browse') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-600 text-white shadow-lg shadow-amber-900/40 transition-all duration-200';
+  if (id === 'practice') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-rose-600 text-white shadow-lg shadow-rose-900/40 transition-all duration-200';
   return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-violet-600 text-white shadow-lg shadow-violet-900/40 transition-all duration-200';
 };
 
@@ -939,6 +947,15 @@ const markExamQuestionsSeen = () => {
   localStorage.setItem('ipas_seen_question_ids_v1', JSON.stringify([...next]));
 };
 
+// 交卷時記下錯題（供「練習題」分頁的錯題複習）與各評鑑代碼的累積答對數
+// 試卷內的 detail_code 已換成 CH 標籤，原始評鑑代碼要用 id 回題庫查
+const recordExamAnswers = () => {
+  const codeById = new Map(allQuestions.value.map(q => [q.id, q.detail_code]));
+  const results = examQuestions.value.map((q, idx) => ({ id: q.id, code: codeById.get(q.id), correct: userAnswers.value[idx] === q.correctIndex }));
+  results.filter(r => !r.correct).forEach(r => recordWrongAnswer(r.id));
+  recordCodeAnswers(results);
+};
+
 const forceSubmitExam = () => {
   stopTimer();
   let correctCount = 0;
@@ -951,6 +968,7 @@ const forceSubmitExam = () => {
   examCounts.value[key]++;
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   markExamQuestionsSeen();
+  recordExamAnswers();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -975,6 +993,7 @@ const submitExam = () => {
   examCounts.value[key]++;
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   markExamQuestionsSeen();
+  recordExamAnswers();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1083,6 +1102,7 @@ const forceSubmitPastExam = () => {
   });
   examScore.value = correctCount * (100 / examQuestions.value.length);
   examSubmitted.value = true;
+  recordExamAnswers();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
