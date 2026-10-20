@@ -115,6 +115,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
 import { loadCodeStats, clearCodeStats } from '../utils/answerStats.js';
+import { CODE_NAMES } from '../data/codeNames.js';
 
 const props = defineProps({
   // 官方考古題（App.vue 的 allQuestions），錯題複習時用 id 查回原題
@@ -135,26 +136,6 @@ const LEVEL_BADGE = {
   '易': 'bg-sky-950 text-sky-400 border-sky-900/40',
   '中': 'bg-amber-950 text-amber-400 border-amber-900/40',
   '難': 'bg-red-950 text-red-400 border-red-900/40',
-};
-
-// 官方「評鑑內容範圍參考（115.02）」初級科目代碼名稱
-const CODE_NAMES = {
-  L11101: 'AI 的定義與分類',
-  L11102: 'AI 治理概念',
-  L11201: '資料基本概念與來源',
-  L11202: '資料整理與分析流程',
-  L11203: '資料隱私與安全',
-  L11301: '機器學習基本原理',
-  L11302: '常見的機器學習模型',
-  L11401: '鑑別式 AI 與生成式 AI 的基本原理',
-  L11402: '鑑別式 AI 與生成式 AI 的整合應用',
-  L12101: 'No Code / Low Code 的基本概念',
-  L12102: 'No Code / Low Code 的優勢與限制',
-  L12201: '生成式 AI 應用領域與常見工具',
-  L12202: '如何善用生成式 AI 工具',
-  L12301: '生成式 AI 導入評估',
-  L12302: '生成式 AI 導入規劃',
-  L12303: '生成式 AI 風險管理',
 };
 
 const practiceQuestions = ref([]);

@@ -5,43 +5,61 @@
   "114041002": [
     "feature-engineering",
     "feature-cross",
-    "wide-and-deep"
+    "wide-and-deep",
+    "normalization",
+    "one-hot"
   ],
   "114041003": [
     "etl"
   ],
   "114041004": [
-    "regularization"
+    "regularization",
+    "l1-regularization",
+    "l2-regularization"
   ],
   "114041005": [
     "bias-variance",
-    "overfitting"
+    "overfitting",
+    "train-val-test",
+    "underfitting"
   ],
   "114041006": [
-    "regularization"
+    "regularization",
+    "l1-regularization",
+    "convergence",
+    "loss-function"
   ],
   "114041007": [
     "naive-bayes",
     "discriminative-vs-generative"
   ],
   "114041008": [
-    "conditional-lm"
+    "conditional-lm",
+    "genetic-algorithm",
+    "decision-tree"
   ],
   "114041009": [
     "ai-basic-act",
-    "regulatory-sandbox"
+    "regulatory-sandbox",
+    "dpia",
+    "ai-ethics-review-board"
   ],
   "114041010": [
     "bank-ai-operating-rules",
-    "fsc-ai-guidance"
+    "fsc-ai-guidance",
+    "generative-ai",
+    "discriminative-vs-generative"
   ],
   "114041011": [
     "unsupervised-learning",
-    "clustering"
+    "clustering",
+    "supervised-learning"
   ],
   "114041012": [
     "scatter-plot",
-    "histogram"
+    "histogram",
+    "line-chart",
+    "bar-chart"
   ],
   "114041013": [
     "supervised-learning",
@@ -50,45 +68,68 @@
     "semi-supervised-learning"
   ],
   "114041014": [
-    "analytics-types"
+    "analytics-types",
+    "descriptive-analytics",
+    "diagnostic-analytics",
+    "predictive-analytics",
+    "standard-deviation",
+    "heatmap",
+    "central-tendency"
   ],
   "114041015": [
-    "knn"
+    "knn",
+    "train-val-test"
   ],
   "114041016": [
     "rnn",
-    "vanishing-gradient"
+    "vanishing-gradient",
+    "vanishing-gradient-single"
   ],
   "114041017": [
-    "reinforcement-learning"
+    "reinforcement-learning",
+    "cumulative-reward",
+    "supervised-learning",
+    "unsupervised-learning",
+    "transfer-learning"
   ],
   "114041018": [
-    "q-learning"
+    "q-learning",
+    "experience-replay",
+    "q-learning-single",
+    "dqn"
   ],
   "114041019": [
     "loss-function",
     "regression-metrics",
     "cross-entropy",
-    "regression-vs-classification"
+    "regression-vs-classification",
+    "mse",
+    "hinge-loss",
+    "kl-divergence"
   ],
   "114041020": [
     "regression-vs-classification",
     "logistic-regression",
     "svm",
     "decision-tree",
-    "decision-threshold"
+    "decision-threshold",
+    "k-means"
   ],
   "114041021": [
     "random-forest",
     "svm",
-    "decision-tree"
+    "decision-tree",
+    "logistic-regression"
   ],
   "114041022": [
-    "vae"
+    "vae",
+    "latent-space",
+    "autoencoder"
   ],
   "114041023": [
     "ai-evaluation-center",
-    "accountability"
+    "accountability",
+    "reliability"
   ],
   "114041024": [
     "gpt-oss",
@@ -100,30 +141,46 @@
   ],
   "114041026": [
     "catastrophic-forgetting",
-    "fine-tuning"
+    "fine-tuning",
+    "convergence",
+    "deep-learning",
+    "pretraining"
   ],
   "114041027": [
     "transformer",
-    "pruning"
+    "pruning",
+    "forward-pass"
   ],
   "114041028": [
     "transformer",
     "self-attention",
-    "softmax"
+    "softmax",
+    "embedding",
+    "retraining",
+    "vector-database"
   ],
   "114041029": [
     "lime",
-    "global-local-explanation"
-  ],
-  "114041030": [
+    "global-local-explanation",
+    "local-explanation",
+    "train-val-test",
     "xai"
   ],
+  "114041030": [
+    "xai",
+    "decision-support-system"
+  ],
   "114041031": [
-    "counterfactual-explanation"
+    "counterfactual-explanation",
+    "federated-learning"
   ],
   "114041032": [
     "skewness",
-    "central-tendency"
+    "central-tendency",
+    "median",
+    "standard-deviation",
+    "variance",
+    "percentile"
   ],
   "114041033": [
     "predictive-maintenance",
@@ -132,29 +189,48 @@
     "autoencoder",
     "seq2seq",
     "lstm",
-    "smote"
+    "smote",
+    "iot",
+    "time-series-data",
+    "differencing",
+    "supervised-learning"
   ],
   "114041034": [
     "feature-engineering",
-    "data-cleaning"
+    "data-cleaning",
+    "data-warehouse",
+    "data-mining",
+    "deep-learning"
   ],
   "114041035": [
     "class-imbalance",
-    "recall"
+    "recall",
+    "convergence",
+    "decision-boundary",
+    "precision"
   ],
   "114041036": [
     "eda",
-    "random-forest"
+    "random-forest",
+    "t-test",
+    "k-means"
   ],
   "114041037": [
-    "time-series-split"
+    "time-series-split",
+    "random-sampling",
+    "model-evaluation",
+    "stratified-sampling"
   ],
   "114041038": [
-    "incremental-indexing"
+    "incremental-indexing",
+    "reindexing"
   ],
   "114041039": [
     "regression-metrics",
-    "k-fold"
+    "k-fold",
+    "standardization",
+    "mae",
+    "r-squared"
   ],
   "114041040": [
     "pca",
@@ -168,77 +244,121 @@
   "114041041": [
     "feature-engineering",
     "one-hot",
-    "ordinal-encoding"
+    "ordinal-encoding",
+    "standardization",
+    "boolean-conversion"
   ],
   "114041042": [
     "federated-learning",
     "k-fold",
-    "differential-privacy"
+    "differential-privacy",
+    "anonymization"
   ],
   "114041043": [
     "feature-engineering",
     "gradient-descent",
     "logistic-regression",
-    "standardization-normalization"
+    "standardization-normalization",
+    "standardization",
+    "boolean-conversion",
+    "time-series-decomposition",
+    "gradient-descent-single",
+    "convergence",
+    "one-hot"
   ],
   "114041044": [
-    "clustering"
+    "clustering",
+    "deep-learning"
   ],
   "114041045": [
     "standardization-normalization",
     "outlier",
-    "log-transform"
+    "log-transform",
+    "standardization",
+    "standard-deviation",
+    "central-tendency",
+    "label-encoding"
   ],
   "114041046": [
     "feature-selection",
-    "pca"
+    "pca",
+    "model-evaluation"
   ],
   "114041047": [
     "vanishing-gradient",
     "activation-function",
-    "data-augmentation"
+    "data-augmentation",
+    "standardization",
+    "relu",
+    "vanishing-gradient-single",
+    "exploding-gradient",
+    "convergence"
   ],
   "114041048": [
     "histogram",
     "skewness",
-    "scatter-plot"
+    "scatter-plot",
+    "line-chart"
   ],
   "114041049": [
-    "ai-evaluation-center"
+    "ai-evaluation-center",
+    "safety-principle"
   ],
   "114041050": [
-    "batch-vs-realtime-inference"
+    "batch-vs-realtime-inference",
+    "batch-inference",
+    "latency",
+    "gpu",
+    "tpu",
+    "latency-throughput"
   ],
   "114042001": [
-    "low-code"
+    "low-code",
+    "uml"
   ],
   "114042002": [
     "federated-learning",
     "homomorphic-encryption",
-    "zero-knowledge-proof"
+    "zero-knowledge-proof",
+    "smpc"
   ],
   "114042003": [
-    "automated-testing"
+    "automated-testing",
+    "automated-testing-single",
+    "service-virtualization",
+    "api",
+    "testability",
+    "unit-test"
   ],
   "114042004": [
     "graph-prompting",
-    "ape"
+    "ape",
+    "prompt-engineering"
   ],
   "114042005": [
-    "ape"
+    "ape",
+    "prompt-engineering"
   ],
   "114042006": [
-    "no-code"
+    "no-code",
+    "api"
   ],
   "114042007": [
-    "mcp"
+    "mcp",
+    "github",
+    "mcp-host",
+    "mcp-client",
+    "mcp-server"
   ],
   "114042008": [
     "a2a",
-    "multi-agent"
+    "multi-agent",
+    "client-agent",
+    "remote-agent"
   ],
   "114042009": [
-    "context-engineering"
+    "context-engineering",
+    "fine-tuning"
   ],
   "114042010": [
     "hallucination",
@@ -246,114 +366,169 @@
   ],
   "114042011": [
     "solution-graph",
-    "graph-search"
+    "graph-search",
+    "bfs",
+    "dfs",
+    "best-first-search",
+    "ai-agent"
   ],
   "114042012": [
     "gpt-oss",
     "on-premises"
   ],
   "114042013": [
-    "ai-coding-assistant"
+    "ai-coding-assistant",
+    "github-copilot",
+    "codex",
+    "openai",
+    "github",
+    "static-analysis",
+    "code-completion"
   ],
   "114042014": [
     "ai-agent",
     "vector-database",
     "task-planner",
-    "function-calling"
+    "function-calling",
+    "vector-database-single",
+    "api",
+    "faq",
+    "temperature"
   ],
   "114042015": [
-    "control-tokens"
+    "control-tokens",
+    "pretraining",
+    "fine-tuning"
   ],
   "114042016": [
     "multi-agent"
   ],
   "114042017": [
-    "fine-tuning"
+    "fine-tuning",
+    "retraining"
   ],
   "114042018": [
     "temperature",
-    "rag"
+    "rag",
+    "fine-tuning"
   ],
   "114042019": [
-    "asr"
+    "asr",
+    "api",
+    "fine-tuning"
   ],
   "114042020": [
-    "hallucination"
+    "hallucination",
+    "generative-ai",
+    "discriminative-vs-generative"
   ],
   "114042021": [
     "batch-vs-realtime-inference",
-    "asr"
+    "asr",
+    "batch-inference",
+    "latency",
+    "api",
+    "latency-throughput",
+    "fine-tuning"
   ],
   "114042022": [
-    "mode-collapse"
+    "mode-collapse",
+    "train-val-test"
   ],
   "114042023": [
     "zero-shot"
   ],
   "114042024": [
     "on-premises",
-    "mvp"
+    "mvp",
+    "api",
+    "audit",
+    "accuracy"
   ],
   "114042025": [
-    "multimodal"
+    "multimodal",
+    "beam-search",
+    "temperature"
   ],
   "114042026": [
-    "temperature"
+    "temperature",
+    "fcnn",
+    "fine-tuning"
   ],
   "114042027": [
     "clustering",
-    "asr"
+    "asr",
+    "keyword-extraction"
   ],
   "114042028": [
     "few-shot"
   ],
   "114042029": [
-    "function-calling"
+    "function-calling",
+    "reliability"
   ],
   "114042030": [
     "kpi"
   ],
   "114042031": [
     "de-identification",
-    "data-minimization"
+    "data-minimization",
+    "de-identification-single",
+    "access-control"
+  ],
+  "114042032": [
+    "latency",
+    "latency-throughput"
   ],
   "114042033": [
     "mlops",
     "no-code",
-    "citizen-developer"
+    "citizen-developer",
+    "citizen-developer-single",
+    "ai-democratization",
+    "feature-engineering"
   ],
   "114042034": [
     "hallucination"
   ],
   "114042035": [
-    "latency-throughput"
+    "latency-throughput",
+    "latency",
+    "throughput"
   ],
   "114042036": [
     "prompt-injection",
-    "guardrails"
+    "guardrails",
+    "input-validation"
   ],
   "114042037": [
     "data-drift",
-    "mlops"
+    "mlops",
+    "overfitting-single"
   ],
   "114042038": [
     "algorithmic-bias",
-    "proxy-variable"
+    "proxy-variable",
+    "fairness",
+    "bias-detection"
   ],
   "114042039": [
     "chain-of-thought",
-    "tree-of-thoughts"
+    "tree-of-thoughts",
+    "prompt-engineering"
   ],
   "114042040": [
     "chain-of-thought",
-    "graph-prompting"
+    "graph-prompting",
+    "prompt-engineering"
   ],
   "114042041": [
     "few-shot",
     "domain-shift"
   ],
   "114042042": [
-    "knowledge-distillation"
+    "knowledge-distillation",
+    "api"
   ],
   "114042043": [
     "benchmark",
@@ -361,74 +536,117 @@
   ],
   "114042044": [
     "mcp",
-    "rag"
+    "rag",
+    "vector-database-single",
+    "api"
   ],
   "114042045": [
-    "mmlu"
+    "mmlu",
+    "gsm8k",
+    "math-dataset",
+    "c-eval"
   ],
   "114042046": [
-    "guardrails"
+    "guardrails",
+    "reindexing",
+    "input-validation"
   ],
   "114042047": [
     "chunking"
   ],
   "114042048": [
-    "multi-vector-retriever"
+    "multi-vector-retriever",
+    "temperature"
   ],
   "114042049": [
-    "solution-graph"
+    "solution-graph",
+    "ai-agent"
   ],
   "114042050": [
     "seq2seq",
     "masked-lm",
-    "autoregressive"
+    "autoregressive",
+    "text-classification",
+    "text-generation"
   ],
   "115011001": [
     "data-integration"
   ],
   "115011002": [
     "sensor-network",
-    "expert-system"
+    "expert-system",
+    "expert-system-single",
+    "decision-support-system",
+    "sensor-network-single",
+    "heuristic"
   ],
   "115011003": [
-    "unsupervised-learning"
+    "unsupervised-learning",
+    "supervised-learning"
   ],
   "115011004": [
     "outlier",
-    "one-hot"
+    "one-hot",
+    "standardization",
+    "trimming",
+    "iqr"
   ],
   "115011005": [
     "smote",
     "class-imbalance",
     "synthetic-data",
-    "k-fold"
+    "k-fold",
+    "random-resampling",
+    "feature-space",
+    "loss-function"
   ],
   "115011006": [
     "standardization-normalization",
-    "data-leakage"
+    "data-leakage",
+    "standardization",
+    "normalization",
+    "train-val-test",
+    "model-evaluation"
   ],
   "115011007": [
     "one-hot",
     "feature-cross",
-    "wide-and-deep"
+    "wide-and-deep",
+    "categorical-feature",
+    "clustering"
   ],
   "115011008": [
     "wide-and-deep",
-    "recommender-system"
+    "recommender-system",
+    "linear-regression",
+    "decision-tree"
   ],
   "115011009": [
     "softmax",
-    "activation-function"
+    "activation-function",
+    "relu",
+    "sigmoid",
+    "linear-function"
   ],
   "115011010": [
     "vae",
-    "knn"
+    "knn",
+    "bayesian-network",
+    "generative-ai",
+    "random-forest",
+    "autoencoder"
   ],
   "115011011": [
-    "hallucination"
+    "hallucination",
+    "generative-ai",
+    "asr"
   ],
   "115011012": [
-    "llm"
+    "llm",
+    "gcn",
+    "chatgpt",
+    "gemini",
+    "decision-tree"
   ],
   "115011013": [
     "bank-ai-operating-rules",
@@ -438,67 +656,113 @@
     "predictive-maintenance"
   ],
   "115011015": [
-    "data-structure-types"
+    "data-structure-types",
+    "structured-data",
+    "semi-structured-data",
+    "unstructured-data",
+    "mysql",
+    "json",
+    "xml"
   ],
   "115011016": [
-    "central-tendency"
+    "central-tendency",
+    "mean",
+    "median",
+    "standard-deviation",
+    "percentile",
+    "skewness",
+    "outlier"
   ],
   "115011017": [
     "histogram",
-    "scatter-plot"
+    "scatter-plot",
+    "bar-chart"
   ],
   "115011018": [
     "binary-search"
   ],
   "115011019": [
-    "reinforcement-learning"
+    "reinforcement-learning",
+    "convergence"
   ],
   "115011020": [
     "image-classification",
     "data-augmentation",
-    "overfitting"
+    "overfitting",
+    "train-val-test",
+    "overfitting-single",
+    "accuracy"
   ],
   "115011021": [
     "diffusion-model",
-    "gan"
+    "gan",
+    "generative-ai",
+    "decision-tree"
   ],
   "115011022": [
     "autoencoder",
     "vae",
-    "svm"
+    "svm",
+    "decision-tree"
   ],
   "115011023": [
-    "batch-vs-realtime-inference"
+    "batch-vs-realtime-inference",
+    "structured-data",
+    "batch-inference",
+    "realtime-inference",
+    "latency",
+    "throughput",
+    "sync-async",
+    "latency-throughput"
   ],
   "115011024": [
     "rlhf",
-    "pretraining"
+    "pretraining",
+    "reward-model"
   ],
   "115011025": [
     "batch-vs-realtime-inference",
-    "latency-throughput"
+    "latency-throughput",
+    "latency",
+    "throughput",
+    "concurrency",
+    "batching"
   ],
   "115011026": [
     "lime",
     "post-hoc-explanation",
-    "surrogate-model"
+    "surrogate-model",
+    "post-hoc",
+    "intrinsic-interpretability",
+    "conversational-explainer",
+    "xai"
   ],
   "115011027": [
-    "shap"
+    "shap",
+    "convergence",
+    "loss-function",
+    "accuracy"
   ],
   "115011028": [
     "counterfactual-explanation"
   ],
   "115011029": [
-    "saliency-map"
+    "saliency-map",
+    "train-val-test",
+    "deep-learning"
   ],
   "115011030": [
     "supervised-learning",
     "regression-vs-classification",
-    "association-rules"
+    "association-rules",
+    "unsupervised-learning",
+    "reinforcement-learning"
   ],
   "115011031": [
-    "semi-supervised-learning"
+    "semi-supervised-learning",
+    "supervised-learning",
+    "unsupervised-learning",
+    "reinforcement-learning"
   ],
   "115011032": [
     "computer-vision",
@@ -512,23 +776,32 @@
     "lstm",
     "mlp",
     "cnn",
-    "autoencoder"
+    "autoencoder",
+    "fcnn"
   ],
   "115011034": [
-    "automl"
+    "automl",
+    "de-identification-single",
+    "deep-learning"
   ],
   "115011035": [
-    "de-identification"
+    "de-identification",
+    "safety-principle",
+    "de-identification-single"
   ],
   "115011036": [
     "weak-ai",
     "strong-ai-agi",
-    "asi"
+    "asi",
+    "strong-ai",
+    "agi"
   ],
   "115011037": [
     "latency-throughput",
     "batch-vs-realtime-inference",
-    "edge-computing"
+    "edge-computing",
+    "realtime-inference",
+    "latency"
   ],
   "115011038": [
     "computer-vision",
@@ -539,70 +812,107 @@
     "supervised-learning",
     "unsupervised-learning",
     "reinforcement-learning",
-    "semi-supervised-learning"
+    "semi-supervised-learning",
+    "recommender-system"
   ],
   "115011040": [
     "class-imbalance",
     "f1-score",
-    "accuracy"
+    "accuracy",
+    "mse",
+    "rmse",
+    "r-squared",
+    "evaluation-metric",
+    "regression-metrics"
   ],
   "115011041": [
     "self-attention",
-    "flash-attention"
+    "flash-attention",
+    "latency",
+    "attention-head",
+    "transformer",
+    "latency-throughput"
   ],
   "115011042": [
-    "incremental-indexing"
+    "incremental-indexing",
+    "reindexing"
   ],
   "115011043": [
     "supervised-learning",
     "unsupervised-learning",
     "semi-supervised-learning",
-    "self-supervised-learning"
+    "self-supervised-learning",
+    "convergence",
+    "reinforcement-learning"
   ],
   "115011044": [
     "skewness",
     "outlier",
     "feature-engineering",
     "log-transform",
-    "binning"
+    "binning",
+    "right-skew",
+    "random-resampling",
+    "one-hot"
   ],
   "115011045": [
     "activation-function",
-    "vanishing-gradient"
+    "vanishing-gradient",
+    "vanishing-gradient-single"
   ],
   "115011046": [
-    "big-data-v"
+    "big-data-v",
+    "volume",
+    "velocity",
+    "variety",
+    "veracity"
   ],
   "115011047": [
     "structured-prediction",
     "ner"
   ],
   "115011048": [
-    "cnn"
+    "cnn",
+    "gps"
   ],
   "115011049": [
     "transfer-learning",
-    "data-augmentation"
+    "data-augmentation",
+    "pretraining"
   ],
   "115011050": [
     "confusion-matrix",
     "recall",
     "precision",
-    "roc-auc"
+    "roc-auc",
+    "false-positive",
+    "false-negative",
+    "fpr",
+    "evaluation-metric"
   ],
   "115012001": [
     "recommender-system",
-    "algorithmic-bias"
+    "algorithmic-bias",
+    "data-bias"
   ],
   "115012002": [
     "lora-peft",
-    "knowledge-distillation"
+    "knowledge-distillation",
+    "gradient-freezing",
+    "lora",
+    "peft",
+    "gpu",
+    "fine-tuning",
+    "prompt-engineering"
   ],
   "115012003": [
-    "low-code"
+    "low-code",
+    "dashboard"
   ],
   "115012004": [
-    "latency-throughput"
+    "latency-throughput",
+    "latency",
+    "throughput"
   ],
   "115012005": [
     "transformer",
@@ -610,47 +920,72 @@
     "rnn"
   ],
   "115012006": [
-    "c2pa"
+    "c2pa",
+    "sora",
+    "openai"
   ],
   "115012007": [
-    "rbac"
+    "rbac",
+    "access-control"
   ],
   "115012008": [
-    "edge-computing"
+    "edge-computing",
+    "latency",
+    "latency-throughput"
   ],
   "115012009": [
     "few-shot",
     "domain-shift"
   ],
   "115012010": [
-    "knowledge-distillation"
+    "knowledge-distillation",
+    "latency",
+    "latency-throughput"
   ],
   "115012011": [
     "automl",
     "no-code"
   ],
   "115012012": [
-    "mcp"
+    "mcp",
+    "vector-database-single"
   ],
   "115012013": [
     "chunking"
   ],
   "115012014": [
-    "context-engineering"
+    "context-engineering",
+    "excel",
+    "json",
+    "markdown"
   ],
   "115012015": [
-    "context-aware-agent"
+    "context-aware-agent",
+    "retraining"
   ],
   "115012016": [
-    "solution-graph"
+    "solution-graph",
+    "ai-agent"
   ],
   "115012017": [
-    "load-balancing"
+    "load-balancing",
+    "high-availability",
+    "load-balancing-single",
+    "ftp",
+    "virtual-machine",
+    "api",
+    "concurrency"
   ],
   "115012018": [
     "ai-coding-assistant",
     "autoregressive",
-    "llm"
+    "llm",
+    "chatgpt",
+    "claude",
+    "github-copilot",
+    "anthropic",
+    "github",
+    "compiler"
   ],
   "115012019": [
     "vibe-coding",
@@ -661,63 +996,104 @@
   ],
   "115012021": [
     "agentkit",
-    "a2a"
+    "a2a",
+    "openai",
+    "reinforcement-learning",
+    "pretraining"
   ],
   "115012022": [
-    "synthid"
+    "synthid",
+    "gemini",
+    "veo"
   ],
   "115012023": [
-    "discriminative-vs-generative"
+    "discriminative-vs-generative",
+    "discriminative-ai",
+    "generative-ai"
   ],
   "115012024": [
-    "tco"
+    "tco",
+    "api"
   ],
   "115012025": [
     "roi",
-    "token-economics"
+    "token-economics",
+    "token-single",
+    "chatgpt",
+    "api"
   ],
   "115012026": [
-    "rag"
+    "rag",
+    "midjourney",
+    "few-shot-learning",
+    "chatgpt",
+    "image-gen-tools"
   ],
   "115012027": [
-    "workflow-automation"
+    "workflow-automation",
+    "n8n",
+    "excel",
+    "api",
+    "workflow"
   ],
   "115012028": [
-    "token-economics"
+    "token-economics",
+    "token-single",
+    "gpu",
+    "api"
   ],
   "115012029": [
-    "low-code"
+    "low-code",
+    "pro-code",
+    "workflow"
   ],
   "115012030": [
-    "few-shot"
+    "few-shot",
+    "few-shot-learning"
   ],
   "115012031": [
     "rag",
     "vector-database",
-    "context-window"
+    "context-window",
+    "few-shot-learning",
+    "vector-database-single",
+    "chatgpt",
+    "pretraining",
+    "system-prompt"
   ],
   "115012032": [
-    "low-code"
+    "low-code",
+    "apache-spark",
+    "retraining"
   ],
   "115012033": [
     "low-code",
     "pretraining",
-    "rule-based-automation"
+    "rule-based-automation",
+    "pro-code",
+    "api",
+    "pretrained-ai-services",
+    "deep-learning"
   ],
   "115012034": [
     "shadow-it"
   ],
   "115012035": [
-    "encoder-decoder"
+    "encoder-decoder",
+    "encoder-decoder-arch",
+    "decoder-only"
   ],
   "115012036": [
     "graph-prompting",
-    "tree-of-thoughts"
+    "tree-of-thoughts",
+    "prompt-engineering",
+    "zero-shot"
   ],
   "115012037": [
     "prompt-engineering",
     "fine-tuning",
-    "system-prompt"
+    "system-prompt",
+    "retraining"
   ],
   "115012038": [
     "poc"
@@ -725,23 +1101,34 @@
   "115012039": [
     "de-identification",
     "data-masking",
-    "data-minimization"
+    "data-minimization",
+    "de-identification-single",
+    "generative-ai",
+    "access-control",
+    "discriminative-vs-generative"
   ],
   "115012040": [
     "rft",
-    "sft"
+    "sft",
+    "latency",
+    "latency-throughput",
+    "fine-tuning"
   ],
   "115012041": [
     "bias-detection-mitigation",
-    "decision-threshold"
+    "decision-threshold",
+    "bias-detection",
+    "bias-mitigation"
   ],
   "115012042": [
     "homomorphic-encryption",
     "federated-learning",
-    "zero-knowledge-proof"
+    "zero-knowledge-proof",
+    "anonymization"
   ],
   "115012043": [
-    "on-premises"
+    "on-premises",
+    "hallucination"
   ],
   "115012044": [
     "asr"
@@ -751,25 +1138,42 @@
   ],
   "115012046": [
     "data-masking",
-    "on-premises"
+    "on-premises",
+    "api",
+    "access-control",
+    "audit"
   ],
   "115012047": [
-    "hallucination"
+    "hallucination",
+    "latency",
+    "latency-throughput"
   ],
   "115012048": [
     "recommender-system",
-    "data-drift"
+    "data-drift",
+    "feature-engineering"
   ],
   "115012049": [
-    "automated-testing"
+    "automated-testing",
+    "automated-testing-single",
+    "service-virtualization",
+    "testability",
+    "reliability",
+    "integration-test"
   ],
   "115012050": [
     "algorithmic-bias",
-    "human-in-the-loop"
+    "human-in-the-loop",
+    "bias-mitigation",
+    "data-bias"
   ],
   "115021001": [
     "sentiment-analysis",
-    "face-recognition"
+    "face-recognition",
+    "text-classification",
+    "keyword-extraction",
+    "social-graph",
+    "recommender-system"
   ],
   "115021002": [
     "supervised-learning",
@@ -780,20 +1184,29 @@
   "115021003": [
     "nlp",
     "computer-vision",
-    "analytics-types"
+    "analytics-types",
+    "diagnostic-analytics",
+    "anomaly-detection"
+  ],
+  "115021004": [
+    "recommender-system"
   ],
   "115021005": [
     "ai-basic-act",
     "xai",
-    "algorithmic-bias"
+    "algorithmic-bias",
+    "accuracy"
   ],
   "115021006": [
-    "ai-evaluation-center"
+    "ai-evaluation-center",
+    "fairness",
+    "reliability"
   ],
   "115021007": [
     "algorithmic-bias",
     "data-cleaning",
-    "data-debiasing"
+    "data-debiasing",
+    "fairness"
   ],
   "115021008": [
     "bank-ai-operating-rules",
@@ -801,57 +1214,87 @@
   ],
   "115021009": [
     "ai-ethics-principles",
-    "accountability"
+    "accountability",
+    "transparency",
+    "fairness",
+    "privacy-principle",
+    "safety-principle"
   ],
   "115021010": [
-    "big-data-v"
+    "big-data-v",
+    "volume",
+    "velocity",
+    "variety",
+    "veracity",
+    "value-v",
+    "high-frequency-data"
   ],
   "115021011": [
     "feature-selection",
     "proxy-variable",
-    "algorithmic-bias"
+    "algorithmic-bias",
+    "fairness"
   ],
   "115021012": [
     "data-structure-types",
-    "ocr"
+    "ocr",
+    "structured-data",
+    "unstructured-data",
+    "pdf",
+    "erp"
   ],
   "115021013": [
     "label-encoding",
-    "one-hot"
+    "one-hot",
+    "binary-encoding",
+    "target-encoding"
   ],
   "115021014": [
     "k-fold",
     "time-series-split",
-    "data-leakage"
+    "data-leakage",
+    "train-val-test"
   ],
   "115021015": [
     "standardization-normalization",
     "decision-tree",
     "knn",
     "linear-regression",
-    "svm"
+    "svm",
+    "standardization"
   ],
   "115021016": [
-    "anomaly-detection"
+    "anomaly-detection",
+    "dashboard"
   ],
   "115021017": [
     "de-identification",
     "personal-data-act",
     "pseudonymization",
-    "hashing"
+    "hashing",
+    "de-identification-single",
+    "md5"
   ],
   "115021018": [
-    "missing-value"
+    "missing-value",
+    "time-series-data",
+    "linear-interpolation"
   ],
   "115021019": [
     "confusion-matrix",
     "recall",
     "precision",
     "f1-score",
-    "accuracy"
+    "accuracy",
+    "false-positive",
+    "false-negative",
+    "evaluation-metric"
   ],
   "115021020": [
-    "mitm"
+    "mitm",
+    "mitm-single",
+    "tls",
+    "access-control"
   ],
   "115021021": [
     "deep-learning"
@@ -865,13 +1308,21 @@
   ],
   "115021023": [
     "regression-metrics",
-    "regression-vs-classification"
+    "regression-vs-classification",
+    "mse",
+    "precision",
+    "recall"
   ],
   "115021024": [
     "reinforcement-learning",
     "exploration-exploitation",
     "bias-variance",
-    "vanishing-gradient"
+    "vanishing-gradient",
+    "exploding-gradient",
+    "overfitting-single",
+    "underfitting",
+    "overfitting",
+    "ai-agent"
   ],
   "115021025": [
     "lstm",
@@ -879,14 +1330,21 @@
     "cnn"
   ],
   "115021026": [
-    "semi-supervised-learning"
+    "semi-supervised-learning",
+    "decision-boundary",
+    "supervised-learning",
+    "unsupervised-learning",
+    "reinforcement-learning"
   ],
   "115021027": [
     "autoencoder",
     "anomaly-detection"
   ],
   "115021028": [
-    "batch-normalization"
+    "batch-normalization",
+    "normalization",
+    "weight-initialization",
+    "loss-function"
   ],
   "115021029": [
     "grpo"
@@ -897,58 +1355,82 @@
   ],
   "115021031": [
     "pdp",
-    "global-local-explanation"
+    "global-local-explanation",
+    "global-explanation",
+    "accuracy"
   ],
   "115021032": [
     "lime",
     "surrogate-model"
   ],
   "115021033": [
-    "moe"
+    "moe",
+    "dense-model",
+    "transformer"
   ],
   "115021034": [
     "self-supervised-learning",
     "clip",
-    "dino"
+    "dino",
+    "supervised-learning"
   ],
   "115021035": [
     "transformer",
-    "context-window"
+    "context-window",
+    "retraining"
   ],
   "115021036": [
-    "optimizer"
+    "optimizer",
+    "deep-learning"
   ],
   "115021037": [
     "saliency-map",
     "lime",
     "shap",
-    "pdp"
+    "pdp",
+    "deep-learning"
   ],
   "115021038": [
     "anomaly-detection",
     "semi-supervised-learning",
-    "association-rules"
+    "association-rules",
+    "supervised-learning",
+    "unsupervised-learning",
+    "reinforcement-learning"
   ],
   "115021039": [
     "ner",
     "crf",
-    "discriminative-vs-generative"
+    "discriminative-vs-generative",
+    "discriminative-ai",
+    "generative-ai",
+    "autoregressive"
   ],
   "115021040": [
     "gan",
-    "autoencoder"
+    "autoencoder",
+    "random-forest"
   ],
   "115021041": [
-    "svm"
+    "svm",
+    "structured-data",
+    "unstructured-data",
+    "accuracy"
   ],
   "115021042": [
-    "lime"
+    "lime",
+    "local-explanation",
+    "recommender-system",
+    "xai"
   ],
   "115021043": [
     "shap"
   ],
   "115021044": [
-    "llm"
+    "llm",
+    "latency",
+    "concurrency",
+    "latency-throughput"
   ],
   "115021045": [
     "cnn",
@@ -960,81 +1442,134 @@
     "autoskill"
   ],
   "115021047": [
-    "mode-collapse"
+    "mode-collapse",
+    "vanishing-gradient-single",
+    "overfitting-single",
+    "convergence",
+    "overfitting",
+    "vanishing-gradient"
   ],
   "115021048": [
     "data-drift",
     "overfitting",
-    "concept-drift"
+    "concept-drift",
+    "overfitting-single",
+    "accuracy"
   ],
   "115021049": [
     "discriminative-vs-generative",
-    "synthetic-data"
+    "synthetic-data",
+    "discriminative-ai"
   ],
   "115021050": [
     "fine-tuning",
-    "rag"
+    "rag",
+    "retraining",
+    "pretraining"
   ],
   "115022001": [
     "rag",
-    "data-structure-types"
+    "data-structure-types",
+    "unstructured-data",
+    "pdf",
+    "api",
+    "accuracy"
   ],
   "115022002": [
     "router-node",
     "aggregator-node",
     "iterator-node",
-    "filter-formatter-node"
+    "filter-formatter-node",
+    "formatter-node",
+    "data-integration"
   ],
   "115022003": [
-    "llm-stateless"
+    "llm-stateless",
+    "dify",
+    "api",
+    "multi-turn-dialogue",
+    "multimodal",
+    "temperature"
   ],
   "115022004": [
     "token",
-    "context-window"
+    "context-window",
+    "max-tokens",
+    "token-single",
+    "api"
   ],
   "115022005": [
-    "vendor-lock-in"
+    "vendor-lock-in",
+    "api"
   ],
   "115022006": [
-    "webhook"
+    "webhook",
+    "erp",
+    "api",
+    "compiler",
+    "on-premises"
   ],
   "115022007": [
     "citizen-developer",
-    "shadow-it"
+    "shadow-it",
+    "citizen-developer-single",
+    "ai-democratization"
   ],
   "115022008": [
-    "webhook"
+    "webhook",
+    "workflow"
   ],
   "115022009": [
     "no-code",
-    "workflow-automation"
+    "workflow-automation",
+    "saas"
   ],
   "115022010": [
     "low-code",
-    "latency-throughput"
+    "latency-throughput",
+    "latency",
+    "throughput",
+    "api",
+    "concurrency"
   ],
   "115022011": [
     "automl",
-    "sentiment-analysis"
+    "sentiment-analysis",
+    "python",
+    "deep-learning"
   ],
   "115022012": [
     "clip",
     "cosine-similarity",
-    "cross-entropy"
+    "cross-entropy",
+    "embedding",
+    "bleu",
+    "precision",
+    "recall",
+    "pretraining"
   ],
   "115022013": [
     "vibe-coding"
   ],
   "115022014": [
-    "agentic-coding"
+    "agentic-coding",
+    "claude",
+    "git-commit"
   ],
   "115022015": [
     "sft",
-    "rft"
+    "rft",
+    "fine-tuning"
   ],
   "115022016": [
     "ai-agent",
-    "rule-based-automation"
+    "rule-based-automation",
+    "structured-data",
+    "gui",
+    "autonomous-agency"
+  ],
+  "115022017": [
+    "generative-ai"
   ],
   "115022018": [
     "context-engineering"
@@ -1045,13 +1580,22 @@
   "115022020": [
     "ai-coding-assistant",
     "mcp",
-    "knowledge-distillation"
+    "knowledge-distillation",
+    "prompt-caching",
+    "latency",
+    "python",
+    "api",
+    "data-pipeline",
+    "retraining",
+    "latency-throughput",
+    "fine-tuning"
   ],
   "115022021": [
     "image-gen-tools"
   ],
   "115022022": [
-    "reasoning-budget"
+    "reasoning-budget",
+    "temperature"
   ],
   "115022023": [
     "titans-mac"
@@ -1060,23 +1604,30 @@
     "ai-agent"
   ],
   "115022025": [
-    "react"
+    "react",
+    "pdf"
   ],
   "115022026": [
     "chain-of-thought",
     "zero-shot",
     "tree-of-thoughts",
     "self-consistency",
-    "react"
+    "react",
+    "zero-shot-learning"
   ],
   "115022027": [
-    "encoder-decoder"
+    "encoder-decoder",
+    "encoder-decoder-arch"
   ],
   "115022028": [
     "prompt-injection",
     "least-privilege",
     "system-prompt",
-    "guardrails"
+    "guardrails",
+    "penetration-testing",
+    "keyword-blacklist",
+    "input-validation",
+    "access-control"
   ],
   "115022029": [
     "diffusion-model",
@@ -1087,65 +1638,108 @@
   ],
   "115022031": [
     "synthetic-data",
-    "image-gen-tools"
+    "image-gen-tools",
+    "midjourney",
+    "dall-e",
+    "stable-diffusion",
+    "perplexity",
+    "chatgpt",
+    "claude"
   ],
   "115022032": [
-    "ai-coding-assistant"
+    "ai-coding-assistant",
+    "github-copilot",
+    "cursor",
+    "github"
   ],
   "115022033": [
-    "few-shot"
+    "few-shot",
+    "fine-tuning",
+    "zero-shot"
   ],
   "115022034": [
     "few-shot",
-    "overfitting"
+    "overfitting",
+    "overfitting-single",
+    "few-shot-fine-tuning",
+    "pretraining",
+    "fine-tuning"
   ],
   "115022035": [
     "multi-agent",
-    "shared-memory"
+    "shared-memory",
+    "context-window"
   ],
   "115022036": [
-    "task-planner"
+    "task-planner",
+    "api-gateway",
+    "api",
+    "tool-executor",
+    "model-trainer",
+    "ai-agent"
   ],
   "115022037": [
-    "function-calling"
+    "function-calling",
+    "vector-database-single",
+    "api",
+    "semantic-parsing",
+    "task-oriented-dialogue",
+    "multi-turn-dialogue"
   ],
   "115022038": [
-    "pretraining"
+    "pretraining",
+    "chatgpt"
   ],
   "115022039": [
-    "mmlu"
+    "mmlu",
+    "accuracy"
   ],
   "115022040": [
-    "solution-graph"
+    "solution-graph",
+    "ai-agent"
   ],
   "115022041": [
-    "solution-graph"
+    "solution-graph",
+    "ai-agent",
+    "react"
   ],
   "115022042": [
     "system-prompt",
     "prompt-injection",
     "prompt-leakage",
-    "adversarial-attack"
+    "adversarial-attack",
+    "adversarial-attack-single",
+    "chatbot",
+    "hallucination"
   ],
   "115022043": [
     "roi",
     "tco"
   ],
   "115022044": [
-    "on-premises"
+    "on-premises",
+    "de-identification-single"
   ],
   "115022045": [
     "indirect-prompt-injection"
   ],
   "115022046": [
-    "differential-privacy"
+    "differential-privacy",
+    "de-identification-single",
+    "access-control"
   ],
   "115022047": [
-    "tco"
+    "tco",
+    "gpu",
+    "api"
   ],
   "115022048": [
     "rag",
-    "expert-system"
+    "expert-system",
+    "expert-system-single",
+    "rule-engine",
+    "retraining",
+    "fine-tuning"
   ],
   "115022049": [
     "memorization"
@@ -1155,92 +1749,146 @@
     "accountability"
   ],
   "115031001": [
-    "supervised-learning"
+    "supervised-learning",
+    "unsupervised-learning",
+    "semi-supervised-learning",
+    "reinforcement-learning"
   ],
   "115031002": [
     "supervised-learning",
     "unsupervised-learning"
   ],
   "115031003": [
-    "ocr"
+    "ocr",
+    "text-mining",
+    "generative-ai",
+    "gps"
   ],
   "115031004": [
     "proxy-variable",
-    "algorithmic-bias"
+    "algorithmic-bias",
+    "fairness",
+    "evaluation-metric",
+    "audit"
   ],
   "115031005": [
     "weak-ai",
     "strong-ai-agi",
-    "asi"
+    "asi",
+    "agi",
+    "embodied-ai",
+    "face-recognition"
   ],
   "115031006": [
     "turing-test"
   ],
   "115031007": [
     "public-sector-ai-handbook",
-    "human-in-the-loop"
+    "human-in-the-loop",
+    "vulnerability-scanning"
   ],
   "115031008": [
     "cnn",
-    "decision-tree"
+    "decision-tree",
+    "reinforcement-learning",
+    "clustering"
   ],
   "115031009": [
     "feature-engineering",
     "data-leakage"
   ],
   "115031010": [
-    "standardization-normalization"
+    "standardization-normalization",
+    "standardization",
+    "standard-deviation",
+    "central-tendency"
   ],
   "115031011": [
-    "data-structure-types"
+    "data-structure-types",
+    "structured-data",
+    "semi-structured-data",
+    "time-series-data",
+    "high-frequency-data"
   ],
   "115031012": [
     "central-tendency",
-    "skewness"
+    "skewness",
+    "mean",
+    "median",
+    "right-skew",
+    "left-skew",
+    "random-sampling"
   ],
   "115031013": [
     "nlp",
     "data-cleaning",
-    "feature-extraction"
+    "feature-extraction",
+    "train-val-test",
+    "stop-words",
+    "hyperparameter-tuning",
+    "html",
+    "model-evaluation",
+    "learning-rate",
+    "batch-size",
+    "precision",
+    "accuracy"
   ],
   "115031014": [
-    "pca"
+    "pca",
+    "standardization",
+    "categorical-feature",
+    "outlier"
   ],
   "115031015": [
     "k-anonymity",
     "differential-privacy",
-    "hashing"
+    "hashing",
+    "anonymization",
+    "de-identification-single",
+    "random-sampling"
   ],
   "115031016": [
     "skewness",
     "missing-value",
-    "central-tendency"
+    "central-tendency",
+    "mean",
+    "median",
+    "mode",
+    "right-skew"
   ],
   "115031017": [
-    "data-leakage"
+    "data-leakage",
+    "high-frequency-data",
+    "model-evaluation"
   ],
   "115031018": [
     "differential-privacy",
     "k-anonymity",
     "pseudonymization",
-    "data-masking"
+    "data-masking",
+    "anonymization"
   ],
   "115031019": [
     "ai-ethics-principles",
     "personal-data-act"
   ],
   "115031020": [
-    "clustering"
+    "clustering",
+    "reinforcement-learning"
   ],
   "115031021": [
     "rnn",
     "mlp",
-    "cnn"
+    "cnn",
+    "deep-learning"
   ],
   "115031022": [
     "image-classification",
     "clustering",
-    "semi-supervised-learning"
+    "semi-supervised-learning",
+    "supervised-learning",
+    "pretraining",
+    "fine-tuning"
   ],
   "115031023": [
     "lstm"
@@ -1249,17 +1897,25 @@
     "precision",
     "recall",
     "decision-threshold",
-    "confusion-matrix"
+    "confusion-matrix",
+    "false-positive",
+    "false-negative"
   ],
   "115031025": [
     "k-fold",
-    "random-forest"
+    "random-forest",
+    "train-val-test",
+    "hold-out",
+    "bootstrapping"
   ],
   "115031026": [
     "gradient-descent",
     "loss-function",
     "accuracy",
-    "activation-function"
+    "activation-function",
+    "epoch",
+    "gradient-descent-single",
+    "deep-learning"
   ],
   "115031027": [
     "gradient-boosting",
@@ -1267,7 +1923,12 @@
     "regression-metrics",
     "clustering",
     "accuracy",
-    "isolation-forest"
+    "isolation-forest",
+    "mape",
+    "k-means",
+    "evaluation-metric",
+    "recall",
+    "decision-tree"
   ],
   "115031028": [
     "regression-vs-classification",
@@ -1275,17 +1936,30 @@
     "linear-regression",
     "clustering",
     "confusion-matrix",
-    "accuracy"
+    "accuracy",
+    "mae",
+    "k-means",
+    "q-learning-single",
+    "cumulative-reward",
+    "supervised-learning",
+    "reinforcement-learning"
   ],
   "115031029": [
     "k-fold",
-    "random-seed"
+    "random-seed",
+    "model-evaluation",
+    "audit"
   ],
   "115031030": [
     "anomaly-detection"
   ],
   "115031031": [
-    "regression-metrics"
+    "regression-metrics",
+    "train-val-test",
+    "mse",
+    "overfitting-single",
+    "model-evaluation",
+    "overfitting"
   ],
   "115031032": [
     "transformer",
@@ -1294,17 +1968,24 @@
   ],
   "115031033": [
     "loss-function",
-    "optimizer"
+    "optimizer",
+    "evaluation-metric",
+    "feature-engineering",
+    "deep-learning"
   ],
   "115031034": [
-    "discriminative-vs-generative"
+    "discriminative-vs-generative",
+    "discriminative-ai",
+    "generative-ai"
   ],
   "115031035": [
     "xai",
-    "global-local-explanation"
+    "global-local-explanation",
+    "global-explanation"
   ],
   "115031036": [
-    "permutation-importance"
+    "permutation-importance",
+    "retraining"
   ],
   "115031037": [
     "computer-vision",
@@ -1318,19 +1999,35 @@
   ],
   "115031039": [
     "diffusion-model",
-    "vae"
+    "vae",
+    "autoencoder"
   ],
   "115031040": [
     "gan",
-    "mode-collapse"
+    "mode-collapse",
+    "vanishing-gradient-single",
+    "exploding-gradient",
+    "overfitting-single",
+    "generator",
+    "discriminator",
+    "overfitting",
+    "vanishing-gradient"
   ],
   "115031041": [
     "object-detection",
-    "face-recognition"
+    "face-recognition",
+    "gait-analysis",
+    "behavior-analytics"
   ],
   "115031042": [
     "rlhf",
-    "sft"
+    "sft",
+    "reward-model",
+    "chatbot",
+    "reinforcement-learning",
+    "pretraining",
+    "fine-tuning",
+    "system-prompt"
   ],
   "115031043": [
     "self-attention"
@@ -1341,33 +2038,52 @@
   ],
   "115031045": [
     "lime",
-    "global-local-explanation"
+    "global-local-explanation",
+    "local-explanation",
+    "xai"
   ],
   "115031046": [
     "saliency-map",
-    "image-segmentation"
+    "image-segmentation",
+    "reliability"
   ],
   "115031047": [
     "moe"
   ],
   "115031048": [
     "rag",
-    "fine-tuning"
+    "fine-tuning",
+    "embedding",
+    "vector-database-single",
+    "latency",
+    "latency-throughput",
+    "on-premises"
   ],
   "115031049": [
-    "discriminative-vs-generative"
+    "discriminative-vs-generative",
+    "discriminative-ai",
+    "generative-ai",
+    "deep-learning"
   ],
   "115031050": [
-    "fine-tuning"
+    "fine-tuning",
+    "hallucination"
   ],
   "115032001": [
-    "multi-cloud"
+    "multi-cloud",
+    "pro-code",
+    "cross-cloud"
   ],
   "115032002": [
-    "low-code"
+    "low-code",
+    "audit"
   ],
   "115032003": [
-    "fine-tuning"
+    "fine-tuning",
+    "latency",
+    "latency-throughput",
+    "few-shot",
+    "chain-of-thought"
   ],
   "115032004": [
     "no-code",
@@ -1377,171 +2093,273 @@
     "aggregator-node",
     "router-node",
     "iterator-node",
-    "filter-formatter-node"
+    "filter-formatter-node",
+    "filter-node"
   ],
   "115032006": [
-    "low-code"
+    "low-code",
+    "pro-code",
+    "gantt-chart",
+    "erp",
+    "mes",
+    "dashboard",
+    "access-control"
   ],
   "115032007": [
     "prompt-chaining",
     "guardrails",
-    "temperature"
+    "temperature",
+    "vector-database-single",
+    "reindexing"
   ],
   "115032008": [
     "prompt-engineering",
-    "temperature"
+    "temperature",
+    "latency",
+    "workflow",
+    "latency-throughput"
   ],
   "115032009": [
     "multi-agent",
-    "shared-memory"
+    "shared-memory",
+    "context-window",
+    "ai-agent"
   ],
   "115032010": [
     "solution-graph",
-    "knowledge-graph"
+    "knowledge-graph",
+    "ai-agent"
   ],
   "115032011": [
     "solution-graph",
-    "hallucination"
+    "hallucination",
+    "structured-data",
+    "ai-agent"
   ],
   "115032012": [
     "vibe-coding",
     "agentic-coding",
-    "prompt-engineering"
+    "prompt-engineering",
+    "multi-turn-dialogue"
   ],
   "115032013": [
     "computer-vision",
     "rag",
-    "multimodal"
+    "multimodal",
+    "pretraining",
+    "fine-tuning"
   ],
   "115032014": [
     "prompt-engineering",
-    "zero-shot"
+    "zero-shot",
+    "sop",
+    "retraining",
+    "zero-shot-learning",
+    "fine-tuning"
   ],
   "115032015": [
-    "temperature"
+    "temperature",
+    "max-tokens",
+    "context-window"
   ],
   "115032016": [
     "rag",
-    "hallucination"
+    "hallucination",
+    "temperature"
   ],
   "115032017": [
     "function-calling",
-    "llm"
+    "llm",
+    "structured-data",
+    "json",
+    "retraining",
+    "context-window"
   ],
   "115032018": [
     "reasoning-budget",
-    "latency-throughput"
+    "latency-throughput",
+    "latency",
+    "context-window",
+    "hallucination",
+    "ai-agent"
   ],
   "115032019": [
     "model-routing",
     "rule-based-automation",
-    "load-balancing"
+    "load-balancing",
+    "load-balancing-single",
+    "rule-based-routing",
+    "prompt-engineering",
+    "system-prompt"
   ],
   "115032020": [
-    "ai-agent"
+    "ai-agent",
+    "autonomous-agency"
   ],
   "115032021": [
     "few-shot",
-    "role-prompting"
+    "role-prompting",
+    "role-prompting-single",
+    "esg"
   ],
   "115032022": [
-    "mcp"
+    "mcp",
+    "mcp-server"
   ],
   "115032023": [
-    "token"
+    "token",
+    "tokenization"
   ],
   "115032024": [
     "reranker",
-    "chunking"
+    "chunking",
+    "query-expansion",
+    "semantic-cache",
+    "vector-database-single",
+    "retraining"
   ],
   "115032025": [
     "ai-agent",
-    "rule-based-automation"
+    "rule-based-automation",
+    "gui",
+    "autonomous-agency"
   ],
   "115032026": [
     "mcp",
-    "agent-skill"
+    "agent-skill",
+    "retraining",
+    "ai-agent"
   ],
   "115032027": [
     "synthetic-data",
-    "rag"
+    "rag",
+    "multimodal",
+    "fine-tuning"
   ],
   "115032028": [
-    "chain-of-thought"
+    "chain-of-thought",
+    "prompt-engineering",
+    "zero-shot",
+    "few-shot"
   ],
   "115032029": [
     "react",
-    "prompt-chaining"
+    "prompt-chaining",
+    "ai-agent"
   ],
   "115032030": [
     "vibe-coding"
   ],
   "115032031": [
-    "role-prompting"
+    "role-prompting",
+    "role-prompting-single",
+    "context-prompting",
+    "zero-shot",
+    "few-shot",
+    "chain-of-thought"
   ],
   "115032032": [
-    "vector-database"
+    "vector-database",
+    "embedding",
+    "full-text-search",
+    "vector-database-single",
+    "mysql"
   ],
   "115032033": [
     "context-window"
   ],
   "115032034": [
-    "adversarial-attack"
+    "adversarial-attack",
+    "adversarial-testing",
+    "audit"
   ],
   "115032035": [
     "data-drift",
     "overfitting",
-    "concept-drift"
+    "concept-drift",
+    "overfitting-single",
+    "data-bias",
+    "accuracy"
   ],
   "115032036": [
     "system-prompt",
     "indirect-prompt-injection",
-    "data-poisoning"
+    "data-poisoning",
+    "multi-turn-dialogue"
   ],
   "115032037": [
-    "federated-learning"
+    "federated-learning",
+    "iot",
+    "data-warehouse",
+    "digital-twin"
   ],
   "115032038": [
-    "sentiment-analysis"
+    "sentiment-analysis",
+    "keyword-blacklist"
   ],
   "115032039": [
-    "guardrails"
+    "guardrails",
+    "safety-alignment",
+    "keyword-blacklist"
   ],
   "115032040": [
-    "token-economics"
+    "token-economics",
+    "token-single",
+    "api"
   ],
   "115032041": [
-    "hallucination"
+    "hallucination",
+    "retraining"
   ],
   "115032042": [
-    "human-in-the-loop"
+    "human-in-the-loop",
+    "ai-agent"
   ],
   "115032043": [
     "system-prompt",
-    "jailbreak"
+    "jailbreak",
+    "data-leakage",
+    "hallucination",
+    "few-shot"
   ],
   "115032044": [
     "rlhf",
-    "selection-bias"
+    "selection-bias",
+    "reward-model",
+    "reinforcement-learning",
+    "pretraining",
+    "fine-tuning"
   ],
   "115032045": [
     "xai"
   ],
   "115032046": [
-    "accountability"
+    "accountability",
+    "transparency"
   ],
   "115032047": [
     "data-poisoning"
   ],
   "115032048": [
     "function-calling",
-    "benchmark"
+    "benchmark",
+    "sop",
+    "workflow"
   ],
   "115032049": [
     "automl",
-    "expert-system"
+    "expert-system",
+    "expert-system-single",
+    "hyperparameter-tuning",
+    "rule-engine",
+    "pytorch",
+    "tensorflow",
+    "pretrained-ai-services",
+    "feature-engineering",
+    "deep-learning"
   ],
   "115032050": [
-    "human-in-the-loop"
+    "human-in-the-loop",
+    "train-val-test"
   ]
 }

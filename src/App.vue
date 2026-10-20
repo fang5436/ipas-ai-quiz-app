@@ -25,6 +25,7 @@
           <button @click="switchTab('book')" :class="getTabClass('book')">指南單元</button>
           <button @click="switchTab('browse')" :class="getTabClass('browse')">題庫瀏覽</button>
           <button @click="switchTab('practice')" :class="getTabClass('practice')">練習題</button>
+          <button @click="switchTab('terms')" :class="getTabClass('terms')">名詞卡</button>
         </nav>
       </div>
     </header>
@@ -518,6 +519,9 @@
       <!-- =================【🆕 TAB 7: 練習題（方小瑋出題＋錯題複習＋累積弱點，程式在 components/PracticeTab.vue）】================= -->
       <PracticeTab v-else-if="currentTab === 'practice'" :questions="allQuestions" />
 
+      <!-- =================【🆕 TAB 8: 名詞卡（搜尋＋依評鑑範圍分組＋不熟清單，程式在 components/TermsTab.vue）】================= -->
+      <TermsTab v-else-if="currentTab === 'terms'" />
+
     </main>
 
     <!-- 模擬考專屬盲點置底切換鍵 -->
@@ -591,6 +595,7 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
 import PracticeTab from './components/PracticeTab.vue';
+import TermsTab from './components/TermsTab.vue';
 import { recordWrongAnswer } from './utils/wrongBook.js';
 import { recordCodeAnswers } from './utils/answerStats.js';
 
@@ -800,11 +805,12 @@ onBeforeUnmount(() => {
 // UI 分流專屬按鈕樣式切換
 const getTabClass = (id) => {
   const isActive = currentTab.value === id;
-  if (!isActive) return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-all duration-200';
-  if (id === 'book') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-sky-600 text-white shadow-lg shadow-sky-900/40 transition-all duration-200';
-  if (id === 'tracker') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white shadow-lg shadow-emerald-900/40 transition-all duration-200';
-  if (id === 'browse') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-600 text-white shadow-lg shadow-amber-900/40 transition-all duration-200';
-  if (id === 'practice') return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-rose-600 text-white shadow-lg shadow-rose-900/40 transition-all duration-200';
+  if (!isActive) return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-all duration-200';
+  if (id === 'book') return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-sky-600 text-white shadow-lg shadow-sky-900/40 transition-all duration-200';
+  if (id === 'tracker') return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-emerald-600 text-white shadow-lg shadow-emerald-900/40 transition-all duration-200';
+  if (id === 'browse') return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-600 text-white shadow-lg shadow-amber-900/40 transition-all duration-200';
+  if (id === 'practice') return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-rose-600 text-white shadow-lg shadow-rose-900/40 transition-all duration-200';
+  if (id === 'terms') return 'px-1.5 sm:px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-teal-600 text-white shadow-lg shadow-teal-900/40 transition-all duration-200';
   return 'px-2 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-violet-600 text-white shadow-lg shadow-violet-900/40 transition-all duration-200';
 };
 
