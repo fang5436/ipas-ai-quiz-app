@@ -5,21 +5,21 @@
     <template v-if="!session">
       <div class="bg-gradient-to-br from-rose-900/30 to-slate-900 border border-rose-800/40 rounded-2xl p-5 flex flex-col gap-1.5">
         <h2 class="text-lg font-bold text-white">✍️ 練習題</h2>
-        <p class="text-slate-400 text-xs leading-relaxed">方小瑋依官方評鑑範圍與名詞卡出的練習題，和 {{ questions.length }} 題官方考古題分開存放。每題作答後立即顯示對錯與解說；答錯的題目會記進錯題本。</p>
+        <p class="text-slate-400 text-xs leading-relaxed">方小瑋依官方評鑑範圍出的練習題（每題都對照名詞卡與考古題查證過），和 {{ questions.length }} 題官方考古題分開存放。每題作答後立即顯示對錯與解說；答錯的題目會記進錯題本。</p>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
         <h3 class="text-sm font-bold text-slate-200">開始練習 <span class="text-[11px] font-normal text-slate-500">（每回最多 {{ ROUND_SIZE }} 題，隨機出題）</span></h3>
         <div v-for="subject in [1, 2]" :key="subject" class="flex flex-col gap-2">
           <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
-          <div class="grid grid-cols-3 gap-2">
-            <button v-for="t in TYPE_OPTIONS" :key="t.key" @click="startPractice(subject, t.key)" :disabled="practiceCount(subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
+          <div class="grid grid-cols-4 gap-2">
+            <button v-for="t in LEVEL_OPTIONS" :key="t.key" @click="startPractice(subject, t.key)" :disabled="practiceCount(subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
               <span class="text-xs font-bold">{{ t.label }}</span>
               <span class="text-[10px] font-normal text-slate-400">{{ practiceCount(subject, t.key) }} 題</span>
             </button>
           </div>
         </div>
-        <p class="text-[11px] text-slate-500 leading-relaxed">A 仿真題：依評鑑內容範圍出的情境題，優先補考古題較少的代碼。B 名詞題：依名詞卡的「易混淆」「陷阱」出題。</p>
+        <p class="text-[11px] text-slate-500 leading-relaxed">難度依考古題題型區分：易＝概念直問；中＝120 字以內的情境題；難＝超過 120 字、需同時判斷多個條件的情境題。比例參考 115 年第二、三次（易 10%、中 46%、難 44%）。</p>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
@@ -123,10 +123,11 @@ const props = defineProps({
 
 const ROUND_SIZE = 20;
 const REMOVE_STREAK = 3;
-const TYPE_OPTIONS = [
-  { key: 'A', label: 'A 仿真題' },
-  { key: 'B', label: 'B 名詞題' },
-  { key: 'all', label: '全部混合' },
+const LEVEL_OPTIONS = [
+  { key: 'all', label: '全部' },
+  { key: '易', label: '易' },
+  { key: '中', label: '中' },
+  { key: '難', label: '難' },
 ];
 
 // 官方「評鑑內容範圍參考（115.02）」初級科目代碼名稱
@@ -169,10 +170,10 @@ const refreshRecords = () => {
 
 const subjectPrefix = (subject) => (subject === 1 ? 'L11' : 'L12');
 
-const filterPractice = (subject, type) => practiceQuestions.value.filter(q =>
-  q.detail_code.startsWith(subjectPrefix(subject)) && (type === 'all' || q.type === type));
+const filterPractice = (subject, level) => practiceQuestions.value.filter(q =>
+  q.detail_code.startsWith(subjectPrefix(subject)) && (level === 'all' || q.difficulty === level));
 
-const practiceCount = (subject, type) => filterPractice(subject, type).length;
+const practiceCount = (subject, level) => filterPractice(subject, level).length;
 
 const examById = computed(() => new Map(props.questions.map(q => [q.id, q])));
 const practiceById = computed(() => new Map(practiceQuestions.value.map(q => [q.id, q])));
@@ -215,7 +216,7 @@ const toItem = (q, isPractice) => {
     options,
     correctIndex: options.indexOf(correctText),
     isPractice,
-    badge: isPractice ? (q.type === 'A' ? 'A 仿真題' : 'B 名詞題') : formatSourceBadge(q.source),
+    badge: isPractice ? `練習題・${q.difficulty}` : formatSourceBadge(q.source),
     streak: 0,
   };
 };
@@ -226,11 +227,11 @@ const startSession = (mode, title, items) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-const startPractice = (subject, type) => {
-  const pool = fisherYates(filterPractice(subject, type)).slice(0, ROUND_SIZE);
+const startPractice = (subject, level) => {
+  const pool = fisherYates(filterPractice(subject, level)).slice(0, ROUND_SIZE);
   if (pool.length === 0) return;
-  const typeLabel = TYPE_OPTIONS.find(t => t.key === type).label;
-  startSession('practice', `科目${subject === 1 ? '一' : '二'}・${typeLabel}`, pool.map(q => toItem(q, true)));
+  const levelLabel = level === 'all' ? '全部難度' : `難度${level}`;
+  startSession('practice', `科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
 };
 
 const startReview = () => {
