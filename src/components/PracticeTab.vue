@@ -82,11 +82,13 @@
         </div>
         <h2 class="text-base font-semibold text-slate-100 leading-relaxed mb-4">{{ current.question }}</h2>
         <div class="flex flex-col space-y-2.5">
-          <button v-for="(option, idx) in current.options" :key="idx" @click="answer(idx)" :disabled="session.selected !== null" class="option-btn text-left" :class="optionClass(idx)">
+          <button v-for="(option, idx) in current.options" :key="idx" @click="choose(idx)" :disabled="session.selected !== null" class="option-btn text-left" :class="optionClass(idx)">
             <div class="option-letter w-8 h-8 text-sm rounded-lg bg-slate-700 text-slate-300 flex items-center justify-center font-bold shrink-0">{{ String.fromCharCode(65 + idx) }}</div>
             <div class="leading-relaxed text-sm font-medium">{{ option }}</div>
           </button>
         </div>
+        <!-- 先選、再按確認才送出，避免誤觸；確認前可以改選 -->
+        <button v-if="session.selected === null" @click="answer(session.pending)" :disabled="session.pending === null" class="btn-primary w-full mt-4">{{ session.pending === null ? '請先選擇答案' : '確認作答' }}</button>
         <div v-if="session.selected !== null" class="mt-4 animate-fade-in flex flex-col gap-3">
           <div class="p-3.5 rounded-xl border text-xs leading-relaxed whitespace-pre-wrap" :class="isCorrect ? 'bg-green-950/20 text-green-300 border-green-900/40' : 'bg-red-950/20 text-red-300 border-red-900/40'">
             <span class="font-bold block mb-1">{{ feedbackTitle }}</span>
@@ -219,7 +221,7 @@ const toItem = (q, isPractice) => {
 };
 
 const startSession = (mode, title, items) => {
-  session.value = { mode, title, items, idx: 0, selected: null, correctCount: 0, answered: 0, removed: 0, pendingRemove: false };
+  session.value = { mode, title, items, idx: 0, pending: null, selected: null, correctCount: 0, answered: 0, removed: 0, pendingRemove: false };
   finished.value = false;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -255,9 +257,14 @@ const feedbackTitle = computed(() => {
   return current.value.streak >= REMOVE_STREAK ? `✅ 答對了！已連續答對 ${REMOVE_STREAK} 次，這題會移出錯題本` : `✅ 答對了！連續答對 ${current.value.streak}/${REMOVE_STREAK}`;
 });
 
+// 點選項只是暫選（可改選），按「確認作答」才呼叫 answer() 判定對錯
+const choose = (idx) => {
+  if (session.value.selected === null) session.value.pending = idx;
+};
+
 const answer = (idx) => {
   const s = session.value;
-  if (s.selected !== null) return;
+  if (s.selected !== null || idx === null) return;
   s.selected = idx;
   s.answered++;
   const item = current.value;
@@ -289,6 +296,7 @@ const next = () => {
   const s = session.value;
   if (s.idx + 1 < s.items.length) {
     s.idx++;
+    s.pending = null;
     s.selected = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
@@ -310,7 +318,7 @@ const backToMenu = () => {
 
 const optionClass = (idx) => {
   const s = session.value;
-  if (s.selected === null) return 'hover:border-slate-600 hover:bg-slate-800/50';
+  if (s.selected === null) return s.pending === idx ? 'option-btn--selected' : 'hover:border-slate-600 hover:bg-slate-800/50';
   if (idx === current.value.correctIndex) return 'option-btn--correct';
   return s.selected === idx ? 'option-btn--wrong' : 'option-btn--dim';
 };
