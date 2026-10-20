@@ -36,10 +36,13 @@
           <template v-for="(b, bi) in sec.blocks" :key="bi">
 
             <!-- 全貌圖：拆成可換行的階層清單 -->
-            <div v-if="b.type === 'tree'" class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col gap-1">
-              <div v-for="(line, li) in treeLines(b.lines)" :key="li" class="text-xs leading-relaxed flex gap-1.5" :style="{ paddingLeft: line.depth * 0.9 + 'rem' }" :class="line.depth === 0 ? 'text-slate-100 font-semibold' : 'text-slate-300'">
-                <span v-if="line.branch" class="text-indigo-500 shrink-0">▸</span>
-                <span v-html="fmt(line.text)"></span>
+            <div v-if="b.type === 'tree'" class="bg-slate-950 border border-slate-800 rounded-xl p-3 flex flex-col">
+              <div v-for="(line, li) in treeLines(b.lines)" :key="li" class="text-xs leading-relaxed flex" :class="line.depth === 0 && !line.cont ? 'text-slate-100 font-semibold py-0.5' : 'text-slate-300'">
+                <!-- 每一層一條垂直導引線，看得出誰是誰的子項目 -->
+                <span v-for="g in Math.max(line.depth - 1, 0)" :key="g" class="w-3.5 shrink-0 border-l border-slate-700 ml-1"></span>
+                <span v-if="line.branch" class="w-4 shrink-0 ml-1 py-0.5" :class="line.depth === 1 ? 'text-indigo-400' : 'text-teal-400'">{{ MARKERS[Math.min(line.depth, 3)] }}</span>
+                <span v-else-if="line.cont" class="w-4 shrink-0 ml-1 border-l border-slate-700" :class="line.depth === 0 ? 'opacity-0' : ''"></span>
+                <span class="py-0.5 min-w-0" :class="line.cont ? 'text-slate-400' : ''" v-html="fmt(line.text)"></span>
               </div>
             </div>
 
@@ -127,20 +130,32 @@ const closeLesson = () => { current.value = null; listOpen.value = true; scrollT
 const step = (d) => { current.value = lessons.value[index.value + d]; scrollToPanel(); };
 
 // ASCII 全貌圖 → 每行一個項目：依前面的 │ ├ └ 判斷層級，長線改成短箭頭，手機上可自動換行
-// 沒有分支符號但有縮排的行，是上一個項目的補充說明，對齊在上一項的文字下方
+// 階層依「分支符號在第幾格」判斷：比上一層的分支更靠右，就是它的子項目
+// （不能只數 │，因為最後一個分支 └ 底下的子項目前面是空白，沒有 │）
+// 沒有分支符號但有縮排的行，是上一個項目的補充說明
 const treeLines = (lines) => {
+  const stack = [];
   let prev = 0;
-  return lines.filter(l => l.trim()).map(raw => {
+  return lines.filter(l => l.replace(/[│\s]/g, '')).map(raw => {
     const m = raw.match(/^([\s│]*)([├└]─*\s*)?(.*)$/);
-    const pipes = (m[1].match(/│/g) || []).length;
     const branch = !!m[2];
     const cont = !branch && m[1].length > 0;
-    const depth = branch ? pipes + 1 : (cont ? prev + 0.9 : 0);
+    let depth = 0;
+    if (branch) {
+      while (stack.length && stack[stack.length - 1] >= m[1].length) stack.pop();
+      stack.push(m[1].length);
+      depth = stack.length;
+    } else if (cont) {
+      depth = prev;
+    } else {
+      stack.length = 0;
+    }
     if (!cont) prev = depth;
     const text = m[3].replace(/\s*─+→\s*/g, ' → ').replace(/─{2,}/g, ' ').replace(/\s{2,}/g, ' ').trim();
-    return { depth, branch, text };
+    return { depth, branch, cont, text };
   });
 };
+const MARKERS = ['', '▸', '◦', '·'];
 
 // 文字格式：粗體、換行、題號可點
 const fmt = (s) => String(s)
