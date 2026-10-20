@@ -9,12 +9,12 @@
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
-        <h3 class="text-sm font-bold text-slate-200">開始練習 <span class="text-[11px] font-normal text-slate-500">（每回最多 {{ ROUND_SIZE }} 題，隨機出題）</span></h3>
+        <h3 class="text-sm font-bold text-slate-200">開始練習 <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
         <div v-for="subject in [1, 2]" :key="subject" class="flex flex-col gap-2">
           <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
           <div class="grid grid-cols-4 gap-2">
             <button v-for="t in LEVEL_OPTIONS" :key="t.key" @click="startPractice(subject, t.key)" :disabled="practiceCount(subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
-              <span class="text-xs font-bold">{{ t.label }}</span>
+              <span class="text-xs font-bold" :class="LEVEL_TEXT[t.key]">{{ t.label }}</span>
               <span class="text-[10px] font-normal text-slate-400">{{ practiceCount(subject, t.key) }} 題</span>
             </button>
           </div>
@@ -77,7 +77,7 @@
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
         <div class="flex flex-wrap gap-2 mb-3">
           <span class="px-2 py-0.5 rounded bg-violet-950 text-violet-400 text-[10px] font-medium border border-violet-900/40">{{ current.detail_code }} {{ CODE_NAMES[current.detail_code] || '' }}</span>
-          <span class="px-2 py-0.5 rounded text-[10px] font-medium border" :class="current.isPractice ? 'bg-rose-950 text-rose-400 border-rose-900/40' : 'bg-emerald-950 text-emerald-400 border-emerald-900/40'">{{ current.badge }}</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-medium border" :class="current.isPractice ? LEVEL_BADGE[current.difficulty] : 'bg-emerald-950 text-emerald-400 border-emerald-900/40'">{{ current.badge }}</span>
           <span v-if="session.mode === 'review'" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-medium border border-slate-700">連續答對 {{ current.streak }}/{{ REMOVE_STREAK }}</span>
         </div>
         <h2 class="text-base font-semibold text-slate-100 leading-relaxed mb-4">{{ current.question }}</h2>
@@ -121,7 +121,7 @@ const props = defineProps({
   questions: { type: Array, default: () => [] },
 });
 
-const ROUND_SIZE = 20;
+const ROUND_SIZE = 20; // 錯題複習每回最多題數
 const REMOVE_STREAK = 3;
 const LEVEL_OPTIONS = [
   { key: 'all', label: '全部' },
@@ -129,6 +129,13 @@ const LEVEL_OPTIONS = [
   { key: '中', label: '中' },
   { key: '難', label: '難' },
 ];
+// 難度顏色：易＝藍、中＝黃、難＝紅
+const LEVEL_TEXT = { '易': 'text-sky-400', '中': 'text-amber-400', '難': 'text-red-400' };
+const LEVEL_BADGE = {
+  '易': 'bg-sky-950 text-sky-400 border-sky-900/40',
+  '中': 'bg-amber-950 text-amber-400 border-amber-900/40',
+  '難': 'bg-red-950 text-red-400 border-red-900/40',
+};
 
 // 官方「評鑑內容範圍參考（115.02）」初級科目代碼名稱
 const CODE_NAMES = {
@@ -216,6 +223,7 @@ const toItem = (q, isPractice) => {
     options,
     correctIndex: options.indexOf(correctText),
     isPractice,
+    difficulty: q.difficulty,
     badge: isPractice ? `練習題・${q.difficulty}` : formatSourceBadge(q.source),
     streak: 0,
   };
@@ -228,7 +236,7 @@ const startSession = (mode, title, items) => {
 };
 
 const startPractice = (subject, level) => {
-  const pool = fisherYates(filterPractice(subject, level)).slice(0, ROUND_SIZE);
+  const pool = fisherYates(filterPractice(subject, level));
   if (pool.length === 0) return;
   const levelLabel = level === 'all' ? '全部難度' : `難度${level}`;
   startSession('practice', `科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
