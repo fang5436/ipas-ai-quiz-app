@@ -32,7 +32,7 @@ EXTRA = {
     '極限梯度提升': 'gradient-boosting', '交叉熵': 'cross-entropy', '變分自編碼器': 'vae', '長短期記憶': 'lstm',
     '循環神經網路': 'rnn', 'Wide & Deep': 'wide-and-deep', '寬深': 'wide-and-deep', '均方根誤差': 'rmse',
     '平均絕對百分比誤差': 'mape', 'ROC-AUC': 'roc-auc', '門檻': 'decision-threshold', '混淆矩陣': 'confusion-matrix',
-    '自注意力': None,
+    '自注意力': 'self-attention', '自注意力機制': 'self-attention',
 }
 
 cands = {}
@@ -67,6 +67,12 @@ out = {a: t for a, t in out.items() if a in corpus}
 DROP = {'Cross', 'Line', 'Log', 'Logistic', 'Rule', 'Rules', 'Threshold', 'Similarity', 'Isolation', 'Association', 'Cosine',
         '曲線與', 'AI Host', '如 Claude Code'}
 out = {a: t for a, t in out.items() if a not in DROP}
+# 名稱拆出來的單一英文字（Mean、Class、Window…）太籠統，只留確定是專有名詞的
+KEEP_WORDS = {'Accuracy', 'Autoencoder', 'Bootstrapping', 'Chunking', 'Clustering', 'Epoch', 'Guardrails', 'Jailbreak',
+              'Memorization', 'Optimizer', 'Precision', 'Python', 'Recall', 'Reranker', 'Sigmoid', 'Softmax', 'Transformer',
+              'Webhook', 'Histogram', 'Heatmap', 'Pseudonymization', 'Percentile', 'Overfitting', 'Lasso', 'Ridge', 'Autoregressive'}
+out = {a: t for a, t in out.items() if not re.fullmatch(r'[A-Z][a-z]+', a) or a in KEEP_WORDS}
+out = {a: t for a, t in out.items() if a not in {'經濟', '與 IQR', '正則化 L1', 'Max'}}
 bad = {a: t for a, t in out.items() if t not in ids}
 print('aliases', len(out), 'bad ids', bad)
 print('skipped (多張卡，未指定):', len(skipped))

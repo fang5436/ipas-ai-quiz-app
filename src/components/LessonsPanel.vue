@@ -12,7 +12,10 @@
       </button>
       <div v-if="listOpen" class="flex flex-col gap-3 animate-fade-in">
         <div v-for="part in parts" :key="part.no" class="flex flex-col gap-1.5">
-          <span class="text-xs font-bold" :class="part.no <= 4 ? 'text-violet-400' : 'text-indigo-400'">{{ part.title }}</span>
+          <span class="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span class="text-xs font-bold" :class="part.no <= 4 ? 'text-violet-400' : 'text-indigo-400'">{{ part.title }}</span>
+            <span v-if="ratio[part.no]" class="text-[11px] px-1.5 py-0.5 rounded border" :class="LEVEL_STYLE[ratio[part.no].level].badge">{{ ratioText(part.no) }}</span>
+          </span>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
             <button v-for="l in part.lessons" :key="l.id" @click="openLesson(l)" class="text-left bg-slate-950 border border-slate-800 hover:border-indigo-600 rounded-xl px-3 py-2 text-sm text-slate-200 transition">
               <span class="font-mono text-xs text-slate-500 mr-1.5">{{ l.id }}</span>{{ l.title }}<span v-if="l.star" class="text-amber-400 ml-1">★</span>
@@ -28,7 +31,12 @@
         <button @click="closeLesson" class="btn-secondary py-1.5 px-2.5 text-xs">← 課程列表</button>
         <span class="text-[11px] text-slate-500 truncate">{{ current.partTitle.split('（')[0] }}</span>
       </div>
+      <div class="grid grid-cols-2 gap-2">
+        <button @click="step(-1)" :disabled="index === 0" class="btn-secondary text-xs">← 上一課</button>
+        <button @click="step(1)" :disabled="index === lessons.length - 1" class="btn-primary text-xs">下一課 →</button>
+      </div>
       <h3 class="text-base font-bold text-white"><span class="font-mono text-indigo-400 mr-1.5">{{ current.id }}</span>{{ current.title }}<span v-if="current.star" class="text-amber-400 ml-1">★</span></h3>
+      <span v-if="ratio[current.part]" class="self-start text-[11px] px-1.5 py-0.5 rounded border" :class="LEVEL_STYLE[ratio[current.part].level].badge">{{ ratioText(current.part) }}</span>
 
       <div class="flex flex-col gap-4" @click="onContentClick">
         <section v-for="(sec, si) in current.sections" :key="si" class="flex flex-col gap-2">
@@ -89,6 +97,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import InfoPopup from './InfoPopup.vue';
 import { fmt, clickTarget, loadTermMap } from '../utils/lessonText.js';
+import { examStats, LEVEL_STYLE, fmtNum } from '../utils/examStats.js';
 
 const props = defineProps({ questions: { type: Array, default: () => [] } });
 
@@ -110,6 +119,13 @@ const parts = computed(() => {
   return Object.values(byPart).sort((a, b) => a.no - b.no);
 });
 const index = computed(() => lessons.value.indexOf(current.value));
+
+// 每篇的近兩屆出題比例，標在篇名旁與課程頁上方
+const ratio = computed(() => Object.fromEntries(examStats(props.questions).parts.map(p => [p.no, p])));
+const ratioText = (no) => {
+  const p = ratio.value[no];
+  return `📊 每次約 ${fmtNum(p.avg)} 題・占科目${p.subject === 1 ? '一' : '二'} ${Math.round(p.pct)}%`;
+};
 const questionById = computed(() => new Map(props.questions.map(q => [String(q.id), q])));
 
 const scrollToPanel = async () => { await nextTick(); panelEl.value?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };

@@ -1,6 +1,7 @@
 <template>
   <div class="animate-fade-in flex flex-col gap-4 pt-2">
 
+    <ExamRatioPanel :questions="questions" />
     <LessonsPanel :questions="questions" />
     <GlossaryPanel :questions="questions" />
 
@@ -75,6 +76,7 @@ import { ref, computed, onMounted } from 'vue';
 import { CODE_NAMES } from '../data/codeNames.js';
 import LessonsPanel from './LessonsPanel.vue';
 import GlossaryPanel from './GlossaryPanel.vue';
+import ExamRatioPanel from './ExamRatioPanel.vue';
 
 defineProps({ questions: { type: Array, default: () => [] } });
 
