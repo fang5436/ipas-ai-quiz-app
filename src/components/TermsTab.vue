@@ -2,6 +2,7 @@
   <div class="animate-fade-in flex flex-col gap-4 pt-2">
 
     <LessonsPanel :questions="questions" />
+    <GlossaryPanel :questions="questions" />
 
     <div class="bg-gradient-to-br from-teal-900/30 to-slate-900 border border-teal-800/40 rounded-2xl p-5 flex flex-col gap-1.5">
       <h2 class="text-lg font-bold text-white">📖 名詞卡</h2>
@@ -73,6 +74,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { CODE_NAMES } from '../data/codeNames.js';
 import LessonsPanel from './LessonsPanel.vue';
+import GlossaryPanel from './GlossaryPanel.vue';
 
 defineProps({ questions: { type: Array, default: () => [] } });
 

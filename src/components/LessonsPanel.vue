@@ -73,34 +73,22 @@
         </section>
       </div>
 
-      <p class="text-[11px] text-slate-500">點題號可以看原題、選項與正解。</p>
+      <p class="text-[11px] text-slate-500">點題號可以看原題、選項與正解；點<span class="term-link">虛線底線</span>的名詞可以看名詞卡。</p>
       <div class="grid grid-cols-2 gap-2">
         <button @click="step(-1)" :disabled="index === 0" class="btn-secondary text-xs">← 上一課</button>
         <button @click="step(1)" :disabled="index === lessons.length - 1" class="btn-primary text-xs">下一課 →</button>
       </div>
     </template>
 
-    <!-- 原題彈出視窗：移到 body 底下，避免外層動畫的 transform 讓 fixed 定位失效 -->
-    <Teleport to="body">
-    <div v-if="popup" class="fixed inset-0 z-[60] flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4" @click.self="popup = null">
-      <div class="w-full max-w-2xl max-h-[85dvh] overflow-y-auto bg-slate-900 border border-slate-700 rounded-t-2xl sm:rounded-2xl p-4 flex flex-col gap-3 animate-fade-in">
-        <div class="flex items-center justify-between gap-2">
-          <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-900/40">{{ popup.source }}・{{ popup.id }}</span>
-          <button @click="popup = null" class="btn-secondary py-1 px-2.5 text-xs">關閉</button>
-        </div>
-        <p class="text-sm text-slate-100 leading-relaxed whitespace-pre-wrap">{{ popup.question }}</p>
-        <div class="flex flex-col gap-1.5">
-          <div v-for="(o, oi) in popup.options" :key="oi" class="text-xs leading-relaxed rounded-lg border px-3 py-2" :class="oi === popup.correctIndex ? 'bg-green-950/40 border-green-700 text-green-200' : 'border-slate-800 text-slate-400'">{{ o }}</div>
-        </div>
-        <p v-if="popup.explanation" class="text-xs text-slate-400 leading-relaxed whitespace-pre-wrap">{{ popup.explanation }}</p>
-      </div>
-    </div>
-    </Teleport>
+    <!-- 原題、名詞卡彈出視窗 -->
+    <InfoPopup :question="popup?.question" :term="popup?.term" @close="popup = null" />
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue';
+import InfoPopup from './InfoPopup.vue';
+import { fmt, clickTarget, loadTermMap } from '../utils/lessonText.js';
 
 const props = defineProps({ questions: { type: Array, default: () => [] } });
 
@@ -157,17 +145,16 @@ const treeLines = (lines) => {
 };
 const MARKERS = ['', '▸', '◦', '·'];
 
-// 文字格式：粗體、換行、題號可點
-const fmt = (s) => String(s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  .replace(/&lt;br&gt;/g, '<br>')
-  .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
-  .replace(/\b(1[01][45]0[1-4][12]\d{3})\b/g, '<button type="button" data-qid="$1" class="font-mono text-teal-400 underline">$1</button>');
-
-const onContentClick = (e) => {
-  const qid = e.target?.dataset?.qid;
-  if (!qid) return;
-  const q = questionById.value.get(qid);
-  if (q) popup.value = q;
+// 點題號看原題，點名詞看名詞卡
+const onContentClick = async (e) => {
+  const hit = clickTarget(e);
+  if (!hit) return;
+  if (hit.qid) {
+    const q = questionById.value.get(hit.qid);
+    if (q) popup.value = { question: q };
+  } else {
+    const t = (await loadTermMap()).get(hit.term);
+    if (t) popup.value = { term: t };
+  }
 };
 </script>

@@ -17,3 +17,11 @@
   .max-w-\[180px\] { max-width: 11.25rem; }
   .min-h-\[90px\] { min-height: 5.625rem; }
 }
+
+/* 課程與圖鑑裡可點的專有名詞：虛線底線，點了跳出名詞卡 */
+.term-link {
+  color: inherit;
+  text-decoration: underline dotted rgb(45 212 191 / 0.8);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
