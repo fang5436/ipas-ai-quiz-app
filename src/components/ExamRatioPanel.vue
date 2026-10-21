@@ -1,10 +1,18 @@
 <template>
   <div v-if="stats.parts.length" class="bg-gradient-to-br from-rose-900/25 to-slate-900 border border-rose-800/40 rounded-2xl p-4 flex flex-col gap-3">
-    <div class="flex flex-col gap-0.5">
-      <span class="text-lg font-bold text-white">📊 近兩屆出題比例</span>
-      <span class="text-xs text-slate-400 leading-relaxed">{{ stats.exams.join('、') }}官方試題的平均題數。<span class="text-rose-300">紅色＝重點（占該科 25% 以上）</span>，越紅越該多花時間。點一篇可以看細項。</span>
-    </div>
+    <button @click="togglePanel" class="flex items-start justify-between gap-3 text-left">
+      <span class="flex flex-col gap-1 min-w-0">
+        <span class="text-lg font-bold text-white">📊 近兩屆出題比例</span>
+        <span v-if="panelOpen" class="text-xs text-slate-400 leading-relaxed">{{ stats.exams.join('、') }}官方試題的平均題數。<span class="text-rose-300">紅色＝重點（占該科 25% 以上）</span>，越紅越該多花時間。點一篇可以看細項。</span>
+        <!-- 收合時只列出重點篇 -->
+        <span v-else class="flex flex-wrap gap-1.5">
+          <span v-for="p in stats.parts.filter(x => x.level === 'high')" :key="p.no" class="text-[11px] px-1.5 py-0.5 rounded border" :class="LEVEL_STYLE.high.badge">{{ PART_NAMES[p.no] }} {{ fmtNum(p.avg) }} 題・{{ Math.round(p.pct) }}%</span>
+        </span>
+      </span>
+      <span class="text-slate-400 text-xs shrink-0 pt-1">{{ panelOpen ? '收合 ▲' : '展開 ▼' }}</span>
+    </button>
 
+    <template v-if="panelOpen">
     <div v-for="subj in [1, 2]" :key="subj" class="flex flex-col gap-1.5">
       <span class="text-xs font-bold" :class="subj === 1 ? 'text-violet-400' : 'text-indigo-400'">科目{{ subj === 1 ? '一' : '二' }}（每次 50 題）</span>
 
@@ -36,6 +44,7 @@
       </div>
     </div>
     <p class="text-[11px] text-slate-500 leading-relaxed">「準備時間建議」是這一篇占兩科合計題數的比例；兩科各 50 題、分開計分，弱的那一科可以再多分一點時間。</p>
+    </template>
   </div>
 </template>
 
@@ -47,6 +56,15 @@ const props = defineProps({ questions: { type: Array, default: () => [] } });
 
 const stats = computed(() => examStats(props.questions));
 const open = ref(null);
+
+// 預設收合；記住使用者上次的選擇（瀏覽器不能儲存時就每次收合）
+const OPEN_KEY = 'ipas_ratio_panel_open_v1';
+const readOpen = () => { try { return localStorage.getItem(OPEN_KEY) === '1'; } catch { return false; } };
+const panelOpen = ref(readOpen());
+const togglePanel = () => {
+  panelOpen.value = !panelOpen.value;
+  try { localStorage.setItem(OPEN_KEY, panelOpen.value ? '1' : '0'); } catch { /* 無法儲存時仍可在本次使用 */ }
+};
 const shortLabel = (s) => s.replace(/ 年第(.)次/, (_, n) => '-' + ('一二三四五六七八九'.indexOf(n) + 1));
 
 // 兩屆題數差 4 題以上的細項，提醒起伏大

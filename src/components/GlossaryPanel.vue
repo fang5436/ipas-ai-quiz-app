@@ -3,7 +3,7 @@
     <button @click="open = !open" class="flex items-center justify-between gap-3 text-left">
       <span class="flex flex-col gap-0.5">
         <span class="text-lg font-bold text-white">🧭 觀念圖鑑</span>
-        <span class="text-xs text-slate-400">組合觀念課第二～四篇的 {{ itemCount }} 個方法、模型與指標：白話、例子、什麼時候用、考古題</span>
+        <span class="text-xs text-slate-400">組合觀念課第二～四篇、第六篇的 {{ itemCount }} 個方法、模型與技巧：白話、例子、什麼時候用、考古題</span>
       </span>
       <span class="text-slate-400 text-xs shrink-0">{{ open ? '收合 ▲' : '展開 ▼' }}</span>
     </button>
