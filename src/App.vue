@@ -87,6 +87,18 @@
       <!-- =================【TAB 2: 全真模擬考模式】================= -->
       <div v-else-if="currentTab === 'exam'" class="animate-fade-in flex flex-col gap-4">
         <div v-if="examQuestions.length === 0" class="text-center py-20 flex flex-col items-center gap-4">
+          <!-- 🆕 暫停中的考試：按「暫停」時保存，關掉 App 也不會消失 -->
+          <div v-if="pausedExam" class="w-full max-w-md flex flex-col gap-3 bg-amber-950/30 border border-amber-800/60 rounded-xl px-4 py-3.5 text-left">
+            <div class="flex flex-col gap-0.5">
+              <span class="text-sm font-bold text-amber-300">⏸️ 暫停中的考試｜{{ pausedExamLabel }}</span>
+              <span class="text-xs text-slate-400">已答 {{ pausedExam.answers.filter(a => a !== null).length }} / {{ pausedExam.questions.length }} 題｜剩餘時間 {{ formatTime(pausedExam.timer) }}｜暫停於 {{ formatHistoryDate(pausedExam.savedAt) }}</span>
+            </div>
+            <div class="flex gap-2">
+              <button @click="resumePausedExam" class="btn-primary flex-1 py-2 text-sm">▶ 繼續作答</button>
+              <button @click="discardPausedExam" class="px-3 py-2 rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/30 text-xs font-bold transition">放棄這份</button>
+            </div>
+          </div>
+
           <p class="text-slate-400">您目前不在模擬考狀態中，請選擇科目：</p>
           <div class="flex gap-3">
             <button @click="startExam(1)" class="btn-primary">📘 科目一</button>
@@ -145,6 +157,7 @@
             </div>
             <div v-if="examSubmitted" class="px-3 py-1 bg-violet-950/60 border border-violet-800 text-violet-400 rounded-lg font-bold text-xs">得分：{{ examScore }}</div>
             <div class="flex gap-2">
+              <button v-if="!examSubmitted" @click="pauseExam" class="btn-secondary py-1.5 px-2.5 text-xs border-amber-900/50 text-amber-400 hover:bg-amber-950/20">⏸️ 暫停</button>
               <button v-if="!examSubmitted" @click="handleExamAbort" class="btn-secondary py-1.5 px-2.5 text-xs border-red-900/50 text-red-400 hover:bg-red-950/20">中止</button>
               <button v-if="!examSubmitted" @click="handleExamSubmit" class="btn-primary py-1.5 px-3 text-xs" :disabled="!allAnswered">交卷</button>
               <button v-if="examSubmitted" @click="backToExamMenu" class="btn-secondary py-1.5 px-2.5 text-xs">← 返回選單</button>
@@ -812,6 +825,7 @@ onMounted(async () => {
     }
 
     examHistory.value = loadExamHistory();
+    pausedExam.value = loadPausedExam();
 
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 60000);
@@ -1003,12 +1017,14 @@ const forceSubmitExam = () => {
   markExamQuestionsSeen();
   recordExamAnswers();
   saveExamHistory();
+  clearPausedIfCurrent();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 const abortExam = () => {
   if (!confirm('🛑 確定要中止本次全真模擬考嗎？')) return;
+  clearPausedIfCurrent();
   stopTimer();
   examQuestions.value = [];
   currentTab.value = 'home';
@@ -1029,6 +1045,7 @@ const submitExam = () => {
   markExamQuestionsSeen();
   recordExamAnswers();
   saveExamHistory();
+  clearPausedIfCurrent();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1139,6 +1156,7 @@ const forceSubmitPastExam = () => {
   examSubmitted.value = true;
   recordExamAnswers();
   saveExamHistory();
+  clearPausedIfCurrent();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1150,6 +1168,7 @@ const submitPastExam = () => {
 
 const abortPastExam = () => {
   if (!confirm('🛑 確定要中止本次歷屆考古題測驗嗎？')) return;
+  clearPausedIfCurrent();
   stopTimer();
   examQuestions.value = [];
   currentTab.value = 'home';
@@ -1270,6 +1289,89 @@ const formatHistoryDate = (iso) => {
   return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
 const formatHistoryScore = (score) => Math.round(score * 10) / 10;
+
+// =================【🆕 暫停功能：分段完成模擬考，暫停內容存在 localStorage，關掉 App 也不會消失】=================
+// 一次只保留一份暫停中的考試；題目與選項順序整份照存，繼續作答時原樣還原，剩餘時間在暫停期間不會減少
+const PAUSED_EXAM_KEY = 'ipas_exam_paused_v1';
+const pausedExam = ref(null);
+
+const loadPausedExam = () => {
+  try {
+    const raw = localStorage.getItem(PAUSED_EXAM_KEY);
+    const slot = raw ? JSON.parse(raw) : null;
+    return slot && Array.isArray(slot.questions) && slot.questions.length > 0 ? slot : null;
+  } catch { return null; }
+};
+
+const removePausedExam = () => {
+  pausedExam.value = null;
+  try { localStorage.removeItem(PAUSED_EXAM_KEY); } catch { /* 無法存取時只清畫面狀態 */ }
+};
+
+// 目前這份試卷是否就是由暫停紀錄「繼續作答」而來：與 isPastExamMode 相同，由試卷第一題的標記判斷
+const isResumedFromPause = () => !!pausedExam.value && examQuestions.value[0]?._pauseId === pausedExam.value.id;
+
+// 交卷或中止時呼叫：該份考試已結束，暫停紀錄不再需要
+const clearPausedIfCurrent = () => { if (isResumedFromPause()) removePausedExam(); };
+
+const pausedExamLabel = computed(() => {
+  const first = pausedExam.value?.questions[0];
+  if (!first) return '';
+  const kind = first._isPastExam ? `${formatSourceBadge(first.source)} 歷屆` : '隨機組卷';
+  return `${kind} ${pausedExam.value.subject === 1 ? '科目一' : '科目二'}`;
+});
+
+const pauseExam = () => {
+  if (examSubmitted.value || examQuestions.value.length === 0) return;
+  const sameSlot = isResumedFromPause();
+  if (pausedExam.value && !sameSlot && !confirm('已經有一份暫停中的考試，要用目前這份取代它嗎？（舊的那份會被放棄）')) return;
+  const id = sameSlot ? pausedExam.value.id : Date.now();
+  const slot = {
+    id,
+    savedAt: new Date().toISOString(),
+    subject: examSubject.value,
+    questions: examQuestions.value.map(q => ({ ...q, _pauseId: id })),
+    answers: [...userAnswers.value],
+    idx: currentQuestionIdx.value,
+    timer: timer.value,
+    bagResetCodes: [...examBagResetCodes.value],
+  };
+  try {
+    localStorage.setItem(PAUSED_EXAM_KEY, JSON.stringify(slot));
+  } catch (e) {
+    console.error('暫停儲存失敗：', e);
+    alert('⚠️ 瀏覽器無法儲存暫停內容，請繼續作答或直接交卷。');
+    return;
+  }
+  pausedExam.value = slot;
+  backToExamMenu();
+};
+
+const resumePausedExam = () => {
+  const slot = pausedExam.value;
+  if (!slot) return;
+  stopTimer();
+  examSubject.value = slot.subject;
+  examQuestions.value = slot.questions;
+  userAnswers.value = [...slot.answers];
+  currentQuestionIdx.value = Math.min(slot.idx || 0, slot.questions.length - 1);
+  examSubmitted.value = false;
+  examScore.value = 0;
+  expandedAccordion.value = null;
+  examBagResetCodes.value = slot.bagResetCodes || [];
+  timer.value = slot.timer;
+  // 歷屆考古題與隨機組卷倒數歸零時呼叫的交卷函式不同，沿用各自原本的計時器
+  if (isPastExamMode.value) startPastExamTimer();
+  else startTimer();
+  currentTab.value = 'exam';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const discardPausedExam = () => {
+  if (!pausedExam.value) return;
+  if (!confirm('確定要放棄這份暫停中的考試嗎？作答內容會被清除，無法復原。')) return;
+  removePausedExam();
+};
 
 // =================【🆕 題庫瀏覽：依年度梯次＋科目列出全部題目，直接查看正確答案與解說】=================
 // 純閱讀用途：不寫入 seenQuestionIds / examCounts，不影響模擬考抽題與計次
