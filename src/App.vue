@@ -106,6 +106,25 @@
               </div>
             </div>
           </div>
+
+          <!-- 🆕 歷次考試紀錄：每次交卷自動保存，可回顧完整作答或自行刪除 -->
+          <div class="w-full max-w-md flex flex-col gap-3 mt-4 pt-6 border-t border-slate-800">
+            <p class="text-slate-500 text-xs">📜 歷次考試紀錄（共 {{ examHistory.length }} 次）</p>
+            <p v-if="examHistory.length === 0" class="text-slate-600 text-xs">尚無紀錄，交卷後會自動保存在這裡。</p>
+            <div v-else class="flex flex-col gap-2">
+              <div v-for="record in examHistory" :key="record.id" class="flex flex-wrap items-center justify-between gap-2 bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-left">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-[11px] text-slate-500 font-mono">{{ formatHistoryDate(record.date) }}</span>
+                  <span class="text-sm font-bold text-slate-300">{{ record.mode === 'past' ? `${record.sourceLabel} 歷屆` : '隨機組卷' }}｜{{ record.subject === 1 ? '科目一' : '科目二' }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-bold" :class="record.score >= 70 ? 'text-green-400' : 'text-red-400'">{{ formatHistoryScore(record.score) }} 分</span>
+                  <button @click="reviewExamHistory(record.id)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition">回顧</button>
+                  <button @click="deleteExamHistory(record.id)" class="px-2.5 py-1.5 rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/30 text-xs font-bold transition">刪除</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div v-else class="flex flex-col gap-4">
@@ -114,6 +133,7 @@
               <div class="flex items-center gap-1.5 mb-0.5">
                 <span class="text-[10px] font-bold px-1.5 py-0.5 rounded" :class="examSubject === 1 ? 'bg-violet-950 text-violet-400' : 'bg-indigo-950 text-indigo-400'">{{ examSubject === 1 ? '科目一' : '科目二' }}</span>
                 <span v-if="isPastExamMode" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400">🗂️ 歷屆考古題</span>
+                <span v-if="reviewingHistoryDate" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">📜 回顧 {{ formatHistoryDate(reviewingHistoryDate) }}</span>
               </div>
               <div class="flex items-baseline gap-1.5">
                 <span class="text-2xl font-bold text-violet-400">{{ currentQuestionIdx + 1 }}</span>
@@ -127,6 +147,7 @@
             <div class="flex gap-2">
               <button v-if="!examSubmitted" @click="handleExamAbort" class="btn-secondary py-1.5 px-2.5 text-xs border-red-900/50 text-red-400 hover:bg-red-950/20">中止</button>
               <button v-if="!examSubmitted" @click="handleExamSubmit" class="btn-primary py-1.5 px-3 text-xs" :disabled="!allAnswered">交卷</button>
+              <button v-if="examSubmitted" @click="backToExamMenu" class="btn-secondary py-1.5 px-2.5 text-xs">← 返回選單</button>
             </div>
           </div>
 
@@ -386,6 +407,10 @@
         </div>
 
         <div v-else class="flex flex-col gap-6">
+          <div class="flex gap-2">
+            <button @click="backToExamMenu" class="btn-secondary flex-1 py-2.5 text-sm">← 返回模擬考選單</button>
+            <button @click="currentTab = 'exam'" class="btn-secondary flex-1 py-2.5 text-sm">📝 查看作答</button>
+          </div>
           <div class="bg-gradient-to-r from-slate-900 to-slate-800 border border-slate-700 rounded-2xl p-5 flex items-center justify-between shadow-lg shadow-slate-900/50">
             <div>
               <p class="text-slate-400 text-sm mb-1 font-medium">模擬考最終得分</p>
@@ -786,6 +811,8 @@ onMounted(async () => {
       seenQuestionIds.value = new Set(JSON.parse(savedSeenIds));
     }
 
+    examHistory.value = loadExamHistory();
+
     updateCountdown();
     countdownInterval = setInterval(updateCountdown, 60000);
 
@@ -975,6 +1002,7 @@ const forceSubmitExam = () => {
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   markExamQuestionsSeen();
   recordExamAnswers();
+  saveExamHistory();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1000,6 +1028,7 @@ const submitExam = () => {
   localStorage.setItem('ipas_exam_counts_v1', JSON.stringify(examCounts.value));
   markExamQuestionsSeen();
   recordExamAnswers();
+  saveExamHistory();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1109,6 +1138,7 @@ const forceSubmitPastExam = () => {
   examScore.value = correctCount * (100 / examQuestions.value.length);
   examSubmitted.value = true;
   recordExamAnswers();
+  saveExamHistory();
   currentTab.value = 'analysis';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1124,6 +1154,122 @@ const abortPastExam = () => {
   examQuestions.value = [];
   currentTab.value = 'home';
 };
+
+// =================【🆕 歷次考試紀錄：交卷自動保存，可回顧完整作答或自行刪除】=================
+// 每題只存題號、選項順序（對應題庫原始選項的索引）與作答，回顧時再從題庫還原題目內容，以節省 localStorage 空間
+const EXAM_HISTORY_KEY = 'ipas_exam_history_v1';
+const examHistory = ref([]);
+
+const loadExamHistory = () => {
+  try {
+    const raw = localStorage.getItem(EXAM_HISTORY_KEY);
+    const list = raw ? JSON.parse(raw) : [];
+    return Array.isArray(list) ? list : [];
+  } catch { return []; }
+};
+
+const persistExamHistory = () => {
+  try { localStorage.setItem(EXAM_HISTORY_KEY, JSON.stringify(examHistory.value)); }
+  catch (e) { console.error('考試紀錄儲存失敗：', e); }
+};
+
+const cleanOptions = (options) => (options || []).map(o => String(o).replace(/^\([A-D]\)\s*/i, '').trim());
+
+// 由三個交卷函式（forceSubmitExam / submitExam / forceSubmitPastExam）在計分後呼叫
+const saveExamHistory = () => {
+  try {
+    const byId = new Map(allQuestions.value.map(q => [q.id, q]));
+    const items = examQuestions.value.map((q, idx) => {
+      const orig = cleanOptions(byId.get(q.id)?.options);
+      const perm = q.options.map(o => orig.indexOf(o));
+      const permOk = perm.length === orig.length && perm.every(i => i >= 0) && new Set(perm).size === perm.length;
+      // 選項文字對不回題庫時（例如重複選項），改存完整選項文字與正解，確保回顧內容正確
+      return permOk
+        ? { id: q.id, code: q.detail_code, perm, answer: userAnswers.value[idx] }
+        : { id: q.id, code: q.detail_code, options: q.options, correctIndex: q.correctIndex, answer: userAnswers.value[idx] };
+    });
+    const correct = examQuestions.value.filter((q, idx) => userAnswers.value[idx] === q.correctIndex).length;
+    examHistory.value = [{
+      id: Date.now(),
+      date: new Date().toISOString(),
+      mode: isPastExamMode.value ? 'past' : 'random',
+      sourceLabel: isPastExamMode.value ? formatSourceBadge(examQuestions.value[0]?.source) : '',
+      subject: examSubject.value,
+      score: examScore.value,
+      correct,
+      total: examQuestions.value.length,
+      timeSpent: 75 * 60 - timer.value,
+      items,
+    }, ...examHistory.value];
+    persistExamHistory();
+  } catch (e) {
+    console.error('考試紀錄建立失敗：', e);
+  }
+};
+
+// 回顧：把紀錄還原成已交卷的試卷，沿用現有的作答畫面與弱點分析；不寫入 seenQuestionIds / examCounts / 錯題本
+const reviewExamHistory = (recordId) => {
+  const record = examHistory.value.find(r => r.id === recordId);
+  if (!record) return;
+  const byId = new Map(allQuestions.value.map(q => [q.id, q]));
+  const restored = record.items.map(item => {
+    const orig = byId.get(item.id);
+    if (!orig) return null;
+    const base = { ...orig, detail_code: item.code, _historyDate: record.date, _isPastExam: record.mode === 'past' };
+    if (item.perm) {
+      const opts = cleanOptions(orig.options);
+      return { ...base, options: item.perm.map(i => opts[i]), correctIndex: item.perm.indexOf(orig.correctIndex) };
+    }
+    return { ...base, options: item.options, correctIndex: item.correctIndex };
+  });
+  if (restored.some(q => !q)) {
+    alert('這筆紀錄有題目已不在目前題庫中，無法完整回顧。');
+    return;
+  }
+  stopTimer();
+  examSubject.value = record.subject;
+  examQuestions.value = restored;
+  userAnswers.value = record.items.map(item => item.answer ?? null);
+  currentQuestionIdx.value = 0;
+  examSubmitted.value = true;
+  examScore.value = record.score;
+  expandedAccordion.value = null;
+  currentTab.value = 'exam';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const deleteExamHistory = (recordId) => {
+  const record = examHistory.value.find(r => r.id === recordId);
+  if (!record) return;
+  if (!confirm(`確定要刪除 ${formatHistoryDate(record.date)} 這筆考試紀錄嗎？刪除後無法復原。`)) return;
+  examHistory.value = examHistory.value.filter(r => r.id !== recordId);
+  persistExamHistory();
+  // 正在回顧的就是這筆時，一併回到選單
+  if (reviewingHistoryDate.value === record.date) backToExamMenu();
+};
+
+// 目前畫面是否為回顧中的紀錄：與 isPastExamMode 相同，直接由試卷第一題判斷
+const reviewingHistoryDate = computed(() => examQuestions.value[0]?._historyDate || null);
+
+// 只清掉畫面上的試卷、回到模擬考選單；紀錄在交卷時就已保存，不受影響
+const backToExamMenu = () => {
+  stopTimer();
+  examQuestions.value = [];
+  userAnswers.value = [];
+  currentQuestionIdx.value = 0;
+  examSubmitted.value = false;
+  examScore.value = 0;
+  expandedAccordion.value = null;
+  currentTab.value = 'exam';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const formatHistoryDate = (iso) => {
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
+const formatHistoryScore = (score) => Math.round(score * 10) / 10;
 
 // =================【🆕 題庫瀏覽：依年度梯次＋科目列出全部題目，直接查看正確答案與解說】=================
 // 純閱讀用途：不寫入 seenQuestionIds / examCounts，不影響模擬考抽題與計次
