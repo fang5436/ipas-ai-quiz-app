@@ -18,7 +18,7 @@ npm run preview  # 預覽建置結果
 
 ## 架構
 
-**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換六個 tab：`home`、`exam`、`book`、`tracker`、`analysis`、`browse`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
+**單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換 tab：`home`、`exam`、`analysis`、`tracker`、`book`、`browse`、`terms`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
 
 `browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。解說框下方的「📖 相關名詞」區塊讀取 `src/data/terms/`（見下方），`activeBrowseTerms` 記錄每題目前展開的名詞（每題最多一張），題目收合、切換梯次／科目、全部展開／收合時一律清空。全真模擬考作答畫面刻意不顯示名詞，以免提示答案。
 
@@ -40,6 +40,14 @@ npm run preview  # 預覽建置結果
 
 **未出現題目優先機制**：`UNSEEN_PRIORITY_GRACE_ATTEMPTS`（目前為 `1`）控制從第幾次模擬考開始啟用——該科目測驗次數達門檻後，每章節抽題時會把 `seenQuestionIds`（曾在已交卷模擬考出現過的題目 id 集合）裡尚未出現過的題目排到前面優先抽取，抽完才輪到已出現過的題目；當某章節所有題目都已出現過一輪時，該章節的追蹤會自動重置、重新開始新一輪。僅在交卷（`forceSubmitExam`/`submitExam` 內的 `markExamQuestionsSeen()`）時才會寫入紀錄，中途放棄（`abortExam`）不計。
 
+### 練習題與模擬考錯題（`components/PracticeTab.vue`）
+
+原本的「練習題」tab 已移進「全真模擬考」頁：選單的「科目一／科目二」旁有「練習題」，下方有「模擬考錯題」。`App.vue` 的 `examPanel`（`null`／`'practice'`／`'exam-wrong'`）決定顯示哪個面板，同一個元件用 `view` prop 切換：
+- `view="practice"`：練習題（依科目、難度）、練習題錯題、累積弱點
+- `view="exam-wrong"`：模擬考錯題（只出官方考古題的錯題）
+
+作答中可按「暫停」；切到別的 tab（元件卸載）或 App 被收到背景（`visibilitychange`）時也會自動存一份，回來從「暫停中的練習」繼續。
+
 ### 指南單元練習（`bookQuizData`）
 
 16 章答案直接硬編碼為 `App.vue` 頂層的 `bookQuizData` 物件（key 格式 `p{篇}_c{章}`，值為 0-based 答案陣列）。使用者對照紙本指南盲選答案，提交後與標準答案比對並記錄歷次成績。
@@ -52,6 +60,8 @@ npm run preview  # 預覽建置結果
 | `ipas_tracker_v1` | 進度追蹤勾選狀態（`{id}_read`、`{id}_quiz`） |
 | `ipas_exam_counts_v1` | 各科目（`sub1`/`sub2`）模擬考累計交卷次數 |
 | `ipas_seen_question_ids_v1` | 曾在已交卷模擬考出現過的題目 `id` 陣列（未出現題目優先機制用） |
+| `ipas-wrong-book` | 錯題本（考古題與練習題共用，用題目 id 區分：練習題 id 是 `P` 開頭） |
+| `ipas_practice_paused_v1_practice`／`ipas_practice_paused_v1_exam-wrong` | 練習題、模擬考錯題各一份暫停中的作答進度 |
 
 ### `src/utils/` 注意事項
 

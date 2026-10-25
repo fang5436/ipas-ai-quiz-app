@@ -24,7 +24,6 @@
           <button @click="switchTab('tracker')" :class="getTabClass('tracker')">進度追蹤</button>
           <button @click="switchTab('book')" :class="getTabClass('book')">指南單元</button>
           <button @click="switchTab('browse')" :class="getTabClass('browse')">題庫瀏覽</button>
-          <button @click="switchTab('practice')" :class="getTabClass('practice')">練習題</button>
           <button @click="switchTab('terms')" :class="getTabClass('terms')">名詞卡</button>
         </nav>
       </div>
@@ -86,7 +85,10 @@
 
       <!-- =================【TAB 2: 全真模擬考模式】================= -->
       <div v-else-if="currentTab === 'exam'" class="animate-fade-in flex flex-col gap-4">
-        <div v-if="examQuestions.length === 0" class="text-center py-20 flex flex-col items-center gap-4">
+        <!-- 🆕 練習題、模擬考錯題：原本的「練習題」分頁移到這裡（程式在 components/PracticeTab.vue） -->
+        <PracticeTab v-if="examPanel && examQuestions.length === 0" :key="examPanel" :view="examPanel" :questions="allQuestions" @back="examPanel = null" />
+
+        <div v-else-if="examQuestions.length === 0" class="text-center py-20 flex flex-col items-center gap-4">
           <!-- 🆕 暫停中的考試：按「暫停」時保存，關掉 App 也不會消失 -->
           <div v-if="pausedExam" class="w-full max-w-md flex flex-col gap-3 bg-amber-950/30 border border-amber-800/60 rounded-xl px-4 py-3.5 text-left">
             <div class="flex flex-col gap-0.5">
@@ -103,7 +105,9 @@
           <div class="flex gap-3">
             <button @click="startExam(1)" class="btn-primary">📘 科目一</button>
             <button @click="startExam(2)" class="btn-primary !bg-indigo-600 hover:!bg-indigo-500">📙 科目二</button>
+            <button @click="examPanel = 'practice'" class="btn-primary !bg-rose-600 hover:!bg-rose-500">✍️ 練習題</button>
           </div>
+          <button @click="examPanel = 'exam-wrong'" class="w-full max-w-md btn-secondary py-2.5 border-rose-900/50 text-rose-300 hover:bg-rose-950/20 text-sm font-bold">🔁 模擬考錯題<span class="ml-1.5 text-xs font-normal text-slate-400">複習交卷時答錯的考古題</span></button>
 
           <!-- 🆕 歷屆考古題單獨測驗：依年度梯次挑選，原始題序、不隨機抽題 -->
           <div class="w-full max-w-md flex flex-col gap-3 mt-4 pt-6 border-t border-slate-800">
@@ -554,8 +558,6 @@
         </div>
       </div>
 
-      <!-- =================【🆕 TAB 7: 練習題（方小瑋出題＋錯題複習＋累積弱點，程式在 components/PracticeTab.vue）】================= -->
-      <PracticeTab v-else-if="currentTab === 'practice'" :questions="allQuestions" />
 
       <!-- =================【🆕 TAB 8: 名詞卡（搜尋＋依評鑑範圍分組＋不熟清單，程式在 components/TermsTab.vue）】================= -->
       <TermsTab v-else-if="currentTab === 'terms'" :questions="allQuestions" />
@@ -739,6 +741,8 @@ const trackerProgress = computed(() => {
 // =================【🔄 模擬考專用變數與大腦】=================
 const allQuestions = ref([]);
 const examQuestions = ref([]);
+// 模擬考頁目前打開的面板：null＝模擬考選單；'practice'＝練習題；'exam-wrong'＝模擬考錯題
+const examPanel = ref(null);
 const userAnswers = ref([]);
 const currentQuestionIdx = ref(0);
 const examSubmitted = ref(false);
@@ -1279,6 +1283,7 @@ const backToExamMenu = () => {
   examSubmitted.value = false;
   examScore.value = 0;
   expandedAccordion.value = null;
+  examPanel.value = null; // 考完回到模擬考選單，不要停在練習題面板
   currentTab.value = 'exam';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };

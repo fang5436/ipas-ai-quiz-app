@@ -1,8 +1,43 @@
 <template>
   <div class="animate-fade-in flex flex-col gap-4 pt-2">
 
-    <!-- =================【選單：練習題／錯題複習／累積弱點】================= -->
+    <!-- =================【選單】=================
+         view="practice"：練習題＋練習題錯題＋累積弱點；view="exam-wrong"：模擬考錯題
+         兩種都放在「全真模擬考」頁裡，按「返回」回到模擬考選單 -->
     <template v-if="!session">
+      <button @click="emit('back')" class="self-start text-xs text-slate-400 hover:text-slate-200">← 返回全真模擬考</button>
+
+      <!-- 🆕 暫停中的練習：按「暫停」時保存，關掉 App 也不會消失 -->
+      <div v-if="pausedSession" class="flex flex-col gap-3 bg-amber-950/30 border border-amber-800/60 rounded-xl px-4 py-3.5">
+        <div class="flex flex-col gap-0.5">
+          <span class="text-sm font-bold text-amber-300">⏸️ 暫停中的練習｜{{ pausedSession.title }}</span>
+          <span class="text-xs text-slate-400">已答 {{ pausedSession.answered }} / {{ pausedSession.items.length }} 題｜答對 {{ pausedSession.correctCount }}｜暫停於 {{ formatPausedDate(pausedSession.savedAt) }}</span>
+        </div>
+        <div class="flex gap-2">
+          <button @click="resumePaused" class="btn-primary flex-1 py-2 text-sm">▶ 繼續作答</button>
+          <button @click="discardPaused" class="px-3 py-2 rounded-lg border border-red-900/50 text-red-400 hover:bg-red-950/30 text-xs font-bold transition">放棄這份</button>
+        </div>
+      </div>
+
+      <template v-if="view === 'exam-wrong'">
+        <div class="bg-gradient-to-br from-rose-900/30 to-slate-900 border border-rose-800/40 rounded-2xl p-5 flex flex-col gap-1.5">
+          <h2 class="text-lg font-bold text-white">🔁 模擬考錯題</h2>
+          <p class="text-slate-400 text-xs leading-relaxed">「全真模擬考」與「歷屆考古題」交卷時答錯的官方考古題（這個功能加入之後才開始記錄）。練習題的錯題分開放在「練習題」裡。</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-bold text-slate-200">錯題複習</h3>
+            <span class="text-[11px] text-slate-500">同一題連續答對 {{ REMOVE_STREAK }} 次才移出</span>
+          </div>
+          <div class="bg-slate-950 border border-slate-800 rounded-xl py-2.5 text-center">
+            <div class="text-[11px] text-slate-400">模擬考錯題</div>
+            <div class="text-xl font-black text-rose-400">{{ wrongStats.exam }}</div>
+          </div>
+          <button @click="startReview('exam')" :disabled="wrongStats.exam === 0" class="btn-primary !bg-rose-600 hover:!bg-rose-500">開始複習模擬考錯題</button>
+        </div>
+      </template>
+
+      <template v-else>
       <div class="bg-gradient-to-br from-rose-900/30 to-slate-900 border border-rose-800/40 rounded-2xl p-5 flex flex-col gap-1.5">
         <h2 class="text-lg font-bold text-white">✍️ 練習題</h2>
         <p class="text-slate-400 text-xs leading-relaxed">方小瑋依官方評鑑範圍出的練習題（每題都對照名詞卡與考古題查證過），和 {{ questions.length }} 題官方考古題分開存放。每題作答後立即顯示對錯與解說；答錯的題目會記進錯題本。</p>
@@ -24,21 +59,15 @@
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
         <div class="flex items-center justify-between gap-2">
-          <h3 class="text-sm font-bold text-slate-200">錯題複習</h3>
+          <h3 class="text-sm font-bold text-slate-200">練習題錯題</h3>
           <span class="text-[11px] text-slate-500">同一題連續答對 {{ REMOVE_STREAK }} 次才移出</span>
         </div>
-        <div class="grid grid-cols-2 gap-2 text-center">
-          <div class="bg-slate-950 border border-slate-800 rounded-xl py-2.5">
-            <div class="text-[11px] text-slate-400">考古題錯題</div>
-            <div class="text-xl font-black text-rose-400">{{ wrongStats.exam }}</div>
-          </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-xl py-2.5">
-            <div class="text-[11px] text-slate-400">練習題錯題</div>
-            <div class="text-xl font-black text-rose-400">{{ wrongStats.practice }}</div>
-          </div>
+        <div class="bg-slate-950 border border-slate-800 rounded-xl py-2.5 text-center">
+          <div class="text-[11px] text-slate-400">練習題錯題</div>
+          <div class="text-xl font-black text-rose-400">{{ wrongStats.practice }}</div>
         </div>
-        <button @click="startReview" :disabled="wrongStats.exam + wrongStats.practice === 0" class="btn-primary !bg-rose-600 hover:!bg-rose-500">開始錯題複習</button>
-        <p class="text-[11px] text-slate-500 leading-relaxed">考古題錯題來自「全真模擬考」與「歷屆考古題」交卷時答錯的題目（這個功能加入之後才開始記錄）。</p>
+        <button @click="startReview('practice')" :disabled="wrongStats.practice === 0" class="btn-primary !bg-rose-600 hover:!bg-rose-500">開始複習練習題錯題</button>
+        <p class="text-[11px] text-slate-500 leading-relaxed">模擬考（官方考古題）的錯題分開放在全真模擬考的「模擬考錯題」。</p>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
@@ -58,6 +87,7 @@
           </div>
         </div>
       </div>
+      </template>
     </template>
 
     <!-- =================【作答中】================= -->
@@ -71,7 +101,10 @@
             <span class="text-xs text-slate-500 ml-2">答對 {{ session.correctCount }}</span>
           </div>
         </div>
-        <button @click="endSession" class="btn-secondary py-1.5 px-2.5 text-xs">結束</button>
+        <div class="flex gap-2">
+          <button @click="pauseSession()" class="btn-secondary py-1.5 px-2.5 text-xs border-amber-900/50 text-amber-400 hover:bg-amber-950/20">⏸️ 暫停</button>
+          <button @click="endSession" class="btn-secondary py-1.5 px-2.5 text-xs">結束</button>
+        </div>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
@@ -105,14 +138,14 @@
         <div class="text-4xl">{{ session.correctCount === session.answered ? '🎉' : '💪' }}</div>
         <h2 class="text-lg font-bold text-slate-100">{{ session.title }} 完成</h2>
         <p class="text-slate-400 text-sm">答對 {{ session.correctCount }} / {{ session.answered }} 題<span v-if="session.removed > 0">，{{ session.removed }} 題移出錯題本</span></p>
-        <button @click="backToMenu" class="btn-primary">回到練習題選單</button>
+        <button @click="backToMenu" class="btn-primary">{{ view === 'exam-wrong' ? '回到模擬考錯題' : '回到練習題選單' }}</button>
       </div>
     </template>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
 import { loadCodeStats, clearCodeStats } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
@@ -120,7 +153,10 @@ import { CODE_NAMES } from '../data/codeNames.js';
 const props = defineProps({
   // 官方考古題（App.vue 的 allQuestions），錯題複習時用 id 查回原題
   questions: { type: Array, default: () => [] },
+  // 'practice'：練習題＋練習題錯題＋累積弱點；'exam-wrong'：模擬考錯題
+  view: { type: String, default: 'practice' },
 });
+const emit = defineEmits(['back']);
 
 const ROUND_SIZE = 20; // 錯題複習每回最多題數
 const REMOVE_STREAK = 3;
@@ -149,6 +185,7 @@ onMounted(async () => {
   const mod = await import('../data/practice/practice.json');
   practiceQuestions.value = mod.default || mod;
   refreshRecords();
+  pausedSession.value = loadPaused();
 });
 
 const refreshRecords = () => {
@@ -223,19 +260,19 @@ const startPractice = (subject, level) => {
   startSession('practice', `科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
 };
 
-const startReview = () => {
+// kind：'exam' 只出模擬考（官方考古題）錯題；'practice' 只出練習題錯題。兩者共用同一份錯題本，用題目 id 區分
+const startReview = (kind) => {
+  const lookup = kind === 'practice' ? practiceById.value : examById.value;
   const items = fisherYates(wrongBook.value)
     .map(entry => {
-      const practice = practiceById.value.get(entry.id);
-      const exam = examById.value.get(entry.id);
-      const q = practice || exam;
+      const q = lookup.get(entry.id);
       if (!q) return null;
-      return { ...toItem(q, Boolean(practice)), streak: entry.correctStreak ?? 0 };
+      return { ...toItem(q, kind === 'practice'), streak: entry.correctStreak ?? 0 };
     })
     .filter(Boolean)
     .slice(0, ROUND_SIZE);
   if (items.length === 0) return;
-  startSession('review', '錯題複習', items);
+  startSession('review', kind === 'practice' ? '練習題錯題複習' : '模擬考錯題複習', items);
 };
 
 const current = computed(() => session.value?.items[session.value.idx] || {});
@@ -301,9 +338,86 @@ const endSession = () => {
 };
 
 const backToMenu = () => {
+  // 從暫停紀錄繼續的那一份已經做完或結束，暫停紀錄不再需要
+  if (pausedSession.value && session.value?.pauseId === pausedSession.value.id) removePaused();
   session.value = null;
   finished.value = false;
   refreshRecords();
+};
+
+// =================【🆕 暫停功能：做到一半先離開，作答進度存在 localStorage，關掉 App 也不會消失】=================
+// 「練習題」與「模擬考錯題」各保留一份；題目與選項順序整份照存，繼續作答時原樣還原
+const pausedKey = computed(() => `ipas_practice_paused_v1_${props.view}`);
+const pausedSession = ref(null);
+
+const loadPaused = () => {
+  try {
+    const raw = localStorage.getItem(pausedKey.value);
+    const slot = raw ? JSON.parse(raw) : null;
+    return slot && Array.isArray(slot.items) && slot.items.length > 0 ? slot : null;
+  } catch { return null; }
+};
+
+const removePaused = () => {
+  pausedSession.value = null;
+  try { localStorage.removeItem(pausedKey.value); } catch { /* 無法存取時只清畫面狀態 */ }
+};
+
+// silent：自動暫停（切換分頁、App 被收到背景）時不跳確認視窗；已有另一份暫停紀錄時不覆蓋，避免蓋掉它
+const pauseSession = (silent = false) => {
+  const s = session.value;
+  if (!s) return;
+  if (silent && (finished.value || s.answered === 0)) return; // 還沒作答或已經做完，不用自動存
+  const sameSlot = pausedSession.value && s.pauseId === pausedSession.value.id;
+  if (pausedSession.value && !sameSlot) {
+    if (silent) return;
+    if (!confirm('已經有一份暫停中的練習，要用目前這份取代它嗎？（舊的那份會被放棄）')) return;
+  }
+  const id = sameSlot ? pausedSession.value.id : Date.now();
+  const slot = { ...JSON.parse(JSON.stringify(s)), id, pauseId: id, savedAt: new Date().toISOString() };
+  try {
+    localStorage.setItem(pausedKey.value, JSON.stringify(slot));
+  } catch (e) {
+    console.error('暫停儲存失敗：', e);
+    if (!silent) alert('⚠️ 瀏覽器無法儲存暫停內容，請繼續作答或直接結束。');
+    return;
+  }
+  pausedSession.value = slot;
+  if (silent) { s.pauseId = id; return; } // 自動存檔：畫面留在原題，回來可以直接接著做
+  session.value = null;
+  finished.value = false;
+  refreshRecords();
+};
+
+const resumePaused = () => {
+  const slot = pausedSession.value;
+  if (!slot) return;
+  if (session.value && !confirm('目前的練習會被放棄，確定要改做暫停中的那一份嗎？')) return;
+  const { id, savedAt, ...rest } = JSON.parse(JSON.stringify(slot));
+  session.value = { ...rest, pauseId: id };
+  finished.value = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// 切到別的分頁（元件被卸載）或手機把 App 收到背景時，自動存一份，回來可以從「暫停中的練習」繼續
+const onHidden = () => { if (document.visibilityState === 'hidden') pauseSession(true); };
+onMounted(() => document.addEventListener('visibilitychange', onHidden));
+onBeforeUnmount(() => {
+  document.removeEventListener('visibilitychange', onHidden);
+  pauseSession(true);
+});
+
+const discardPaused = () => {
+  if (!pausedSession.value) return;
+  if (!confirm('確定要放棄這份暫停中的練習嗎？作答進度會被清除，無法復原。')) return;
+  removePaused();
+};
+
+const formatPausedDate = (iso) => {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getMonth() + 1}/${d.getDate()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
 
 const optionClass = (idx) => {
