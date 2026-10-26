@@ -43,18 +43,19 @@
         <p class="text-slate-400 text-xs leading-relaxed">方小瑋依官方評鑑範圍出的練習題（每題都對照名詞卡與考古題查證過），和 {{ questions.length }} 題官方考古題分開存放。每題作答後立即顯示對錯與解說；答錯的題目會記進錯題本。</p>
       </div>
 
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
-        <h3 class="text-sm font-bold text-slate-200">開始練習 <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
+      <div v-for="round in ROUNDS" :key="round" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+        <h3 class="text-sm font-bold text-slate-200">{{ round === 1 ? '開始練習（第一回）' : '✍️ 練習題第二回' }} <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
         <div v-for="subject in [1, 2]" :key="subject" class="flex flex-col gap-2">
           <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
           <div class="grid grid-cols-4 gap-2">
-            <button v-for="t in LEVEL_OPTIONS" :key="t.key" @click="startPractice(subject, t.key)" :disabled="practiceCount(subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
+            <button v-for="t in LEVEL_OPTIONS" :key="t.key" @click="startPractice(round, subject, t.key)" :disabled="practiceCount(round, subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
               <span class="text-xs font-bold" :class="LEVEL_TEXT[t.key]">{{ t.label }}</span>
-              <span class="text-[10px] font-normal text-slate-400">{{ practiceCount(subject, t.key) }} 題</span>
+              <span class="text-[10px] font-normal text-slate-400">{{ practiceCount(round, subject, t.key) }} 題</span>
             </button>
           </div>
         </div>
-        <p class="text-[11px] text-slate-500 leading-relaxed">難度依考古題題型區分：易＝概念直問；中＝120 字以內的情境題；難＝超過 120 字、需同時判斷多個條件的情境題。比例參考 115 年第二、三次（易 10%、中 46%、難 44%）。</p>
+        <p v-if="round === 1" class="text-[11px] text-slate-500 leading-relaxed">難度依考古題題型區分：易＝概念直問；中＝120 字以內的情境題；難＝超過 120 字、需同時判斷多個條件的情境題。比例參考 115 年第二、三次（易 10%、中 46%、難 44%）。</p>
+        <p v-else class="text-[11px] text-slate-500 leading-relaxed">第二回是新出的題目，考點和第一回錯開；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。</p>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
@@ -174,7 +175,10 @@ const LEVEL_BADGE = {
   '難': 'bg-red-950 text-red-400 border-red-900/40',
 };
 
-const practiceQuestions = ref([]);
+// 練習題分回存放：第一回 practice.json、第二回 practice2.json，兩回題目不混在一起出
+const ROUNDS = [1, 2];
+const roundQuestions = ref({ 1: [], 2: [] });
+const practiceQuestions = computed(() => ROUNDS.flatMap(r => roundQuestions.value[r]));
 const wrongBook = ref([]);
 const codeStats = ref({});
 const session = ref(null);
@@ -182,8 +186,11 @@ const finished = ref(false);
 
 onMounted(async () => {
   // 練習題放在 src/data/practice/ 子資料夾，不會被 App.vue 的 ./data/*.json 題庫載入誤收
-  const mod = await import('../data/practice/practice.json');
-  practiceQuestions.value = mod.default || mod;
+  const [mod1, mod2] = await Promise.all([
+    import('../data/practice/practice.json'),
+    import('../data/practice/practice2.json'),
+  ]);
+  roundQuestions.value = { 1: mod1.default || mod1, 2: mod2.default || mod2 };
   refreshRecords();
   pausedSession.value = loadPaused();
 });
@@ -195,10 +202,10 @@ const refreshRecords = () => {
 
 const subjectPrefix = (subject) => (subject === 1 ? 'L11' : 'L12');
 
-const filterPractice = (subject, level) => practiceQuestions.value.filter(q =>
+const filterPractice = (round, subject, level) => roundQuestions.value[round].filter(q =>
   q.detail_code.startsWith(subjectPrefix(subject)) && (level === 'all' || q.difficulty === level));
 
-const practiceCount = (subject, level) => filterPractice(subject, level).length;
+const practiceCount = (round, subject, level) => filterPractice(round, subject, level).length;
 
 const examById = computed(() => new Map(props.questions.map(q => [q.id, q])));
 const practiceById = computed(() => new Map(practiceQuestions.value.map(q => [q.id, q])));
@@ -253,11 +260,12 @@ const startSession = (mode, title, items) => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-const startPractice = (subject, level) => {
-  const pool = fisherYates(filterPractice(subject, level));
+const startPractice = (round, subject, level) => {
+  const pool = fisherYates(filterPractice(round, subject, level));
   if (pool.length === 0) return;
   const levelLabel = level === 'all' ? '全部難度' : `難度${level}`;
-  startSession('practice', `科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
+  const roundLabel = round === 1 ? '' : '第二回・';
+  startSession('practice', `${roundLabel}科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
 };
 
 // kind：'exam' 只出模擬考（官方考古題）錯題；'practice' 只出練習題錯題。兩者共用同一份錯題本，用題目 id 區分
