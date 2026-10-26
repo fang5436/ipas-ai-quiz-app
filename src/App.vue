@@ -413,10 +413,11 @@
 
       <!-- =================【TAB 4: 模擬考雙層弱點分析】================= -->
       <div v-else-if="currentTab === 'analysis'" class="animate-fade-in flex flex-col gap-6 pt-2">
-        <div v-if="!examSubmitted" class="text-center py-20 bg-slate-900 border border-slate-800 rounded-2xl">
+        <h3 class="text-sm font-bold text-slate-300 tracking-widest pl-1 border-l-2 border-violet-500">這次考試</h3>
+        <div v-if="!examSubmitted" class="text-center py-10 bg-slate-900 border border-slate-800 rounded-2xl">
           <div class="text-4xl mb-4">📊</div>
           <h2 class="text-lg font-bold text-slate-200 mb-2">尚無分析數據</h2>
-          <p class="text-slate-400 text-sm mb-6">請先完成一次 50 題模擬測驗並交卷，系統將自動為您生成雙層弱點分析報告。</p>
+          <p class="text-slate-400 text-sm mb-6">完成一次 50 題模擬測驗並交卷後，這裡會顯示這次考試的雙層弱點分析。下方的累積弱點會持續累積每次交卷的結果。</p>
           <div class="flex gap-3 justify-center">
             <button @click="startExam(1)" class="btn-primary">📘 科目一</button>
             <button @click="startExam(2)" class="btn-primary !bg-indigo-600 hover:!bg-indigo-500">📙 科目二</button>
@@ -470,6 +471,11 @@
             </div>
           </div>
         </div>
+
+        <!-- 累積弱點（每次交卷都加總）與練習題弱點（分開存），程式在 components/CumulativeWeakness.vue，沒交卷時也會顯示 -->
+        <h3 class="text-sm font-bold text-slate-300 tracking-widest pl-1 border-l-2 border-violet-500">長期累積</h3>
+        <CumulativeWeakness kind="exam" />
+        <CumulativeWeakness kind="practice" />
       </div>
 
       <!-- =================【🆕 TAB 6: 題庫瀏覽（依梯次＋科目列出全部題目，直接查看答案與解說）】================= -->
@@ -635,6 +641,7 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
 import PracticeTab from './components/PracticeTab.vue';
+import CumulativeWeakness from './components/CumulativeWeakness.vue';
 import TermsTab from './components/TermsTab.vue';
 import { recordWrongAnswer } from './utils/wrongBook.js';
 import { recordCodeAnswers } from './utils/answerStats.js';

@@ -2,7 +2,7 @@
   <div class="animate-fade-in flex flex-col gap-4 pt-2">
 
     <!-- =================【選單】=================
-         view="practice"：練習題＋練習題錯題＋累積弱點；view="exam-wrong"：模擬考錯題
+         view="practice"：練習題＋練習題錯題（作答結果另記成練習題弱點，顯示在弱點分析分頁）；view="exam-wrong"：模擬考錯題
          兩種都放在「全真模擬考」頁裡，按「返回」回到模擬考選單 -->
     <template v-if="!session">
       <button @click="emit('back')" class="self-start text-xs text-slate-400 hover:text-slate-200">← 返回全真模擬考</button>
@@ -71,23 +71,7 @@
         <p class="text-[11px] text-slate-500 leading-relaxed">模擬考（官方考古題）的錯題分開放在全真模擬考的「模擬考錯題」。</p>
       </div>
 
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
-        <div class="flex items-center justify-between gap-2">
-          <h3 class="text-sm font-bold text-slate-200">累積弱點 <span class="text-[11px] font-normal text-slate-500">（模擬考＋考古題，依官方評鑑代碼）</span></h3>
-          <button v-if="hasStats" @click="resetStats" class="text-[11px] text-slate-500 hover:text-red-400 underline shrink-0">清除</button>
-        </div>
-        <p v-if="!hasStats" class="text-xs text-slate-500 py-2">還沒有紀錄。交卷一次「全真模擬考」或「歷屆考古題」後，這裡會開始累積各代碼的答對率，答對率低的排在前面。</p>
-        <div v-for="group in statsGroups" v-else :key="group.title" class="flex flex-col gap-1.5">
-          <span class="text-xs font-bold" :class="group.colorClass">{{ group.title }}</span>
-          <div v-for="row in group.rows" :key="row.code" class="flex items-center justify-between gap-3 py-1.5 border-b border-slate-800/60 last:border-0">
-            <span class="text-xs text-slate-300 min-w-0"><span class="text-slate-500 font-mono mr-1.5">{{ row.code }}</span>{{ row.name }}</span>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="text-[10px] text-slate-500">{{ row.correct }}/{{ row.total }}</span>
-              <span class="w-10 text-right text-xs font-bold" :class="rateColor(row.rate)">{{ Math.round(row.rate * 100) }}%</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="text-[11px] text-slate-500 text-center leading-relaxed">📊 累積弱點與練習題弱點都移到上方的「弱點分析」分頁</p>
       </template>
     </template>
 
@@ -148,13 +132,13 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
-import { loadCodeStats, clearCodeStats } from '../utils/answerStats.js';
+import { recordCodeAnswers } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
 
 const props = defineProps({
   // 官方考古題（App.vue 的 allQuestions），錯題複習時用 id 查回原題
   questions: { type: Array, default: () => [] },
-  // 'practice'：練習題＋練習題錯題＋累積弱點；'exam-wrong'：模擬考錯題
+  // 'practice'：練習題＋練習題錯題；'exam-wrong'：模擬考錯題
   view: { type: String, default: 'practice' },
 });
 const emit = defineEmits(['back']);
@@ -180,7 +164,6 @@ const ROUNDS = [1, 2];
 const roundQuestions = ref({ 1: [], 2: [] });
 const practiceQuestions = computed(() => ROUNDS.flatMap(r => roundQuestions.value[r]));
 const wrongBook = ref([]);
-const codeStats = ref({});
 const session = ref(null);
 const finished = ref(false);
 
@@ -197,7 +180,6 @@ onMounted(async () => {
 
 const refreshRecords = () => {
   wrongBook.value = loadWrongBook();
-  codeStats.value = loadCodeStats();
 };
 
 const subjectPrefix = (subject) => (subject === 1 ? 'L11' : 'L12');
@@ -303,6 +285,8 @@ const answer = (idx) => {
   s.selected = idx;
   s.answered++;
   const item = current.value;
+  // 練習題弱點：只算「練習題」模式；錯題複習只出答錯過的題，算進去會讓答對率偏低
+  if (s.mode === 'practice') recordCodeAnswers([{ code: item.detail_code, correct: idx === item.correctIndex }], 'practice');
   if (idx === item.correctIndex) {
     s.correctCount++;
     if (s.mode === 'review') {
@@ -433,26 +417,5 @@ const optionClass = (idx) => {
   if (s.selected === null) return s.pending === idx ? 'option-btn--selected' : 'hover:border-slate-600 hover:bg-slate-800/50';
   if (idx === current.value.correctIndex) return 'option-btn--correct';
   return s.selected === idx ? 'option-btn--wrong' : 'option-btn--dim';
-};
-
-const hasStats = computed(() => Object.keys(codeStats.value).length > 0);
-
-const statsGroups = computed(() => [
-  { title: '📘 科目一', prefix: 'L11', colorClass: 'text-violet-400' },
-  { title: '📙 科目二', prefix: 'L12', colorClass: 'text-indigo-400' },
-].map(g => ({
-  ...g,
-  rows: Object.entries(codeStats.value)
-    .filter(([code, s]) => code.startsWith(g.prefix) && s.total > 0)
-    .map(([code, s]) => ({ code, name: CODE_NAMES[code] || '', correct: s.correct, total: s.total, rate: s.correct / s.total }))
-    .sort((a, b) => a.rate - b.rate || b.total - a.total),
-})).filter(g => g.rows.length > 0));
-
-const rateColor = (rate) => (rate >= 0.8 ? 'text-green-400' : rate >= 0.6 ? 'text-amber-400' : 'text-red-400');
-
-const resetStats = () => {
-  if (!confirm('確定要清除累積弱點紀錄嗎？（錯題本不受影響）')) return;
-  clearCodeStats();
-  refreshRecords();
 };
 </script>
