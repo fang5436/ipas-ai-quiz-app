@@ -1167,5 +1167,1188 @@
       "llm"
     ],
     "basis": "名詞卡 hallucination（生成看似合理但錯誤或不存在的內容，例如捏造法規條號；RAG 能降低幻覺；提高溫度反而增加不實內容；附上引用來源不保證正確；分階段驗證可降低但無法完全避免）；NIST AI 600-1"
+  },
+  {
+    "id": "P0451",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12101",
+    "source": "方小瑋練習題第二回",
+    "question": "某電商用自動化流程追蹤訂單付款狀態。原本的做法是每隔 10 分鐘去金流系統查一次有沒有新付款；工程師建議改成「付款完成時，金流系統主動把資料送到我們指定的網址」。工程師建議的機制是下列何者？",
+    "options": [
+      "輪詢（Polling），定時重複查詢是否有新資料",
+      "Webhook，事件發生時由系統主動推送資料到指定網址",
+      "批次匯入（Batch Import），每天下班後一次整批匯入資料",
+      "手動匯出 Excel 報表，再由人員上傳到流程平台"
+    ],
+    "correctIndex": 1,
+    "explanation": "Webhook 是事件驅動的推播：事件一發生，系統就主動把資料推送到預先指定的網址。原本「每隔 10 分鐘查一次」是輪詢；批次匯入與手動匯出都不是即時推送。",
+    "term_ids": [
+      "webhook",
+      "workflow-automation"
+    ],
+    "basis": "名詞卡 webhook（事件發生時系統主動把資料推送到預先指定的網址；定時重複查詢是輪詢，不是 Webhook）；考古題 115 年 L12101 Webhook 比喻題官方答案一致"
+  },
+  {
+    "id": "P0452",
+    "difficulty": "易",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12101",
+    "source": "方小瑋練習題第二回",
+    "question": "完全不需要撰寫程式，只靠視覺化介面與拖拉元件，就能建立應用程式或自動化流程的開發方式，稱為下列何者？",
+    "options": [
+      "Pro-Code",
+      "Low-Code",
+      "No-Code",
+      "Vibe Coding"
+    ],
+    "correctIndex": 2,
+    "explanation": "No-Code 完全不寫程式、只靠視覺化介面與拖拉元件；Low-Code 以元件為主再搭配少量程式碼；Pro-Code 由工程師從頭寫程式；Vibe Coding 是用自然語言讓 AI 生成程式碼。",
+    "term_ids": [
+      "no-code",
+      "low-code",
+      "pro-code",
+      "vibe-coding"
+    ],
+    "basis": "名詞卡 no-code（完全不寫程式，只靠視覺化介面與拖拉元件）、pro-code（Pro-Code 全部自己寫；Low-Code 用元件加少量程式；No-Code 完全不寫程式）"
+  },
+  {
+    "id": "P0453",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12101",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司用 Low-Code 平台整合三個系統的訂單，但各系統的日期寫法不同（2026/10/26、26-10-2026、Oct 26, 2026），需要先統一成同一種格式再寫入報表。最適合使用流程中的哪一種節點？",
+    "options": [
+      "條件分支節點（Router），依條件決定流程走向",
+      "格式化節點（Formatter），轉換與整理資料格式",
+      "聚合器節點（Aggregator），把多個來源的結果合併成一筆",
+      "迭代器節點（Iterator），把清單拆成單筆逐一處理"
+    ],
+    "correctIndex": 1,
+    "explanation": "格式化節點用來整理、轉換資料格式，例如改日期格式、拆字串、調整欄位。條件分支決定流程走向；聚合器把多筆或多來源資料合併；迭代器把清單逐筆處理，都不是用來統一日期寫法。",
+    "term_ids": [
+      "formatter-node",
+      "router-node",
+      "aggregator-node",
+      "iterator-node"
+    ],
+    "basis": "名詞卡 formatter-node（整理、轉換資料格式，例如改日期格式；格式化只處理資料長相，條件分支決定流程走向，聚合器把多筆資料合併）"
+  },
+  {
+    "id": "P0454",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12101",
+    "source": "方小瑋練習題第二回",
+    "question": "某物流公司規劃三項自動化需求：(甲) 訂單金額超過 5 萬元且為首次下單的客戶，一律轉給人工審核，規則由主管訂好、很少變動；(乙) 用過去三年的客戶資料，自動建立「下季可能流失客戶」的預測模型，但公司沒有資料科學家；(丙) 客戶來信說包裹延誤時，系統能依目標自行決定要查物流狀態、聯絡倉庫或改派車輛，並依結果調整下一步。下列對應何者最恰當？",
+    "options": [
+      "甲：AutoML；乙：規則引擎；丙：AI Agent",
+      "甲：規則引擎；乙：AI Agent；丙：AutoML",
+      "甲：規則引擎；乙：AutoML；丙：AI Agent",
+      "甲：AI Agent；乙：規則引擎；丙：AutoML"
+    ],
+    "correctIndex": 2,
+    "explanation": "固定、由人事先寫好的「如果…就…」規則 → 規則引擎；沒有資料科學家、要用自有資料自動建預測模型 → AutoML；能依目標自主規劃步驟、依結果動態調整 → AI Agent。",
+    "term_ids": [
+      "rule-engine",
+      "automl",
+      "ai-agent",
+      "rule-based-automation"
+    ],
+    "basis": "名詞卡 rule-engine（依人事先寫好的如果…就…規則自動判斷；規則引擎依人寫的規則，AutoML 從資料自動學出模型，AI Agent 能依目標自主規劃步驟）、automl；考古題 115 年 L12201 AI Agent 與傳統自動化差異題官方答案一致"
+  },
+  {
+    "id": "P0455",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12101",
+    "source": "方小瑋練習題第二回",
+    "question": "某零售業者用 Low-Code 平台建立線上訂單流程，需要串接物流商與金流商的 API。但金流商的測試環境要兩個月後才開放，團隊又希望現在就能反覆驗證「付款成功、付款失敗、逾時」等各種情況下的流程是否正確，避免上線後才發現問題。下列做法何者最恰當？",
+    "options": [
+      "先只用平台的即時預覽功能檢查畫面流程，其餘等正式上線後再依客訴修正",
+      "直接串接金流商的正式環境做測試，用真實信用卡小額付款驗證各種情況",
+      "用服務虛擬化模擬金流 API 的各種回應，並建立可重複執行的自動化測試",
+      "等兩個月後金流商測試環境開放，再一次把所有流程開發完並一起測試"
+    ],
+    "correctIndex": 2,
+    "explanation": "服務虛擬化用模擬程式代替還沒完成或不方便真的呼叫的外部服務，讓測試能獨立進行；搭配可重複執行的自動化測試，就能現在驗證各種情境。只看即時預覽、上線後再修風險太高；用正式環境測試有金流風險；空等兩個月會延誤進度。",
+    "term_ids": [
+      "service-virtualization",
+      "automated-testing",
+      "low-code"
+    ],
+    "basis": "名詞卡 service-virtualization（用模擬程式代替還沒完成或不方便真的呼叫的外部服務，如物流、金流 API）、automated-testing（跨系統整合應建立自動化測試並用服務虛擬化做模組化驗證；只看平台預覽、上線後再修風險太高）"
+  },
+  {
+    "id": "P0456",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12102",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司各部門開放使用 No-Code 工具後，資訊部門盤點發現：業務部和客服部各自做了功能幾乎一樣的客戶名單系統，欄位定義不一致，而且都沒經過資安審核就上線。這種現象最常被稱為下列何者？",
+    "options": [
+      "影子 IT（Shadow IT）",
+      "供應商鎖定（Vendor Lock-in）",
+      "資料漂移（Data Drift）",
+      "模型路由（Model Routing）"
+    ],
+    "correctIndex": 0,
+    "explanation": "各部門未經資訊部門審核，自行建置或使用系統與工具，造成重複開發、資料不一致與資安風險，稱為影子 IT。根本解是建立治理規範、上線審核與共用標準，而不是全面禁止部門開發。",
+    "term_ids": [
+      "shadow-it",
+      "vendor-lock-in",
+      "citizen-developer"
+    ],
+    "basis": "名詞卡 shadow-it（各部門未經資訊部門審核自行建置系統，容易重複開發、資料不一致與資安風險；根本解是治理規範與上線審核，不是全面禁止）"
+  },
+  {
+    "id": "P0457",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12102",
+    "source": "方小瑋練習題第二回",
+    "question": "某連鎖藥局準備選用 No-Code 平台建置會員、處方紀錄與庫存系統，預計使用五年以上，期間可能因業務擴張改用其他系統。資訊主管擔心幾年後若想更換平台，累積的資料與已建好的功能會很難搬走。在比較各家平台時，下列哪一項評估重點最能降低這個風險？",
+    "options": [
+      "優先挑選介面最美觀、內建範本最多的平台，讓各部門同仁上手最快、導入時間最短",
+      "確認能以標準格式完整匯出資料、提供開放 API，避免資料只能存成專有格式",
+      "選擇年費最低的平台，把省下的預算保留起來，留待之後需要更換平台時再使用",
+      "要求所有資料都只存放在平台內部、不另外備份到其他地方，以免資料版本不一致"
+    ],
+    "correctIndex": 1,
+    "explanation": "專有格式、匯出功能有限、沒有標準 API，是供應商鎖定的警訊。選型時確認能用標準格式完整匯出、有開放 API，將來才搬得走。介面美觀、年費低都不能解決鎖定；資料只存在平台內部反而加重鎖定。",
+    "term_ids": [
+      "vendor-lock-in",
+      "no-code",
+      "multi-cloud"
+    ],
+    "basis": "名詞卡 vendor-lock-in（過度依賴某平台，資料與功能難以轉移；專有格式、匯出功能有限、沒有標準 API 是鎖定的警訊）、no-code（封閉平台可能造成供應商鎖定）；改編自考古題 115 年 L12102 封閉平台題（該題問後果，本題改問選型時如何預防）"
+  },
+  {
+    "id": "P0458",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L121",
+    "detail_code": "L12102",
+    "source": "方小瑋練習題第二回",
+    "question": "某券商用 Low-Code 平台很快做出了內部報表與簽核系統。下列哪一項新需求，最可能仍需要由工程師以 Pro-Code 方式自行開發？",
+    "options": [
+      "新增一張請假申請表單，並加上主管簽核",
+      "把每週報表改成自動寄到主管的電子信箱",
+      "在報表頁面加上一個新的長條圖",
+      "公司專屬的高頻交易演算法，要求毫秒級回應"
+    ],
+    "correctIndex": 3,
+    "explanation": "Low-Code 底層封裝通用框架，毫秒級延遲、超高吞吐量難以做底層優化，企業專屬的複雜演算法也通常仍需自行寫程式。表單、簽核、自動寄信、加圖表都是 Low-Code 平台擅長的功能。",
+    "term_ids": [
+      "low-code",
+      "pro-code",
+      "latency-throughput"
+    ],
+    "basis": "名詞卡 low-code（限制：毫秒級延遲與超高吞吐量難以底層優化、企業專屬複雜演算法仍需自行寫程式）、pro-code（由工程師從頭撰寫，彈性最高）；考古題 115 年 L12102 股票交易輔助工具題官方答案一致"
+  },
+  {
+    "id": "P0459",
+    "difficulty": "易",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "只用 Transformer 解碼器堆疊而成、把上下文和要生成的內容放在同一串序列中逐一預測下一個 Token 的模型架構，稱為下列何者？GPT 系列就屬於這一類。",
+    "options": [
+      "Decoder-only 架構",
+      "Encoder-only 架構",
+      "卷積神經網路（CNN）",
+      "生成對抗網路（GAN）"
+    ],
+    "correctIndex": 0,
+    "explanation": "Decoder-only 架構只用 Transformer 解碼器，把上下文和生成內容放在同一串序列中，一個 Token 接一個預測，GPT 系列屬於這類。CNN 主要處理影像；GAN 由生成器與鑑別器對抗訓練。",
+    "term_ids": [
+      "decoder-only",
+      "transformer",
+      "autoregressive"
+    ],
+    "basis": "名詞卡 decoder-only（只用 Transformer 解碼器堆疊，一個 Token 接一個預測；GPT 系列屬於這類）；Brown et al. (2020) GPT-3"
+  },
+  {
+    "id": "P0460",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某 Agentic AI 系統由三個元件組成：(甲) 把使用者目標拆解成子任務並決定執行順序；(乙) 依規劃實際呼叫外部 API 並取得結果；(丙) 作為所有 API 請求的統一入口，負責驗證身分與限流。下列對應何者正確？",
+    "options": [
+      "甲：API 閘道器；乙：任務規劃器；丙：工具執行器",
+      "甲：任務規劃器；乙：工具執行器；丙：API 閘道器",
+      "甲：工具執行器；乙：API 閘道器；丙：任務規劃器",
+      "甲：任務規劃器；乙：API 閘道器；丙：工具執行器"
+    ],
+    "correctIndex": 1,
+    "explanation": "任務規劃器負責拆解任務與決策；工具執行器依規劃結果實際呼叫外部工具或 API；API 閘道器是所有 API 請求的統一入口，負責轉送、驗證身分、限流與監控。",
+    "term_ids": [
+      "task-planner",
+      "tool-executor",
+      "api-gateway"
+    ],
+    "basis": "名詞卡 api-gateway（API 閘道器負責轉送與管控請求；任務規劃器負責拆解任務與決策；工具執行器負責實際呼叫工具）、tool-executor（依規劃結果實際呼叫外部工具或 API）；考古題 115 年 L12201 任務規劃器題官方答案一致"
+  },
+  {
+    "id": "P0461",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某法律翻譯系統要把合約條文譯成英文，客戶要求「同一段條文每次翻譯結果都要穩定、可預測，不要每次措辭都不同」。在生成時的解碼策略上，下列做法何者最符合需求？",
+    "options": [
+      "調高溫度（Temperature）並改用隨機取樣，讓每次產生的譯文更自然",
+      "每一步都刻意挑選一個機率較低的詞，讓每次譯文的措辭都有變化",
+      "把最大 Token 數設為 1，讓模型每次只輸出一個字再組合",
+      "採用束搜尋（Beam Search），選整體機率最高的候選譯文"
+    ],
+    "correctIndex": 3,
+    "explanation": "束搜尋每一步保留機率最高的幾條候選句子，最後選整體機率最高的一條，輸出偏向穩定、可預測。調高溫度、隨機取樣會增加多樣性，與需求相反；最大 Token 數只控制長度，設成 1 會讓譯文不完整。",
+    "term_ids": [
+      "beam-search",
+      "temperature",
+      "max-tokens"
+    ],
+    "basis": "名詞卡 beam-search（每一步保留機率最高的幾條候選，最後選整體機率最高的一條；偏向穩定、可預測的輸出；調高溫度、隨機取樣則增加多樣性）、max-tokens（控制長度）"
+  },
+  {
+    "id": "P0462",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某翻譯公司要評估機器翻譯系統，做法是把系統譯文和專業譯者的人工參考譯文比對，看兩者有多少詞組重疊。最常用的評估指標是下列何者？",
+    "options": [
+      "BLEU 分數",
+      "餘弦相似度（Cosine Similarity）",
+      "F1 分數",
+      "均方誤差（MSE）"
+    ],
+    "correctIndex": 0,
+    "explanation": "BLEU 比較機器產生的文字和人工參考答案有多少詞組重疊，常用於機器翻譯。餘弦相似度比較向量方向（如 CLIP 比較文字與圖片）；F1 是分類指標；MSE 是迴歸指標。",
+    "term_ids": [
+      "bleu",
+      "cosine-similarity",
+      "f1-score",
+      "mse"
+    ],
+    "basis": "名詞卡 bleu（比較機器產生文字和人工參考答案的詞組重疊，常用於機器翻譯；CLIP 用餘弦相似度比較文字與圖片向量）；Papineni et al. (2002)"
+  },
+  {
+    "id": "P0463",
+    "difficulty": "易",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "下列哪一種生成式 AI 工具，主要定位是結合網路搜尋與大型語言模型、回答問題時會附上引用來源的 AI 搜尋引擎？",
+    "options": [
+      "Midjourney",
+      "Stable Diffusion",
+      "Sora",
+      "Perplexity"
+    ],
+    "correctIndex": 3,
+    "explanation": "Perplexity 結合網路搜尋與大型語言模型，回答時附上引用來源。Midjourney、Stable Diffusion 是影像生成工具；Sora 是文字生成影片。",
+    "term_ids": [
+      "perplexity",
+      "midjourney",
+      "stable-diffusion",
+      "sora"
+    ],
+    "basis": "名詞卡 perplexity（結合網路搜尋與大型語言模型的 AI 搜尋引擎，會附上引用來源；影像生成要用 Midjourney、Stable Diffusion）、sora（文字生成影片）"
+  },
+  {
+    "id": "P0464",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某 AI 代理會先把任務整理成解決方案圖，再用搜尋演算法找出執行路徑。工程師針對三種情境選擇演算法：(甲) 一定要找出步驟最少的路徑；(乙) 系統記憶體有限，可以接受找到的不一定是最短路徑；(丙) 每個節點都有一個評估分數，估計它離目標有多近，希望先走最有希望的方向。下列對應何者最正確？",
+    "options": [
+      "甲：深度優先（DFS）；乙：廣度優先（BFS）；丙：最佳優先搜尋",
+      "甲：廣度優先（BFS）；乙：深度優先（DFS）；丙：最佳優先搜尋",
+      "甲：最佳優先搜尋；乙：廣度優先（BFS）；丙：深度優先（DFS）",
+      "三種情境都應每一步隨機選擇節點，再由 LLM 一次推斷完整路徑"
+    ],
+    "correctIndex": 1,
+    "explanation": "BFS 一層層往外擴展，能找到步數最少的解；DFS 一路走到底再回頭，記憶體用量小，但找到的不一定是最短路徑；最佳優先搜尋依評估函數挑看起來最接近目標的節點（A* 是常見的一種）。隨機選擇或完全靠 LLM 一次推斷，都不是有系統的搜尋策略。",
+    "term_ids": [
+      "graph-search",
+      "bfs",
+      "dfs",
+      "best-first-search",
+      "solution-graph"
+    ],
+    "basis": "名詞卡 bfs（一層層擴展、找得到最少步數的解）、dfs（記憶體用量小，但找到的不一定是最短路徑）、best-first-search（依評估函數挑最接近目標的節點）、graph-search（隨機嘗試或完全靠 LLM 一次推斷都不是有系統的搜尋）；Russell & Norvig Ch.3"
+  },
+  {
+    "id": "P0465",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "OpenAI 於 2025 年 10 月推出 AgentKit。某公司評估是否採用時，下列哪一項對 AgentKit 的描述最正確？",
+    "options": [
+      "它是讓不同公司 AI 代理互相溝通的開放通訊協定，與 A2A 相同",
+      "它是用大量網路文字重新預訓練語言模型的方法",
+      "它是協助建構、部署與優化 AI 代理的開發工具包",
+      "它是強化學習用的模擬環境，讓代理在虛擬世界中反覆試錯"
+    ],
+    "correctIndex": 2,
+    "explanation": "AgentKit 是 OpenAI 推出的開發工具包，協助建構、部署與優化 AI 代理，包含視覺化的 Agent Builder、ChatKit、評估工具與連接器管理。代理之間的通訊協定是 A2A；它也不是預訓練方法或強化學習模擬環境。",
+    "term_ids": [
+      "agentkit",
+      "a2a",
+      "ai-agent"
+    ],
+    "basis": "名詞卡 agentkit（OpenAI 2025 年 10 月推出，協助建構、部署與優化 AI 代理；AgentKit 是開發工具包，A2A 是代理間通訊協定，也不是強化學習模擬環境或預訓練機制）"
+  },
+  {
+    "id": "P0466",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某旅行社的 AI 客服代理，會記得使用者剛才說過預算三萬元、偏好靠海的飯店，以及目前已完成訂機票、還沒訂飯店的進度，並據此調整推薦。這最能說明它具備下列哪一項特性？",
+    "options": [
+      "情境感知（Context-aware），利用對話歷史與任務狀態調整",
+      "多模態（Multimodal），能同時處理文字、影像與語音等多種資料",
+      "每次對話結束後都即時重新訓練模型權重，藉此記住每位使用者的偏好",
+      "只依照當前這一句指令回應，完全不參考先前任何一輪的對話內容"
+    ],
+    "correctIndex": 0,
+    "explanation": "情境感知代理能利用對話歷史、任務狀態與環境資訊，動態調整行為與決策。多模態指處理多種資料型態，與記憶狀態不同；情境感知不是即時重新訓練模型，也不是只看當前指令。",
+    "term_ids": [
+      "context-aware-agent",
+      "multimodal",
+      "ai-agent"
+    ],
+    "basis": "名詞卡 context-aware-agent（利用對話歷史、任務狀態與環境資訊動態調整決策；情境感知看記憶與狀態，多模態指處理多種資料型態；不是即時重新訓練模型、也不是只看當前指令）"
+  },
+  {
+    "id": "P0467",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某餐廳透過 API 串接大型語言模型，開發訂位機器人：需要和顧客來回好幾輪，問清楚日期、時段、人數與特殊需求，最後才送出訂位。測試時發現機器人常常在第三輪就忘了顧客第一輪說的日期，顧客只好重複說明，工程師正在討論原因與改善方式。下列敘述何者最正確？",
+    "options": [
+      "屬任務導向對話；LLM 本身無狀態，每次請求都要附上先前的對話紀錄",
+      "這是模型參數太少造成的，只要換成參數更大的模型，就能自動記住先前每一輪的內容",
+      "只要調高溫度參數，模型就會更積極地回想第一輪顧客提供的日期與人數",
+      "增加伺服器的記憶體容量，模型就能自動保存每一輪的對話紀錄並在下一輪使用"
+    ],
+    "correctIndex": 0,
+    "explanation": "以完成訂位等特定任務為目標、透過多輪對話收集資訊，是任務導向對話系統。透過 API 呼叫時，LLM 本身不會記得上一次的對話，要有記憶就必須在每次請求時把歷史對話一起送入。換大模型、調溫度、加伺服器記憶體都無法讓模型記住上一輪。",
+    "term_ids": [
+      "task-oriented-dialogue",
+      "multi-turn-dialogue",
+      "llm-stateless"
+    ],
+    "basis": "名詞卡 task-oriented-dialogue（以完成特定任務為目標，透過多輪對話收集資訊）、multi-turn-dialogue（LLM 本身無狀態，要靠每次請求把歷史對話一起送入）、llm-stateless（增加伺服器記憶體、換更大模型、調溫度都無法讓模型記住上一輪）"
+  },
+  {
+    "id": "P0468",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某服飾品牌想用生成式 AI 產生新品概念圖，並撰寫每件新品的商品說明文案。法務要求：未公開的設計稿屬於營業秘密，不能上傳到任何外部雲端服務；設計部門也希望模型能用品牌過去十年的設計風格自行微調；行銷部門則希望文案語氣與品牌形象一致。下列工具規劃何者最恰當？",
+    "options": [
+      "全部交給 Perplexity 處理，因為它回答時會附上引用來源，資料最安全也最可靠",
+      "全部交給 Stable Diffusion 處理，新品概念圖和商品說明文案都由它一起生成",
+      "影像用開源 Stable Diffusion 在內部部署並微調；文案交給受控環境中的語言模型",
+      "影像與文案都改用雲端的 Midjourney，並把設計稿上傳讓它學習品牌的設計風格"
+    ],
+    "correctIndex": 2,
+    "explanation": "Stable Diffusion 是開源的潛在擴散模型，可在本機部署並自行微調，符合設計稿不外流、要用品牌風格微調的需求；但它只生成影像，文案要交給語言模型。Perplexity 是 AI 搜尋引擎，不是影像生成工具；把設計稿上傳雲端違反法務要求。",
+    "term_ids": [
+      "stable-diffusion",
+      "on-premises",
+      "midjourney",
+      "perplexity"
+    ],
+    "basis": "名詞卡 stable-diffusion（開源的潛在擴散模型，可在本機部署並自行微調；專門生成影像，不負責撰寫文件）、perplexity（不是影像生成工具）、on-premises（部署在企業自己管理的環境，敏感資料不必傳給外部雲端）"
+  },
+  {
+    "id": "P0469",
+    "difficulty": "易",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某行銷團隊想輸入一段文字描述，直接生成一支產品宣傳短片。下列哪一項工具最符合這個用途？",
+    "options": [
+      "Sora",
+      "DALL·E",
+      "BLEU",
+      "GitHub Copilot"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sora 是 OpenAI 推出的文字生成影片模型與應用。DALL·E 生成圖片；BLEU 是翻譯評估指標；GitHub Copilot 是 AI 程式設計助手。",
+    "term_ids": [
+      "sora",
+      "dall-e",
+      "bleu",
+      "github-copilot"
+    ],
+    "basis": "名詞卡 sora（文字生成影片；Sora 生成影片、DALL·E 生成圖片、ChatGPT 生成文字）、bleu（評估指標）"
+  },
+  {
+    "id": "P0470",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某旅行平台採用 A2A（Agent-to-Agent）協定串接多個 AI 代理：平台的行程規劃代理收到「安排東京五日遊」的需求後，把訂機票交給航空公司的代理、把訂飯店交給飯店集團的代理，兩者完成後再把結果回傳。下列關於這個流程的敘述何者最正確？",
+    "options": [
+      "航空公司與飯店的代理是 Client Agent，會主動把各自的任務分派給行程規劃代理處理",
+      "A2A 是 AI 代理與外部工具、資料來源之間的連接協定，功能與 MCP 協定完全相同",
+      "A2A 就是 OpenAI 推出的 AgentKit，用來在視覺化介面上用拖拉方式建立 AI 代理",
+      "行程規劃代理是 Client Agent，發起任務；航空與飯店代理是 Remote Agent，執行後回傳"
+    ],
+    "correctIndex": 3,
+    "explanation": "A2A 中由 Client Agent 發起任務、Remote Agent 執行並回傳結果，所以行程規劃代理是 Client Agent。Remote Agent 不會主動派工；MCP 是代理與工具或資料之間的協定，A2A 是代理與代理之間的協定；AgentKit 是開發工具包，不是 A2A。",
+    "term_ids": [
+      "a2a",
+      "client-agent",
+      "remote-agent",
+      "mcp",
+      "agentkit"
+    ],
+    "basis": "名詞卡 a2a（Client Agent 發起任務，Remote Agent 執行並回傳結果；MCP 是代理與工具或資料之間的協定，A2A 是代理與代理之間；AgentKit 不是 A2A）、client-agent、remote-agent"
+  },
+  {
+    "id": "P0471",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某銀行的 AI 理財助理需要回答「現在美元兌台幣是多少？幫我換 1,000 美元」，必須取得即時匯率、精確算出金額（算到小數點後兩位），並呼叫銀行內部系統送出換匯申請。工程師說明這要靠函數呼叫（Function Calling）。下列敘述何者最正確？",
+    "options": [
+      "函數呼叫會把即時匯率直接寫進模型權重，之後模型就不必再查詢匯率資料",
+      "函數呼叫會擴大模型的上下文窗口上限，讓模型一次讀得下更多的匯率歷史資料",
+      "函數呼叫等同 RAG，都是先從知識庫檢索相關文件，再把文件內容交給模型參考",
+      "讓模型把需求轉成結構化參數呼叫外部 API，補足即時資訊、精確運算與操作系統的限制"
+    ],
+    "correctIndex": 3,
+    "explanation": "函數呼叫讓 LLM 把自然語言需求轉成結構化參數（如 JSON），去呼叫外部 API 或工具，以取得即時資料、執行精確運算或操作外部系統。它不會更新模型權重，也不會增加上下文長度；RAG 是檢索文件補充知識，函數呼叫是讓模型採取行動或取得即時資料。",
+    "term_ids": [
+      "function-calling",
+      "tool-executor",
+      "rag",
+      "context-window"
+    ],
+    "basis": "名詞卡 function-calling（把需求轉成結構化參數呼叫外部 API；彌補 LLM 無法取得即時資訊、無法精確運算、無法操作外部系統的限制；不會增加上下文長度，也不會更新模型權重）；考古題 115 年 L12201 工具呼叫題官方答案一致"
+  },
+  {
+    "id": "P0472",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12201",
+    "source": "方小瑋練習題第二回",
+    "question": "某電信公司的客服信箱每天收到上萬封信，希望 AI 自動把每封信歸到「帳務」「網路故障」「方案變更」「其他」其中一類，再轉給對應的窗口。這屬於哪一種自然語言處理任務？",
+    "options": [
+      "文本生成（Text Generation）",
+      "文本分類（Text Classification）",
+      "序列到序列翻譯（Seq2Seq）",
+      "遮罩語言建模（Masked LM）"
+    ],
+    "correctIndex": 1,
+    "explanation": "把一段文字歸到預先定義的類別，是文本分類，輸出的是類別標籤。文本生成會產生新的文字；Seq2Seq 是把一段序列轉成另一段序列（如翻譯）；遮罩語言建模是補齊缺字。",
+    "term_ids": [
+      "text-classification",
+      "text-generation",
+      "seq2seq",
+      "masked-lm"
+    ],
+    "basis": "名詞卡 text-classification（把文字歸到預先定義的類別，輸出類別標籤）、text-generation（文本生成產生新文字；遮罩語言建模是補齊缺字；Seq2Seq 是序列轉另一序列）"
+  },
+  {
+    "id": "P0473",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某醫療新創只有一張消費級 GPU，想讓一個數十億參數的開源語言模型學會醫院內部的病歷摘要格式，同時盡量維持模型原本的語言能力，主管也要求一個月內完成並控制雲端費用。團隊比較四種做法，希望在可訓練參數量大幅減少的前提下仍維持效能。下列哪一種最適合？",
+    "options": [
+      "全量微調，更新模型的全部參數以達到最佳效果",
+      "知識蒸餾，另外訓練一個小模型去模仿大模型的輸出行為",
+      "梯度凍結，把前面幾層凍結、只訓練剩下所有的層",
+      "LoRA，凍結原本權重，只在旁邊加入很小的低秩矩陣來訓練"
+    ],
+    "correctIndex": 3,
+    "explanation": "LoRA 凍結大模型原本的權重，只訓練旁邊加上的很小低秩矩陣，可訓練參數量大幅減少並維持效能，適合運算資源受限的情況。全量微調要更新全部參數，資源需求最高；知識蒸餾是訓練另一個小模型，不是 PEFT；梯度凍結只是少訓練幾層，可訓練參數仍比 LoRA 多很多。",
+    "term_ids": [
+      "lora",
+      "peft",
+      "gradient-freezing",
+      "knowledge-distillation"
+    ],
+    "basis": "名詞卡 lora（凍結原本權重，只加很小的低秩矩陣訓練；運算資源嚴重受限又要維持效能→LoRA）、gradient-freezing（梯度凍結是減少要訓練的層；LoRA 可訓練參數量少得多並維持效能）；Hu et al. (2021)"
+  },
+  {
+    "id": "P0474",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某 AI 團隊整理教材，要說明哪些技術屬於「參數高效微調（PEFT）」。草稿列出五種做法：(1) LoRA 低秩適配；(2) Adapter 在模型層之間加入小型可訓練模組；(3) Prefix Tuning 在輸入前加入可訓練的向量；(4) 撰寫更精準的提示詞；(5) 用小模型學習大模型輸出的知識蒸餾。下列哪一個組合全部屬於 PEFT？",
+    "options": [
+      "(1)、(2)、(4)",
+      "(1)、(4)、(5)",
+      "(2)、(3)、(5)",
+      "(1)、(2)、(3)"
+    ],
+    "correctIndex": 3,
+    "explanation": "PEFT 只調整模型中一小部分參數，或額外加入少量參數來微調大模型，LoRA、Adapter、Prefix Tuning 都屬於這一類。撰寫提示詞不更新任何參數，不屬於 PEFT；知識蒸餾是另外訓練一個小模型，也不是 PEFT。",
+    "term_ids": [
+      "peft",
+      "lora",
+      "prompt-engineering",
+      "knowledge-distillation"
+    ],
+    "basis": "名詞卡 peft（只調整一小部分參數或額外加入少量參數；LoRA、Adapter、Prefix Tuning 都屬於它；提示詞工程不更新參數，不屬於 PEFT）、lora（知識蒸餾不是 PEFT）；Hugging Face PEFT Docs"
+  },
+  {
+    "id": "P0475",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司用 API 讓大型語言模型自動產生會議摘要，發現有些摘要寫到一半就突然中斷，而另一批摘要又長得離譜、費用偏高。最直接用來控制模型每次回覆長度的參數是下列何者？",
+    "options": [
+      "溫度（Temperature）",
+      "最大 Token 數（Max Tokens）",
+      "上下文窗口（Context Window）大小",
+      "隨機種子（Random Seed）"
+    ],
+    "correctIndex": 1,
+    "explanation": "最大 Token 數限制模型這次回覆最多能產生多少 Token，用來控制輸出長度與費用；設太小會讓回覆寫到一半被截斷。溫度控制隨機性與多樣性，不是長度；束寬與隨機種子也不是用來控制長度。",
+    "term_ids": [
+      "max-tokens",
+      "temperature",
+      "token"
+    ],
+    "basis": "名詞卡 max-tokens（限制這次回覆最多能產生多少 Token，控制輸出長度與費用；溫度控制隨機性與多樣性）"
+  },
+  {
+    "id": "P0476",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司內規查詢系統採用關鍵字全文檢索。員工查「離職」時，找不到標題寫「終止勞動契約」「資遣」的相關規定。若想保留現有檢索方式，在查詢時自動補上同義詞與相關詞，最適合的做法是下列何者？",
+    "options": [
+      "查詢擴展（Query Expansion）",
+      "重排序器（Reranker）",
+      "語意快取（Semantic Cache）",
+      "調高生成溫度（Temperature）"
+    ],
+    "correctIndex": 0,
+    "explanation": "查詢擴展在搜尋時自動加入同義詞或相關關鍵字，讓更多相關文件被找到。重排序器是把「已經找到」的文件重新排序，本題是根本沒找到；語意快取是重用過去的回答；溫度與檢索無關。",
+    "term_ids": [
+      "query-expansion",
+      "reranker",
+      "semantic-cache",
+      "full-text-search"
+    ],
+    "basis": "名詞卡 query-expansion（自動加入同義詞或相關關鍵字，讓更多相關文件被找到；重排序器是把已找到的文件重新排序）、reranker"
+  },
+  {
+    "id": "P0477",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某電信公司的 AI 客服每天回答數萬次問題，其中大量是「怎麼查帳單」「怎麼改方案」這類語意相近的問法，API 費用與等待時間都偏高。工程師提議導入語意快取（Semantic Cache），主管想了解它的效果，也擔心有沒有副作用。下列敘述何者最正確？",
+    "options": [
+      "相近問題直接回傳先前回覆、降低成本與延遲；但規定更新後可能回傳過時答案",
+      "語意快取會重新訓練模型，讓模型更懂客服用語，也能提升檢索準確度",
+      "語意快取會自動把檢索結果重新排序，把最相關的文件排到前面再交給模型",
+      "語意快取能讓模型取得即時的帳單資料，因此每位用戶看到的答案都會是最新的"
+    ],
+    "correctIndex": 0,
+    "explanation": "語意快取把常見問題與回覆存起來，遇到語意相近的新問題時直接回傳，能降低成本與延遲；但它不改善檢索準確度，內容更新後還可能回傳過時答案，所以要設定更新或失效機制。重新排序是重排序器的功能；它也不會重新訓練模型或取得即時資料。",
+    "term_ids": [
+      "semantic-cache",
+      "reranker",
+      "fine-tuning"
+    ],
+    "basis": "名詞卡 semantic-cache（遇到語意相近的新問題直接回傳先前結果，降低成本與延遲；不改善檢索準確度；可能回傳過時答案）、reranker；GPTCache 說明"
+  },
+  {
+    "id": "P0478",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某工廠把一份 300 頁的設備維修手冊，整份轉成一個向量存進 RAG 知識庫。技術員問「馬達過熱警示該怎麼處理」時，系統常常抓不到正確段落，回答也很籠統。主管希望不要換掉現有的語言模型，工程師檢討後要調整建立知識庫的方式。下列做法何者最能改善？",
+    "options": [
+      "把手冊切成適當大小的語意段落，分別轉成向量存入知識庫",
+      "調高語言模型的溫度參數，讓回答更有創意、內容更豐富",
+      "改用參數量更大的語言模型，就能自動從整份手冊中找到正確段落",
+      "把整份手冊再轉成更長的向量，保留更多細節以提高命中率"
+    ],
+    "correctIndex": 0,
+    "explanation": "文本切分把長篇文件切成適當大小的語意段落再轉成向量，讓檢索更精準、降低長文件的雜訊干擾。整份文件只有一個向量，問題很難對上具體段落。調溫度、換大模型都改善不了檢索；把整份轉成更長的向量也沒有解決根本問題。",
+    "term_ids": [
+      "chunking",
+      "rag",
+      "embedding",
+      "temperature"
+    ],
+    "basis": "名詞卡 chunking（把長篇文件切成適當大小的語意段落再轉成向量；目的是提高檢索的語意相關性、降低長文件的雜訊干擾）；LangChain Text splitters"
+  },
+  {
+    "id": "P0479",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某保險公司的 RAG 系統收錄上千份保單條款。使用者的提問方式很多元，有人直接引用條文用語，有人用口語描述情境，導致部分文件明明相關卻沒被檢索到。工程師建議：為每份文件同時建立原文、摘要，以及「這份文件可能回答的問題」三種向量。這種做法稱為下列何者？",
+    "options": [
+      "語意快取，把常見問題的回覆存起來，下次直接重複使用",
+      "調高生成溫度，讓模型能用更多元的方式理解使用者提問",
+      "多向量檢索器，為同一文件建立多種表示以提高命中",
+      "重排序器，把已經檢索到的文件重新排序後再交給模型"
+    ],
+    "correctIndex": 2,
+    "explanation": "多向量檢索器為同一份文件同時建立多種向量表示（原文、摘要、可能被問到的問題），讓不同提問方式都能從不同角度命中，提升完整性與精準度。語意快取重用過去回答；溫度與檢索無關；重排序器只能調整已檢索到文件的順序，救不回沒被檢索到的文件。",
+    "term_ids": [
+      "multi-vector-retriever",
+      "semantic-cache",
+      "reranker",
+      "chunking"
+    ],
+    "basis": "名詞卡 multi-vector-retriever（同一份文件同時建立原文、摘要、可能被問到的問題等多種向量表示；提升完整性與精準度的方式是支援多種資訊表示，不是壓縮向量或調整溫度）；LangChain Multi-vector retriever"
+  },
+  {
+    "id": "P0480",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某團隊不想再由人工反覆修改提示詞，改成讓大型語言模型自動產生多個候選提示詞，再依評估結果挑出或迭代出效果最好的一個。這種做法稱為下列何者？",
+    "options": [
+      "思維鏈提示（Chain-of-Thought）",
+      "角色提示（Role Prompting）",
+      "自動提示工程（APE）",
+      "少樣本提示（Few-shot Prompting）"
+    ],
+    "correctIndex": 2,
+    "explanation": "自動提示工程（APE）讓 LLM 自動產生多個候選提示詞，再依評估結果挑選或迭代出最好的。一般提示工程由人設計；思維鏈是要求模型逐步推理；角色提示是設定模型扮演的角色；少樣本提示是給幾個範例。",
+    "term_ids": [
+      "ape",
+      "prompt-engineering",
+      "chain-of-thought",
+      "few-shot"
+    ],
+    "basis": "名詞卡 ape（讓 LLM 自動產生多個候選提示詞，再依評估結果挑選或迭代；一般提示工程由人設計）；Zhou et al. (2022)"
+  },
+  {
+    "id": "P0481",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某軟體公司的客服機器人，每次請求都要附上同一份約三萬字的系統提示與產品手冊，再加上使用者的一句提問，導致回應慢、費用高。工程師提議使用提示詞快取（Prompt Caching），另一位同事則誤以為它還能讓模型讀到最新版的 API 文件。下列敘述何者最正確？",
+    "options": [
+      "提示詞快取會即時連線到官方網站，自動抓取最新的 API 文件內容",
+      "提示詞快取會把手冊內容寫進模型權重，之後就不必再附上手冊",
+      "提示詞快取可重用重複出現的長段內容，降低延遲與費用；但它不會取得新資訊",
+      "提示詞快取會自動把三萬字手冊摘要成三百字，所以回答品質會略為下降"
+    ],
+    "correctIndex": 2,
+    "explanation": "提示詞快取把每次都重複出現的長段提示（系統提示、固定文件）快取起來重用，降低延遲與費用；它重用的是已經送過的內容，不會取得新資訊。要讓模型推理時取得最新官方文件，應透過 MCP 等工具整合；快取也不會改寫模型權重或自動摘要內容。",
+    "term_ids": [
+      "prompt-caching",
+      "mcp",
+      "system-prompt",
+      "fine-tuning"
+    ],
+    "basis": "名詞卡 prompt-caching（把每次重複出現的長段提示快取起來重用，降低延遲與費用；重用已送過的內容，不會取得新資訊；要即時取得最新官方 API 文件應透過 MCP）；Anthropic Docs, Prompt caching"
+  },
+  {
+    "id": "P0482",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司用大型語言模型做客服分類，效果很好但推論成本太高。團隊打算讓一個小型模型學習大型模型的輸出行為，以較低成本保留接近的效果。這種做法稱為下列何者？",
+    "options": [
+      "知識蒸餾（Knowledge Distillation）",
+      "提示詞快取（Prompt Caching）",
+      "查詢擴展（Query Expansion）",
+      "參數高效微調（Parameter-Efficient Fine-Tuning）"
+    ],
+    "correctIndex": 0,
+    "explanation": "知識蒸餾讓小型的學生模型學習大型教師模型的輸出行為，以較低推論成本保留接近的效果。提示詞快取重用重複的提示內容；查詢擴展用於檢索；資料增強是擴充訓練資料，都不是讓小模型學大模型。",
+    "term_ids": [
+      "knowledge-distillation",
+      "prompt-caching",
+      "query-expansion",
+      "data-augmentation"
+    ],
+    "basis": "名詞卡 knowledge-distillation（讓小型學生模型學習大型教師模型的輸出行為，以較低成本保留接近的效果）；Hinton, Vinyals & Dean (2015)"
+  },
+  {
+    "id": "P0483",
+    "difficulty": "易",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "在對話開始前，由開發者提供給模型、用來設定它的角色、語氣、回答範圍與規則的背景指示，稱為下列何者？",
+    "options": [
+      "使用者提示（User Prompt）",
+      "系統提示詞（System Prompt）",
+      "最大 Token 數（Max Tokens）",
+      "嵌入向量（Embedding）"
+    ],
+    "correctIndex": 1,
+    "explanation": "系統提示詞是對話開始前給模型的背景指示，設定角色、語氣、回答範圍與規則，由開發者設定。使用者提示是使用者每次輸入的內容；最大 Token 數控制輸出長度；嵌入是向量表示。",
+    "term_ids": [
+      "system-prompt",
+      "max-tokens",
+      "embedding"
+    ],
+    "basis": "名詞卡 system-prompt（對話開始前給模型的背景指示，設定角色、語氣、回答範圍與規則；由開發者設定）"
+  },
+  {
+    "id": "P0484",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某團隊原本用兩則「電商客服」的範例做少樣本提示，讓模型產生回覆，效果不錯。後來把同一套提示直接用在「醫院掛號客服」，模型開始給出不符合醫療情境的回答，例如把掛號延誤當成物流延誤處理。主管想了解問題出在哪裡，並要求下週提出修正方案。下列分析何者最正確？",
+    "options": [
+      "這是模型推理能力不足造成的，只要改用參數更大的模型就能解決",
+      "這是溫度參數太低，應調高溫度讓回答更多元",
+      "這是提示詞太長，應刪掉範例改成零樣本提示",
+      "屬領域偏移：電商範例無法代表醫療情境，應改用醫療相關範例"
+    ],
+    "correctIndex": 3,
+    "explanation": "新應用的資料特性和原本範例涵蓋的差異很大，導致表現下降，是領域偏移。少樣本提示只有一兩個電商範例，無法涵蓋醫療情境的多樣性，問題在範例代表性不夠，不是模型推理能力；調高溫度或刪掉範例都沒有對症下藥。",
+    "term_ids": [
+      "domain-shift",
+      "few-shot",
+      "zero-shot",
+      "temperature"
+    ],
+    "basis": "名詞卡 domain-shift（新資料和原本範例涵蓋的特性差異很大導致表現下降；少樣本提示只有 1～2 個範例時無法涵蓋新領域的多樣性，問題在範例代表性，不是推理能力）"
+  },
+  {
+    "id": "P0485",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某模型的上下文窗口為 128K Token。工程師一次送入約 125K Token 的文件，並要求模型輸出約 10K Token 的完整分析，結果請求失敗或輸出被截斷。下列解釋與做法何者最正確？",
+    "options": [
+      "上下文窗口只限制模型的輸出長度，輸入內容再長都沒有關係",
+      "改用工具呼叫（Tool Calling），就能讓模型的上下文窗口自動變大",
+      "窗口包含輸入與輸出；應縮減輸入，例如改用 RAG 只送相關片段",
+      "只要把溫度調低，模型就能在同一個窗口內完成更長的輸出"
+    ],
+    "correctIndex": 2,
+    "explanation": "上下文窗口是模型一次能讀進與產生的最大 Token 數，包含輸入與輸出；125K 加 10K 超過 128K。資料量大時應用 RAG 只檢索相關片段，或縮短輸入。工具呼叫不會增加上下文上限；溫度與長度上限無關。",
+    "term_ids": [
+      "context-window",
+      "rag",
+      "function-calling",
+      "temperature"
+    ],
+    "basis": "名詞卡 context-window（一次能讀進與產生的最大 Token 數，包含輸入與輸出；資料量大時要用 RAG 檢索相關片段；工具呼叫不會增加模型的上下文上限）；數值已核對（125K＋10K＞128K）"
+  },
+  {
+    "id": "P0486",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某團隊微調影像模型時，把前面負責基礎特徵的層全部凍結不更新，只訓練最後幾層，以減少運算量並保留原本學到的能力。這種做法稱為下列何者？",
+    "options": [
+      "梯度凍結（Gradient Freezing）",
+      "知識蒸餾（Knowledge Distillation）",
+      "全量微調（Full Fine-tuning）",
+      "提示詞快取（Prompt Caching）"
+    ],
+    "correctIndex": 0,
+    "explanation": "梯度凍結是微調時把部分層凍結不更新、只訓練剩下的層，以減少運算量並保留原本的能力。知識蒸餾是讓小模型學大模型；全量微調更新所有參數；提示詞快取與訓練無關。",
+    "term_ids": [
+      "gradient-freezing",
+      "knowledge-distillation",
+      "fine-tuning",
+      "prompt-caching"
+    ],
+    "basis": "名詞卡 gradient-freezing（微調時把部分層凍結不更新、只訓練剩下的層，減少運算量並保留原本學到的能力）；Yosinski et al. (2014)"
+  },
+  {
+    "id": "P0487",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L122",
+    "detail_code": "L12202",
+    "source": "方小瑋練習題第二回",
+    "question": "某 RAG 系統先用向量檢索找出 50 份候選文件，再用另一個模型對這 50 份逐一重新評估與提問的相關性，只把最相關的前 5 份交給語言模型。第二個步驟使用的元件是下列何者？",
+    "options": [
+      "查詢擴展（Query Expansion），補上同義詞找出更多文件",
+      "重排序器（Reranker），重新評估候選文件的相關性並排序",
+      "語意快取（Semantic Cache），重用過去相似問題的回答",
+      "文本切分器（Text Splitter），把長文件切成小段落"
+    ],
+    "correctIndex": 1,
+    "explanation": "重排序器在初步檢索出一批候選文件後，用更精細的模型重新評估相關性並排序，把最相關的交給 LLM。查詢擴展是讓更多文件被找到；語意快取是重用過去的回答；文本切分是建索引前的處理。",
+    "term_ids": [
+      "reranker",
+      "query-expansion",
+      "semantic-cache",
+      "chunking"
+    ],
+    "basis": "名詞卡 reranker（初步檢索出候選文件後，再用更精細的模型重新評估相關性並排序；查詢擴展讓更多文件被找到，語意快取重用過去回答，文本切分是建索引前的處理）；考古題 115 年 L12202 重排序器題官方答案一致"
+  },
+  {
+    "id": "P0488",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12301",
+    "source": "方小瑋練習題第二回",
+    "question": "某團隊要用基準測試評估三個面向：(甲) 小學程度數學應用題的多步驟推理；(乙) 中文多學科知識；(丙) 英文為主、涵蓋 57 個學科的多領域理解。下列資料集對應何者正確？",
+    "options": [
+      "甲：MMLU；乙：GSM8K；丙：C-Eval",
+      "甲：GSM8K；乙：C-Eval；丙：MMLU",
+      "甲：C-Eval；乙：MMLU；丙：GSM8K",
+      "甲：GSM8K；乙：MMLU；丙：C-Eval"
+    ],
+    "correctIndex": 1,
+    "explanation": "GSM8K 是約 8,500 題小學數學應用題，測多步驟數學推理；C-Eval 評估中文知識與推理，涵蓋 50 多個學科；MMLU 涵蓋 57 個學科，評估多領域、多任務的英文語言理解。",
+    "term_ids": [
+      "gsm8k",
+      "c-eval",
+      "mmlu",
+      "benchmark"
+    ],
+    "basis": "名詞卡 gsm8k（約 8,500 題小學數學應用題，測多步驟數學推理）、c-eval（中文知識與推理，涵蓋 50 多個學科）、mmlu（涵蓋 57 個學科的多領域理解）；Cobbe et al. (2021)、Huang et al. (2023)、Hendrycks et al. (2020)"
+  },
+  {
+    "id": "P0489",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12301",
+    "source": "方小瑋練習題第二回",
+    "question": "某法務部門用大型語言模型 API 產生合約重點摘要，每月約 2,000 份。每份送入的合約內容約 1,500 個 Token，產生的摘要約 300 個 Token。目前用的模型 A 價格為：輸入每 1,000 Token 0.003 美元、輸出每 1,000 Token 0.015 美元；較小的模型 B 則為輸入 0.0005 美元、輸出 0.0015 美元（同樣以每 1,000 Token 計）。只看推論階段的 API 費用，改用模型 B 每月約可省下多少？",
+    "options": [
+      "約 2.4 美元",
+      "約 7.5 美元",
+      "約 18 美元",
+      "約 15.6 美元"
+    ],
+    "correctIndex": 3,
+    "explanation": "模型 A：輸入 2,000×1,500＝300 萬 Token，÷1,000×0.003＝9 美元；輸出 2,000×300＝60 萬 Token，÷1,000×0.015＝9 美元，合計 18 美元。模型 B：輸入 3,000×0.0005＝1.5 美元、輸出 600×0.0015＝0.9 美元，合計 2.4 美元。每月約省 18−2.4＝15.6 美元。2.4 美元是模型 B 的費用、18 美元是模型 A 的費用、7.5 美元只算了輸入的差額。換小模型前，仍要另外評估摘要品質是否夠用。",
+    "term_ids": [
+      "token-economics",
+      "token",
+      "tco"
+    ],
+    "basis": "名詞卡 token-economics（依推論時使用的輸入與輸出 Token 數估算 API 成本；總 Token ÷1,000 × 每千 Token 單價）；數值已手算核對（A：9＋9＝18；B：1.5＋0.9＝2.4；差 15.6；只算輸入差額 3,000×0.0025＝7.5）"
+  },
+  {
+    "id": "P0490",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12302",
+    "source": "方小瑋練習題第二回",
+    "question": "某銀行的 AI 客服目前只部署在一台高效能主機上，主機一當機服務就全面中斷，月底高峰時也常回應緩慢。下列架構調整何者最能同時改善這兩個問題？",
+    "options": [
+      "換成規格更高的單一主機，提升運算效能",
+      "依問題難度把請求分給不同模型的模型路由",
+      "建立多個服務實例，用負載平衡器分散請求",
+      "在夜間離峰時段批次處理所有客服請求"
+    ],
+    "correctIndex": 2,
+    "explanation": "建立多個服務實例、用負載平衡器分散請求，可以避免單點故障（高可用性）並因應流量高峰。單一高效能主機仍有單點故障風險；模型路由是依問題特性選模型，不是解決當機；客服需要即時回應，不能改成夜間批次處理。",
+    "term_ids": [
+      "load-balancing",
+      "high-availability",
+      "model-routing",
+      "batch-vs-realtime-inference"
+    ],
+    "basis": "名詞卡 load-balancing（多個服務實例加負載平衡器，避免單點故障、因應流量高峰；單一高效能主機有單點故障風險；依問題難度選模型是模型路由）、high-availability"
+  },
+  {
+    "id": "P0491",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某影像辨識服務開放使用者上傳標註過的圖片協助改善模型。幾個月後發現，有人刻意上傳大量標錯類別的圖片，模型在某些類別的判斷開始明顯出錯。這種風險最屬於下列何者？",
+    "options": [
+      "提示詞注入（Prompt Injection）",
+      "資料投毒（Data Poisoning）",
+      "模型路由（Model Routing）",
+      "提示洩漏（Prompt Leakage）"
+    ],
+    "correctIndex": 1,
+    "explanation": "有問題或惡意的資料混進訓練資料，讓模型學到錯誤模式，是資料投毒，發生在訓練階段；根本原因是缺少訓練資料驗證機制。提示詞注入發生在使用（推論）階段；提示洩漏是系統提示內容外流。",
+    "term_ids": [
+      "data-poisoning",
+      "prompt-injection",
+      "prompt-leakage"
+    ],
+    "basis": "名詞卡 data-poisoning（有問題或惡意的資料混進訓練資料；發生在訓練階段，提示詞注入發生在推論階段；使用者回饋未經驗證就拿去優化模型，根本原因是缺少訓練資料驗證機制）；OWASP LLM04"
+  },
+  {
+    "id": "P0492",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某停車場用影像辨識系統讀取車牌。資安團隊發現，有人在車牌上貼了幾塊人眼幾乎不會注意的小貼紙，系統就把車牌號碼辨識成另一組，事後檢查也確認系統本身沒有被入侵或竄改。公司決定在每次模型更新前，主動模擬這類手法驗證系統是否扛得住。下列敘述何者最正確？",
+    "options": [
+      "貼貼紙屬於資料漂移，模型更新前只要重新收集最近的車牌照片即可",
+      "貼貼紙屬於提示詞注入，應在系統提示詞中加上「不要被貼紙影響」",
+      "貼貼紙屬於對抗性攻擊；主動模擬攻擊手法來檢驗系統，屬於對抗性測試",
+      "貼貼紙屬於選擇性偏差，應增加不同地區車牌的照片來平衡資料"
+    ],
+    "correctIndex": 2,
+    "explanation": "刻意對輸入做細微偽裝或修改、讓 AI 判斷出錯，是對抗性攻擊；主動模擬這種攻擊、檢驗系統能否判斷正確，是對抗性測試。資料漂移是資料分布隨時間自然改變；提示詞注入是用文字指令覆蓋模型設定；選擇性偏差是資料只來自特定群體。",
+    "term_ids": [
+      "adversarial-attack",
+      "adversarial-testing",
+      "data-drift",
+      "prompt-injection"
+    ],
+    "basis": "名詞卡 adversarial-attack（刻意對輸入做細微偽裝或修改讓 AI 判斷出錯；對抗性測試是主動模擬這種攻擊；模擬攻擊者手法把特徵稍作偽裝再送入→對抗性測試）；Goodfellow, Shlens & Szegedy (2014)"
+  },
+  {
+    "id": "P0493",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "三家銀行想一起計算「同時在三家都有逾期紀錄的客戶人數」，用來評估整體信用風險，但依法不能把各自的客戶資料交給其他銀行，也不想交給第三方集中保管，還必須能向主管機關說明做法。三家希望在不揭露各自原始資料的前提下，共同算出這個統計結果。最適合的技術是下列何者？",
+    "options": [
+      "聯邦學習（Federated Learning），由各銀行在本地訓練模型、只交換模型更新",
+      "零知識證明（Zero-knowledge Proof），證明某件事為真而不透露其他資訊",
+      "資料遮罩（Data Masking），把客戶姓名部分遮蔽後再互相交換",
+      "安全多方計算（SMPC），多方在不揭露原始資料的前提下共同計算出結果"
+    ],
+    "correctIndex": 3,
+    "explanation": "安全多方計算讓多個參與方在不揭露各自原始資料的前提下，共同計算出一個結果，正符合「一起算出統計數字」的需求。聯邦學習著重各自本地訓練模型、只交換模型更新；零知識證明用於驗證某件事為真；資料遮罩後交換仍會揭露其他資料。",
+    "term_ids": [
+      "smpc",
+      "federated-learning",
+      "zero-knowledge-proof",
+      "data-masking"
+    ],
+    "basis": "名詞卡 smpc（多個參與方在不揭露各自原始資料的前提下共同計算出結果；SMPC 重共同計算，聯邦學習重各自本地訓練、只交換模型更新）；Evans, Kolesnikov & Rosulek (2018)"
+  },
+  {
+    "id": "P0494",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某醫院把加密後的病歷資料交給雲端服務商分析，希望對方能直接在加密狀態下完成統計運算，解密後的結果又和用原始資料計算的一樣，全程看不到明文。最符合此需求的技術是下列何者？",
+    "options": [
+      "同態加密（Homomorphic Encryption）",
+      "聯邦學習（Federated Learning）",
+      "差分隱私（Differential Privacy）",
+      "雜湊（Hashing）"
+    ],
+    "correctIndex": 0,
+    "explanation": "同態加密可以直接對加密後的資料做運算，解密後的結果和對原始資料運算相同。關鍵字是「資料可集中、在加密狀態下計算」；聯邦學習是資料不集中、各自本地訓練；差分隱私是對統計結果加雜訊；雜湊無法還原也不能做這類運算。",
+    "term_ids": [
+      "homomorphic-encryption",
+      "federated-learning",
+      "differential-privacy",
+      "hashing"
+    ],
+    "basis": "名詞卡 homomorphic-encryption（可直接對加密資料運算，解密後結果和原始資料運算相同；資料可集中、在加密狀態下計算→同態加密；資料分散不能集中→聯邦學習）"
+  },
+  {
+    "id": "P0495",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某資安顧問整理四種隱私與安全技術給客戶參考，並各配一個情境：(甲) 使用者向網站證明自己已滿 18 歲，但不透露生日；(乙) 五家醫院共同訓練模型，病歷都不離開醫院；(丙) 雲端在加密資料上直接計算；(丁) 公開統計查詢時加入隨機雜訊，防止推論個人。下列對應何者正確？",
+    "options": [
+      "甲：同態加密；乙：聯邦學習；丙：零知識證明；丁：差分隱私",
+      "甲：零知識證明；乙：差分隱私；丙：同態加密；丁：聯邦學習",
+      "甲：差分隱私；乙：同態加密；丙：聯邦學習；丁：零知識證明",
+      "甲：零知識證明；乙：聯邦學習；丙：同態加密；丁：差分隱私"
+    ],
+    "correctIndex": 3,
+    "explanation": "證明某件事為真卻不透露其他資訊 → 零知識證明；資料不離開本地、各自訓練 → 聯邦學習；在加密狀態下運算 → 同態加密；對統計結果加隨機雜訊 → 差分隱私。",
+    "term_ids": [
+      "zero-knowledge-proof",
+      "federated-learning",
+      "homomorphic-encryption",
+      "differential-privacy"
+    ],
+    "basis": "名詞卡 zero-knowledge-proof（證明某件事為真卻不透露其他資訊）、homomorphic-encryption（區別：聯邦學習資料不集中、同態加密在加密狀態下運算、零知識證明證明某事為真）、differential-privacy；考古題 115031018 官方答案一致（差分隱私加隨機雜訊）"
+  },
+  {
+    "id": "P0496",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某電商客服機器人上線後，資安團隊做滲透測試，發現攻擊者能用各種換句話說的方式繞過限制，誘導機器人洩漏內部折扣規則。工程師原本的防護只有在輸入端設定一份關鍵字黑名單，遇到「忽略指示」等字詞就封鎖，主管要求一週內提出改善方案。下列改善方向何者最恰當？",
+    "options": [
+      "把黑名單擴充到一萬個字詞，就能完全擋下所有換句話說的攻擊",
+      "改成全面封鎖所有與折扣、價格、優惠活動有關的使用者提問",
+      "只要在系統提示詞中寫上「絕對不能洩漏任何內部規則」即可",
+      "採多層防禦：輸入驗證、輸出監控、保護系統提示與最小權限"
+    ],
+    "correctIndex": 3,
+    "explanation": "關鍵字黑名單只能擋已知字詞，容易被換句話說繞過；單靠系統提示詞也防不住攻擊。應採多層防禦：輸入驗證、輸出監控、系統提示保護與最小權限控管。擴充黑名單仍會被繞過；全面封鎖相關提問會讓客服失去正常功能。",
+    "term_ids": [
+      "keyword-blacklist",
+      "guardrails",
+      "input-validation",
+      "penetration-testing",
+      "least-privilege"
+    ],
+    "basis": "名詞卡 keyword-blacklist（只能擋已知字詞，容易被換句話說繞過；只在輸入端部署黑名單不足以防範提示詞注入）、penetration-testing（發現提示詞注入風險時，最適當的是多層防禦）、system-prompt（單靠系統提示詞防不住攻擊）；考古題 115 年 L12303 滲透測試題官方答案一致"
+  },
+  {
+    "id": "P0497",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司上線 AI 客服前，資安團隊模擬駭客實際攻擊系統，嘗試各種手法找出可被利用的漏洞；另一組人則用工具自動掃描系統是否有已知弱點。前者屬於下列何者？",
+    "options": [
+      "弱點掃描（Vulnerability Scanning）",
+      "滲透測試（Penetration Testing）",
+      "資料漂移監控（Data Drift Monitoring）",
+      "負載測試（Load Testing）"
+    ],
+    "correctIndex": 1,
+    "explanation": "滲透測試是由安全團隊模擬駭客實際攻擊系統，找出可被利用的漏洞；用工具自動找已知漏洞則是弱點掃描。資料漂移監控看資料分布變化；負載測試看系統能承受多少流量。",
+    "term_ids": [
+      "penetration-testing",
+      "vulnerability-scanning",
+      "data-drift"
+    ],
+    "basis": "名詞卡 penetration-testing（由安全團隊模擬駭客實際攻擊系統找出漏洞；滲透測試是實際攻擊驗證，弱點掃描是用工具自動找已知漏洞）；NIST SP 800-115"
+  },
+  {
+    "id": "P0498",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某銀行的信用評分模型被質疑對年輕族群不公平，團隊列出四項工作：(甲) 比較各年齡層的核准率與錯誤率；(乙) 訓練前重新加權樣本，讓年輕族群的資料比重更合理；(丙) 依不同族群調整決策門檻；(丁) 在模型輸出後加入過濾與人工審查。下列敘述何者最正確？",
+    "options": [
+      "四項都屬於偏見檢測，因為每一項都和各族群的預測結果有關",
+      "甲、乙屬於偏見緩解；丙、丁屬於偏見檢測，只負責找出問題",
+      "甲屬偏見檢測；乙、丙、丁屬偏見緩解，作用在不同階段",
+      "只要大量增加訓練資料、不必做其他調整，就能取代乙、丙、丁"
+    ],
+    "correctIndex": 2,
+    "explanation": "比較不同群體的預測分布與錯誤率是偏見檢測，只負責找出問題；重新加權樣本、調整決策門檻、加入輸出過濾或人工審查都是偏見緩解，分別作用在不同階段。只增加資料量而不清理、不平衡分布，無法降低偏差。",
+    "term_ids": [
+      "bias-detection-mitigation",
+      "bias-mitigation",
+      "algorithmic-bias"
+    ],
+    "basis": "名詞卡 bias-detection-mitigation（比較各群體錯誤率是檢測；重新加權、過濾、調門檻都是緩解）、bias-mitigation（大幅增加資料量但不清理、不平衡分布無法降低偏差；生成後人工審查並修正輸出是有效的緩解策略）；NIST SP 1270"
+  },
+  {
+    "id": "P0499",
+    "difficulty": "中",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某公司要建立員工滿意度預測模型，但問卷只發給總部員工填寫，各地分店員工都沒有參與。模型上線後，對分店員工的預測明顯失準。最主要的原因是下列何者？",
+    "options": [
+      "選擇性偏差：資料只來自總部，無法代表全體",
+      "過擬合：模型參數太少，學不到總部員工資料的規律",
+      "提示詞注入：分店員工在問卷中夾帶了惡意指令",
+      "梯度消失：模型層數太多，導致訓練完全失敗"
+    ],
+    "correctIndex": 0,
+    "explanation": "資料只來自某些特定群體、不能代表全體，導致結果偏向那一群，是選擇性偏差；應擴大不同群體的樣本。過擬合是模型太複雜、學到雜訊，不是參數太少；提示詞注入與梯度消失都與本題無關。",
+    "term_ids": [
+      "selection-bias",
+      "overfitting",
+      "prompt-injection"
+    ],
+    "basis": "名詞卡 selection-bias（資料只來自某些特定群體，不能代表全體，導致結果偏向那一群；正解是擴大不同群體的樣本）"
+  },
+  {
+    "id": "P0500",
+    "difficulty": "難",
+    "category": "生成式 AI 應用與規劃",
+    "sub_category_code": "L123",
+    "detail_code": "L12303",
+    "source": "方小瑋練習題第二回",
+    "question": "某新創要把開源大型語言模型做成對外的兒童學習 App。工程師認為：「這個開源模型出廠前已用 RLHF 做過安全對齊，會拒絕有害請求，所以 App 上線時不需要另外加任何防護。」產品經理不同意這個看法，兩人請公司的資安顧問判斷。下列哪一項說明最正確？",
+    "options": [
+      "產品經理錯了，模型完成安全對齊後，就不會再產生任何不當內容",
+      "只要把溫度參數調到 0，模型就不會產生有害內容，可以取代護欄的功能",
+      "開源模型無法做安全對齊，所以應改用規則引擎取代整個語言模型",
+      "安全對齊屬訓練階段；上線仍應在前後端部署獨立護欄，監控與過濾輸入輸出"
+    ],
+    "correctIndex": 3,
+    "explanation": "安全對齊透過 RLHF 等方法在訓練階段讓模型行為符合安全規範；護欄則在產品部署階段即時監控與過濾輸入輸出。不能只信任開源模型出廠時的安全對齊，商業產品仍應部署獨立的護欄機制。調溫度不能取代護欄；開源模型也可以做安全對齊。",
+    "term_ids": [
+      "safety-alignment",
+      "guardrails",
+      "rlhf",
+      "temperature"
+    ],
+    "basis": "名詞卡 safety-alignment（安全對齊在模型訓練階段，護欄在產品部署階段即時監控與過濾輸入輸出；不能只信任開源模型出廠時已完成安全對齊，仍應部署獨立護欄）；考古題 115 年 L12303 開源模型安全防護題官方答案一致"
   }
 ]
