@@ -43,10 +43,20 @@ npm run preview  # 預覽建置結果
 ### 練習題與模擬考錯題（`components/PracticeTab.vue`）
 
 原本的「練習題」tab 已移進「全真模擬考」頁：選單的「科目一／科目二」旁有「練習題」，下方有「模擬考錯題」。`App.vue` 的 `examPanel`（`null`／`'practice'`／`'exam-wrong'`）決定顯示哪個面板，同一個元件用 `view` prop 切換：
-- `view="practice"`：練習題（依科目、難度）、練習題錯題、累積弱點
+- `view="practice"`：練習題（分「第一回」「第二回」兩個區塊，各依科目、難度）、練習題錯題
 - `view="exam-wrong"`：模擬考錯題（只出官方考古題的錯題）
 
+練習題分回存放在 `src/data/practice/`：第一回 `practice.json`、第二回 `practice2.json`（各兩科 50 題，id 分別為 `P01xx`～`P03xx`、`P0401`～`P0500`）。`ROUNDS` 決定有幾回，各回題目不混在一起出；錯題本與錯題複習則把各回合在一起查。
+
 作答中可按「暫停」；切到別的 tab（元件卸載）或 App 被收到背景（`visibilitychange`）時也會自動存一份，回來從「暫停中的練習」繼續。
+
+### 弱點分析分頁（`analysis`）
+
+上半部「這次考試」是剛交卷那一份的雙層分析（`weaknessAnalysis`，交卷後才有）；下半部「長期累積」用 `components/CumulativeWeakness.vue` 顯示兩份分開存的統計（`utils/answerStats.js`）：
+- `kind="exam"` 累積弱點：全真模擬考與歷屆考古題交卷時，由 `App.vue` 的 `recordExamAnswers()` 寫入
+- `kind="practice"` 練習題弱點：`PracticeTab.vue` 在「練習題」模式每答一題寫入；錯題複習不算（只出答錯過的題，會讓答對率偏低）
+
+練習題不是官方題，所以和考試實力分開存、分開顯示，不要合併。
 
 ### 指南單元練習（`bookQuizData`）
 
@@ -62,6 +72,8 @@ npm run preview  # 預覽建置結果
 | `ipas_seen_question_ids_v1` | 曾在已交卷模擬考出現過的題目 `id` 陣列（未出現題目優先機制用） |
 | `ipas-wrong-book` | 錯題本（考古題與練習題共用，用題目 id 區分：練習題 id 是 `P` 開頭） |
 | `ipas_practice_paused_v1_practice`／`ipas_practice_paused_v1_exam-wrong` | 練習題、模擬考錯題各一份暫停中的作答進度 |
+| `ipas_code_stats_v1` | 累積弱點：模擬考＋考古題各評鑑代碼的答對數／作答數 |
+| `ipas_practice_code_stats_v1` | 練習題弱點：練習題各評鑑代碼的答對數／作答數（和上一列分開） |
 
 ### `src/utils/` 注意事項
 
