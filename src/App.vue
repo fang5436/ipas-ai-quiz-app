@@ -485,7 +485,7 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
           <div class="flex flex-col gap-1">
             <h2 class="text-base font-bold text-amber-400">📚 題庫瀏覽</h2>
-            <p class="text-slate-400 text-xs">依官方出題梯次與科目分類，點選題目即可查看正確答案與解說。</p>
+            <p class="text-slate-400 text-xs">依官方出題梯次與科目分類，點選題目即可查看正確答案與解說。標「📖 延伸」的題目，解說裡有考古題題目沒出現過的延伸名詞。</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <button v-for="session in pastExamSessions" :key="session.source" @click="selectBrowseSource(session.source)" class="px-3 py-1.5 rounded-lg border text-xs font-bold transition" :class="activeBrowseSource === session.source ? 'bg-amber-600 border-amber-500 text-white' : 'bg-slate-950 border-slate-700 text-slate-400 hover:text-slate-200'">{{ session.label }}</button>
@@ -512,6 +512,7 @@
                 <div class="flex flex-wrap gap-1.5">
                   <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-medium border border-slate-700">{{ q.category }}</span>
                   <span class="px-2 py-0.5 rounded bg-violet-950 text-violet-400 text-[10px] font-medium border border-violet-900/40">{{ q.detail_code }}</span>
+                  <span v-if="extendedCount(q.id)" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-medium border border-dashed border-slate-500">📖 延伸 {{ extendedCount(q.id) }}</span>
                 </div>
               </div>
               <span class="shrink-0 text-slate-500 text-xs mt-1 transition-transform duration-200" :class="{ 'rotate-90 text-amber-400': browseExpanded.has(q.id) }">▶</span>
@@ -528,39 +529,8 @@
                 {{ q.explanation || '此題無解析。' }}
               </div>
 
-              <!-- 📖 相關名詞：獨立區塊，標籤預設全關，同一題一次只展開一張卡片 -->
-              <div v-if="getQuestionTerms(q.id).length" class="mt-1 p-3 rounded-xl border bg-slate-950/40 border-sky-900/50 flex flex-col gap-2.5">
-                <span class="font-bold text-xs text-sky-400">📖 相關名詞</span>
-                <div class="flex flex-wrap gap-1.5">
-                  <button v-for="term in getQuestionTerms(q.id)" :key="term.id" @click="toggleBrowseTerm(q.id, term.id)" class="px-2.5 py-1 rounded-lg border text-xs font-medium transition text-left" :class="activeBrowseTerms[q.id] === term.id ? 'bg-sky-600 border-sky-500 text-white' : 'bg-slate-900 border-slate-700 text-slate-300 hover:border-sky-700 hover:text-sky-200'">
-                    {{ term.name }}<span v-if="term.status === '待確認'" class="ml-1 text-yellow-400">⚠</span>
-                  </button>
-                </div>
-
-                <div v-if="activeBrowseTerms[q.id] && termsById[activeBrowseTerms[q.id]]" :key="activeBrowseTerms[q.id]" class="rounded-xl border border-sky-800/60 bg-slate-900 p-3.5 flex flex-col gap-2.5 text-xs leading-relaxed animate-fade-in">
-                  <template v-for="term in [termsById[activeBrowseTerms[q.id]]]" :key="term.id">
-                    <div class="flex flex-wrap items-center gap-2">
-                      <span class="text-sm font-bold text-sky-300">{{ term.name }}</span>
-                      <span v-if="term.status === '待確認'" class="px-2 py-0.5 rounded-md bg-yellow-500/15 border border-yellow-500/60 text-yellow-300 text-[10px] font-bold">⚠ 待確認：尚無權威來源</span>
-                    </div>
-                    <p class="text-slate-200">{{ term.oneLiner }}</p>
-                    <div><span class="font-bold text-emerald-400">🧩 生活比喻　</span><span class="text-slate-300">{{ term.analogy }}</span></div>
-                    <div><span class="font-bold text-violet-300">🎯 適用情境　</span><span class="text-slate-300">{{ term.useCases }}</span></div>
-                    <div v-if="term.distinguish"><span class="font-bold text-amber-300">🔀 怎麼區分　</span><span class="text-slate-300">{{ term.distinguish }}</span></div>
-                    <div class="p-2.5 rounded-lg bg-rose-950/50 border border-rose-800/70 text-rose-100">
-                      <span class="font-bold text-rose-300 block mb-0.5">⚠️ 考題陷阱</span>
-                      {{ term.trap }}
-                    </div>
-                    <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 leading-relaxed flex flex-col gap-0.5">
-                      <span class="font-bold text-slate-400">參考來源</span>
-                      <span v-for="(src, sIdx) in term.sources" :key="sIdx" class="break-all">
-                        <template v-if="splitSource(src).url">{{ splitSource(src).label }}<a :href="splitSource(src).url" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:text-sky-300 underline">{{ splitSource(src).url }}</a></template>
-                        <template v-else>{{ src }}</template>
-                      </span>
-                    </div>
-                  </template>
-                </div>
-              </div>
+              <!-- 📖 相關名詞：名詞卡＋延伸名詞，與練習題、模擬考共用同一個元件；題目收合時元件卸載，名詞卡也跟著關閉 -->
+              <RelatedTerms :qid="q.id" class="mt-1" />
             </div>
           </div>
         </div>
@@ -810,13 +780,9 @@ onMounted(async () => {
     }
     allQuestions.value = loadedData;
 
-    // 名詞卡片放在 src/data/terms/ 子資料夾，不會被上方 ./data/*.json 的題庫載入誤收
-    const [termsMod, questionTermsMod] = await Promise.all([
-      import('./data/terms/terms.json'),
-      import('./data/terms/question-terms.json'),
-    ]);
-    termsById.value = Object.fromEntries((termsMod.default || termsMod).map(t => [t.id, t]));
-    questionTermIds.value = questionTermsMod.default || questionTermsMod;
+    // 題庫瀏覽列表標出有延伸名詞的題目（資料放在子資料夾，不會被上方題庫載入誤收）
+    const extMod = await import('./data/practice/extended-terms.json');
+    extendedTerms.value = extMod.default || extMod;
 
     const savedBookHistory = localStorage.getItem('ipas_book_history_v2');
     if (savedBookHistory) {
@@ -1406,34 +1372,15 @@ const browseQuestions = computed(() => {
     .sort((a, b) => a.id - b.id);
 });
 
-// 📖 相關名詞卡片：資料在 onMounted 動態載入；activeBrowseTerms 記錄「題目 id → 目前展開的名詞 id」，每題最多一張
-const termsById = ref({});
-const questionTermIds = ref({});
-const activeBrowseTerms = ref({});
+const extendedTerms = ref({});
+const extendedCount = (qid) => (extendedTerms.value[String(qid)] || []).length;
 
-const getQuestionTerms = (qid) => (questionTermIds.value[qid] || []).map(id => termsById.value[id]).filter(Boolean);
-
-// 同一題一次只展開一張；點另一個標籤會切換，再點已展開的標籤則收起
-const toggleBrowseTerm = (qid, termId) => {
-  const next = { ...activeBrowseTerms.value };
-  if (next[qid] === termId) delete next[qid];
-  else next[qid] = termId;
-  activeBrowseTerms.value = next;
-};
-
-// 來源字串格式為「說明: https://…」或純檔名，拆出網址以便顯示為連結
-const splitSource = (src) => {
-  const m = String(src).match(/^(.*?)(https?:\/\/\S+)$/);
-  return m ? { label: m[1], url: m[2] } : { label: src, url: null };
-};
-
-const selectBrowseSource = (source) => { browseSource.value = source; browseExpanded.value = new Set(); activeBrowseTerms.value = {}; };
-const selectBrowseSubject = (subject) => { browseSubject.value = subject; browseExpanded.value = new Set(); activeBrowseTerms.value = {}; };
+const selectBrowseSource = (source) => { browseSource.value = source; browseExpanded.value = new Set(); };
+const selectBrowseSubject = (subject) => { browseSubject.value = subject; browseExpanded.value = new Set(); };
 
 // 一次只展開一題：點開新題目時自動收合其他題；再點同一題則收合
-// 題目收合時一併關閉其名詞卡片，重新打開時回到全部關閉的狀態
+// 題目收合時「📖 相關名詞」元件跟著卸載，重新打開時名詞卡回到全部關閉的狀態
 const toggleBrowseItem = (id, event) => {
-  activeBrowseTerms.value = {};
   if (browseExpanded.value.has(id)) {
     browseExpanded.value = new Set();
     return;
@@ -1445,8 +1392,8 @@ const toggleBrowseItem = (id, event) => {
     if (card && card.getBoundingClientRect().top < 64) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 };
-const expandAllBrowse = () => { browseExpanded.value = new Set(browseQuestions.value.map(q => q.id)); activeBrowseTerms.value = {}; };
-const collapseAllBrowse = () => { browseExpanded.value = new Set(); activeBrowseTerms.value = {}; };
+const expandAllBrowse = () => { browseExpanded.value = new Set(browseQuestions.value.map(q => q.id)); };
+const collapseAllBrowse = () => { browseExpanded.value = new Set(); };
 
 // 交卷/中止按鈕的統一入口：依目前試卷是否為歷屆考古題模式分派，隨機抽題模擬考的原有行為完全不變
 const handleExamAbort = () => { isPastExamMode.value ? abortPastExam() : abortExam(); };
