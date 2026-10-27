@@ -20,7 +20,14 @@ npm run preview  # 預覽建置結果
 
 **單一大元件架構**：所有商業邏輯與 UI 集中在 `src/App.vue`（~1100 行），以 `currentTab`（ref）切換 tab：`home`、`exam`、`analysis`、`tracker`、`book`、`browse`、`terms`，以 `v-if/v-else-if` 渲染，`switchTab()` 負責切換並處理離開頁面前的確認邏輯（如作答中離開模擬考）。
 
-`browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。解說框下方的「📖 相關名詞」區塊讀取 `src/data/terms/`（見下方），`activeBrowseTerms` 記錄每題目前展開的名詞（每題最多一張），題目收合、切換梯次／科目、全部展開／收合時一律清空。全真模擬考作答畫面刻意不顯示名詞，以免提示答案。
+`browse`（題庫瀏覽）沿用 `pastExamSessions` 依梯次＋科目列出全部題目，可展開查看正確答案與解說；純閱讀用途，不寫入 `seenQuestionIds`／`examCounts`。解說框下方的「📖 相關名詞」區塊讀取 `src/data/terms/`（見下方），`activeBrowseTerms` 記錄每題目前展開的名詞（每題最多一張），題目收合、切換梯次／科目、全部展開／收合時一律清空。全真模擬考作答中刻意不顯示名詞，以免提示答案；交卷後才顯示（見下方 `RelatedTerms.vue`）。
+
+### `components/RelatedTerms.vue`（作答後的「📖 相關名詞」）
+
+- 用在 `App.vue` 的模擬考畫面（`examSubmitted` 後；首頁模擬考、全真模擬考、歷屆考古題、紀錄回顧共用）、`PracticeTab.vue` 的作答回饋，以及練習題瀏覽
+- props：`qid`（題號）、`termIds`（練習題自帶 `term_ids`；沒給時用 `question-terms.json` 依題號查，即考古題）
+- 先列名詞卡（考試範圍，藍色），再列延伸名詞（灰色虛線、標「延伸」）；同一題一次只展開一張，換題自動收起
+- 延伸名詞資料在 `src/data/practice/extended-terms.json`：題號（字串）→ `[{ name, note, see? }]`，`see` 是可連過去的名詞卡 id。延伸名詞＝練習題或考古題解說裡出現、但考古題題目與選項、名詞卡名稱與別名都沒出現的技術名詞（2026-10-27 建立，134 題 163 筆）；只是補充說明，不是考試範圍
 
 ### `src/data/terms/`（相關名詞卡片）
 
@@ -47,6 +54,8 @@ npm run preview  # 預覽建置結果
 - `view="exam-wrong"`：模擬考錯題（只出官方考古題的錯題）
 
 練習題分回存放在 `src/data/practice/`：第一回 `practice.json`、第二回 `practice2.json`（各兩科 50 題，id 分別為 `P01xx`～`P03xx`、`P0401`～`P0500`）。`ROUNDS` 決定有幾回，各回題目不混在一起出；錯題本與錯題複習則把各回合在一起查。
+
+練習題選單每一回、每個科目旁有「📚 瀏覽」（`browsing`＝`{ round, subject }`）：照題號列出該回該科的題目，可展開看答案、解說與相關名詞，並標出有延伸名詞的題目；純閱讀，不記錄作答。
 
 作答中可按「暫停」；切到別的 tab（元件卸載）或 App 被收到背景（`visibilitychange`）時也會自動存一份，回來從「暫停中的練習」繼續。
 
