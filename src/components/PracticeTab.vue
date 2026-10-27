@@ -112,6 +112,8 @@
             <span class="font-bold block mb-1">{{ feedbackTitle }}</span>
             {{ current.explanation || '此題無解析。' }}
           </div>
+          <!-- 舊版暫停紀錄裡的題目沒有 termIds，用題號從練習題查回來 -->
+          <RelatedTerms :qid="current.id" :term-ids="current.termIds || practiceById.get(current.id)?.term_ids || null" />
           <button @click="next" class="btn-primary">{{ session.idx + 1 < session.items.length ? '下一題' : '看結果' }}</button>
         </div>
       </div>
@@ -134,6 +136,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
 import { recordCodeAnswers } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
+import RelatedTerms from './RelatedTerms.vue';
 
 const props = defineProps({
   // 官方考古題（App.vue 的 allQuestions），錯題複習時用 id 查回原題
@@ -231,6 +234,7 @@ const toItem = (q, isPractice) => {
     correctIndex: options.indexOf(correctText),
     isPractice,
     difficulty: q.difficulty,
+    termIds: q.term_ids || null, // 練習題自帶；考古題為 null，RelatedTerms 會改用題號查
     badge: isPractice ? `練習題・${q.difficulty}` : formatSourceBadge(q.source),
     streak: 0,
   };

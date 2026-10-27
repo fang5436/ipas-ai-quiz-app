@@ -183,11 +183,13 @@
                 <div class="leading-relaxed text-sm font-medium">{{ cleanOptionText(option) }}</div>
               </button>
             </div>
-            <div v-if="examSubmitted" class="mt-4 animate-fade-in">
+            <div v-if="examSubmitted" class="mt-4 animate-fade-in flex flex-col gap-3">
               <div class="p-3.5 rounded-xl border border-slate-800 text-xs leading-relaxed whitespace-pre-wrap" :class="userAnswers[currentQuestionIdx] === currentQuestion.correctIndex ? 'bg-green-950/20 text-green-300 border-green-900/40' : 'bg-red-950/20 text-red-300 border-red-900/40'">
                 <span class="font-bold block mb-1">{{ userAnswers[currentQuestionIdx] === currentQuestion.correctIndex ? '✅ 答對了！' : '❌ 答錯了' }}</span>
                 {{ currentQuestion.explanation || '此題無解析。' }}
               </div>
+              <!-- 📖 相關名詞：交卷後才出現（作答中不顯示，以免提示答案）；首頁模擬考、全真模擬考、歷屆考古題、紀錄回顧共用這個畫面 -->
+              <RelatedTerms :qid="currentQuestion.id" />
             </div>
           </div>
 
@@ -641,6 +643,7 @@ import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
 import PracticeTab from './components/PracticeTab.vue';
+import RelatedTerms from './components/RelatedTerms.vue';
 import CumulativeWeakness from './components/CumulativeWeakness.vue';
 import TermsTab from './components/TermsTab.vue';
 import { recordWrongAnswer } from './utils/wrongBook.js';
