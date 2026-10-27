@@ -614,6 +614,7 @@ import { chapterNotes } from './data/chapterNotes.js';
 import { chapterAnalysis } from './data/chapterAnalysis.js';
 import PracticeTab from './components/PracticeTab.vue';
 import RelatedTerms from './components/RelatedTerms.vue';
+import { mentionsOptionLetters } from './utils/optionLetters.js';
 import CumulativeWeakness from './components/CumulativeWeakness.vue';
 import TermsTab from './components/TermsTab.vue';
 import { recordWrongAnswer } from './utils/wrongBook.js';
@@ -942,11 +943,12 @@ const startExam = (subject = 1) => {
   let shuffledExam = fisherYates(selected);
 
   // ── 步驟5：選項洗牌 + 清除 (A)(B)(C)(D) 前綴 + 修正 correctIndex
+  // 解說用 A/B/C/D 指稱選項的題目不洗牌，否則解說的字母會跟畫面上的選項對不起來（見 utils/optionLetters.js）
   shuffledExam = shuffledExam.map(q => {
     if (!q.options?.length || q.correctIndex == null) return { ...q };
     const cleanOpts = q.options.map(o => String(o).replace(/^\([A-D]\)\s*/i, '').trim());
     const correctText = cleanOpts[q.correctIndex];
-    const shuffledOpts = fisherYates(cleanOpts);
+    const shuffledOpts = mentionsOptionLetters(q.explanation) ? cleanOpts : fisherYates(cleanOpts);
     return { ...q, options: shuffledOpts, correctIndex: shuffledOpts.indexOf(correctText) };
   });
 

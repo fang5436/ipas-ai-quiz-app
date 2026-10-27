@@ -43,6 +43,8 @@ npm run preview  # 預覽建置結果
 
 ### 模擬考抽題邏輯（`App.vue` 內 `startExam()`）
 
+選項洗牌的例外：解說用 A/B/C/D 指稱選項的題目（`utils/optionLetters.js` 的 `mentionsOptionLetters()`，考古題約 13 題＋幾題誤判）維持官方順序不洗牌，否則解說字母會跟畫面對不起來。`App.vue` 的 `startExam()` 與 `PracticeTab.vue` 的 `toItem()` 都要套用；歷屆考古題模式本來就不洗牌。
+
 `detail_code` 對應兩科的 CH 標籤映射（`sub1CHMap` / `sub2CHMap`），依 `sub1Quotas` / `sub2Quotas` 這兩個**靜態寫死的固定配額字典**從各章節抽足 50 題（`EXAM_TOTAL_QUESTIONS`），再對整卷與各題選項分別執行 Fisher-Yates 洗牌，並自動修正 `correctIndex`。配額數字並非執行期動態計算，而是依「115年第一~三次」+「114年第四次」共 4 梯次官方公告試題（每梯次固定50題/科）平均後以最大餘數法（Hamilton apportionment）取整而來；未來題庫再擴充新梯次時，應重新手動執行這個計算並更新配額數字，而不是自動重算。
 
 **未出現題目優先機制**：`UNSEEN_PRIORITY_GRACE_ATTEMPTS`（目前為 `1`）控制從第幾次模擬考開始啟用——該科目測驗次數達門檻後，每章節抽題時會把 `seenQuestionIds`（曾在已交卷模擬考出現過的題目 id 集合）裡尚未出現過的題目排到前面優先抽取，抽完才輪到已出現過的題目；當某章節所有題目都已出現過一輪時，該章節的追蹤會自動重置、重新開始新一輪。僅在交卷（`forceSubmitExam`/`submitExam` 內的 `markExamQuestionsSeen()`）時才會寫入紀錄，中途放棄（`abortExam`）不計。

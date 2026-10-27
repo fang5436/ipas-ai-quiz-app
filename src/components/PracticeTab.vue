@@ -189,6 +189,7 @@ import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWro
 import { recordCodeAnswers } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
 import RelatedTerms from './RelatedTerms.vue';
+import { mentionsOptionLetters } from '../utils/optionLetters.js';
 
 const props = defineProps({
   // 官方考古題（App.vue 的 allQuestions），錯題複習時用 id 查回原題
@@ -307,10 +308,11 @@ const formatSourceBadge = (source) => {
 };
 
 // 統一成作答用的格式：清掉 (A)(B) 前綴、選項洗牌並修正 correctIndex
+// 解說用 A/B/C/D 指稱選項的題目不洗牌，否則解說的字母會跟畫面上的選項對不起來（見 utils/optionLetters.js）
 const toItem = (q, isPractice) => {
   const cleanOpts = q.options.map(o => String(o).replace(/^\([A-D]\)\s*/i, '').trim());
   const correctText = cleanOpts[q.correctIndex];
-  const options = fisherYates(cleanOpts);
+  const options = mentionsOptionLetters(q.explanation) ? cleanOpts : fisherYates(cleanOpts);
   return {
     id: q.id,
     detail_code: q.detail_code,
