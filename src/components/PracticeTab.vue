@@ -4,7 +4,56 @@
     <!-- =================【選單】=================
          view="practice"：練習題＋練習題錯題（作答結果另記成練習題弱點，顯示在弱點分析分頁）；view="exam-wrong"：模擬考錯題
          兩種都放在「全真模擬考」頁裡，按「返回」回到模擬考選單 -->
-    <template v-if="!session">
+    <!-- =================【🆕 練習題瀏覽：單獨看某一回、某一科的 50 題，直接看答案、解說與相關名詞；純閱讀，不記錄作答】================= -->
+    <template v-if="browsing">
+      <button @click="closeBrowse" class="self-start text-xs text-slate-400 hover:text-slate-200">← 返回練習題</button>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+        <div class="flex flex-col gap-1">
+          <h2 class="text-base font-bold text-amber-400">📚 {{ browsing.round === 1 ? '第一回' : '第二回' }}・科目{{ browsing.subject === 1 ? '一' : '二' }} 題庫瀏覽</h2>
+          <p class="text-slate-400 text-xs">點選題目即可查看正確答案、解說與相關名詞。標「📖 延伸」的題目有考古題沒出現過的延伸名詞。</p>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <p class="text-slate-500 text-[11px]">共 {{ browseList.length }} 題，其中 {{ browseList.filter(q => extendedCount(q.id)).length }} 題有延伸名詞</p>
+          <div class="flex gap-2">
+            <button @click="browseExpanded = new Set(browseList.map(q => q.id))" class="btn-secondary py-1.5 px-2.5 text-xs">全部展開</button>
+            <button @click="browseExpanded = new Set()" class="btn-secondary py-1.5 px-2.5 text-xs">全部收合</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2.5">
+        <div v-for="(q, qIdx) in browseList" :key="q.id" class="bg-slate-900 border rounded-xl overflow-hidden transition-colors scroll-mt-20" :class="browseExpanded.has(q.id) ? 'border-amber-800/60' : 'border-slate-800'">
+          <button @click="toggleBrowseItem(q.id, $event)" class="w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-slate-800/40 transition-colors">
+            <span class="shrink-0 w-8 h-8 rounded-lg bg-slate-800 text-slate-300 flex items-center justify-center text-xs font-bold">{{ qIdx + 1 }}</span>
+            <div class="flex-1 min-w-0 flex flex-col gap-1.5">
+              <span class="text-sm text-slate-200 leading-relaxed" :class="{ 'line-clamp-2': !browseExpanded.has(q.id) }">{{ q.question }}</span>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded bg-violet-950 text-violet-400 text-[10px] font-medium border border-violet-900/40">{{ q.detail_code }} {{ CODE_NAMES[q.detail_code] || '' }}</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-medium border" :class="LEVEL_BADGE[q.difficulty]">{{ q.difficulty }}</span>
+                <span v-if="extendedCount(q.id)" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-medium border border-dashed border-slate-500">📖 延伸 {{ extendedCount(q.id) }}</span>
+              </div>
+            </div>
+            <span class="shrink-0 text-slate-500 text-xs mt-1 transition-transform duration-200" :class="{ 'rotate-90 text-amber-400': browseExpanded.has(q.id) }">▶</span>
+          </button>
+
+          <div v-if="browseExpanded.has(q.id)" class="px-4 pb-4 pt-1 flex flex-col gap-2 animate-fade-in">
+            <div v-for="(option, idx) in q.options" :key="idx" class="flex items-start gap-3 p-3 rounded-xl border text-sm" :class="idx === q.correctIndex ? 'bg-green-950/30 border-green-800/60 text-green-300' : 'bg-slate-950/40 border-slate-800 text-slate-400'">
+              <div class="w-7 h-7 text-xs rounded-lg flex items-center justify-center font-bold shrink-0" :class="idx === q.correctIndex ? 'bg-green-600 text-white' : 'bg-slate-800 text-slate-400'">{{ String.fromCharCode(65 + idx) }}</div>
+              <div class="flex-1 leading-relaxed">{{ option }}</div>
+              <span v-if="idx === q.correctIndex" class="shrink-0 text-[10px] font-bold text-green-400 mt-1">✓ 正確答案</span>
+            </div>
+            <div class="mt-1 p-3.5 rounded-xl border bg-amber-950/20 border-amber-900/40 text-amber-100/90 text-xs leading-relaxed whitespace-pre-wrap">
+              <span class="font-bold block mb-1 text-amber-400">💡 解說</span>
+              {{ q.explanation || '此題無解析。' }}
+            </div>
+            <RelatedTerms :qid="q.id" :term-ids="q.term_ids || null" />
+          </div>
+        </div>
+      </div>
+      <button @click="closeBrowse" class="btn-secondary self-center text-xs px-4 py-2">← 返回練習題</button>
+    </template>
+
+    <template v-else-if="!session">
       <button @click="emit('back')" class="self-start text-xs text-slate-400 hover:text-slate-200">← 返回全真模擬考</button>
 
       <!-- 🆕 暫停中的練習：按「暫停」時保存，關掉 App 也不會消失 -->
@@ -46,7 +95,10 @@
       <div v-for="round in ROUNDS" :key="round" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
         <h3 class="text-sm font-bold text-slate-200">{{ round === 1 ? '開始練習（第一回）' : '✍️ 練習題第二回' }} <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
         <div v-for="subject in [1, 2]" :key="subject" class="flex flex-col gap-2">
-          <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
+            <button @click="openBrowse(round, subject)" :disabled="practiceCount(round, subject, 'all') === 0" class="shrink-0 px-2.5 py-1 rounded-lg border border-amber-800/60 bg-amber-950/30 text-amber-300 hover:bg-amber-900/40 text-[11px] font-bold transition">📚 瀏覽</button>
+          </div>
           <div class="grid grid-cols-4 gap-2">
             <button v-for="t in LEVEL_OPTIONS" :key="t.key" @click="startPractice(round, subject, t.key)" :disabled="practiceCount(round, subject, t.key) === 0" class="btn-secondary !px-2 !py-2.5 flex flex-col items-center gap-0.5">
               <span class="text-xs font-bold" :class="LEVEL_TEXT[t.key]">{{ t.label }}</span>
@@ -132,7 +184,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
 import { recordCodeAnswers } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
@@ -183,6 +235,40 @@ onMounted(async () => {
 
 const refreshRecords = () => {
   wrongBook.value = loadWrongBook();
+};
+
+// =================【🆕 練習題瀏覽】=================
+// browsing：{ round, subject }＝正在瀏覽哪一回、哪一科；null＝沒有在瀏覽。題目照題號順序，不洗牌、不記錄作答
+const browsing = ref(null);
+const browseExpanded = ref(new Set());
+const extendedTerms = ref({});
+onMounted(async () => {
+  const mod = await import('../data/practice/extended-terms.json');
+  extendedTerms.value = mod.default || mod;
+});
+const extendedCount = (qid) => (extendedTerms.value[qid] || []).length;
+const browseList = computed(() => (browsing.value ? filterPractice(browsing.value.round, browsing.value.subject, 'all') : []));
+
+const openBrowse = (round, subject) => {
+  browsing.value = { round, subject };
+  browseExpanded.value = new Set();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+const closeBrowse = () => {
+  browsing.value = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+// 同一時間只展開一題（與題庫瀏覽相同）；上方題目收合後版面會上移，點開的題目可能被推出畫面外，需捲回可視範圍
+const toggleBrowseItem = (id, event) => {
+  if (browseExpanded.value.has(id)) {
+    browseExpanded.value = new Set();
+    return;
+  }
+  browseExpanded.value = new Set([id]);
+  const card = event?.currentTarget?.parentElement;
+  nextTick(() => {
+    if (card && card.getBoundingClientRect().top < 64) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 };
 
 const subjectPrefix = (subject) => (subject === 1 ? 'L11' : 'L12');
