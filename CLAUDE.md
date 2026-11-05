@@ -52,10 +52,10 @@ npm run preview  # 預覽建置結果
 ### 練習題與模擬考錯題（`components/PracticeTab.vue`）
 
 原本的「練習題」tab 已移進「全真模擬考」頁：選單的「科目一／科目二」旁有「練習題」，下方有「模擬考錯題」。`App.vue` 的 `examPanel`（`null`／`'practice'`／`'exam-wrong'`）決定顯示哪個面板，同一個元件用 `view` prop 切換：
-- `view="practice"`：練習題（分「第一回」「第二回」兩個區塊，各依科目、難度）、練習題錯題
+- `view="practice"`：練習題（分「第一回」「第二回」「第三回」三個區塊，各依科目、難度）、練習題錯題
 - `view="exam-wrong"`：模擬考錯題（只出官方考古題的錯題）
 
-練習題分回存放在 `src/data/practice/`：第一回 `practice.json`、第二回 `practice2.json`（各兩科 50 題，id 分別為 `P01xx`～`P03xx`、`P0401`～`P0500`）。`ROUNDS` 決定有幾回，各回題目不混在一起出；錯題本與錯題複習則把各回合在一起查。
+練習題分回存放在 `src/data/practice/`：第一回 `practice.json`、第二回 `practice2.json`、第三回 `practice3.json`（各兩科 50 題，id 分別為 `P01xx`～`P03xx`、`P0401`～`P0500`、`P0501`～`P0600`）。`ROUNDS` 決定有幾回，`ROUND_NAMES`／`ROUND_TITLES`／`ROUND_NOTES` 是各回的名稱、選單標題與說明；各回題目不混在一起出；錯題本與錯題複習則把各回合在一起查。第三回（2026-11-05）是考前衝刺：重點考點（主考點都在考古題出現過，87 題出現 3 次以上）＋全新情境，章節×難度格子照第二回，正確答案位置每科 A～D 各 12～13，經程式檢查與 Gemini Flash 盲答（100 題全一致）。
 
 練習題選單每一回、每個科目旁有「📚 瀏覽」（`browsing`＝`{ round, subject }`）：照題號列出該回該科的題目，可展開看答案、解說與相關名詞，並標出有延伸名詞的題目；純閱讀，不記錄作答。
 

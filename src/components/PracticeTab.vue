@@ -9,7 +9,7 @@
       <button @click="closeBrowse" class="self-start text-xs text-slate-400 hover:text-slate-200">← 返回練習題</button>
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
         <div class="flex flex-col gap-1">
-          <h2 class="text-base font-bold text-amber-400">📚 {{ browsing.round === 1 ? '第一回' : '第二回' }}・科目{{ browsing.subject === 1 ? '一' : '二' }} 題庫瀏覽</h2>
+          <h2 class="text-base font-bold text-amber-400">📚 {{ ROUND_NAMES[browsing.round] }}・科目{{ browsing.subject === 1 ? '一' : '二' }} 題庫瀏覽</h2>
           <p class="text-slate-400 text-xs">點選題目即可查看正確答案、解說與相關名詞。標「📖 延伸」的題目有考古題沒出現過的延伸名詞。</p>
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2">
@@ -93,7 +93,7 @@
       </div>
 
       <div v-for="round in ROUNDS" :key="round" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
-        <h3 class="text-sm font-bold text-slate-200">{{ round === 1 ? '開始練習（第一回）' : '✍️ 練習題第二回' }} <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
+        <h3 class="text-sm font-bold text-slate-200">{{ ROUND_TITLES[round] }} <span class="text-[11px] font-normal text-slate-500">（出完所選範圍的全部題目，順序隨機；「全部」＝完整 50 題）</span></h3>
         <div v-for="subject in [1, 2]" :key="subject" class="flex flex-col gap-2">
           <div class="flex items-center justify-between gap-2">
             <span class="text-xs font-bold" :class="subject === 1 ? 'text-violet-400' : 'text-indigo-400'">{{ subject === 1 ? '📘 科目一：人工智慧基礎概論' : '📙 科目二：生成式 AI 應用與規劃' }}</span>
@@ -107,7 +107,7 @@
           </div>
         </div>
         <p v-if="round === 1" class="text-[11px] text-slate-500 leading-relaxed">難度依考古題題型區分：易＝概念直問；中＝120 字以內的情境題；難＝超過 120 字、需同時判斷多個條件的情境題。比例參考 115 年第二、三次（易 10%、中 46%、難 44%）。</p>
-        <p v-else class="text-[11px] text-slate-500 leading-relaxed">第二回是新出的題目，考點和第一回錯開；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。</p>
+        <p v-else class="text-[11px] text-slate-500 leading-relaxed">{{ ROUND_NOTES[round] }}</p>
       </div>
 
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
@@ -215,9 +215,16 @@ const LEVEL_BADGE = {
   '難': 'bg-red-950 text-red-400 border-red-900/40',
 };
 
-// 練習題分回存放：第一回 practice.json、第二回 practice2.json，兩回題目不混在一起出
-const ROUNDS = [1, 2];
-const roundQuestions = ref({ 1: [], 2: [] });
+// 練習題分回存放：第一回 practice.json、第二回 practice2.json、第三回 practice3.json，各回題目不混在一起出
+const ROUNDS = [1, 2, 3];
+const ROUND_NAMES = { 1: '第一回', 2: '第二回', 3: '第三回' };
+// 各回選單的標題與說明（第一回沿用原本的文字）
+const ROUND_TITLES = { 1: '開始練習（第一回）', 2: '✍️ 練習題第二回', 3: '🎯 練習題第三回' };
+const ROUND_NOTES = {
+  2: '第二回是新出的題目，考點和第一回錯開；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。',
+  3: '第三回是考前衝刺：集中在考古題最常考的重點考點，換成全新的情境與問法；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。',
+};
+const roundQuestions = ref({ 1: [], 2: [], 3: [] });
 const practiceQuestions = computed(() => ROUNDS.flatMap(r => roundQuestions.value[r]));
 const wrongBook = ref([]);
 const session = ref(null);
@@ -225,11 +232,12 @@ const finished = ref(false);
 
 onMounted(async () => {
   // 練習題放在 src/data/practice/ 子資料夾，不會被 App.vue 的 ./data/*.json 題庫載入誤收
-  const [mod1, mod2] = await Promise.all([
+  const [mod1, mod2, mod3] = await Promise.all([
     import('../data/practice/practice.json'),
     import('../data/practice/practice2.json'),
+    import('../data/practice/practice3.json'),
   ]);
-  roundQuestions.value = { 1: mod1.default || mod1, 2: mod2.default || mod2 };
+  roundQuestions.value = { 1: mod1.default || mod1, 2: mod2.default || mod2, 3: mod3.default || mod3 };
   refreshRecords();
   pausedSession.value = loadPaused();
 });
@@ -338,7 +346,7 @@ const startPractice = (round, subject, level) => {
   const pool = fisherYates(filterPractice(round, subject, level));
   if (pool.length === 0) return;
   const levelLabel = level === 'all' ? '全部難度' : `難度${level}`;
-  const roundLabel = round === 1 ? '' : '第二回・';
+  const roundLabel = round === 1 ? '' : `${ROUND_NAMES[round]}・`;
   startSession('practice', `${roundLabel}科目${subject === 1 ? '一' : '二'}・${levelLabel}`, pool.map(q => toItem(q, true)));
 };
 
