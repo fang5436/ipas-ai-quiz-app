@@ -121,6 +121,20 @@
         </div>
         <button @click="startReview('practice')" :disabled="wrongStats.practice === 0" class="btn-primary !bg-rose-600 hover:!bg-rose-500">開始複習練習題錯題</button>
         <p class="text-[11px] text-slate-500 leading-relaxed">模擬考（官方考古題）的錯題分開放在全真模擬考的「模擬考錯題」。</p>
+        <!-- 搬到別的裝置：錯題本只存在這台裝置，匯出代碼 → 傳到另一台 → 貼上合併 -->
+        <div class="border-t border-slate-800 pt-3 flex flex-col gap-2">
+          <div class="text-[11px] text-slate-400">📲 搬到別的裝置（練習題＋模擬考錯題一起搬，合併不覆蓋）</div>
+          <div class="flex gap-2">
+            <button @click="doExportWrong" class="flex-1 text-xs py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">📤 匯出錯題</button>
+            <button @click="showImport = !showImport; transferMsg = ''" class="flex-1 text-xs py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200">📥 匯入錯題</button>
+          </div>
+          <textarea v-if="exportCode" readonly :value="exportCode" @focus="$event.target.select()" rows="3" class="w-full text-[11px] bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-300 break-all"></textarea>
+          <template v-if="showImport">
+            <textarea v-model="importText" rows="3" placeholder="把另一台裝置匯出的代碼貼在這裡" class="w-full text-[11px] bg-slate-950 border border-slate-700 rounded-lg p-2 text-slate-200"></textarea>
+            <button @click="doImportWrong" :disabled="!importText.trim()" class="btn-primary text-xs">合併匯入</button>
+          </template>
+          <p v-if="transferMsg" class="text-[11px] text-amber-300 leading-relaxed">{{ transferMsg }}</p>
+        </div>
       </div>
 
       <p class="text-[11px] text-slate-500 text-center leading-relaxed">📊 累積弱點與練習題弱點都移到上方的「弱點分析」分頁</p>
@@ -185,7 +199,7 @@
 
 <script setup>
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook } from '../utils/wrongBook.js';
+import { loadWrongBook, recordWrongAnswer, recordWrongBookCorrect, removeFromWrongBook, exportWrongBook, importWrongBook } from '../utils/wrongBook.js';
 import { recordCodeAnswers } from '../utils/answerStats.js';
 import { CODE_NAMES } from '../data/codeNames.js';
 import RelatedTerms from './RelatedTerms.vue';
@@ -301,6 +315,34 @@ const wrongStats = computed(() => {
   });
   return { exam, practice };
 });
+
+// =================【📲 錯題搬到別的裝置】=================
+const exportCode = ref('');
+const showImport = ref(false);
+const importText = ref('');
+const transferMsg = ref('');
+const doExportWrong = async () => {
+  showImport.value = false;
+  exportCode.value = exportWrongBook();
+  const n = loadWrongBook().length;
+  try {
+    await navigator.clipboard.writeText(exportCode.value);
+    transferMsg.value = `已複製 ${n} 題錯題的代碼。用 LINE 等方式傳到另一台裝置，在那邊按「📥 匯入錯題」貼上。`;
+  } catch {
+    transferMsg.value = `共 ${n} 題。自動複製沒成功：請點上面的代碼框、全選後手動複製。`;
+  }
+};
+const doImportWrong = () => {
+  try {
+    const r = importWrongBook(importText.value);
+    refreshRecords();
+    transferMsg.value = `匯入完成：代碼裡 ${r.total} 題，新增 ${r.added} 題、更新 ${r.updated} 題（其他是這台已經有的）。`;
+    importText.value = '';
+    showImport.value = false;
+  } catch (e) {
+    transferMsg.value = `匯入失敗：${e.message}`;
+  }
+};
 
 const fisherYates = (arr) => {
   const a = [...arr];

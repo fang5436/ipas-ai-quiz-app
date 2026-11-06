@@ -59,6 +59,8 @@ npm run preview  # 預覽建置結果
 
 練習題選單每一回、每個科目旁有「📚 瀏覽」（`browsing`＝`{ round, subject }`）：照題號列出該回該科的題目，可展開看答案、解說與相關名詞，並標出有延伸名詞的題目；純閱讀，不記錄作答。
 
+錯題本只存在各裝置的 localStorage；「練習題錯題」卡片下方的「📲 搬到別的裝置」可匯出一段代碼（`IPAS-WB1:` ＋ JSON `[[id, correctStreak], …]`，練習題與模擬考錯題一起）並自動複製，到另一台按「📥 匯入錯題」貼上合併（`wrongBook.js` 的 `exportWrongBook`／`importWrongBook`）：沒有的題目加入、兩邊都有的取連續答對次數較少者，不覆蓋。iPhone 主畫面 App 與 Safari 的資料分開存，所以用貼代碼、不用連結（2026-11-06）。
+
 作答中可按「暫停」；切到別的 tab（元件卸載）或 App 被收到背景（`visibilitychange`）時也會自動存一份，回來從「暫停中的練習」繼續。
 
 ### 弱點分析分頁（`analysis`）
