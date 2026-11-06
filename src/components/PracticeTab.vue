@@ -215,16 +215,17 @@ const LEVEL_BADGE = {
   '難': 'bg-red-950 text-red-400 border-red-900/40',
 };
 
-// 練習題分回存放：第一回 practice.json、第二回 practice2.json、第三回 practice3.json，各回題目不混在一起出
-const ROUNDS = [1, 2, 3];
-const ROUND_NAMES = { 1: '第一回', 2: '第二回', 3: '第三回' };
+// 練習題分回存放：第一回 practice.json、第二回 practice2.json、第三回 practice3.json、第四回 practice4.json，各回題目不混在一起出
+const ROUNDS = [1, 2, 3, 4];
+const ROUND_NAMES = { 1: '第一回', 2: '第二回', 3: '第三回', 4: '第四回' };
 // 各回選單的標題與說明（第一回沿用原本的文字）
-const ROUND_TITLES = { 1: '開始練習（第一回）', 2: '✍️ 練習題第二回', 3: '🎯 練習題第三回' };
+const ROUND_TITLES = { 1: '開始練習（第一回）', 2: '✍️ 練習題第二回', 3: '🎯 練習題第三回', 4: '🔥 練習題第四回（最終衝刺）' };
 const ROUND_NOTES = {
   2: '第二回是新出的題目，考點和第一回錯開；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。',
   3: '第三回是考前衝刺：集中在考古題最常考的重點考點，換成全新的情境與問法；難度與章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。',
+  4: '第四回是考前最終衝刺，難度最高：沒有易題，每科 35 題難題（題幹較長、要同時判斷 2～3 個條件）＋15 題情境中題；章節比例同樣參考 115 年第二、三次。答錯的題目一樣記進下方的「練習題錯題」。',
 };
-const roundQuestions = ref({ 1: [], 2: [], 3: [] });
+const roundQuestions = ref({ 1: [], 2: [], 3: [], 4: [] });
 const practiceQuestions = computed(() => ROUNDS.flatMap(r => roundQuestions.value[r]));
 const wrongBook = ref([]);
 const session = ref(null);
@@ -232,12 +233,13 @@ const finished = ref(false);
 
 onMounted(async () => {
   // 練習題放在 src/data/practice/ 子資料夾，不會被 App.vue 的 ./data/*.json 題庫載入誤收
-  const [mod1, mod2, mod3] = await Promise.all([
+  const [mod1, mod2, mod3, mod4] = await Promise.all([
     import('../data/practice/practice.json'),
     import('../data/practice/practice2.json'),
     import('../data/practice/practice3.json'),
+    import('../data/practice/practice4.json'),
   ]);
-  roundQuestions.value = { 1: mod1.default || mod1, 2: mod2.default || mod2, 3: mod3.default || mod3 };
+  roundQuestions.value = { 1: mod1.default || mod1, 2: mod2.default || mod2, 3: mod3.default || mod3, 4: mod4.default || mod4 };
   refreshRecords();
   pausedSession.value = loadPaused();
 });
